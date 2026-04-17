@@ -29,14 +29,16 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "Mathos Website" },
+      { name: "description", content: "Sign up for the MathOs summer camp to make sure your summer doesnt go dull and learn application math with Neuqua Valley High School Students" },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "Mathos Website" },
+      { property: "og:description", content: "Sign up for the MathOs summer camp to make sure your summer doesnt go dull and learn application math with Neuqua Valley High School Students" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Mathos Website" },
+      { name: "twitter:description", content: "Sign up for the MathOs summer camp to make sure your summer doesnt go dull and learn application math with Neuqua Valley High School Students" },
     ],
     links: [
       {
