@@ -8,7 +8,14 @@ export function SiteHeader() {
           <span className="font-display text-3xl font-black tracking-tight">Mathos</span>
           <span className="font-mono text-xs text-muted-foreground">v.2026</span>
         </Link>
-        <nav className="hidden items-center gap-8 font-mono text-sm md:flex">
+        <nav className="hidden items-center gap-7 font-mono text-sm md:flex">
+          <Link
+            to="/about"
+            className="hover:text-electric"
+            activeProps={{ className: "text-electric" }}
+          >
+            About
+          </Link>
           <Link
             to="/curriculum"
             className="hover:text-electric"
@@ -57,6 +64,9 @@ export function SiteFooter() {
           Mathos<span className="text-coral">.</span>
         </div>
         <div className="flex flex-wrap items-center gap-6 font-mono text-xs">
+          <Link to="/about" className="hover:text-electric">
+            About
+          </Link>
           <Link to="/curriculum" className="hover:text-electric">
             Curriculum
           </Link>
