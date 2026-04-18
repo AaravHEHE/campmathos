@@ -14,6 +14,7 @@ import { Route as FaqRouteImport } from './routes/faq'
 import { Route as DetailsRouteImport } from './routes/details'
 import { Route as CurriculumRouteImport } from './routes/curriculum'
 import { Route as BoardRouteImport } from './routes/board'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
 const RegisterRoute = RegisterRouteImport.update({
@@ -41,6 +42,11 @@ const BoardRoute = BoardRouteImport.update({
   path: '/board',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -49,6 +55,7 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/board': typeof BoardRoute
   '/curriculum': typeof CurriculumRoute
   '/details': typeof DetailsRoute
@@ -57,6 +64,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/board': typeof BoardRoute
   '/curriculum': typeof CurriculumRoute
   '/details': typeof DetailsRoute
@@ -66,6 +74,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/board': typeof BoardRoute
   '/curriculum': typeof CurriculumRoute
   '/details': typeof DetailsRoute
@@ -74,12 +83,27 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/board' | '/curriculum' | '/details' | '/faq' | '/register'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/board'
+    | '/curriculum'
+    | '/details'
+    | '/faq'
+    | '/register'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/board' | '/curriculum' | '/details' | '/faq' | '/register'
+  to:
+    | '/'
+    | '/about'
+    | '/board'
+    | '/curriculum'
+    | '/details'
+    | '/faq'
+    | '/register'
   id:
     | '__root__'
     | '/'
+    | '/about'
     | '/board'
     | '/curriculum'
     | '/details'
@@ -89,6 +113,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   BoardRoute: typeof BoardRoute
   CurriculumRoute: typeof CurriculumRoute
   DetailsRoute: typeof DetailsRoute
@@ -133,6 +158,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BoardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -145,6 +177,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   BoardRoute: BoardRoute,
   CurriculumRoute: CurriculumRoute,
   DetailsRoute: DetailsRoute,

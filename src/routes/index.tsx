@@ -12,13 +12,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Mathos is a completely free 4-week summer applied math camp at Naperville Public Library for grades 4–7, with an Easy Python game-building track. June 2026.",
+          "Mathos (Greek for 'learning') is a completely free 4-week applied math camp at Naperville Public Library for grades 4–7. June 2026.",
       },
       { property: "og:title", content: "Mathos — Free summer applied math camp in Naperville" },
       {
         property: "og:description",
         content:
-          "Four weeks of applied math for grades 4–7, plus Easy Python game-building. Completely free. Naperville Public Library, June 2026.",
+          "Four weeks of hands-on applied math for grades 4–7. Completely free. Naperville Public Library, June 2026.",
       },
       { property: "og:image", content: heroImg },
       { name: "twitter:card", content: "summary_large_image" },
@@ -119,11 +119,11 @@ function Index() {
               system.
             </h1>
             <p className="mt-8 max-w-xl text-lg text-ink/75 md:text-xl">
-              <span className="font-semibold">Mathos</span> is a{" "}
+              <span className="font-semibold">Mathos</span> — from the Greek for{" "}
+              <span className="italic">learning</span> — is a{" "}
               <span className="font-semibold">completely free</span> four-week summer camp built
-              around <span className="font-semibold">applied math</span> — the math behind money,
-              buildings, sports, and decisions. For grades 4–7, with an Easy Python game-building
-              track, taught by Neuqua Valley students.
+              around <span className="font-semibold">applied math</span>: the math behind money,
+              buildings, sports, and decisions. For grades 4–7, taught by Neuqua Valley students.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Link
@@ -213,28 +213,28 @@ function Index() {
             </Link>
           </div>
 
-          {/* Easy Python teaser */}
+          {/* Pythos teaser */}
           <div className="mt-12 rounded-3xl border-2 border-ink bg-electric p-8 text-cream md:p-12">
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
               <div className="max-w-2xl">
                 <p className="font-mono text-xs uppercase tracking-widest text-cream/70">
-                  / parallel track
+                  / sister program · July
                 </p>
                 <h3 className="mt-2 font-display text-3xl font-black md:text-4xl">
-                  Easy Python — build a retro video game.
+                  Pythos — build a 2D game in July.
                 </h3>
                 <p className="mt-3 text-cream/85">
-                  Easy Python is a UI/UX-focused course built by our directors. Campers use a
-                  custom library of pre-coded helpers so they spend less time writing boilerplate
-                  and more time building — and finish the camp with a working 2D retro-style video
-                  game of their own. Easy Python has its own dedicated site coming soon.
+                  After Mathos wraps, our directors run Pythos: a creative computer-science camp
+                  with two age tracks (grades 1–4 in Scratch, grades 5–8 in Python with a custom
+                  Turtle library). Every camper finishes with their own playable 2D game. Pythos
+                  has its own dedicated site coming soon.
                 </p>
               </div>
               <Link
-                to="/board"
+                to="/about"
                 className="shrink-0 rounded-full border-2 border-cream bg-cream px-6 py-3 font-semibold text-ink transition hover:bg-sun hover:border-sun"
               >
-                Meet the directors →
+                More about us →
               </Link>
             </div>
           </div>

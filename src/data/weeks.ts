@@ -10,21 +10,21 @@ export type Week = {
 export const weeks: Week[] = [
   {
     n: "01",
-    title: "Graphing the real world",
+    title: "Graphing for engineering",
     blurb:
-      "Graphs aren't homework — they're how scientists, athletes, and investors read the world.",
+      "Graphs aren't homework — they're how engineers, athletes, and investors read the world.",
     bullets: [
       "Plotting data from real measurements",
       "Linear and parabolic motion in sports",
       "Exponential growth: savings, viruses, populations",
     ],
     detail:
-      "We start with the question every student asks: when will I actually use this? In week one, we plot heart rates from a sprint, model a basketball arc with a parabola, and watch a savings account grow exponentially. Every concept comes from a real situation, not a textbook problem. Students leave able to read a chart in a news article and tell whether it's honest or misleading.",
+      "We start with the question every student asks: when will I actually use this? In week one, we plot heart rates from a sprint, model a basketball arc with a parabola, and watch a savings account grow exponentially. Every concept comes from a real situation — the same kind of data engineers use to design and test things in the real world. Students leave able to read a chart in a news article and tell whether it's honest or misleading.",
     accent: "bg-electric text-cream",
   },
   {
     n: "02",
-    title: "Finance and probability",
+    title: "Probability for decision-making and finance",
     blurb:
       "How banks, casinos, and insurance companies all use the same math — and how to read it.",
     bullets: [
@@ -38,7 +38,7 @@ export const weeks: Week[] = [
   },
   {
     n: "03",
-    title: "Geometry and architecture",
+    title: "Geometry for architecture",
     blurb:
       "Area, volume, and angles aren't decoration — they decide whether a building stands up.",
     bullets: [
