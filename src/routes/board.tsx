@@ -1,4 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
+import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 
 export const Route = createFileRoute("/board")({
   component: BoardPage,
@@ -8,7 +9,7 @@ export const Route = createFileRoute("/board")({
       {
         name: "description",
         content:
-          "Meet the Mathos board of directors — the Neuqua Valley students leading our summer applied math and CS camp in Naperville.",
+          "Meet the Mathos board of directors — the Neuqua Valley students leading our free summer applied math camp in Naperville.",
       },
       { property: "og:title", content: "Board of directors — Mathos" },
       {
@@ -50,32 +51,7 @@ function initials(name: string) {
 function BoardPage() {
   return (
     <main className="min-h-screen bg-cream text-ink">
-      <header className="sticky top-0 z-40 border-b-2 border-ink/80 bg-cream/85 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <Link to="/" className="flex items-baseline gap-2">
-            <span className="font-display text-3xl font-black tracking-tight">Mathos</span>
-            <span className="font-mono text-xs text-muted-foreground">v.2026</span>
-          </Link>
-          <nav className="hidden items-center gap-8 font-mono text-sm md:flex">
-            <Link to="/" hash="curriculum" className="hover:text-electric">
-              Curriculum
-            </Link>
-            <Link to="/" hash="details" className="hover:text-electric">
-              Details
-            </Link>
-            <Link to="/board" className="hover:text-electric" activeProps={{ className: "text-electric" }}>
-              Board
-            </Link>
-          </nav>
-          <Link
-            to="/"
-            hash="register"
-            className="rounded-full border-2 border-ink bg-ink px-5 py-2 text-sm font-semibold text-cream transition hover:bg-electric hover:border-electric"
-          >
-            Register →
-          </Link>
-        </div>
-      </header>
+      <SiteHeader />
 
       <section className="grid-paper border-b-2 border-ink">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
@@ -87,8 +63,8 @@ function BoardPage() {
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
             Mathos is built and taught by six Neuqua Valley High School students who believe math
-            should feel useful, not abstract. We design every session, mentor every camper, and run
-            every workshop ourselves.
+            should feel useful, not abstract. We design every session, mentor every camper, and
+            run every workshop ourselves.
           </p>
         </div>
       </section>
@@ -124,23 +100,17 @@ function BoardPage() {
             <p className="mt-5 max-w-2xl text-cream/80">
               Every director is happy to meet one-on-one with any camper who needs a little extra
               help — whether that's reviewing a concept, working through homework from school, or
-              just talking through an idea. Just ask during a session or reach out and we'll set
-              up a time.
+              just talking through an idea. Just ask during a session, or email{" "}
+              <a href="mailto:Mathos@gmail.com" className="underline">
+                Mathos@gmail.com
+              </a>{" "}
+              and we'll set up a time.
             </p>
           </div>
         </div>
       </section>
 
-      <footer className="border-t-2 border-ink bg-cream">
-        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-6 py-10 md:flex-row md:items-center">
-          <div className="font-display text-2xl font-black">
-            Mathos<span className="text-coral">.</span>
-          </div>
-          <p className="font-mono text-xs text-muted-foreground">
-            © 2026 Mathos · Naperville, IL · Built with curiosity
-          </p>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }
