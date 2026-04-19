@@ -22,11 +22,11 @@ interface Registration {
 type SortKey = "created_at" | "email";
 type SortDir = "asc" | "desc";
 
+const STORAGE_KEY = "mathos-admin-ok";
+
 function AdminDashboard() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const [authorized, setAuthorized] = useState(false);
-  const [userEmail, setUserEmail] = useState("");
   const [rows, setRows] = useState<Registration[]>([]);
   const [error, setError] = useState("");
 
@@ -40,45 +40,29 @@ function AdminDashboard() {
   useEffect(() => {
     let cancelled = false;
 
-    const check = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        navigate({ to: "/admin/login" });
-        return;
-      }
+    if (typeof window === "undefined") return;
+    if (sessionStorage.getItem(STORAGE_KEY) !== "1") {
+      navigate({ to: "/admin/login" });
+      return;
+    }
+
+    const load = async () => {
+      const { data, error: queryError } = await supabase
+        .from("registrations")
+        .select("id, email, created_at")
+        .order("created_at", { ascending: false });
       if (cancelled) return;
-      setUserEmail(session.user.email ?? "");
-
-      const { data: roles } = await supabase
-        .from("user_roles")
-        .select("role")
-        .eq("user_id", session.user.id);
-
-      const isAdmin = (roles ?? []).some((r) => r.role === "admin");
-      setAuthorized(isAdmin);
-
-      if (isAdmin) {
-        const { data, error: queryError } = await supabase
-          .from("registrations")
-          .select("id, email, created_at")
-          .order("created_at", { ascending: false });
-        if (queryError) {
-          setError(queryError.message);
-        } else {
-          setRows((data as Registration[]) ?? []);
-        }
+      if (queryError) {
+        setError(queryError.message);
+      } else {
+        setRows((data as Registration[]) ?? []);
       }
       setLoading(false);
     };
 
-    check();
-
-    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
-      if (!session) navigate({ to: "/admin/login" });
-    });
+    load();
     return () => {
       cancelled = true;
-      sub.subscription.unsubscribe();
     };
   }, [navigate]);
 
