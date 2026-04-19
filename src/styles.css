@@ -74,7 +74,7 @@
 :root {
   --radius: 1rem;
 
-  /* MathOS palette — cream paper, ink, electric blue, coral, sun yellow */
+  /* MathOs palette — cream paper, ink, electric blue, coral, sun yellow */
   --cream: oklch(0.972 0.025 90);
   --ink: oklch(0.18 0.04 260);
   --electric: oklch(0.62 0.22 255);

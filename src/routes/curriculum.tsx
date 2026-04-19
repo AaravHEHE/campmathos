@@ -6,13 +6,13 @@ export const Route = createFileRoute("/curriculum")({
   component: CurriculumPage,
   head: () => ({
     meta: [
-      { title: "Curriculum — MathOS summer camp" },
+      { title: "Curriculum — MathOs summer camp" },
       {
         name: "description",
         content:
-          "Full week-by-week breakdown of the MathOS applied math curriculum: graphing, finance and probability, geometry and architecture, and a final project showcase.",
+          "Full week-by-week breakdown of the MathOs applied math curriculum: graphing, finance and probability, geometry and architecture, and a final project showcase.",
       },
-      { property: "og:title", content: "Curriculum — MathOS summer camp" },
+      { property: "og:title", content: "Curriculum — MathOs summer camp" },
       {
         property: "og:description",
         content:
@@ -36,7 +36,7 @@ function CurriculumPage() {
             Four weeks of <span className="italic text-electric">applied</span> math.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            Every MathOS session is built around math you can actually use — money, buildings,
+            Every MathOs session is built around math you can actually use — money, buildings,
             sports, decisions. Below is the full week-by-week plan for June 2026.
           </p>
         </div>
@@ -168,7 +168,7 @@ function CurriculumPage() {
               Pythos — our computer-science camp.
             </h2>
             <p className="mt-4 text-lg text-cream/85">
-              After MathOS finishes in June, the same directors run{" "}
+              After MathOs finishes in June, the same directors run{" "}
               <span className="font-semibold">Pythos</span> in July: a creative CS program for two
               age groups. Grades 1–4 use Scratch on Mondays and Thursdays; grades 5–8 use Python
               with a custom Turtle-graphics library on Tuesdays and Fridays. We focus on logic,

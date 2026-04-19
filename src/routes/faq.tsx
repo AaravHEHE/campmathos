@@ -5,13 +5,13 @@ export const Route = createFileRoute("/faq")({
   component: FaqPage,
   head: () => ({
     meta: [
-      { title: "FAQ — MathOS summer camp" },
+      { title: "FAQ — MathOs summer camp" },
       {
         name: "description",
         content:
-          "Answers to the most common questions about MathOS: cost, schedule, attendance, drop-off, materials, prerequisites, the Pythos sister CS camp, and how to register.",
+          "Answers to the most common questions about MathOs: cost, schedule, attendance, drop-off, materials, prerequisites, the Pythos sister CS camp, and how to register.",
       },
-      { property: "og:title", content: "FAQ — MathOS summer camp" },
+      { property: "og:title", content: "FAQ — MathOs summer camp" },
       {
         property: "og:description",
         content:
@@ -28,7 +28,7 @@ const faqs: { q: string; a: string }[] = [
   },
   {
     q: "Is the camp really free? Are there any fees or materials we have to pay for?",
-    a: "MathOS is completely free. We recommend students bring a pencil and scratch paper, but if you don't have those, materials will be provided.",
+    a: "MathOs is completely free. We recommend students bring a pencil and scratch paper, but if you don't have those, materials will be provided.",
   },
   {
     q: "What days and times does the camp meet?",
@@ -80,7 +80,7 @@ const faqs: { q: string; a: string }[] = [
   },
   {
     q: "Can my child get extra help outside of class?",
-    a: "Yes. Every MathOS teacher is willing to meet one-on-one with any camper who needs extra help — whether that's a tricky topic from camp, homework from school, or something else they want to understand. Just ask, or email campmathos@gmail.com.",
+    a: "Yes. Every MathOs teacher is willing to meet one-on-one with any camper who needs extra help — whether that's a tricky topic from camp, homework from school, or something else they want to understand. Just ask, or email campmathos@gmail.com.",
   },
 ];
 

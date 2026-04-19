@@ -8,13 +8,13 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "MathOS — Free summer applied math camp in Naperville | June 2026" },
+      { title: "MathOs — Free summer applied math camp in Naperville | June 2026" },
       {
         name: "description",
         content:
-          "MathOS (Greek for 'learning') is a completely free 4-week applied math camp at Naperville Public Library for grades 4–7. June 2026.",
+          "MathOs (Greek for 'learning') is a completely free 4-week applied math camp at Naperville Public Library for grades 4–7. June 2026.",
       },
-      { property: "og:title", content: "MathOS — Free summer applied math camp in Naperville" },
+      { property: "og:title", content: "MathOs — Free summer applied math camp in Naperville" },
       {
         property: "og:description",
         content:
@@ -29,7 +29,7 @@ export const Route = createFileRoute("/")({
 
 function Marquee() {
   const items = [
-    "MathOS '26",
+    "MathOs '26",
     "★",
     "Completely free",
     "★",
@@ -119,7 +119,7 @@ function Index() {
               system.
             </h1>
             <p className="mt-8 max-w-xl text-lg text-ink/75 md:text-xl">
-              <span className="font-semibold">MathOS</span> — from the Greek for{" "}
+              <span className="font-semibold">MathOs</span> — from the Greek for{" "}
               <span className="italic">learning</span> — is a{" "}
               <span className="font-semibold">completely free</span> four-week summer camp built
               around <span className="font-semibold">applied math</span>: the math behind money,
@@ -160,7 +160,7 @@ function Index() {
             <div className="float-slow relative overflow-hidden rounded-3xl border-2 border-ink shadow-[12px_12px_0_0_var(--ink)]">
               <img
                 src={heroImg}
-                alt="Colorful collage of dice, geometric shapes and graphs representing the MathOS curriculum"
+                alt="Colorful collage of dice, geometric shapes and graphs representing the MathOs curriculum"
                 width={1536}
                 height={1024}
                 className="h-full w-full object-cover"
@@ -224,7 +224,7 @@ function Index() {
                   Pythos — build a 2D game in July.
                 </h3>
                 <p className="mt-3 text-cream/85">
-                  After MathOS wraps, our directors run Pythos: a creative computer-science camp
+                  After MathOs wraps, our directors run Pythos: a creative computer-science camp
                   with two age tracks (grades 1–4 in Scratch, grades 5–8 in Python with a custom
                   Turtle library). Every camper finishes with their own playable 2D game. Pythos
                   has its own dedicated site coming soon.
@@ -250,7 +250,7 @@ function Index() {
               When, where, <span className="italic text-sun">how much</span>.
             </h2>
             <p className="mt-6 max-w-md text-cream/70">
-              MathOS meets Monday, Wednesday, and Friday throughout June at Naperville Public
+              MathOs meets Monday, Wednesday, and Friday throughout June at Naperville Public
               Library. Every session is 2.5 hours with a 15-minute break in the middle.
             </p>
             <Link
@@ -288,7 +288,7 @@ function Index() {
               Stuck on something? <span className="italic">Just ask.</span>
             </h2>
             <p className="mt-6 max-w-2xl text-lg text-ink/80">
-              Every MathOS teacher is happy to meet one-on-one with any camper who needs extra
+              Every MathOs teacher is happy to meet one-on-one with any camper who needs extra
               help — whether that's a tricky topic from camp, homework from school, or a concept
               they've been wanting to understand for a while. We'll find time before or after a
               session and work through it together.
