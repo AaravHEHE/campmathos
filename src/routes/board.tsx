@@ -85,8 +85,7 @@ function BoardPage() {
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
             Mathos is built and taught by six Neuqua Valley High School students who believe math
             should feel useful, not abstract. We design every session, mentor every camper, and
-            run every workshop ourselves. Bios below are a starting point — directors will
-            personalize them soon.
+            run every workshop ourselves.
           </p>
         </div>
       </section>
