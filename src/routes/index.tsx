@@ -308,10 +308,10 @@ function Index() {
                 reading recommendations matched to their grade.
               </p>
               <a
-                href="mailto:Mathos@gmail.com?subject=More%20Mathos%20material"
+                href="mailto:campmathos@gmail.com?subject=More%20Mathos%20material"
                 className="mt-6 inline-flex rounded-full bg-ink px-6 py-3 font-semibold text-cream transition hover:bg-electric"
               >
-                Email Mathos@gmail.com →
+                Email campmathos@gmail.com →
               </a>
             </div>
           </div>
