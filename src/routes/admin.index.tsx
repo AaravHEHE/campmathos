@@ -120,8 +120,8 @@ function AdminDashboard() {
     URL.revokeObjectURL(url);
   };
 
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
+  const handleSignOut = () => {
+    sessionStorage.removeItem(STORAGE_KEY);
     navigate({ to: "/admin/login" });
   };
 
@@ -187,44 +187,6 @@ function AdminDashboard() {
     );
   }
 
-  if (!authorized) {
-    return (
-      <main className="min-h-screen bg-cream text-ink">
-        <SiteHeader />
-        <section className="border-b-2 border-ink">
-          <div className="mx-auto max-w-2xl px-6 py-20">
-            <p className="font-mono text-sm uppercase tracking-widest text-coral">
-              NOT AUTHORIZED
-            </p>
-            <h1 className="mt-3 font-display text-4xl font-black">
-              Your account isn't a director yet.
-            </h1>
-            <p className="mt-4 text-ink/70">
-              You're signed in as <strong>{userEmail}</strong>, but this account hasn't been
-              granted director access. Ask an existing director to add your account, then come
-              back here.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <button
-                onClick={handleSignOut}
-                className="rounded-full border-2 border-ink px-6 py-3 font-semibold transition hover:bg-ink hover:text-cream"
-              >
-                Sign out
-              </button>
-              <Link
-                to="/"
-                className="rounded-full bg-ink px-6 py-3 font-semibold text-cream transition hover:bg-electric"
-              >
-                Home
-              </Link>
-            </div>
-          </div>
-        </section>
-        <SiteFooter />
-      </main>
-    );
-  }
-
   return (
     <main className="min-h-screen bg-cream text-ink">
       <SiteHeader />
@@ -239,9 +201,6 @@ function AdminDashboard() {
               <h1 className="mt-2 font-display text-4xl font-black md:text-5xl">
                 Interest list
               </h1>
-              <p className="mt-2 font-mono text-xs text-muted-foreground">
-                Signed in as {userEmail}
-              </p>
             </div>
             <div className="flex flex-wrap gap-3">
               <button
