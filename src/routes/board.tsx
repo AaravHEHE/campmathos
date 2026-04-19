@@ -30,32 +30,32 @@ type Director = {
 const directors: Director[] = [
   {
     name: "Aarav Arora",
-    bio: "Neuqua Valley Class of 2029. Neuqua Robotics' first-ever sophomore Executive Board Member and a founding member of NeighbrHub. Aarav brings an engineering mindset to Mathos curriculum design, building lessons that show kids how math actually gets used to build things.",
+    bio: "Neuqua Valley Class of 2029. Neuqua Robotics' first-ever sophomore Executive Board Member and a founding member of NeighbrHub.",
     accent: "bg-electric text-cream",
   },
   {
     name: "Alan Zhan",
-    bio: "Neuqua Valley Class of 2029. Member of NVHS Computing Team, Chess Team, and Math Team — qualified for State in both Chess and Math. Alan leads the Pythos computer-science track, where campers learn Python by building their own games.",
+    bio: "Neuqua Valley Class of 2029. Member of NVHS Computing Team, Chess Team, and Math Team — qualified for State in both Chess and Math.",
     accent: "bg-sun text-ink",
   },
   {
     name: "Shaury Sharma",
-    bio: "Neuqua Valley Class of 2029. Member of NVHS Robotics Team, IJAS State Qualifier, and NVHS Science Olympiad State Qualifier. Shaury runs day-to-day Mathos operations — scheduling, the library partnership, and family communication.",
+    bio: "Neuqua Valley Class of 2029. Member of NVHS Robotics Team, IJAS State Qualifier, and NVHS Science Olympiad State Qualifier.",
     accent: "bg-coral text-cream",
   },
   {
     name: "Wenxuan Chen",
-    bio: "Neuqua Valley Class of 2029. Math Team State Qualifier and member of IMSA / NVHS Robotics. Wenxuan organizes the final showcase day at Mathos and handles community outreach across Naperville.",
+    bio: "Neuqua Valley Class of 2029. Math Team State Qualifier and member of IMSA / NVHS Robotics.",
     accent: "bg-electric text-cream",
   },
   {
     name: "Yifan Bao",
-    bio: "Neuqua Valley Class of 2029. Math Team State Qualifier and Science Olympiad State Qualifier. Yifan designs Mathos' guided notes, problem sets, and the extra-stretch material we send curious campers home with.",
+    bio: "Neuqua Valley Class of 2029. Math Team State Qualifier and Science Olympiad State Qualifier.",
     accent: "bg-coral text-cream",
   },
   {
     name: "Ediz Gusey",
-    bio: "Neuqua Valley Class of 2028. Robotics State Qualifier, 2× AIME qualifier, and Math Team State Qualifier. Ediz heads instructor training at Mathos and makes sure every session is hands-on, not lecture-heavy.",
+    bio: "Neuqua Valley Class of 2028. Robotics State Qualifier, 2× AIME qualifier, and Math Team State Qualifier.",
     accent: "bg-ink text-cream",
   },
 ];
