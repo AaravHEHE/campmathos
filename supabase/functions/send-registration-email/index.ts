@@ -59,9 +59,9 @@ function confirmationHtml(email: string) {
       <table width="560" cellpadding="0" cellspacing="0" style="background:#ffffff;border:2px solid #1a1a2e;border-radius:16px;padding:32px;">
         <tr><td>
           <p style="margin:0 0 8px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#666;">Mathos Camp · June 2026</p>
-          <h1 style="margin:0 0 16px;font-size:28px;line-height:1.1;">You're signed up. 🎉</h1>
+          <h1 style="margin:0 0 16px;font-size:28px;line-height:1.1;">Thanks for your interest! 👋</h1>
           <p style="margin:0 0 16px;font-size:16px;line-height:1.5;">
-            Thanks for registering for <strong>Mathos</strong> — the completely free summer applied math camp at Naperville Public Library.
+            We've noted that your family is interested in <strong>Mathos</strong> — the completely free summer applied math camp at Naperville Public Library. This isn't a commitment, just a heads-up so we can keep you in the loop.
           </p>
           <p style="margin:0 0 16px;font-size:16px;line-height:1.5;">
             We've got <strong>${email}</strong> on the list. In the next few weeks we'll send you:
@@ -69,10 +69,10 @@ function confirmationHtml(email: string) {
           <ul style="margin:0 0 16px 20px;padding:0;font-size:16px;line-height:1.6;">
             <li>The full June schedule (Mon · Wed · Fri)</li>
             <li>Library check-in details and room location</li>
-            <li>What to bring on day one</li>
+            <li>What to bring on day one — if you decide to come</li>
           </ul>
           <p style="margin:0 0 16px;font-size:16px;line-height:1.5;">
-            Sessions are 2.5 hours with a 15-minute break in the middle. Camp is for grades 4–7 and is 100% free.
+            Sessions are 2.5 hours with a 15-minute break in the middle. Camp is for grades 4–7 and is 100% free. You can decide closer to June whether to attend.
           </p>
           <p style="margin:24px 0 0;font-size:14px;color:#666;">
             Questions? Just reply to this email — it goes straight to our directors at campmathos@gmail.com.
@@ -89,10 +89,10 @@ function notifyHtml(email: string, when: string) {
   return `
 <!doctype html>
 <html><body style="font-family:Arial,sans-serif;color:#111;">
-  <h2 style="margin:0 0 12px;">New Mathos sign-up</h2>
+  <h2 style="margin:0 0 12px;">New Mathos interest</h2>
   <p style="margin:0 0 8px;"><strong>Email:</strong> ${email}</p>
   <p style="margin:0 0 8px;"><strong>Submitted:</strong> ${when}</p>
-  <p style="margin:16px 0 0;font-size:13px;color:#666;">View all sign-ups in the admin dashboard.</p>
+  <p style="margin:16px 0 0;font-size:13px;color:#666;">View all interested families in the admin dashboard.</p>
 </body></html>`;
 }
 
@@ -140,12 +140,12 @@ Deno.serve(async (req) => {
     const results = await Promise.allSettled([
       sendEmail({
         to: rawEmail,
-        subject: "You're signed up for Mathos camp 🎉",
+        subject: "Thanks for your interest in Mathos camp 👋",
         html: confirmationHtml(rawEmail),
       }),
       sendEmail({
         to: DIRECTOR_NOTIFY,
-        subject: `New Mathos sign-up: ${rawEmail}`,
+        subject: `New Mathos interest: ${rawEmail}`,
         html: notifyHtml(rawEmail, when),
         reply_to: rawEmail,
       }),

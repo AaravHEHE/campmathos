@@ -130,7 +130,7 @@ function Index() {
                 to="/register"
                 className="rounded-full bg-coral px-8 py-4 font-semibold text-cream shadow-[6px_6px_0_0_var(--ink)] transition hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_var(--ink)]"
               >
-                Reserve a spot
+                I'm interested →
               </Link>
               <Link
                 to="/curriculum"
@@ -361,14 +361,14 @@ function Index() {
             Spend June <span className="italic">thinking</span> in math.
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg text-cream/85">
-            Completely free. Sign up with your email and we'll send the schedule and library
-            details.
+            Completely free. Drop your email to let us know you're interested — we'll send
+            the schedule and library details as June gets closer. No commitment required.
           </p>
           <Link
             to="/register"
             className="mt-10 inline-flex rounded-full bg-ink px-8 py-4 font-semibold text-cream shadow-[6px_6px_0_0_oklch(0.18_0.04_260_/_0.25)] transition hover:bg-electric"
           >
-            Sign up →
+            I'm interested →
           </Link>
         </div>
       </section>
