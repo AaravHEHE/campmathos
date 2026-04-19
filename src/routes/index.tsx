@@ -130,7 +130,7 @@ function Index() {
               </Link>
               <Link
                 to="/curriculum"
-                className="rounded-full border-2 border-ink px-8 py-4 font-semibold transition hover:bg-ink hover:text-cream"
+                className="rounded-full border-2 border-ink bg-cream px-8 py-4 font-semibold text-ink shadow-[6px_6px_0_0_var(--ink)] transition hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_var(--ink)]"
               >
                 See the curriculum
               </Link>

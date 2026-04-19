@@ -46,12 +46,34 @@ function RegisterPage() {
       const { data, error } = await supabase.functions.invoke("send-registration-email", {
         body: { email: email.trim().toLowerCase() },
       });
-      if (error) throw error;
-      const payload = data as { error?: string; duplicate?: boolean };
-      if (payload?.error) throw new Error(payload.error);
+
+      // The edge function may return a non-2xx with a JSON body. Try to read
+      // the body from the error context first so we surface friendly messages
+      // instead of generic "Edge Function returned a non-2xx status code".
+      let payload = (data ?? null) as
+        | { error?: string; duplicate?: boolean; message?: string; ok?: boolean }
+        | null;
+
+      if (error) {
+        const ctx = (error as { context?: Response }).context;
+        if (ctx && typeof ctx.json === "function") {
+          try {
+            payload = await ctx.json();
+          } catch {
+            // ignore parse failure, fall through to generic message
+          }
+        }
+        if (!payload?.duplicate && !payload?.error) {
+          throw new Error(payload?.message || "Something went wrong. Please try again.");
+        }
+      }
+
       if (payload?.duplicate) {
         setStatus("duplicate");
         return;
+      }
+      if (payload?.error) {
+        throw new Error(payload.error);
       }
       setStatus("success");
       setEmail("");
