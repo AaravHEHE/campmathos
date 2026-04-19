@@ -121,7 +121,7 @@ function DetailsPage() {
       <section className="border-b-2 border-ink bg-sun">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 md:grid-cols-2 md:py-24">
           <div>
-            <p className="font-mono text-sm tracking-widest text-ink/60">/ Bring</p>
+            <p className="font-mono text-sm tracking-widest text-ink/60">Bring</p>
             <h2 className="mt-3 font-display text-5xl font-black leading-[0.95]">
               What to bring.
             </h2>
@@ -147,7 +147,7 @@ function DetailsPage() {
             </p>
           </div>
           <div>
-            <p className="font-mono text-sm tracking-widest text-ink/60">/ Drop-off</p>
+            <p className="font-mono text-sm tracking-widest text-ink/60">Drop-off</p>
             <h2 className="mt-3 font-display text-5xl font-black leading-[0.95]">
               Drop-off and pick-up.
             </h2>
