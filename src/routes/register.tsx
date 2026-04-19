@@ -56,7 +56,7 @@ function RegisterPage() {
       <section className="grid-paper border-b-2 border-ink">
         <div className="mx-auto max-w-3xl px-6 py-20 md:py-28">
           <p className="font-mono text-sm uppercase tracking-widest text-muted-foreground">
-            / interest form
+            INTEREST FORM
           </p>
           <h1 className="mt-3 font-display text-5xl font-black leading-[0.95] md:text-7xl">
             Curious? <span className="italic text-electric">Tell us.</span>
