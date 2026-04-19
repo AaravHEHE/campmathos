@@ -166,12 +166,6 @@ function Index() {
                 className="h-full w-full object-cover"
               />
             </div>
-            <div className="absolute -left-6 -top-6 hidden h-20 w-20 rotate-12 items-center justify-center rounded-2xl border-2 border-ink bg-sun font-display text-4xl font-black md:flex">
-              π
-            </div>
-            <div className="absolute -bottom-6 -right-4 hidden h-24 w-24 -rotate-6 items-center justify-center rounded-full border-2 border-ink bg-electric font-display text-3xl font-black text-cream md:flex">
-              x²
-            </div>
           </div>
         </div>
       </section>
