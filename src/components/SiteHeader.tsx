@@ -84,7 +84,7 @@ export function SiteFooter() {
           </Link>
         </div>
         <p className="font-mono text-xs text-muted-foreground">
-          © 2026 Mathos · Naperville, IL · Mathos@gmail.com
+          © 2026 Mathos · Naperville, IL · campmathos@gmail.com
         </p>
       </div>
     </footer>

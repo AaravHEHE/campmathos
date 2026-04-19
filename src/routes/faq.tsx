@@ -68,7 +68,7 @@ const faqs: { q: string; a: string }[] = [
   },
   {
     q: "What's the best way to reach the directors?",
-    a: "Email us at Mathos@gmail.com — that's the fastest way to reach the directors with any question.",
+    a: "Email us at campmathos@gmail.com — that's the fastest way to reach the directors with any question.",
   },
   {
     q: "What if a session fills up — is there a waitlist?",
@@ -76,11 +76,11 @@ const faqs: { q: string; a: string }[] = [
   },
   {
     q: "Do you offer accommodations for students with learning differences?",
-    a: "Yes — please reach out for specific students. Email Mathos@gmail.com so we can make sure your child has a great experience.",
+    a: "Yes — please reach out for specific students. Email campmathos@gmail.com so we can make sure your child has a great experience.",
   },
   {
     q: "Can my child get extra help outside of class?",
-    a: "Yes. Every Mathos teacher is willing to meet one-on-one with any camper who needs extra help — whether that's a tricky topic from camp, homework from school, or something else they want to understand. Just ask, or email Mathos@gmail.com.",
+    a: "Yes. Every Mathos teacher is willing to meet one-on-one with any camper who needs extra help — whether that's a tricky topic from camp, homework from school, or something else they want to understand. Just ask, or email campmathos@gmail.com.",
   },
 ];
 
@@ -99,8 +99,8 @@ function FaqPage() {
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
             If you don't see your question below, email us at{" "}
-            <a href="mailto:Mathos@gmail.com" className="underline hover:text-electric">
-              Mathos@gmail.com
+            <a href="mailto:campmathos@gmail.com" className="underline hover:text-electric">
+              campmathos@gmail.com
             </a>{" "}
             and a director will get back to you.
           </p>
@@ -131,10 +131,10 @@ function FaqPage() {
             Still have a question?
           </h2>
           <a
-            href="mailto:Mathos@gmail.com"
+            href="mailto:campmathos@gmail.com"
             className="mt-10 inline-flex rounded-full bg-ink px-8 py-4 font-semibold text-cream transition hover:bg-electric"
           >
-            Email Mathos@gmail.com →
+            Email campmathos@gmail.com →
           </a>
           <div className="mt-6">
             <Link to="/register" className="font-mono text-sm text-cream/80 underline">

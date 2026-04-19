@@ -136,8 +136,8 @@ function BoardPage() {
               Every director is happy to meet one-on-one with any camper who needs a little extra
               help — whether that's reviewing a concept, working through homework from school, or
               just talking through an idea. Just ask during a session, or email{" "}
-              <a href="mailto:Mathos@gmail.com" className="underline">
-                Mathos@gmail.com
+              <a href="mailto:campmathos@gmail.com" className="underline">
+                campmathos@gmail.com
               </a>{" "}
               and we'll set up a time.
             </p>
