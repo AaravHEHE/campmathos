@@ -68,7 +68,7 @@ function AdminLoginPage() {
       <section className="grid-paper border-b-2 border-ink">
         <div className="mx-auto max-w-md px-6 py-20 md:py-28">
           <p className="font-mono text-sm uppercase tracking-widest text-muted-foreground">
-            / directors only
+            DIRECTORS ONLY
           </p>
           <h1 className="mt-3 font-display text-4xl font-black md:text-5xl">
             {mode === "signin" ? "Director sign in" : "Create director account"}

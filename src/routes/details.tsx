@@ -40,7 +40,7 @@ function DetailsPage() {
       <section className="grid-paper border-b-2 border-ink">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
           <p className="font-mono text-sm uppercase tracking-widest text-muted-foreground">
-            / details
+            DETAILS
           </p>
           <h1 className="mt-3 font-display text-5xl font-black leading-[0.95] md:text-7xl">
             Everything <span className="italic text-electric">logistical</span>.
@@ -69,7 +69,7 @@ function DetailsPage() {
       <section className="border-b-2 border-ink">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
           <p className="font-mono text-sm uppercase tracking-widest text-muted-foreground">
-            / a typical session
+            A TYPICAL SESSION
           </p>
           <h2 className="mt-3 font-display text-5xl font-black md:text-6xl">
             2.5 hours, with room to <span className="italic">breathe</span>.
