@@ -184,7 +184,7 @@ function Index() {
           <div className="mb-16 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
             <div>
               <p className="font-mono text-sm uppercase tracking-widest text-muted-foreground">
-                / curriculum
+                CURRICULUM
               </p>
               <h2 className="mt-2 font-display text-5xl font-black md:text-7xl">
                 Four weeks of
@@ -218,7 +218,7 @@ function Index() {
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
               <div className="max-w-2xl">
                 <p className="font-mono text-xs uppercase tracking-widest text-cream/70">
-                  / sister program · July
+                  SISTER PROGRAM · JULY
                 </p>
                 <h3 className="mt-2 font-display text-3xl font-black md:text-4xl">
                   Pythos — build a 2D game in July.
@@ -297,7 +297,7 @@ function Index() {
           <div className="md:col-span-5">
             <div className="rounded-3xl border-2 border-ink bg-cream p-8">
               <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-                / want more material?
+                WANT MORE MATERIAL?
               </p>
               <h3 className="mt-2 font-display text-3xl font-black">
                 Reach out — we'll send more.

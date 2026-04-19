@@ -57,7 +57,7 @@ function AboutPage() {
       <section className="grid-paper border-b-2 border-ink">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
           <p className="font-mono text-sm uppercase tracking-widest text-muted-foreground">
-            / about
+            ABOUT
           </p>
           <h1 className="mt-3 font-display text-5xl font-black leading-[0.95] md:text-7xl">
             <span className="italic text-electric">Mathos</span> means
@@ -102,7 +102,7 @@ function AboutPage() {
       <section className="border-b-2 border-ink">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
           <p className="font-mono text-sm uppercase tracking-widest text-muted-foreground">
-            / how we teach
+            HOW WE TEACH
           </p>
           <h2 className="mt-3 font-display text-5xl font-black leading-[0.95] md:text-6xl">
             Built around how kids
@@ -139,7 +139,7 @@ function AboutPage() {
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 text-cream md:grid-cols-12 md:py-28">
           <div className="md:col-span-7">
             <p className="font-mono text-sm uppercase tracking-widest text-cream/70">
-              / sister program
+              SISTER PROGRAM
             </p>
             <h2 className="mt-2 font-display text-5xl font-black leading-[0.95] md:text-6xl">
               Meet <span className="italic text-sun">Pythos</span>.
@@ -154,7 +154,7 @@ function AboutPage() {
           <div className="md:col-span-5">
             <div className="rounded-3xl border-2 border-cream bg-cream/10 p-6">
               <p className="font-mono text-xs uppercase tracking-widest text-cream/70">
-                / July tracks
+                JULY TRACKS
               </p>
               <ul className="mt-4 space-y-3 font-mono text-sm">
                 <li className="flex gap-3">

@@ -114,7 +114,7 @@ function AdminDashboard() {
         <section className="border-b-2 border-ink">
           <div className="mx-auto max-w-2xl px-6 py-20">
             <p className="font-mono text-sm uppercase tracking-widest text-coral">
-              / not authorized
+              NOT AUTHORIZED
             </p>
             <h1 className="mt-3 font-display text-4xl font-black">
               Your account isn't a director yet.
@@ -153,7 +153,7 @@ function AdminDashboard() {
           <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
             <div>
               <p className="font-mono text-sm uppercase tracking-widest text-muted-foreground">
-                / directors · sign-ups
+                DIRECTORS · SIGN-UPS
               </p>
               <h1 className="mt-2 font-display text-4xl font-black md:text-5xl">
                 {rows.length} {rows.length === 1 ? "registration" : "registrations"}

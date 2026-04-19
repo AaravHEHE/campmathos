@@ -77,7 +77,7 @@ function BoardPage() {
       <section className="grid-paper border-b-2 border-ink">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
           <p className="font-mono text-sm uppercase tracking-widest text-muted-foreground">
-            / board of directors
+            BOARD OF DIRECTORS
           </p>
           <h1 className="mt-3 font-display text-5xl font-black leading-[0.95] md:text-7xl">
             The students <span className="italic text-electric">behind</span> Mathos.
@@ -115,7 +115,7 @@ function BoardPage() {
 
           <div className="mt-16 rounded-3xl border-2 border-ink bg-ink p-10 text-cream md:p-14">
             <p className="font-mono text-sm uppercase tracking-widest text-cream/60">
-              / extra help
+              EXTRA HELP
             </p>
             <h2 className="mt-3 font-display text-4xl font-black md:text-5xl">
               We meet kids where they are.

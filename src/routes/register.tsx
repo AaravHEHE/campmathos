@@ -70,7 +70,7 @@ function RegisterPage() {
           {status === "success" ? (
             <div className="mt-10 rounded-3xl border-2 border-ink bg-sun p-8">
               <p className="font-mono text-xs uppercase tracking-widest text-ink/70">
-                / noted
+                NOTED
               </p>
               <h2 className="mt-2 font-display text-3xl font-black md:text-4xl">
                 Thanks for letting us know 📬
