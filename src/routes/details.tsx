@@ -39,8 +39,8 @@ function DetailsPage() {
 
       <section className="grid-paper border-b-2 border-ink">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
-          <p className="font-mono text-sm uppercase tracking-widest text-muted-foreground">
-            DETAILS
+          <p className="font-mono text-sm tracking-widest text-muted-foreground">
+            Details
           </p>
           <h1 className="mt-3 font-display text-5xl font-black leading-[0.95] md:text-7xl">
             Everything <span className="italic text-electric">logistical</span>.
@@ -57,7 +57,7 @@ function DetailsPage() {
           <dl className="grid gap-px overflow-hidden rounded-3xl border-2 border-cream/20 bg-cream/10 md:grid-cols-2">
             {facts.map(([k, v]) => (
               <div key={k} className="bg-ink p-8">
-                <dt className="font-mono text-xs uppercase tracking-widest text-cream/50">{k}</dt>
+                <dt className="font-mono text-xs tracking-widest text-cream/50">{k}</dt>
                 <dd className="mt-3 font-display text-2xl font-bold leading-tight">{v}</dd>
               </div>
             ))}
@@ -68,8 +68,8 @@ function DetailsPage() {
       {/* CLASS STRUCTURE */}
       <section className="border-b-2 border-ink">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
-          <p className="font-mono text-sm uppercase tracking-widest text-muted-foreground">
-            A TYPICAL SESSION
+          <p className="font-mono text-sm tracking-widest text-muted-foreground">
+            A typical session
           </p>
           <h2 className="mt-3 font-display text-5xl font-black md:text-6xl">
             2.5 hours, with room to <span className="italic">breathe</span>.
@@ -121,7 +121,7 @@ function DetailsPage() {
       <section className="border-b-2 border-ink bg-sun">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 md:grid-cols-2 md:py-24">
           <div>
-            <p className="font-mono text-sm uppercase tracking-widest text-ink/60">/ bring</p>
+            <p className="font-mono text-sm tracking-widest text-ink/60">/ Bring</p>
             <h2 className="mt-3 font-display text-5xl font-black leading-[0.95]">
               What to bring.
             </h2>
@@ -147,7 +147,7 @@ function DetailsPage() {
             </p>
           </div>
           <div>
-            <p className="font-mono text-sm uppercase tracking-widest text-ink/60">/ drop-off</p>
+            <p className="font-mono text-sm tracking-widest text-ink/60">/ Drop-off</p>
             <h2 className="mt-3 font-display text-5xl font-black leading-[0.95]">
               Drop-off and pick-up.
             </h2>

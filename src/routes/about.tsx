@@ -56,8 +56,8 @@ function AboutPage() {
       {/* HERO */}
       <section className="grid-paper border-b-2 border-ink">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
-          <p className="font-mono text-sm uppercase tracking-widest text-muted-foreground">
-            ABOUT
+          <p className="font-mono text-sm tracking-widest text-muted-foreground">
+            About
           </p>
           <h1 className="mt-3 font-display text-5xl font-black leading-[0.95] md:text-7xl">
             <span className="italic text-electric">Mathos</span> means
@@ -76,7 +76,7 @@ function AboutPage() {
       <section className="border-b-2 border-ink bg-ink text-cream">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 md:grid-cols-12 md:py-28">
           <div className="md:col-span-5">
-            <p className="font-mono text-sm uppercase tracking-widest text-cream/60">/ mission</p>
+            <p className="font-mono text-sm tracking-widest text-cream/60">/ Mission</p>
             <h2 className="mt-2 font-display text-5xl font-black leading-[0.95] md:text-6xl">
               Math you can <span className="italic text-sun">actually use</span>.
             </h2>
@@ -101,8 +101,8 @@ function AboutPage() {
       {/* PHILOSOPHY */}
       <section className="border-b-2 border-ink">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
-          <p className="font-mono text-sm uppercase tracking-widest text-muted-foreground">
-            HOW WE TEACH
+          <p className="font-mono text-sm tracking-widest text-muted-foreground">
+            How we teach
           </p>
           <h2 className="mt-3 font-display text-5xl font-black leading-[0.95] md:text-6xl">
             Built around how kids
@@ -138,8 +138,8 @@ function AboutPage() {
       <section className="border-b-2 border-ink bg-electric">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 text-cream md:grid-cols-12 md:py-28">
           <div className="md:col-span-7">
-            <p className="font-mono text-sm uppercase tracking-widest text-cream/70">
-              SISTER PROGRAM
+            <p className="font-mono text-sm tracking-widest text-cream/70">
+              Sister program
             </p>
             <h2 className="mt-2 font-display text-5xl font-black leading-[0.95] md:text-6xl">
               Meet <span className="italic text-sun">Pythos</span>.
@@ -153,8 +153,8 @@ function AboutPage() {
           </div>
           <div className="md:col-span-5">
             <div className="rounded-3xl border-2 border-cream bg-cream/10 p-6">
-              <p className="font-mono text-xs uppercase tracking-widest text-cream/70">
-                JULY TRACKS
+              <p className="font-mono text-xs tracking-widest text-cream/70">
+                July tracks
               </p>
               <ul className="mt-4 space-y-3 font-mono text-sm">
                 <li className="flex gap-3">

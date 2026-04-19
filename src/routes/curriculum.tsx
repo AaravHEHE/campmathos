@@ -29,8 +29,8 @@ function CurriculumPage() {
 
       <section className="grid-paper border-b-2 border-ink">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
-          <p className="font-mono text-sm uppercase tracking-widest text-muted-foreground">
-            CURRICULUM
+          <p className="font-mono text-sm tracking-widest text-muted-foreground">
+            Curriculum
           </p>
           <h1 className="mt-3 font-display text-5xl font-black leading-[0.95] md:text-7xl">
             Four weeks of <span className="italic text-electric">applied</span> math.
@@ -45,8 +45,8 @@ function CurriculumPage() {
       {/* THREE THEMES */}
       <section className="border-b-2 border-ink bg-ink text-cream">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
-          <p className="font-mono text-sm uppercase tracking-widest text-cream/60">
-            THREE THEMES
+          <p className="font-mono text-sm tracking-widest text-cream/60">
+            Three themes
           </p>
           <h2 className="mt-3 font-display text-5xl font-black leading-[0.95] md:text-6xl">
             Math, mapped to the
@@ -111,8 +111,8 @@ function CurriculumPage() {
 
               <div className="mt-8 grid gap-8 md:grid-cols-2">
                 <div>
-                  <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-                    WHAT WE COVER
+                  <p className="font-mono text-xs tracking-widest text-muted-foreground">
+                    What we cover
                   </p>
                   <ul className="mt-4 space-y-3 font-mono text-sm">
                     {w.bullets.map((b) => (
@@ -124,8 +124,8 @@ function CurriculumPage() {
                   </ul>
                 </div>
                 <div>
-                  <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-                    HOW IT FEELS
+                  <p className="font-mono text-xs tracking-widest text-muted-foreground">
+                    How it feels
                   </p>
                   <p className="mt-4 text-ink/80">{w.detail}</p>
                 </div>
@@ -136,8 +136,8 @@ function CurriculumPage() {
           {/* SUPPORT CALLOUT */}
           <article className="grid gap-6 rounded-3xl border-2 border-ink bg-sun p-8 md:grid-cols-3 md:p-12">
             <div className="md:col-span-1">
-              <p className="font-mono text-xs uppercase tracking-widest text-ink/60">
-                BUILT-IN SUPPORT
+              <p className="font-mono text-xs tracking-widest text-ink/60">
+                Built-in support
               </p>
               <h3 className="mt-2 font-display text-3xl font-black">However you learn.</h3>
             </div>

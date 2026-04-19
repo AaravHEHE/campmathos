@@ -78,8 +78,8 @@ function RegisterPage() {
 
       <section className="grid-paper border-b-2 border-ink">
         <div className="mx-auto max-w-3xl px-6 py-20 md:py-28">
-          <p className="font-mono text-sm uppercase tracking-widest text-muted-foreground">
-            INTEREST FORM
+          <p className="font-mono text-sm tracking-widest text-muted-foreground">
+            Interest form
           </p>
           <h1 className="mt-3 font-display text-5xl font-black leading-[0.95] md:text-7xl">
             Curious? <span className="italic text-electric">Tell us.</span>
@@ -92,8 +92,8 @@ function RegisterPage() {
 
           {status === "success" ? (
             <div className="mt-10 rounded-3xl border-2 border-ink bg-sun p-8">
-              <p className="font-mono text-xs uppercase tracking-widest text-ink/70">
-                NOTED
+              <p className="font-mono text-xs tracking-widest text-ink/70">
+                Noted
               </p>
               <h2 className="mt-2 font-display text-3xl font-black md:text-4xl">
                 Thanks for letting us know 📬
@@ -113,8 +113,8 @@ function RegisterPage() {
             </div>
           ) : status === "duplicate" ? (
             <div className="mt-10 rounded-3xl border-2 border-ink bg-electric p-8 text-cream">
-              <p className="font-mono text-xs uppercase tracking-widest text-cream/70">
-                ALREADY ON THE LIST
+              <p className="font-mono text-xs tracking-widest text-cream/70">
+                Already on the list
               </p>
               <h2 className="mt-2 font-display text-3xl font-black md:text-4xl">
                 Looks like you've already signed up 📬
@@ -184,9 +184,9 @@ function RegisterPage() {
                 type="button"
                 onClick={() => setAdminOpen(true)}
                 aria-label="Admin"
-                className="font-mono text-[10px] uppercase tracking-widest text-ink/20 transition hover:text-ink/60"
+                className="font-mono text-[10px] tracking-widest text-ink/20 transition hover:text-ink/60"
               >
-                admin
+                Admin
               </button>
             ) : (
               <form onSubmit={handleAdminGate} className="flex flex-wrap items-center gap-2">
@@ -200,9 +200,9 @@ function RegisterPage() {
                 />
                 <button
                   type="submit"
-                  className="rounded-full bg-ink px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-cream transition hover:bg-electric"
+                  className="rounded-full bg-ink px-3 py-1.5 font-mono text-[10px] tracking-widest text-cream transition hover:bg-electric"
                 >
-                  enter
+                  Enter
                 </button>
                 <button
                   type="button"
@@ -211,9 +211,9 @@ function RegisterPage() {
                     setAdminPassword("");
                     setAdminError("");
                   }}
-                  className="font-mono text-[10px] uppercase tracking-widest text-ink/40 hover:text-ink/70"
+                  className="font-mono text-[10px] tracking-widest text-ink/40 hover:text-ink/70"
                 >
-                  cancel
+                  Cancel
                 </button>
                 {adminError && (
                   <span className="font-mono text-[10px] text-coral">{adminError}</span>
