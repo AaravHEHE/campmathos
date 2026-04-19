@@ -82,6 +82,14 @@ export function SiteFooter() {
           <Link to="/register" className="hover:text-electric">
             Interest form
           </Link>
+          <Link
+            to="/admin/login"
+            className="text-cream/0 hover:text-ink/40"
+            aria-label="Admin"
+            tabIndex={-1}
+          >
+            admin
+          </Link>
         </div>
         <p className="font-mono text-xs text-muted-foreground">
           © 2026 Mathos · Naperville, IL · campmathos@gmail.com

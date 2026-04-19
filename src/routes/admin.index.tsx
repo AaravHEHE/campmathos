@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { supabase } from "@/integrations/supabase/client";
@@ -22,11 +22,11 @@ interface Registration {
 type SortKey = "created_at" | "email";
 type SortDir = "asc" | "desc";
 
+const STORAGE_KEY = "mathos-admin-ok";
+
 function AdminDashboard() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const [authorized, setAuthorized] = useState(false);
-  const [userEmail, setUserEmail] = useState("");
   const [rows, setRows] = useState<Registration[]>([]);
   const [error, setError] = useState("");
 
@@ -40,45 +40,29 @@ function AdminDashboard() {
   useEffect(() => {
     let cancelled = false;
 
-    const check = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        navigate({ to: "/admin/login" });
-        return;
-      }
+    if (typeof window === "undefined") return;
+    if (sessionStorage.getItem(STORAGE_KEY) !== "1") {
+      navigate({ to: "/admin/login" });
+      return;
+    }
+
+    const load = async () => {
+      const { data, error: queryError } = await supabase
+        .from("registrations")
+        .select("id, email, created_at")
+        .order("created_at", { ascending: false });
       if (cancelled) return;
-      setUserEmail(session.user.email ?? "");
-
-      const { data: roles } = await supabase
-        .from("user_roles")
-        .select("role")
-        .eq("user_id", session.user.id);
-
-      const isAdmin = (roles ?? []).some((r) => r.role === "admin");
-      setAuthorized(isAdmin);
-
-      if (isAdmin) {
-        const { data, error: queryError } = await supabase
-          .from("registrations")
-          .select("id, email, created_at")
-          .order("created_at", { ascending: false });
-        if (queryError) {
-          setError(queryError.message);
-        } else {
-          setRows((data as Registration[]) ?? []);
-        }
+      if (queryError) {
+        setError(queryError.message);
+      } else {
+        setRows((data as Registration[]) ?? []);
       }
       setLoading(false);
     };
 
-    check();
-
-    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
-      if (!session) navigate({ to: "/admin/login" });
-    });
+    load();
     return () => {
       cancelled = true;
-      sub.subscription.unsubscribe();
     };
   }, [navigate]);
 
@@ -136,8 +120,8 @@ function AdminDashboard() {
     URL.revokeObjectURL(url);
   };
 
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
+  const handleSignOut = () => {
+    sessionStorage.removeItem(STORAGE_KEY);
     navigate({ to: "/admin/login" });
   };
 
@@ -203,44 +187,6 @@ function AdminDashboard() {
     );
   }
 
-  if (!authorized) {
-    return (
-      <main className="min-h-screen bg-cream text-ink">
-        <SiteHeader />
-        <section className="border-b-2 border-ink">
-          <div className="mx-auto max-w-2xl px-6 py-20">
-            <p className="font-mono text-sm uppercase tracking-widest text-coral">
-              NOT AUTHORIZED
-            </p>
-            <h1 className="mt-3 font-display text-4xl font-black">
-              Your account isn't a director yet.
-            </h1>
-            <p className="mt-4 text-ink/70">
-              You're signed in as <strong>{userEmail}</strong>, but this account hasn't been
-              granted director access. Ask an existing director to add your account, then come
-              back here.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <button
-                onClick={handleSignOut}
-                className="rounded-full border-2 border-ink px-6 py-3 font-semibold transition hover:bg-ink hover:text-cream"
-              >
-                Sign out
-              </button>
-              <Link
-                to="/"
-                className="rounded-full bg-ink px-6 py-3 font-semibold text-cream transition hover:bg-electric"
-              >
-                Home
-              </Link>
-            </div>
-          </div>
-        </section>
-        <SiteFooter />
-      </main>
-    );
-  }
-
   return (
     <main className="min-h-screen bg-cream text-ink">
       <SiteHeader />
@@ -255,9 +201,6 @@ function AdminDashboard() {
               <h1 className="mt-2 font-display text-4xl font-black md:text-5xl">
                 Interest list
               </h1>
-              <p className="mt-2 font-mono text-xs text-muted-foreground">
-                Signed in as {userEmail}
-              </p>
             </div>
             <div className="flex flex-wrap gap-3">
               <button
