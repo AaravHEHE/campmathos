@@ -49,7 +49,7 @@ export function SiteHeader() {
           to="/register"
           className="rounded-full border-2 border-ink bg-ink px-5 py-2 text-sm font-semibold text-cream transition hover:bg-electric hover:border-electric"
         >
-          Register →
+          I'm interested →
         </Link>
       </div>
     </header>
@@ -80,7 +80,7 @@ export function SiteFooter() {
             FAQ
           </Link>
           <Link to="/register" className="hover:text-electric">
-            Register
+            Interest form
           </Link>
         </div>
         <p className="font-mono text-xs text-muted-foreground">
