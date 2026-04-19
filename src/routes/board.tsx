@@ -23,7 +23,6 @@ export const Route = createFileRoute("/board")({
 
 type Director = {
   name: string;
-  role: string;
   bio: string;
   accent: string;
 };
@@ -31,37 +30,31 @@ type Director = {
 const directors: Director[] = [
   {
     name: "Aarav Arora",
-    role: "Co-founder · Curriculum",
     bio: "Aarav leads Mathos curriculum design, building the week-by-week applied math lessons. He's drawn to the math behind engineering and how a clear graph can change someone's mind.",
     accent: "bg-electric text-cream",
   },
   {
     name: "Shaury Sharma",
-    role: "Co-founder · Operations",
     bio: "Shaury runs day-to-day operations — scheduling, the library partnership, and family communication. He believes the best way to learn math is to need it for something you actually care about.",
     accent: "bg-coral text-cream",
   },
   {
     name: "Alan Zhan",
-    role: "Director · Pythos lead",
     bio: "Alan leads the Pythos computer-science program and built much of the custom Python library campers use to make games. He's interested in the overlap between problem-solving and design.",
     accent: "bg-sun text-ink",
   },
   {
     name: "Ediz Gusey",
-    role: "Director · Instruction",
     bio: "Ediz heads instructor training and makes sure every Mathos session is hands-on, not lecture-heavy. He's especially passionate about geometry and showing kids the math hidden in buildings.",
     accent: "bg-ink text-cream",
   },
   {
     name: "Yifan Bao",
-    role: "Director · Materials",
     bio: "Yifan designs Mathos' guided notes, problem sets, and the extra-stretch material we send curious campers home with. She loves probability and the way it shows up in everyday decisions.",
     accent: "bg-coral text-cream",
   },
   {
     name: "Wenxuan Chen",
-    role: "Director · Showcase &amp; outreach",
     bio: "Wenxuan organizes the final showcase day and handles community outreach across Naperville. He's most excited when a camper presents their own project to a room full of family and friends.",
     accent: "bg-electric text-cream",
   },
@@ -116,10 +109,6 @@ function BoardPage() {
                   </span>
                 </div>
                 <h2 className="mt-6 font-display text-2xl font-black leading-tight">{d.name}</h2>
-                <p
-                  className="mt-1 font-mono text-xs uppercase tracking-widest text-muted-foreground"
-                  dangerouslySetInnerHTML={{ __html: d.role }}
-                />
                 <p className="mt-4 text-sm text-ink/70">{d.bio}</p>
               </article>
             ))}
