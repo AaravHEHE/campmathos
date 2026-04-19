@@ -27,7 +27,7 @@ const facts: [string, string][] = [
   ["Days", "Monday, Wednesday, Friday"],
   ["Session length", "2.5 hours (1 hr · 15-min break · 1 hr 15)"],
   ["Math grades", "4th — 7th (recommended)"],
-  ["Sister program", "Pythos (CS camp) runs in July"],
+  ["Sister program", "PythOs (CS camp) runs in July"],
   ["Cost", "Completely free"],
   ["Showcase", "Friday of week 4 — families invited"],
 ];
@@ -133,7 +133,7 @@ function DetailsPage() {
                 <span className="text-coral">→</span>A snack and a drink for the 15-minute break
               </li>
               <li className="flex gap-3">
-                <span className="text-coral">→</span>A computer if you join Pythos in July
+                <span className="text-coral">→</span>A computer if you join PythOs in July
                 (required for the CS camp)
               </li>
               <li className="flex gap-3">

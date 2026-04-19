@@ -9,7 +9,7 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "MathOs comes from the Greek word for 'learning.' We're a student-led nonprofit running a free, hands-on applied math camp at Naperville Public Library, with a sister CS program called Pythos.",
+          "MathOs comes from the Greek word for 'learning.' We're a student-led nonprofit running a free, hands-on applied math camp at Naperville Public Library, with a sister CS program called PythOs.",
       },
       { property: "og:title", content: "About MathOs — Free applied math camp" },
       {
@@ -142,12 +142,12 @@ function AboutPage() {
               Sister program
             </p>
             <h2 className="mt-2 font-display text-5xl font-black leading-[0.95] md:text-6xl">
-              Meet <span className="italic text-sun">Pythos</span>.
+              Meet <span className="italic text-sun">PythOs</span>.
             </h2>
             <p className="mt-6 max-w-2xl text-cream/85">
               After MathOs wraps in June, our directors run a sister computer-science program
-              called <span className="font-semibold">Pythos</span> in July. Two age tracks, both
-              focused on building real games — not memorizing syntax. Pythos has its own
+              called <span className="font-semibold">PythOs</span> in July. Two age tracks, both
+              focused on building real games — not memorizing syntax. PythOs has its own
               dedicated website coming soon.
             </p>
           </div>

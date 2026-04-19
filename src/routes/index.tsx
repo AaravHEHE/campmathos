@@ -207,7 +207,7 @@ function Index() {
             </Link>
           </div>
 
-          {/* Pythos teaser */}
+          {/* PythOs teaser */}
           <div className="mt-12 rounded-3xl border-2 border-ink bg-electric p-8 text-cream md:p-12">
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
               <div className="max-w-2xl">
@@ -215,12 +215,12 @@ function Index() {
                   Sister program · July
                 </p>
                 <h3 className="mt-2 font-display text-3xl font-black md:text-4xl">
-                  Pythos — build a 2D game in July.
+                  PythOs — build a 2D game in July.
                 </h3>
                 <p className="mt-3 text-cream/85">
-                  After MathOs wraps, our directors run Pythos: a creative computer-science camp
+                  After MathOs wraps, our directors run PythOs: a creative computer-science camp
                   with two age tracks (grades 1–4 in Scratch, grades 5–8 in Python with a custom
-                  Turtle library). Every camper finishes with their own playable 2D game. Pythos
+                  Turtle library). Every camper finishes with their own playable 2D game. PythOs
                   has its own dedicated site coming soon.
                 </p>
               </div>
