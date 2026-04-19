@@ -111,6 +111,34 @@ function RegisterPage() {
                 Add another email
               </button>
             </div>
+          ) : status === "duplicate" ? (
+            <div className="mt-10 rounded-3xl border-2 border-ink bg-electric p-8 text-cream">
+              <p className="font-mono text-xs uppercase tracking-widest text-cream/70">
+                ALREADY ON THE LIST
+              </p>
+              <h2 className="mt-2 font-display text-3xl font-black md:text-4xl">
+                Looks like you've already signed up 📬
+              </h2>
+              <p className="mt-3 text-cream/85">
+                We already have <strong>{email}</strong> on our interest list — no need to sign
+                up again. We'll be in touch as June gets closer with the schedule and library
+                details. Questions? Email{" "}
+                <a href="mailto:campmathos@gmail.com" className="underline">
+                  campmathos@gmail.com
+                </a>
+                .
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  setStatus("idle");
+                  setEmail("");
+                }}
+                className="mt-6 inline-flex rounded-full border-2 border-cream bg-ink px-6 py-3 font-semibold text-cream transition hover:bg-cream hover:text-ink"
+              >
+                Use a different email
+              </button>
+            </div>
           ) : (
             <>
               <form onSubmit={handleSubmit} className="mt-10 flex flex-col gap-3 sm:flex-row">
@@ -148,6 +176,51 @@ function RegisterPage() {
             </a>
             .
           </p>
+
+          {/* Hidden admin gate — small, low-contrast button at the bottom */}
+          <div className="mt-12 flex items-center gap-2">
+            {!adminOpen ? (
+              <button
+                type="button"
+                onClick={() => setAdminOpen(true)}
+                aria-label="Admin"
+                className="font-mono text-[10px] uppercase tracking-widest text-ink/20 transition hover:text-ink/60"
+              >
+                admin
+              </button>
+            ) : (
+              <form onSubmit={handleAdminGate} className="flex flex-wrap items-center gap-2">
+                <input
+                  type="password"
+                  autoFocus
+                  value={adminPassword}
+                  onChange={(e) => setAdminPassword(e.target.value)}
+                  placeholder="password"
+                  className="rounded-full border border-ink/30 bg-cream px-3 py-1.5 font-mono text-xs placeholder:text-ink/30 focus:outline-none focus:ring-2 focus:ring-electric/40"
+                />
+                <button
+                  type="submit"
+                  className="rounded-full bg-ink px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-cream transition hover:bg-electric"
+                >
+                  enter
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAdminOpen(false);
+                    setAdminPassword("");
+                    setAdminError("");
+                  }}
+                  className="font-mono text-[10px] uppercase tracking-widest text-ink/40 hover:text-ink/70"
+                >
+                  cancel
+                </button>
+                {adminError && (
+                  <span className="font-mono text-[10px] text-coral">{adminError}</span>
+                )}
+              </form>
+            )}
+          </div>
         </div>
       </section>
 
