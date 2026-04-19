@@ -5,17 +5,17 @@ export const Route = createFileRoute("/details")({
   component: DetailsPage,
   head: () => ({
     meta: [
-      { title: "Details — MathOS summer camp schedule and logistics" },
+      { title: "Details — MathOs summer camp schedule and logistics" },
       {
         name: "description",
         content:
-          "MathOS camp logistics: free for all students, Monday/Wednesday/Friday in June 2026 at Naperville Public Library, 2.5-hour sessions with a 15-minute break.",
+          "MathOs camp logistics: free for all students, Monday/Wednesday/Friday in June 2026 at Naperville Public Library, 2.5-hour sessions with a 15-minute break.",
       },
-      { property: "og:title", content: "Details — MathOS summer camp" },
+      { property: "og:title", content: "Details — MathOs summer camp" },
       {
         property: "og:description",
         content:
-          "Schedule, location, session structure, and what to bring. MathOS is completely free.",
+          "Schedule, location, session structure, and what to bring. MathOs is completely free.",
       },
     ],
   }),
@@ -46,7 +46,7 @@ function DetailsPage() {
             Everything <span className="italic text-electric">logistical</span>.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            MathOS is a four-week summer camp at Naperville Public Library, completely free for
+            MathOs is a four-week summer camp at Naperville Public Library, completely free for
             every camper. Here's exactly how it runs.
           </p>
         </div>
@@ -75,7 +75,7 @@ function DetailsPage() {
             2.5 hours, with room to <span className="italic">breathe</span>.
           </h2>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            Each MathOS session runs two and a half hours, broken in the middle by a 15-minute
+            Each MathOs session runs two and a half hours, broken in the middle by a 15-minute
             break so campers can rest, snack, and reset before diving back in.
           </p>
 

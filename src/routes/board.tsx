@@ -5,17 +5,17 @@ export const Route = createFileRoute("/board")({
   component: BoardPage,
   head: () => ({
     meta: [
-      { title: "Board of directors — MathOS" },
+      { title: "Board of directors — MathOs" },
       {
         name: "description",
         content:
-          "Meet the MathOS board of directors — the Neuqua Valley students leading our free summer applied math camp in Naperville.",
+          "Meet the MathOs board of directors — the Neuqua Valley students leading our free summer applied math camp in Naperville.",
       },
-      { property: "og:title", content: "Board of directors — MathOS" },
+      { property: "og:title", content: "Board of directors — MathOs" },
       {
         property: "og:description",
         content:
-          "Meet the six directors behind MathOS, a free summer applied math camp at Naperville Public Library.",
+          "Meet the six directors behind MathOs, a free summer applied math camp at Naperville Public Library.",
       },
     ],
   }),
@@ -80,10 +80,10 @@ function BoardPage() {
             Board of directors
           </p>
           <h1 className="mt-3 font-display text-5xl font-black leading-[0.95] md:text-7xl">
-            The students <span className="italic text-electric">behind</span> MathOS.
+            The students <span className="italic text-electric">behind</span> MathOs.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            MathOS is built and taught by six Neuqua Valley High School students who believe math
+            MathOs is built and taught by six Neuqua Valley High School students who believe math
             should feel useful, not abstract. We design every session, mentor every camper, and
             run every workshop ourselves.
           </p>

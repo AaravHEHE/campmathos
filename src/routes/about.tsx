@@ -5,13 +5,13 @@ export const Route = createFileRoute("/about")({
   component: AboutPage,
   head: () => ({
     meta: [
-      { title: "About MathOS — Free applied math camp in Naperville" },
+      { title: "About MathOs — Free applied math camp in Naperville" },
       {
         name: "description",
         content:
-          "MathOS comes from the Greek word for 'learning.' We're a student-led nonprofit running a free, hands-on applied math camp at Naperville Public Library, with a sister CS program called Pythos.",
+          "MathOs comes from the Greek word for 'learning.' We're a student-led nonprofit running a free, hands-on applied math camp at Naperville Public Library, with a sister CS program called Pythos.",
       },
-      { property: "og:title", content: "About MathOS — Free applied math camp" },
+      { property: "og:title", content: "About MathOs — Free applied math camp" },
       {
         property: "og:description",
         content:
@@ -60,12 +60,12 @@ function AboutPage() {
             About
           </p>
           <h1 className="mt-3 font-display text-5xl font-black leading-[0.95] md:text-7xl">
-            <span className="italic text-electric">MathOS</span> means
+            <span className="italic text-electric">MathOs</span> means
             <br />
             learning.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            The name comes from the Greek word for "learning" or "knowledge." MathOS is a
+            The name comes from the Greek word for "learning" or "knowledge." MathOs is a
             one-month summer program designed by a team of Neuqua Valley High School students to
             make math feel useful, hands-on, and genuinely exciting — not abstract.
           </p>
@@ -84,7 +84,7 @@ function AboutPage() {
           <div className="md:col-span-7">
             <p className="text-lg text-cream/80">
               Most kids meet math as a stack of formulas with no obvious purpose. We think that's
-              backwards. MathOS teaches incoming 4th–7th graders how the math they already see in
+              backwards. MathOs teaches incoming 4th–7th graders how the math they already see in
               school connects to engineering, finance, and architecture — the things adults
               actually pay for and build with.
             </p>
@@ -145,7 +145,7 @@ function AboutPage() {
               Meet <span className="italic text-sun">Pythos</span>.
             </h2>
             <p className="mt-6 max-w-2xl text-cream/85">
-              After MathOS wraps in June, our directors run a sister computer-science program
+              After MathOs wraps in June, our directors run a sister computer-science program
               called <span className="font-semibold">Pythos</span> in July. Two age tracks, both
               focused on building real games — not memorizing syntax. Pythos has its own
               dedicated website coming soon.
