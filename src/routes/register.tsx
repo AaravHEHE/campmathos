@@ -26,9 +26,17 @@ export const Route = createFileRoute("/register")({
 });
 
 function RegisterPage() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "duplicate" | "error">(
+    "idle",
+  );
   const [errorMsg, setErrorMsg] = useState("");
+
+  // Hidden admin gate
+  const [adminOpen, setAdminOpen] = useState(false);
+  const [adminPassword, setAdminPassword] = useState("");
+  const [adminError, setAdminError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,8 +47,11 @@ function RegisterPage() {
         body: { email: email.trim().toLowerCase() },
       });
       if (error) throw error;
-      if ((data as { error?: string })?.error) {
-        throw new Error((data as { error: string }).error);
+      const payload = data as { error?: string; duplicate?: boolean };
+      if (payload?.error) throw new Error(payload.error);
+      if (payload?.duplicate) {
+        setStatus("duplicate");
+        return;
       }
       setStatus("success");
       setEmail("");
@@ -48,6 +59,16 @@ function RegisterPage() {
       const msg = err instanceof Error ? err.message : "Something went wrong.";
       setErrorMsg(msg);
       setStatus("error");
+    }
+  };
+
+  const handleAdminGate = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (adminPassword === ADMIN_GATE_PASSWORD) {
+      setAdminError("");
+      navigate({ to: "/admin/login" });
+    } else {
+      setAdminError("Incorrect password.");
     }
   };
 
