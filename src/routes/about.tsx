@@ -23,25 +23,25 @@ export const Route = createFileRoute("/about")({
 
 const pillars: { tag: string; title: string; body: string; accent: string }[] = [
   {
-    tag: "/ hands-on",
+    tag: "hands-on",
     title: "Activities, not lectures.",
     body: "We design custom games, challenges, and builds for every concept. Note-taking is minimal so participation can stay high.",
     accent: "bg-electric text-cream",
   },
   {
-    tag: "/ guided",
+    tag: "guided",
     title: "Structured guided notes.",
     body: "Every lesson comes with clear, pre-built notes that simplify complex ideas — campers leave with a reference they can actually use later.",
     accent: "bg-coral text-cream",
   },
   {
-    tag: "/ supportive",
+    tag: "supportive",
     title: "Optional out-of-class help.",
     body: "Any director will meet one-on-one with any camper who needs extra time on a topic — from camp, from school, or just curiosity.",
     accent: "bg-sun text-ink",
   },
   {
-    tag: "/ stretching",
+    tag: "stretching",
     title: "Extra material for the curious.",
     body: "Campers who want to go further get harder problem sets, project ideas, and reading recommendations matched to their grade.",
     accent: "bg-ink text-cream",

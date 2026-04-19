@@ -56,19 +56,19 @@ function CurriculumPage() {
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {[
               {
-                tag: "/ engineering",
+                tag: "engineering",
                 title: "Graphing",
                 body: "Read, build, and defend graphs the way engineers and analysts do.",
                 accent: "bg-electric text-cream",
               },
               {
-                tag: "/ decision-making",
+                tag: "decision-making",
                 title: "Probability + Finance",
                 body: "Use the same math banks, casinos, and insurance companies use every day.",
                 accent: "bg-coral text-cream",
               },
               {
-                tag: "/ architecture",
+                tag: "architecture",
                 title: "Geometry",
                 body: "Design structures with area, volume, and angle relationships that have to actually hold up.",
                 accent: "bg-sun text-ink",
