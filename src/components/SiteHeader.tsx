@@ -88,7 +88,7 @@ export function SiteFooter() {
             aria-label="Admin"
             tabIndex={-1}
           >
-            admin
+            Admin
           </Link>
         </div>
         <p className="font-mono text-xs text-muted-foreground">
