@@ -8,7 +8,7 @@ export const Route = createFileRoute("/admin/login")({
   component: AdminLoginPage,
   head: () => ({
     meta: [
-      { title: "Director login — Mathos" },
+      { title: "Director login — MathOS" },
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),
