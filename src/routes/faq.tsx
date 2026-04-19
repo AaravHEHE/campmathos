@@ -91,7 +91,7 @@ function FaqPage() {
 
       <section className="grid-paper border-b-2 border-ink">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
-          <p className="font-mono text-sm uppercase tracking-widest text-muted-foreground">
+          <p className="font-mono text-sm tracking-widest text-muted-foreground">
             FAQ
           </p>
           <h1 className="mt-3 font-display text-5xl font-black leading-[0.95] md:text-7xl">

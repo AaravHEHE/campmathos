@@ -107,7 +107,7 @@ function Index() {
       <section className="relative grid-paper border-b-2 border-ink">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:grid-cols-12 md:gap-8 md:py-24">
           <div className="md:col-span-7">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-ink bg-cream px-4 py-1.5 font-mono text-xs uppercase tracking-widest">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-ink bg-cream px-4 py-1.5 font-mono text-xs tracking-widest">
               <span className="h-2 w-2 rounded-full bg-coral" />
               June 2026 · Naperville Public Library · 100% free
             </div>
@@ -183,8 +183,8 @@ function Index() {
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
           <div className="mb-16 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
             <div>
-              <p className="font-mono text-sm uppercase tracking-widest text-muted-foreground">
-                CURRICULUM
+              <p className="font-mono text-sm tracking-widest text-muted-foreground">
+                Curriculum
               </p>
               <h2 className="mt-2 font-display text-5xl font-black md:text-7xl">
                 Four weeks of
@@ -217,8 +217,8 @@ function Index() {
           <div className="mt-12 rounded-3xl border-2 border-ink bg-electric p-8 text-cream md:p-12">
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
               <div className="max-w-2xl">
-                <p className="font-mono text-xs uppercase tracking-widest text-cream/70">
-                  SISTER PROGRAM · JULY
+                <p className="font-mono text-xs tracking-widest text-cream/70">
+                  Sister program · July
                 </p>
                 <h3 className="mt-2 font-display text-3xl font-black md:text-4xl">
                   Pythos — build a 2D game in July.
@@ -245,7 +245,7 @@ function Index() {
       <section className="border-b-2 border-ink bg-ink text-cream">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 md:grid-cols-12 md:py-28">
           <div className="md:col-span-5">
-            <p className="font-mono text-sm uppercase tracking-widest text-cream/60">/ details</p>
+            <p className="font-mono text-sm tracking-widest text-cream/60">/ Details</p>
             <h2 className="mt-2 font-display text-5xl font-black md:text-6xl">
               When, where, <span className="italic text-sun">how much</span>.
             </h2>
@@ -271,7 +271,7 @@ function Index() {
               ["Cost", "Completely free"],
             ].map(([k, v]) => (
               <div key={k} className="bg-ink p-8">
-                <dt className="font-mono text-xs uppercase tracking-widest text-cream/50">{k}</dt>
+                <dt className="font-mono text-xs tracking-widest text-cream/50">{k}</dt>
                 <dd className="mt-3 font-display text-2xl font-bold leading-tight">{v}</dd>
               </div>
             ))}
@@ -283,7 +283,7 @@ function Index() {
       <section className="border-b-2 border-ink bg-sun">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 md:grid-cols-12 md:py-24">
           <div className="md:col-span-7">
-            <p className="font-mono text-sm uppercase tracking-widest text-ink/60">/ extra help</p>
+            <p className="font-mono text-sm tracking-widest text-ink/60">/ Extra help</p>
             <h2 className="mt-2 font-display text-5xl font-black leading-[0.95] md:text-6xl">
               Stuck on something? <span className="italic">Just ask.</span>
             </h2>
@@ -296,8 +296,8 @@ function Index() {
           </div>
           <div className="md:col-span-5">
             <div className="rounded-3xl border-2 border-ink bg-cream p-8">
-              <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-                WANT MORE MATERIAL?
+              <p className="font-mono text-xs tracking-widest text-muted-foreground">
+                Want more material?
               </p>
               <h3 className="mt-2 font-display text-3xl font-black">
                 Reach out — we'll send more.
@@ -321,7 +321,7 @@ function Index() {
       {/* FAQ TEASER */}
       <section className="border-b-2 border-ink">
         <div className="mx-auto max-w-4xl px-6 py-20 md:py-28">
-          <p className="font-mono text-sm uppercase tracking-widest text-muted-foreground">/ faq</p>
+          <p className="font-mono text-sm tracking-widest text-muted-foreground">/ FAQ</p>
           <h2 className="mt-2 font-display text-5xl font-black md:text-6xl">Common questions.</h2>
           <p className="mt-6 max-w-2xl text-lg text-ink/70">
             A few of the questions families ask most. We have a full FAQ page with everything
@@ -356,7 +356,7 @@ function Index() {
       {/* CTA */}
       <section className="bg-coral">
         <div className="mx-auto max-w-7xl px-6 py-24 text-center md:py-32">
-          <p className="font-mono text-sm uppercase tracking-widest text-cream/80">/ register</p>
+          <p className="font-mono text-sm tracking-widest text-cream/80">/ Register</p>
           <h2 className="mx-auto mt-4 max-w-4xl font-display text-6xl font-black leading-[0.9] text-cream md:text-8xl">
             Spend June <span className="italic">thinking</span> in math.
           </h2>
