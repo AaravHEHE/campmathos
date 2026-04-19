@@ -118,6 +118,31 @@ Deno.serve(async (req) => {
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
+    // Duplicate check first — friendly message instead of a generic error.
+    const { data: existing, error: existingError } = await supabase
+      .from("registrations")
+      .select("id")
+      .eq("email", rawEmail)
+      .maybeSingle();
+
+    if (existingError) {
+      console.error("Lookup error", existingError);
+      return new Response(JSON.stringify({ error: "Could not check your registration. Please try again." }), {
+        status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    if (existing) {
+      return new Response(
+        JSON.stringify({
+          duplicate: true,
+          message: "Looks like you've already signed up — we have you on the list! 📬",
+        }),
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      );
+    }
+
     const { data: inserted, error: insertError } = await supabase
       .from("registrations")
       .insert({ email: rawEmail })
@@ -126,6 +151,17 @@ Deno.serve(async (req) => {
 
     if (insertError) {
       console.error("Insert error", insertError);
+      // Race-condition fallback: if a unique constraint fires, treat as duplicate.
+      const code = (insertError as { code?: string }).code;
+      if (code === "23505") {
+        return new Response(
+          JSON.stringify({
+            duplicate: true,
+            message: "Looks like you've already signed up — we have you on the list! 📬",
+          }),
+          { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+        );
+      }
       return new Response(JSON.stringify({ error: "Could not save your registration. Please try again." }), {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },

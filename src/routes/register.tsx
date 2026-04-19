@@ -1,7 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { supabase } from "@/integrations/supabase/client";
+
+const ADMIN_GATE_PASSWORD = "CampMathos123!@#";
 
 export const Route = createFileRoute("/register")({
   component: RegisterPage,
@@ -24,9 +26,17 @@ export const Route = createFileRoute("/register")({
 });
 
 function RegisterPage() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "duplicate" | "error">(
+    "idle",
+  );
   const [errorMsg, setErrorMsg] = useState("");
+
+  // Hidden admin gate
+  const [adminOpen, setAdminOpen] = useState(false);
+  const [adminPassword, setAdminPassword] = useState("");
+  const [adminError, setAdminError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,8 +47,11 @@ function RegisterPage() {
         body: { email: email.trim().toLowerCase() },
       });
       if (error) throw error;
-      if ((data as { error?: string })?.error) {
-        throw new Error((data as { error: string }).error);
+      const payload = data as { error?: string; duplicate?: boolean };
+      if (payload?.error) throw new Error(payload.error);
+      if (payload?.duplicate) {
+        setStatus("duplicate");
+        return;
       }
       setStatus("success");
       setEmail("");
@@ -46,6 +59,16 @@ function RegisterPage() {
       const msg = err instanceof Error ? err.message : "Something went wrong.";
       setErrorMsg(msg);
       setStatus("error");
+    }
+  };
+
+  const handleAdminGate = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (adminPassword === ADMIN_GATE_PASSWORD) {
+      setAdminError("");
+      navigate({ to: "/admin/login" });
+    } else {
+      setAdminError("Incorrect password.");
     }
   };
 
@@ -88,6 +111,34 @@ function RegisterPage() {
                 Add another email
               </button>
             </div>
+          ) : status === "duplicate" ? (
+            <div className="mt-10 rounded-3xl border-2 border-ink bg-electric p-8 text-cream">
+              <p className="font-mono text-xs uppercase tracking-widest text-cream/70">
+                ALREADY ON THE LIST
+              </p>
+              <h2 className="mt-2 font-display text-3xl font-black md:text-4xl">
+                Looks like you've already signed up 📬
+              </h2>
+              <p className="mt-3 text-cream/85">
+                We already have <strong>{email}</strong> on our interest list — no need to sign
+                up again. We'll be in touch as June gets closer with the schedule and library
+                details. Questions? Email{" "}
+                <a href="mailto:campmathos@gmail.com" className="underline">
+                  campmathos@gmail.com
+                </a>
+                .
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  setStatus("idle");
+                  setEmail("");
+                }}
+                className="mt-6 inline-flex rounded-full border-2 border-cream bg-ink px-6 py-3 font-semibold text-cream transition hover:bg-cream hover:text-ink"
+              >
+                Use a different email
+              </button>
+            </div>
           ) : (
             <>
               <form onSubmit={handleSubmit} className="mt-10 flex flex-col gap-3 sm:flex-row">
@@ -125,6 +176,51 @@ function RegisterPage() {
             </a>
             .
           </p>
+
+          {/* Hidden admin gate — small, low-contrast button at the bottom */}
+          <div className="mt-12 flex items-center gap-2">
+            {!adminOpen ? (
+              <button
+                type="button"
+                onClick={() => setAdminOpen(true)}
+                aria-label="Admin"
+                className="font-mono text-[10px] uppercase tracking-widest text-ink/20 transition hover:text-ink/60"
+              >
+                admin
+              </button>
+            ) : (
+              <form onSubmit={handleAdminGate} className="flex flex-wrap items-center gap-2">
+                <input
+                  type="password"
+                  autoFocus
+                  value={adminPassword}
+                  onChange={(e) => setAdminPassword(e.target.value)}
+                  placeholder="password"
+                  className="rounded-full border border-ink/30 bg-cream px-3 py-1.5 font-mono text-xs placeholder:text-ink/30 focus:outline-none focus:ring-2 focus:ring-electric/40"
+                />
+                <button
+                  type="submit"
+                  className="rounded-full bg-ink px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-cream transition hover:bg-electric"
+                >
+                  enter
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAdminOpen(false);
+                    setAdminPassword("");
+                    setAdminError("");
+                  }}
+                  className="font-mono text-[10px] uppercase tracking-widest text-ink/40 hover:text-ink/70"
+                >
+                  cancel
+                </button>
+                {adminError && (
+                  <span className="font-mono text-[10px] text-coral">{adminError}</span>
+                )}
+              </form>
+            )}
+          </div>
         </div>
       </section>
 
