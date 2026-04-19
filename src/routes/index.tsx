@@ -324,16 +324,19 @@ function Index() {
 
           <ul className="mt-10 space-y-4">
             {[
-              "Is the camp really free?",
-              "How do we sign up?",
-              "What days does it meet?",
-              "What should my child bring?",
-            ].map((q) => (
-              <li
-                key={q}
-                className="rounded-2xl border-2 border-ink bg-cream px-6 py-4 font-display text-xl font-bold"
-              >
-                {q}
+              { q: "Is the camp really free?", id: "free" },
+              { q: "How do we sign up?", id: "register" },
+              { q: "What days does it meet?", id: "schedule" },
+              { q: "What should my child bring?", id: "bring" },
+            ].map(({ q, id }) => (
+              <li key={id}>
+                <Link
+                  to="/faq"
+                  hash={id}
+                  className="block rounded-2xl border-2 border-ink bg-cream px-6 py-4 font-display text-xl font-bold transition hover:bg-electric hover:text-cream"
+                >
+                  {q}
+                </Link>
               </li>
             ))}
           </ul>
