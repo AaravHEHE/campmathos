@@ -1,7 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { supabase } from "@/integrations/supabase/client";
+
+const ADMIN_GATE_PASSWORD = "CampMathos123!@#";
 
 export const Route = createFileRoute("/register")({
   component: RegisterPage,
