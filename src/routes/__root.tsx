@@ -29,15 +29,15 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Mathos — Summer applied math camp in Naperville" },
-      { name: "description", content: "Sign up for the Mathos summer camp and learn applied math with Neuqua Valley High School students at Naperville Public Library." },
-      { name: "author", content: "Mathos" },
-      { property: "og:title", content: "Mathos — Summer applied math camp" },
-      { property: "og:description", content: "Sign up for the Mathos summer camp and learn applied math with Neuqua Valley High School students at Naperville Public Library." },
+      { title: "MathOS — Summer applied math camp in Naperville" },
+      { name: "description", content: "Sign up for the MathOS summer camp and learn applied math with Neuqua Valley High School students at Naperville Public Library." },
+      { name: "author", content: "MathOS" },
+      { property: "og:title", content: "MathOS — Summer applied math camp" },
+      { property: "og:description", content: "Sign up for the MathOS summer camp and learn applied math with Neuqua Valley High School students at Naperville Public Library." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:title", content: "Mathos — Summer applied math camp" },
-      { name: "twitter:description", content: "Sign up for the Mathos summer camp and learn applied math with Neuqua Valley High School students at Naperville Public Library." },
+      { name: "twitter:title", content: "MathOS — Summer applied math camp" },
+      { name: "twitter:description", content: "Sign up for the MathOS summer camp and learn applied math with Neuqua Valley High School students at Naperville Public Library." },
     ],
     links: [
       {

@@ -7,7 +7,7 @@ export const Route = createFileRoute("/admin/")({
   component: AdminDashboard,
   head: () => ({
     meta: [
-      { title: "Sign-ups dashboard — Mathos directors" },
+      { title: "Sign-ups dashboard — MathOS directors" },
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),

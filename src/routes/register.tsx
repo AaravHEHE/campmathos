@@ -9,17 +9,17 @@ export const Route = createFileRoute("/register")({
   component: RegisterPage,
   head: () => ({
     meta: [
-      { title: "Express interest — Mathos summer camp (free)" },
+      { title: "Express interest — MathOS summer camp (free)" },
       {
         name: "description",
         content:
-          "Let us know your child is interested in Mathos, the free summer applied math camp at Naperville Public Library. No commitment — we'll send schedule and library details as June gets closer.",
+          "Let us know your child is interested in MathOS, the free summer applied math camp at Naperville Public Library. No commitment — we'll send schedule and library details as June gets closer.",
       },
-      { property: "og:title", content: "Express interest — Mathos summer camp" },
+      { property: "og:title", content: "Express interest — MathOS summer camp" },
       {
         property: "og:description",
         content:
-          "Drop your email to express interest. No commitment required. Mathos is a completely free summer math camp at Naperville Public Library.",
+          "Drop your email to express interest. No commitment required. MathOS is a completely free summer math camp at Naperville Public Library.",
       },
     ],
   }),
