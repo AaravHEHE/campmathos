@@ -9,13 +9,13 @@ export const Route = createFileRoute("/faq")({
       {
         name: "description",
         content:
-          "Answers to the most common questions about MathOs: cost, schedule, attendance, drop-off, materials, prerequisites, the Pythos sister CS camp, and how to register.",
+          "Answers to the most common questions about MathOs: cost, schedule, attendance, drop-off, materials, prerequisites, the PythOS sister CS camp, and how to register.",
       },
       { property: "og:title", content: "FAQ — MathOs summer camp" },
       {
         property: "og:description",
         content:
-          "Cost, schedule, attendance, drop-off, materials, prerequisites, Pythos, and how to register.",
+          "Cost, schedule, attendance, drop-off, materials, prerequisites, PythOS, and how to register.",
       },
     ],
   }),
@@ -48,7 +48,7 @@ const faqs: { q: string; a: string }[] = [
   },
   {
     q: "What should my child bring?",
-    a: "A pencil and a notebook are recommended. A calculator can be helpful but isn't required — instructors will assist whenever it's needed. For our July sister CS camp Pythos, a computer is required.",
+    a: "A pencil and a notebook are recommended. A calculator can be helpful but isn't required — instructors will assist whenever it's needed. For our July sister CS camp PythOS, a computer is required.",
   },
   {
     q: "How many kids will be in a class? What's the student-to-instructor ratio?",
@@ -59,8 +59,8 @@ const faqs: { q: string; a: string }[] = [
     a: "Grades 4–7 is a recommendation, not a hard rule. If you'd still like your child to attend, please reach out and they can be admitted on a special-request basis.",
   },
   {
-    q: "Are there any prerequisites for Pythos (the July CS camp)?",
-    a: "There are no prerequisites — beginners are welcome. Pythos runs in July with two age tracks: grades 1–4 use Scratch on Mondays and Thursdays, and grades 5–8 use Python with a custom Turtle library on Tuesdays and Fridays. The only requirement is bringing a computer.",
+    q: "Are there any prerequisites for PythOS (the July CS camp)?",
+    a: "There are no prerequisites — beginners are welcome. PythOS runs in July with two age tracks: grades 1–4 use Scratch on Mondays and Thursdays, and grades 5–8 use Python with a custom Turtle library on Tuesdays and Fridays. The only requirement is bringing a computer.",
   },
   {
     q: "When is the showcase, and can families come?",
