@@ -76,7 +76,7 @@ function AboutPage() {
       <section className="border-b-2 border-ink bg-ink text-cream">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 md:grid-cols-12 md:py-28">
           <div className="md:col-span-5">
-            <p className="font-mono text-sm tracking-widest text-cream/60">/ Mission</p>
+            <p className="font-mono text-sm tracking-widest text-cream/60">Mission</p>
             <h2 className="mt-2 font-display text-5xl font-black leading-[0.95] md:text-6xl">
               Math you can <span className="italic text-sun">actually use</span>.
             </h2>

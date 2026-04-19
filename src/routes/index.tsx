@@ -239,7 +239,7 @@ function Index() {
       <section className="border-b-2 border-ink bg-ink text-cream">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 md:grid-cols-12 md:py-28">
           <div className="md:col-span-5">
-            <p className="font-mono text-sm tracking-widest text-cream/60">/ Details</p>
+            <p className="font-mono text-sm tracking-widest text-cream/60">Details</p>
             <h2 className="mt-2 font-display text-5xl font-black md:text-6xl">
               When, where, <span className="italic text-sun">how much</span>.
             </h2>
@@ -277,7 +277,7 @@ function Index() {
       <section className="border-b-2 border-ink bg-sun">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 md:grid-cols-12 md:py-24">
           <div className="md:col-span-7">
-            <p className="font-mono text-sm tracking-widest text-ink/60">/ Extra help</p>
+            <p className="font-mono text-sm tracking-widest text-ink/60">Extra help</p>
             <h2 className="mt-2 font-display text-5xl font-black leading-[0.95] md:text-6xl">
               Stuck on something? <span className="italic">Just ask.</span>
             </h2>
@@ -315,7 +315,7 @@ function Index() {
       {/* FAQ TEASER */}
       <section className="border-b-2 border-ink">
         <div className="mx-auto max-w-4xl px-6 py-20 md:py-28">
-          <p className="font-mono text-sm tracking-widest text-muted-foreground">/ FAQ</p>
+          <p className="font-mono text-sm tracking-widest text-muted-foreground">FAQ</p>
           <h2 className="mt-2 font-display text-5xl font-black md:text-6xl">Common questions.</h2>
           <p className="mt-6 max-w-2xl text-lg text-ink/70">
             A few of the questions families ask most. We have a full FAQ page with everything
@@ -350,7 +350,7 @@ function Index() {
       {/* CTA */}
       <section className="bg-coral">
         <div className="mx-auto max-w-7xl px-6 py-24 text-center md:py-32">
-          <p className="font-mono text-sm tracking-widest text-cream/80">/ Register</p>
+          <p className="font-mono text-sm tracking-widest text-cream/80">Register</p>
           <h2 className="mx-auto mt-4 max-w-4xl font-display text-6xl font-black leading-[0.9] text-cream md:text-8xl">
             Spend June <span className="italic">thinking</span> in math.
           </h2>
