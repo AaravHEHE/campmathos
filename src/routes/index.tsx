@@ -136,18 +136,22 @@ function Index() {
               </Link>
             </div>
 
-            <dl className="mt-14 grid max-w-lg grid-cols-3 gap-6 border-t-2 border-ink/20 pt-8 font-mono text-sm">
+            <dl className="mt-14 grid max-w-lg grid-cols-4 gap-6 border-t-2 border-ink/20 pt-8 font-mono text-sm">
               <div>
                 <dt className="text-muted-foreground">Cost</dt>
-                <dd className="font-display text-3xl font-black">$0</dd>
+                <dd className="font-display text-2xl font-black md:text-3xl">$0</dd>
+              </div>
+              <div>
+                <dt className="text-muted-foreground">Weeks</dt>
+                <dd className="font-display text-2xl font-black md:text-3xl">04</dd>
               </div>
               <div>
                 <dt className="text-muted-foreground">Sessions / wk</dt>
-                <dd className="font-display text-3xl font-black">03</dd>
+                <dd className="font-display text-2xl font-black md:text-3xl">03</dd>
               </div>
               <div>
                 <dt className="text-muted-foreground">Grades</dt>
-                <dd className="font-display text-3xl font-black">4–7</dd>
+                <dd className="font-display text-2xl font-black md:text-3xl">4–7</dd>
               </div>
             </dl>
           </div>
