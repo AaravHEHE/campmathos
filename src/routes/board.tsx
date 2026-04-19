@@ -30,33 +30,33 @@ type Director = {
 const directors: Director[] = [
   {
     name: "Aarav Arora",
-    bio: "Aarav leads Mathos curriculum design, building the week-by-week applied math lessons. He's drawn to the math behind engineering and how a clear graph can change someone's mind.",
+    bio: "Neuqua Valley Class of 2029. Neuqua Robotics' first-ever sophomore Executive Board Member and a founding member of NeighbrHub. Aarav brings an engineering mindset to Mathos curriculum design, building lessons that show kids how math actually gets used to build things.",
     accent: "bg-electric text-cream",
   },
   {
-    name: "Shaury Sharma",
-    bio: "Shaury runs day-to-day operations — scheduling, the library partnership, and family communication. He believes the best way to learn math is to need it for something you actually care about.",
-    accent: "bg-coral text-cream",
-  },
-  {
     name: "Alan Zhan",
-    bio: "Alan leads the Pythos computer-science program and built much of the custom Python library campers use to make games. He's interested in the overlap between problem-solving and design.",
+    bio: "Neuqua Valley Class of 2029. Member of NVHS Computing Team, Chess Team, and Math Team — qualified for State in both Chess and Math. Alan leads the Pythos computer-science track, where campers learn Python by building their own games.",
     accent: "bg-sun text-ink",
   },
   {
-    name: "Ediz Gusey",
-    bio: "Ediz heads instructor training and makes sure every Mathos session is hands-on, not lecture-heavy. He's especially passionate about geometry and showing kids the math hidden in buildings.",
-    accent: "bg-ink text-cream",
-  },
-  {
-    name: "Yifan Bao",
-    bio: "Yifan designs Mathos' guided notes, problem sets, and the extra-stretch material we send curious campers home with. She loves probability and the way it shows up in everyday decisions.",
+    name: "Shaury Sharma",
+    bio: "Neuqua Valley Class of 2029. Member of NVHS Robotics Team, IJAS State Qualifier, and NVHS Science Olympiad State Qualifier. Shaury runs day-to-day Mathos operations — scheduling, the library partnership, and family communication.",
     accent: "bg-coral text-cream",
   },
   {
     name: "Wenxuan Chen",
-    bio: "Wenxuan organizes the final showcase day and handles community outreach across Naperville. He's most excited when a camper presents their own project to a room full of family and friends.",
+    bio: "Neuqua Valley Class of 2029. Math Team State Qualifier and member of IMSA / NVHS Robotics. Wenxuan organizes the final showcase day at Mathos and handles community outreach across Naperville.",
     accent: "bg-electric text-cream",
+  },
+  {
+    name: "Yifan Bao",
+    bio: "Neuqua Valley Class of 2029. Math Team State Qualifier and Science Olympiad State Qualifier. Yifan designs Mathos' guided notes, problem sets, and the extra-stretch material we send curious campers home with.",
+    accent: "bg-coral text-cream",
+  },
+  {
+    name: "Ediz Gusey",
+    bio: "Neuqua Valley Class of 2028. Robotics State Qualifier, 2× AIME qualifier, and Math Team State Qualifier. Ediz heads instructor training at Mathos and makes sure every session is hands-on, not lecture-heavy.",
+    accent: "bg-ink text-cream",
   },
 ];
 
