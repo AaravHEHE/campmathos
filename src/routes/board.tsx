@@ -76,8 +76,8 @@ function BoardPage() {
 
       <section className="grid-paper border-b-2 border-ink">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
-          <p className="font-mono text-sm uppercase tracking-widest text-muted-foreground">
-            BOARD OF DIRECTORS
+          <p className="font-mono text-sm tracking-widest text-muted-foreground">
+            Board of directors
           </p>
           <h1 className="mt-3 font-display text-5xl font-black leading-[0.95] md:text-7xl">
             The students <span className="italic text-electric">behind</span> Mathos.
@@ -103,8 +103,8 @@ function BoardPage() {
                   className={`relative flex h-40 w-full items-center justify-center overflow-hidden rounded-2xl border-2 border-ink ${d.accent}`}
                 >
                   <span className="font-display text-5xl font-black">{initials(d.name)}</span>
-                  <span className="absolute bottom-2 right-3 font-mono text-[10px] uppercase tracking-widest opacity-70">
-                    photo soon
+                  <span className="absolute bottom-2 right-3 font-mono text-[10px] tracking-widest opacity-70">
+                    Photo soon
                   </span>
                 </div>
                 <h2 className="mt-6 font-display text-2xl font-black leading-tight">{d.name}</h2>
@@ -114,8 +114,8 @@ function BoardPage() {
           </div>
 
           <div className="mt-16 rounded-3xl border-2 border-ink bg-ink p-10 text-cream md:p-14">
-            <p className="font-mono text-sm uppercase tracking-widest text-cream/60">
-              EXTRA HELP
+            <p className="font-mono text-sm tracking-widest text-cream/60">
+              Extra help
             </p>
             <h2 className="mt-3 font-display text-4xl font-black md:text-5xl">
               We meet kids where they are.
