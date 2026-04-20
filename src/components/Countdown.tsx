@@ -2,29 +2,7 @@ import { useEffect, useState } from "react";
 import { CAMP } from "@/lib/camp";
 
 /**
- * Returns the ISO date (YYYY-MM-DD) of the first Monday of June for the
- * upcoming camp year. If we're already past the first Monday of June this
- * year, rolls forward to next year.
- */
-function firstMondayOfJuneISO(): string {
-  const now = new Date();
-  let year = now.getFullYear();
-  const candidate = (y: number) => {
-    const d = new Date(y, 5, 1); // June = month index 5
-    const offset = (8 - d.getDay()) % 7; // 0=Sun, 1=Mon … shift to next Mon
-    d.setDate(1 + offset);
-    return d;
-  };
-  let target = candidate(year);
-  if (target.getTime() < now.getTime()) target = candidate(++year);
-  const yyyy = target.getFullYear();
-  const mm = String(target.getMonth() + 1).padStart(2, "0");
-  const dd = String(target.getDate()).padStart(2, "0");
-  return `${yyyy}-${mm}-${dd}`;
-}
-
-/**
- * Live countdown to the first Monday of June (the camp's first session).
+ * Live countdown to the camp's first session (CAMP.startDateISO at session start time).
  * Avoids hydration mismatch by only computing on the client (after mount).
  */
 export function Countdown() {
@@ -36,9 +14,9 @@ export function Countdown() {
     return () => clearInterval(id);
   }, []);
 
-  // First Monday of June, 1:00 PM America/Chicago (CDT = UTC-5 in June)
+  // Camp first session, America/Chicago (CDT = UTC-5 in June)
   const target = new Date(
-    `${firstMondayOfJuneISO()}T${CAMP.sessionStartTime}:00-05:00`
+    `${CAMP.startDateISO}T${CAMP.sessionStartTime}:00-05:00`
   ).getTime();
 
   // Render placeholder shell during SSR / pre-mount
@@ -68,7 +46,7 @@ export function Countdown() {
         <Unit label="sec" value={seconds} dim={now === null} />
       </dl>
       <p className="mt-3 font-mono text-[11px] tracking-widest text-ink/60">
-        First session · 1:00 PM
+        First session opens
       </p>
     </div>
   );
