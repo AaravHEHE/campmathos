@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 const ADMIN_PASSWORD = "CampMathos123!@#";
 const STORAGE_KEY = "mathos-admin-ok";
+const PW_KEY = "mathos-admin-pw";
 
 export const Route = createFileRoute("/admin/login")({
   component: AdminLoginPage,
@@ -32,6 +33,7 @@ function AdminLoginPage() {
     setLoading(true);
     if (password === ADMIN_PASSWORD) {
       sessionStorage.setItem(STORAGE_KEY, "1");
+      sessionStorage.setItem(PW_KEY, password);
       navigate({ to: "/admin" });
     } else {
       setError("Incorrect password.");
