@@ -280,23 +280,23 @@ function Index() {
             </Link>
           </Reveal>
 
-          <dl className="grid gap-px overflow-hidden rounded-3xl border-2 border-cream/20 bg-cream/10 md:col-span-7 md:grid-cols-2">
-            {[
-              ["When", "Jun 15 – Jul 24, 2026"],
-              ["Where", "Naperville Public Library (95th St)"],
-              ["Days", "Mon · Wed · Fri"],
-              ["Time", "1:00 – 3:00 PM"],
-              ["Math grades", "4th — 7th (recommended)"],
-              ["Cost", "Completely free"],
-            ].map(([k, v], i) => (
-              <Reveal key={k} delay={i * 0.18} amount={0.3}>
-                <div className="bg-ink p-8">
+          <Reveal direction="up" amount={0.2} className="md:col-span-7">
+            <dl className="grid gap-px overflow-hidden rounded-3xl border-2 border-cream/20 bg-cream/10 md:grid-cols-2">
+              {[
+                ["When", "Jun 15 – Jul 24, 2026"],
+                ["Where", "Naperville Public Library (95th St)"],
+                ["Days", "Mon · Wed · Fri"],
+                ["Time", "1:00 – 3:00 PM"],
+                ["Math grades", "4th — 7th (recommended)"],
+                ["Cost", "Completely free"],
+              ].map(([k, v]) => (
+                <div key={k} className="bg-ink p-8">
                   <dt className="font-mono text-xs tracking-widest text-cream/50">{k}</dt>
                   <dd className="mt-3 font-display text-2xl font-bold leading-tight">{v}</dd>
                 </div>
-              </Reveal>
-            ))}
-          </dl>
+              ))}
+            </dl>
+          </Reveal>
         </div>
       </section>
 
