@@ -16,7 +16,17 @@ const FROM = "Mathos Camp <onboarding@resend.dev>";
 const REPLY_TO = "campmathos@gmail.com";
 const DIRECTOR_NOTIFY = "campmathos@gmail.com";
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Restrict to standard printable email characters — explicitly excludes <, >, &, " to prevent HTML injection.
+const EMAIL_RE = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
 
 async function sendEmail(payload: {
   to: string;
