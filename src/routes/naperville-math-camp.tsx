@@ -108,7 +108,7 @@ function NapervilleMathCampPage() {
             </p>
             <p>
               Sessions are at the 95th Street branch of Naperville Public
-              Library. Drop your child off, head to the cafe upstairs, or sit
+              Library. Drop your child off, browse the library, or sit quietly
               in the back of the room — parents are welcome.
             </p>
             <p>
