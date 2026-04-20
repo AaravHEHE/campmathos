@@ -1,16 +1,24 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useLocation } from "@tanstack/react-router";
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 /**
  * Wraps page content with a lively fade + slide-up transition keyed on pathname.
  * Honors prefers-reduced-motion (renders children with no motion).
+ *
+ * To avoid SSR hydration mismatches, the very first render after hydration
+ * skips animation — only subsequent route changes animate.
  */
 export function PageTransition({ children }: { children: ReactNode }) {
   const location = useLocation();
   const reduce = useReducedMotion();
+  const [hydrated, setHydrated] = useState(false);
 
-  if (reduce) return <>{children}</>;
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+
+  if (reduce || !hydrated) return <>{children}</>;
 
   return (
     <motion.div

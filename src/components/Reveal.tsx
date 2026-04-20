@@ -19,13 +19,13 @@ interface RevealProps {
   amount?: number;
 }
 
-const offset = 28;
+const offset = 64;
 const directionMap: Record<Direction, { x?: number; y?: number; scale?: number }> = {
   up: { y: offset },
   down: { y: -offset },
   left: { x: offset },
   right: { x: -offset },
-  scale: { scale: 0.92 },
+  scale: { scale: 0.82 },
 };
 
 /**
@@ -40,10 +40,10 @@ export function Reveal({
   children,
   direction = "up",
   delay = 0,
-  duration = 0.6,
+  duration = 0.95,
   className,
   once = true,
-  amount = 0.15,
+  amount = 0.2,
 }: RevealProps) {
   const reduce = useReducedMotion();
   if (reduce) return <div className={className}>{children}</div>;

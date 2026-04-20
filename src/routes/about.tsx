@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { canonical, ogImage } from "@/lib/seo";
+import { Reveal } from "@/components/Reveal";
 
 const OG = ogImage("/og-about.jpg");
 
@@ -82,13 +83,13 @@ function AboutPage() {
       {/* MISSION */}
       <section className="border-b-2 border-ink bg-ink text-cream">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 md:grid-cols-12 md:py-28">
-          <div className="md:col-span-5">
+          <Reveal direction="right" className="md:col-span-5">
             <p className="font-mono text-sm tracking-widest text-cream/60">Mission</p>
             <h2 className="mt-2 font-display text-5xl font-black leading-[0.95] md:text-6xl">
               Math you can <span className="italic text-sun">actually use</span>.
             </h2>
-          </div>
-          <div className="md:col-span-7">
+          </Reveal>
+          <Reveal direction="left" delay={0.2} className="md:col-span-7">
             <p className="text-lg text-cream/80">
               Most kids meet math as a stack of formulas with no obvious purpose. We think that's
               backwards. MathOs teaches incoming 4th–7th graders how the math they already see in
@@ -101,7 +102,7 @@ function AboutPage() {
               project-based. There are no fees, no strict attendance rules, and no exams. Just
               real problems, real tools, and real things to build.
             </p>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -123,19 +124,18 @@ function AboutPage() {
           </p>
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2">
-            {pillars.map((p) => (
-              <article
-                key={p.title}
-                className="rounded-3xl border-2 border-ink bg-cream p-8 shadow-[6px_6px_0_0_var(--ink)]"
-              >
-                <span
-                  className={`inline-block rounded-full px-3 py-1 font-mono text-xs font-bold ${p.accent}`}
-                >
-                  {p.tag}
-                </span>
-                <h3 className="mt-4 font-display text-2xl font-black">{p.title}</h3>
-                <p className="mt-3 text-ink/70">{p.body}</p>
-              </article>
+            {pillars.map((p, i) => (
+              <Reveal key={p.title} delay={i * 0.22} amount={0.3}>
+                <article className="rounded-3xl border-2 border-ink bg-cream p-8 shadow-[6px_6px_0_0_var(--ink)]">
+                  <span
+                    className={`inline-block rounded-full px-3 py-1 font-mono text-xs font-bold ${p.accent}`}
+                  >
+                    {p.tag}
+                  </span>
+                  <h3 className="mt-4 font-display text-2xl font-black">{p.title}</h3>
+                  <p className="mt-3 text-ink/70">{p.body}</p>
+                </article>
+              </Reveal>
             ))}
           </div>
         </div>

@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { canonical, ogImage } from "@/lib/seo";
+import { Reveal } from "@/components/Reveal";
 
 const OG = ogImage("/og-faq.jpg");
 
@@ -156,20 +157,21 @@ function FaqPage() {
       <section className="border-b-2 border-ink">
         <div className="mx-auto max-w-4xl px-6 py-20 md:py-28">
           <div ref={containerRef} className="divide-y-2 divide-ink/15">
-            {faqs.map((f) => (
-              <details
-                key={f.id}
-                id={f.id}
-                className="group py-6 scroll-mt-28"
-              >
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-6">
-                  <span className="font-display text-2xl font-bold md:text-3xl">{f.q}</span>
-                  <span className="font-display text-3xl font-black text-electric transition group-open:rotate-45">
-                    +
-                  </span>
-                </summary>
-                <p className="mt-4 max-w-3xl text-ink/70">{f.a}</p>
-              </details>
+            {faqs.map((f, i) => (
+              <Reveal key={f.id} delay={(i % 4) * 0.12} amount={0.4}>
+                <details
+                  id={f.id}
+                  className="group py-6 scroll-mt-28"
+                >
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-6">
+                    <span className="font-display text-2xl font-bold md:text-3xl">{f.q}</span>
+                    <span className="font-display text-3xl font-black text-electric transition group-open:rotate-45">
+                      +
+                    </span>
+                  </summary>
+                  <p className="mt-4 max-w-3xl text-ink/70">{f.a}</p>
+                </details>
+              </Reveal>
             ))}
           </div>
         </div>

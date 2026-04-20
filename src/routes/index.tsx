@@ -212,7 +212,7 @@ function Index() {
 
           <div className="grid gap-6 md:grid-cols-2">
             {weeks.map((w, i) => (
-              <Reveal key={w.n} delay={i * 0.08} amount={0.2}>
+              <Reveal key={w.n} delay={i * 0.25} amount={0.2}>
                 <WeekTeaser week={w} />
               </Reveal>
             ))}
@@ -289,7 +289,7 @@ function Index() {
               ["Math grades", "4th — 7th (recommended)"],
               ["Cost", "Completely free"],
             ].map(([k, v], i) => (
-              <Reveal key={k} delay={i * 0.06} amount={0.3}>
+              <Reveal key={k} delay={i * 0.18} amount={0.3}>
                 <div className="bg-ink p-8">
                   <dt className="font-mono text-xs tracking-widest text-cream/50">{k}</dt>
                   <dd className="mt-3 font-display text-2xl font-bold leading-tight">{v}</dd>
@@ -358,7 +358,7 @@ function Index() {
               { q: "What days does it meet?", id: "schedule" },
               { q: "What should my child bring?", id: "bring" },
             ].map(({ q, id }, i) => (
-              <Reveal key={id} delay={i * 0.06} amount={0.4}>
+              <Reveal key={id} delay={i * 0.2} amount={0.4}>
                 <li>
                   <Link
                     to="/faq"

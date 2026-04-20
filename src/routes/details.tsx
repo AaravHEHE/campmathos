@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { canonical, ogImage } from "@/lib/seo";
 import { CAMP, fullAddress } from "@/lib/camp";
+import { Reveal } from "@/components/Reveal";
 
 const OG = ogImage("/og-details.jpg");
 
@@ -63,11 +64,13 @@ function DetailsPage() {
       <section className="border-b-2 border-ink bg-ink text-cream">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
           <dl className="grid gap-px overflow-hidden rounded-3xl border-2 border-cream/20 bg-cream/10 md:grid-cols-2">
-            {facts.map(([k, v]) => (
-              <div key={k} className="bg-ink p-8">
-                <dt className="font-mono text-xs tracking-widest text-cream/50">{k}</dt>
-                <dd className="mt-3 font-display text-2xl font-bold leading-tight">{v}</dd>
-              </div>
+            {facts.map(([k, v], i) => (
+              <Reveal key={k} delay={i * 0.18} amount={0.3}>
+                <div className="bg-ink p-8">
+                  <dt className="font-mono text-xs tracking-widest text-cream/50">{k}</dt>
+                  <dd className="mt-3 font-display text-2xl font-bold leading-tight">{v}</dd>
+                </div>
+              </Reveal>
             ))}
           </dl>
         </div>
@@ -76,17 +79,19 @@ function DetailsPage() {
       {/* CLASS STRUCTURE */}
       <section className="border-b-2 border-ink">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
-          <p className="font-mono text-sm tracking-widest text-muted-foreground">
-            A typical session
-          </p>
-          <h2 className="mt-3 font-display text-5xl font-black md:text-6xl">
-            2 hours, with room to <span className="italic">breathe</span>.
-          </h2>
-          <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            Each MathOs session runs from 1:00 to 3:00 PM with a short break in
-            the middle so campers can rest, snack, and reset before the second
-            half.
-          </p>
+          <Reveal>
+            <p className="font-mono text-sm tracking-widest text-muted-foreground">
+              A typical session
+            </p>
+            <h2 className="mt-3 font-display text-5xl font-black md:text-6xl">
+              2 hours, with room to <span className="italic">breathe</span>.
+            </h2>
+            <p className="mt-6 max-w-2xl text-lg text-ink/75">
+              Each MathOs session runs from 1:00 to 3:00 PM with a short break in
+              the middle so campers can rest, snack, and reset before the second
+              half.
+            </p>
+          </Reveal>
 
           <ol className="mt-12 grid gap-6 md:grid-cols-3">
             {[
@@ -108,87 +113,92 @@ function DetailsPage() {
                 body: "Project work, group challenges, and Q&A. Instructors circulate to help one-on-one and pull together what we built.",
                 accent: "bg-coral text-cream",
               },
-            ].map((b) => (
-              <li
-                key={b.title}
-                className="rounded-3xl border-2 border-ink bg-cream p-6 shadow-[6px_6px_0_0_var(--ink)]"
-              >
-                <span
-                  className={`inline-block rounded-full px-3 py-1 font-mono text-xs font-bold ${b.accent}`}
-                >
-                  {b.tag}
-                </span>
-                <h3 className="mt-4 font-display text-2xl font-black">{b.title}</h3>
-                <p className="mt-3 text-ink/70">{b.body}</p>
-              </li>
+            ].map((b, i) => (
+              <Reveal key={b.title} delay={i * 0.25} amount={0.3}>
+                <li className="rounded-3xl border-2 border-ink bg-cream p-6 shadow-[6px_6px_0_0_var(--ink)]">
+                  <span
+                    className={`inline-block rounded-full px-3 py-1 font-mono text-xs font-bold ${b.accent}`}
+                  >
+                    {b.tag}
+                  </span>
+                  <h3 className="mt-4 font-display text-2xl font-black">{b.title}</h3>
+                  <p className="mt-3 text-ink/70">{b.body}</p>
+                </li>
+              </Reveal>
             ))}
           </ol>
 
-          <div className="mt-12 rounded-3xl border-2 border-ink bg-electric p-6 text-cream md:flex md:items-center md:justify-between md:gap-8 md:p-8">
-            <div className="max-w-xl">
-              <p className="font-mono text-xs uppercase tracking-widest text-cream/70">
-                Add to calendar
-              </p>
-              <h3 className="mt-2 font-display text-2xl font-black md:text-3xl">
-                Drop every session into your calendar.
-              </h3>
-              <p className="mt-2 text-cream/85">
-                Download the .ics file — it includes every Mon/Wed/Fri session
-                from June 15 to July 24, 2026, with the library address pre-filled.
-              </p>
+          <Reveal direction="scale" amount={0.3}>
+            <div className="mt-12 rounded-3xl border-2 border-ink bg-electric p-6 text-cream md:flex md:items-center md:justify-between md:gap-8 md:p-8">
+              <div className="max-w-xl">
+                <p className="font-mono text-xs uppercase tracking-widest text-cream/70">
+                  Add to calendar
+                </p>
+                <h3 className="mt-2 font-display text-2xl font-black md:text-3xl">
+                  Drop every session into your calendar.
+                </h3>
+                <p className="mt-2 text-cream/85">
+                  Download the .ics file — it includes every Mon/Wed/Fri session
+                  from June 15 to July 24, 2026, with the library address pre-filled.
+                </p>
+              </div>
+              <a
+                href="/mathos.ics"
+                download="mathos-2026.ics"
+                className="mt-5 inline-flex min-h-11 items-center rounded-full border-2 border-cream bg-cream px-6 py-3 font-semibold text-ink shadow-[6px_6px_0_0_var(--ink)] transition hover:bg-sun hover:border-sun md:mt-0"
+              >
+                Download .ics →
+              </a>
             </div>
-            <a
-              href="/mathos.ics"
-              download="mathos-2026.ics"
-              className="mt-5 inline-flex min-h-11 items-center rounded-full border-2 border-cream bg-cream px-6 py-3 font-semibold text-ink shadow-[6px_6px_0_0_var(--ink)] transition hover:bg-sun hover:border-sun md:mt-0"
-            >
-              Download .ics →
-            </a>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* WHAT TO BRING */}
       <section className="border-b-2 border-ink bg-sun">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 md:grid-cols-2 md:py-24">
-          <div>
-            <p className="font-mono text-sm tracking-widest text-ink/60">Bring</p>
-            <h2 className="mt-3 font-display text-5xl font-black leading-[0.95]">
-              What to bring.
-            </h2>
-            <ul className="mt-8 space-y-3 font-mono text-sm">
-              <li className="flex gap-3">
-                <span className="text-coral">→</span>A pencil and a notebook (or scratch paper)
-              </li>
-              <li className="flex gap-3">
-                <span className="text-coral">→</span>A snack and a drink for the short break
-              </li>
-              <li className="flex gap-3">
-                <span className="text-coral">→</span>A computer if you join PythOs in July
-                (required for the CS camp)
-              </li>
-              <li className="flex gap-3">
-                <span className="text-coral">→</span>A calculator if you have one — not required,
-                instructors will help when needed
-              </li>
-            </ul>
-            <p className="mt-6 max-w-md text-ink/75">
-              Don't have something? Don't worry — basic materials will be provided so no camper is
-              left out.
-            </p>
-          </div>
-          <div>
-            <p className="font-mono text-sm tracking-widest text-ink/60">Drop-off</p>
-            <h2 className="mt-3 font-display text-5xl font-black leading-[0.95]">
-              Drop-off and pick-up.
-            </h2>
-            <p className="mt-6 text-lg text-ink/80">
-              Parents sign their child in at the start of each session and sign them out at the
-              end. You're welcome to stay for the session if you'd like — we just ask that you keep
-              quiet so the class can focus. Instructors are happy to answer parent questions
-              before or after class.
-            </p>
-          </div>
+          <Reveal direction="right">
+            <div>
+              <p className="font-mono text-sm tracking-widest text-ink/60">Bring</p>
+              <h2 className="mt-3 font-display text-5xl font-black leading-[0.95]">
+                What to bring.
+              </h2>
+              <ul className="mt-8 space-y-3 font-mono text-sm">
+                <li className="flex gap-3">
+                  <span className="text-coral">→</span>A pencil and a notebook (or scratch paper)
+                </li>
+                <li className="flex gap-3">
+                  <span className="text-coral">→</span>A snack and a drink for the short break
+                </li>
+                <li className="flex gap-3">
+                  <span className="text-coral">→</span>A computer if you join PythOs in July
+                  (required for the CS camp)
+                </li>
+                <li className="flex gap-3">
+                  <span className="text-coral">→</span>A calculator if you have one — not required,
+                  instructors will help when needed
+                </li>
+              </ul>
+              <p className="mt-6 max-w-md text-ink/75">
+                Don't have something? Don't worry — basic materials will be provided so no camper is
+                left out.
+              </p>
+            </div>
+          </Reveal>
+          <Reveal direction="left" delay={0.2}>
+            <div>
+              <p className="font-mono text-sm tracking-widest text-ink/60">Drop-off</p>
+              <h2 className="mt-3 font-display text-5xl font-black leading-[0.95]">
+                Drop-off and pick-up.
+              </h2>
+              <p className="mt-6 text-lg text-ink/80">
+                Parents sign their child in at the start of each session and sign them out at the
+                end. You're welcome to stay for the session if you'd like — we just ask that you keep
+                quiet so the class can focus. Instructors are happy to answer parent questions
+                before or after class.
+              </p>
+            </div>
+          </Reveal>
         </div>
       </section>
 
