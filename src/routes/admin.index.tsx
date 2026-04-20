@@ -413,7 +413,7 @@ function AdminDashboard() {
                     <td colSpan={3} className="px-6 py-12 text-center text-ink/60">
                       {rows.length === 0
                         ? "No sign-ups yet — they'll show up here as parents register."
-                        : `No sign-ups match "${search}".`}
+                        : "No sign-ups match the current filters."}
                     </td>
                   </tr>
                 ) : (
