@@ -1,13 +1,11 @@
 // Edge function: daily digest of new sign-ups (last 24h) emailed to the director.
-// Triggered by pg_cron (see migration). Always returns 200 with a status payload
-// so cron logs stay clean — failures are reported in the JSON body.
+// Triggered by pg_cron. Sends from campmathos@gmail.com via Gmail SMTP.
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { sendGmail, closeGmail } from "../_shared/gmail.ts";
 
-const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 
-const FROM = "Mathos Camp <onboarding@resend.dev>";
 const DIRECTOR_NOTIFY = "campmathos@gmail.com";
 
 function escapeHtml(s: string): string {
@@ -61,7 +59,6 @@ function digestHtml(rows: { email: string; created_at: string }[], total: number
 }
 
 Deno.serve(async (_req) => {
-  // No auth required — invoked by pg_cron with internal anon key. Idempotent: just sends.
   try {
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
       auth: { persistSession: false, autoRefreshToken: false },
@@ -80,40 +77,18 @@ Deno.serve(async (_req) => {
       .select("*", { count: "exact", head: true });
     if (countErr) throw countErr;
 
-    if (!RESEND_API_KEY) {
-      return new Response(JSON.stringify({ ok: false, error: "RESEND_API_KEY missing" }), {
-        status: 200,
-        headers: { "Content-Type": "application/json" },
-      });
-    }
-
     const rows = recent ?? [];
     const subject = rows.length === 0
       ? "Mathos daily digest: 0 new sign-ups"
       : `Mathos daily digest: ${rows.length} new sign-up${rows.length === 1 ? "" : "s"}`;
 
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${RESEND_API_KEY}`,
-      },
-      body: JSON.stringify({
-        from: FROM,
-        to: [DIRECTOR_NOTIFY],
-        subject,
-        html: digestHtml(rows, count ?? 0),
-      }),
+    await sendGmail({
+      to: DIRECTOR_NOTIFY,
+      subject,
+      html: digestHtml(rows, count ?? 0),
     });
 
-    if (!res.ok) {
-      const txt = await res.text();
-      console.error("Resend error", res.status, txt);
-      return new Response(JSON.stringify({ ok: false, error: `Resend ${res.status}` }), {
-        status: 200,
-        headers: { "Content-Type": "application/json" },
-      });
-    }
+    await closeGmail();
 
     return new Response(
       JSON.stringify({ ok: true, sentTo: DIRECTOR_NOTIFY, count: rows.length, total: count ?? 0 }),
@@ -121,6 +96,7 @@ Deno.serve(async (_req) => {
     );
   } catch (err) {
     console.error("Digest failed", err);
+    await closeGmail();
     return new Response(
       JSON.stringify({ ok: false, error: err instanceof Error ? err.message : String(err) }),
       { status: 200, headers: { "Content-Type": "application/json" } },
