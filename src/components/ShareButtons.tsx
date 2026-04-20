@@ -74,7 +74,7 @@ export function ShareButtons() {
           <Facebook className="h-4 w-4" aria-hidden />
           <span>Facebook</span>
         </a>
-        <a href={mailUrl} aria-label="Share by email" className={btn}>
+        <a href={mailUrl} onClick={onEmail} aria-label="Share by email" className={btn}>
           <Mail className="h-4 w-4" aria-hidden />
           <span>Email</span>
         </a>
