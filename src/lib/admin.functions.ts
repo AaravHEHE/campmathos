@@ -1,18 +1,22 @@
 import { createServerFn } from "@tanstack/react-start";
+import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
-const ADMIN_PASSWORD = "CampMathos123!@#";
-
-function verify(password: string) {
-  if (password !== ADMIN_PASSWORD) {
-    throw new Error("Unauthorized");
-  }
+async function assertAdmin(userId: string) {
+  const { data, error } = await supabaseAdmin
+    .from("user_roles")
+    .select("role")
+    .eq("user_id", userId)
+    .eq("role", "admin")
+    .maybeSingle();
+  if (error) throw new Error("Authorization check failed");
+  if (!data) throw new Error("Forbidden");
 }
 
 export const adminListRegistrations = createServerFn({ method: "POST" })
-  .inputValidator((input: { password: string }) => input)
-  .handler(async ({ data }) => {
-    verify(data.password);
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    await assertAdmin(context.userId);
     const { data: rows, error } = await supabaseAdmin
       .from("registrations")
       .select("id, email, created_at")
@@ -22,9 +26,10 @@ export const adminListRegistrations = createServerFn({ method: "POST" })
   });
 
 export const adminDeleteRegistration = createServerFn({ method: "POST" })
-  .inputValidator((input: { password: string; id: string }) => input)
-  .handler(async ({ data }) => {
-    verify(data.password);
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: { id: string }) => input)
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context.userId);
     const { error } = await supabaseAdmin
       .from("registrations")
       .delete()

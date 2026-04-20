@@ -1,9 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-
-const ADMIN_PASSWORD = "CampMathos123!@#";
-const STORAGE_KEY = "mathos-admin-ok";
-const PW_KEY = "mathos-admin-pw";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/admin/login")({
   component: AdminLoginPage,
@@ -17,28 +14,62 @@ export const Route = createFileRoute("/admin/login")({
 
 function AdminLoginPage() {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // If already signed in as an admin, skip the form.
   useEffect(() => {
-    if (typeof window !== "undefined" && sessionStorage.getItem(STORAGE_KEY) === "1") {
-      navigate({ to: "/admin" });
-    }
+    let cancelled = false;
+    (async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session || cancelled) return;
+      const { data: roles } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", session.user.id)
+        .eq("role", "admin")
+        .maybeSingle();
+      if (!cancelled && roles) navigate({ to: "/admin" });
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, [navigate]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setLoading(true);
-    if (password === ADMIN_PASSWORD) {
-      sessionStorage.setItem(STORAGE_KEY, "1");
-      sessionStorage.setItem(PW_KEY, password);
-      navigate({ to: "/admin" });
-    } else {
-      setError("Incorrect password.");
+
+    const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
+      email: email.trim().toLowerCase(),
+      password,
+    });
+
+    if (signInError || !signInData.session) {
+      setError("Incorrect email or password.");
       setLoading(false);
+      return;
     }
+
+    // Verify the signed-in user actually has the admin role.
+    const { data: roleRow, error: roleError } = await supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", signInData.session.user.id)
+      .eq("role", "admin")
+      .maybeSingle();
+
+    if (roleError || !roleRow) {
+      await supabase.auth.signOut();
+      setError("This account does not have director access.");
+      setLoading(false);
+      return;
+    }
+
+    navigate({ to: "/admin" });
   };
 
   return (
@@ -50,16 +81,27 @@ function AdminLoginPage() {
         <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
           DIRECTORS ONLY
         </p>
-        <h1 className="mt-2 font-display text-3xl font-black">Enter password</h1>
+        <h1 className="mt-2 font-display text-3xl font-black">Sign in</h1>
         <input
           required
           autoFocus
+          type="email"
+          autoComplete="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          disabled={loading}
+          placeholder="director@email.com"
+          className="mt-6 w-full rounded-full border-2 border-ink bg-cream px-5 py-3 font-mono text-sm focus:outline-none focus:ring-4 focus:ring-electric/40"
+        />
+        <input
+          required
           type="password"
+          autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           disabled={loading}
           placeholder="Password"
-          className="mt-6 w-full rounded-full border-2 border-ink bg-cream px-5 py-3 font-mono text-sm focus:outline-none focus:ring-4 focus:ring-electric/40"
+          className="mt-3 w-full rounded-full border-2 border-ink bg-cream px-5 py-3 font-mono text-sm focus:outline-none focus:ring-4 focus:ring-electric/40"
         />
         {error && <p className="mt-3 font-mono text-sm text-coral">{error}</p>}
         <button
@@ -69,6 +111,11 @@ function AdminLoginPage() {
         >
           {loading ? "…" : "Sign in"}
         </button>
+        <p className="mt-4 font-mono text-[11px] text-muted-foreground">
+          Director accounts are provisioned by an existing admin. Contact{" "}
+          <a href="mailto:campmathos@gmail.com" className="underline">campmathos@gmail.com</a>{" "}
+          if you need access.
+        </p>
       </form>
     </main>
   );
