@@ -1,7 +1,7 @@
 import { CAMP } from "./camp";
 
 /**
- * Generate an .ics calendar string for every camp session (Mon–Thu 1–3 PM local)
+ * Generate an .ics calendar string for every camp session (Mon/Wed/Fri 1–3 PM local)
  * between CAMP.startDateISO and CAMP.endDateISO.
  *
  * Times are emitted in floating local time with TZID=America/Chicago so
@@ -63,14 +63,14 @@ export function buildCampIcs(): string {
 }
 
 function enumerateSessions(): string[] {
-  // Sessions: every Mon/Tue/Wed/Thu between startDateISO and endDateISO inclusive.
+  // Sessions: every Mon/Wed/Fri between startDateISO and endDateISO inclusive.
   const out: string[] = [];
   const start = new Date(`${CAMP.startDateISO}T00:00:00Z`);
   const end = new Date(`${CAMP.endDateISO}T00:00:00Z`);
   const d = new Date(start);
   while (d.getTime() <= end.getTime()) {
     const day = d.getUTCDay(); // 0 Sun .. 6 Sat
-    if (day >= 1 && day <= 4) {
+    if (day === 1 || day === 3 || day === 5) {
       out.push(toIsoDate(d));
     }
     d.setUTCDate(d.getUTCDate() + 1);
