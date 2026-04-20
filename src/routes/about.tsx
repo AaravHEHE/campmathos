@@ -124,19 +124,18 @@ function AboutPage() {
           </p>
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2">
-            {pillars.map((p) => (
-              <article
-                key={p.title}
-                className="rounded-3xl border-2 border-ink bg-cream p-8 shadow-[6px_6px_0_0_var(--ink)]"
-              >
-                <span
-                  className={`inline-block rounded-full px-3 py-1 font-mono text-xs font-bold ${p.accent}`}
-                >
-                  {p.tag}
-                </span>
-                <h3 className="mt-4 font-display text-2xl font-black">{p.title}</h3>
-                <p className="mt-3 text-ink/70">{p.body}</p>
-              </article>
+            {pillars.map((p, i) => (
+              <Reveal key={p.title} delay={i * 0.22} amount={0.3}>
+                <article className="rounded-3xl border-2 border-ink bg-cream p-8 shadow-[6px_6px_0_0_var(--ink)]">
+                  <span
+                    className={`inline-block rounded-full px-3 py-1 font-mono text-xs font-bold ${p.accent}`}
+                  >
+                    {p.tag}
+                  </span>
+                  <h3 className="mt-4 font-display text-2xl font-black">{p.title}</h3>
+                  <p className="mt-3 text-ink/70">{p.body}</p>
+                </article>
+              </Reveal>
             ))}
           </div>
         </div>
