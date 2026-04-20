@@ -1,5 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
+import { canonical, ogImage } from "@/lib/seo";
+
+const OG = ogImage("/og-board.jpg");
 
 export const Route = createFileRoute("/board")({
   component: BoardPage,
@@ -17,7 +20,11 @@ export const Route = createFileRoute("/board")({
         content:
           "Meet the six directors behind MathOs, a free summer applied math camp at Naperville Public Library.",
       },
+      { property: "og:image", content: OG },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: OG },
     ],
+    links: [canonical("/board")],
   }),
 });
 

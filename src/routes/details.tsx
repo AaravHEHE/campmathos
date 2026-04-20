@@ -1,5 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
+import { canonical, ogImage } from "@/lib/seo";
+import { CAMP, fullAddress } from "@/lib/camp";
+
+const OG = ogImage("/og-details.jpg");
 
 export const Route = createFileRoute("/details")({
   component: DetailsPage,
@@ -9,7 +13,7 @@ export const Route = createFileRoute("/details")({
       {
         name: "description",
         content:
-          "MathOs camp logistics: free for all students, Monday/Wednesday/Friday in June 2026 at Naperville Public Library, 2.5-hour sessions with a 15-minute break.",
+          "MathOs camp logistics: free for all students, Mon–Thu 1–3 PM, June 15 – July 23, 2026, at Naperville Public Library 95th Street branch. 2-hour sessions with a short break.",
       },
       { property: "og:title", content: "Details — MathOs summer camp" },
       {
@@ -17,19 +21,23 @@ export const Route = createFileRoute("/details")({
         content:
           "Schedule, location, session structure, and what to bring. MathOs is completely free.",
       },
+      { property: "og:image", content: OG },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: OG },
     ],
+    links: [canonical("/details")],
   }),
 });
 
 const facts: [string, string][] = [
-  ["When", "June 2026 · 4 weeks"],
-  ["Where", "Naperville Public Library"],
-  ["Days", "Monday, Wednesday, Friday"],
-  ["Session length", "2.5 hours (1 hr · 15-min break · 1 hr 15)"],
+  ["When", CAMP.humanDateRange],
+  ["Where", fullAddress()],
+  ["Days", CAMP.humanDays],
+  ["Time", CAMP.humanTime],
+  ["Session length", "2 hours (with a short break)"],
   ["Math grades", "4th — 7th (recommended)"],
   ["Sister program", "PythOs (CS camp) runs in July"],
   ["Cost", "Completely free"],
-  ["Showcase", "Friday of week 4 — families invited"],
 ];
 
 function DetailsPage() {

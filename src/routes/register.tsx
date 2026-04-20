@@ -2,8 +2,10 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { supabase } from "@/integrations/supabase/client";
+import { canonical, ogImage } from "@/lib/seo";
 
 const ADMIN_GATE_PASSWORD = "CampMathos123!@#";
+const OG = ogImage("/og-register.jpg");
 
 export const Route = createFileRoute("/register")({
   component: RegisterPage,
@@ -21,7 +23,11 @@ export const Route = createFileRoute("/register")({
         content:
           "Drop your email to express interest. No commitment required. MathOs is a completely free summer math camp at Naperville Public Library.",
       },
+      { property: "og:image", content: OG },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: OG },
     ],
+    links: [canonical("/register")],
   }),
 });
 

@@ -1,6 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { weeks } from "@/data/weeks";
+import { canonical, ogImage } from "@/lib/seo";
+
+const OG = ogImage("/og-curriculum.jpg");
 
 export const Route = createFileRoute("/curriculum")({
   component: CurriculumPage,
@@ -18,7 +21,11 @@ export const Route = createFileRoute("/curriculum")({
         content:
           "Four weeks of applied math: graphing the real world, finance and probability, geometry and architecture, and a final project showcase.",
       },
+      { property: "og:image", content: OG },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: OG },
     ],
+    links: [canonical("/curriculum")],
   }),
 });
 
