@@ -1,9 +1,10 @@
-// Edge function: admin-only broadcast to all registrants.
+// Edge function: admin-only broadcast to all registrants via Gmail SMTP.
 // Verifies the caller is an authenticated admin via user_roles, then sends
-// the same email body to every row in the registrations table via Resend.
-// Sends individually (one recipient per email) so each goes to BCC-style
-// privacy automatically — recipients never see other addresses.
+// the same email body to every row in the registrations table.
+// Each recipient gets their own message (no other addresses visible).
+// NOTE: Gmail free has a ~500 recipients/day limit.
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { sendGmail, closeGmail } from "../_shared/gmail.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -11,13 +12,9 @@ const corsHeaders = {
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
-const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 const SUPABASE_ANON_KEY = Deno.env.get("SUPABASE_ANON_KEY")!;
-
-const FROM = "Mathos Camp <onboarding@resend.dev>";
-const REPLY_TO = "campmathos@gmail.com";
 
 function escapeHtml(s: string): string {
   return s
@@ -29,8 +26,7 @@ function escapeHtml(s: string): string {
 }
 
 function bodyHtml(message: string) {
-  // Convert newlines to <br>, escape everything else.
-  const safe = escapeHtml(message).replace(/\\n/g, "<br>");
+  const safe = escapeHtml(message).replace(/\n/g, "<br>");
   return `
 <!doctype html>
 <html><body style="margin:0;padding:0;background:#fdf8ee;font-family:Arial,sans-serif;color:#1a1a2e;">
@@ -51,28 +47,6 @@ function bodyHtml(message: string) {
 </body></html>`;
 }
 
-async function sendOne(to: string, subject: string, html: string) {
-  if (!RESEND_API_KEY) throw new Error("RESEND_API_KEY missing");
-  const res = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${RESEND_API_KEY}`,
-    },
-    body: JSON.stringify({
-      from: FROM,
-      to: [to],
-      subject,
-      html,
-      reply_to: REPLY_TO,
-    }),
-  });
-  if (!res.ok) {
-    const txt = await res.text();
-    throw new Error(`Resend ${res.status}: ${txt}`);
-  }
-}
-
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
   if (req.method !== "POST") {
@@ -91,7 +65,6 @@ Deno.serve(async (req) => {
   }
   const token = authHeader.slice(7);
 
-  // Verify token + admin role.
   const userClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     global: { headers: { Authorization: `Bearer ${token}` } },
     auth: { persistSession: false, autoRefreshToken: false },
@@ -163,10 +136,10 @@ Deno.serve(async (req) => {
   let failed = 0;
   const errors: string[] = [];
 
-  // Sequential with small pacing to stay under Resend rate limits (2 req/s on free).
+  // Sequential with small pacing — Gmail tolerates ~1 send/sec via SMTP pool.
   for (const to of emails) {
     try {
-      await sendOne(to, subject, html);
+      await sendGmail({ to, subject, html });
       sent++;
     } catch (err) {
       failed++;
@@ -174,9 +147,10 @@ Deno.serve(async (req) => {
       errors.push(`${to}: ${msg}`);
       console.error("Broadcast send failed", to, msg);
     }
-    // ~500ms between sends keeps us under 2 req/s.
-    await new Promise((r) => setTimeout(r, 550));
+    await new Promise((r) => setTimeout(r, 250));
   }
+
+  await closeGmail();
 
   return new Response(
     JSON.stringify({

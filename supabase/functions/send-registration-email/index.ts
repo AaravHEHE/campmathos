@@ -1,6 +1,7 @@
 // Edge function: stores a registration and sends confirmation + director notification.
-// Uses Resend for email delivery. Default Resend sender (no domain required) with reply-to your Gmail.
+// Uses Gmail SMTP — emails come directly from campmathos@gmail.com.
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { sendGmail, closeGmail } from "../_shared/gmail.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -8,14 +9,9 @@ const corsHeaders = {
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
-const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 
-// Note: Gmail addresses cannot be used as the literal "from" — providers block this to prevent spoofing.
-// We use Resend's shared sender but set the display name + reply-to so it clearly comes from CampMathos@gmail.com.
-const FROM = "CampMathos <onboarding@resend.dev>";
-const REPLY_TO = "campmathos@gmail.com";
 const DIRECTOR_NOTIFY = "campmathos@gmail.com";
 
 // Restrict to standard printable email characters — explicitly excludes <, >, &, " to prevent HTML injection.
@@ -28,38 +24,6 @@ function escapeHtml(s: string): string {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
-}
-
-async function sendEmail(payload: {
-  to: string;
-  subject: string;
-  html: string;
-  reply_to?: string;
-}) {
-  if (!RESEND_API_KEY) {
-    console.error("RESEND_API_KEY missing — skipping send");
-    return { skipped: true };
-  }
-  const res = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${RESEND_API_KEY}`,
-    },
-    body: JSON.stringify({
-      from: FROM,
-      to: [payload.to],
-      subject: payload.subject,
-      html: payload.html,
-      reply_to: payload.reply_to ?? REPLY_TO,
-    }),
-  });
-  const text = await res.text();
-  if (!res.ok) {
-    console.error("Resend error", res.status, text);
-    throw new Error(`Resend ${res.status}: ${text}`);
-  }
-  return JSON.parse(text);
 }
 
 function confirmationHtml(email: string) {
@@ -91,7 +55,7 @@ function confirmationHtml(email: string) {
             </td></tr>
           </table>
           <p style="margin:24px 0 0;font-size:14px;color:#666;">
-            Questions? Just reply to this email — it goes straight to our directors at campmathos@gmail.com.
+            Questions? Just reply to this email — it goes straight to campmathos@gmail.com.
           </p>
           <p style="margin:24px 0 0;font-size:14px;">— The Mathos team</p>
         </td></tr>
@@ -134,7 +98,6 @@ Deno.serve(async (req) => {
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
-    // Duplicate check first — friendly message instead of a generic error.
     const { data: existing, error: existingError } = await supabase
       .from("registrations")
       .select("id")
@@ -167,7 +130,6 @@ Deno.serve(async (req) => {
 
     if (insertError) {
       console.error("Insert error", insertError);
-      // Race-condition fallback: if a unique constraint fires, treat as duplicate.
       const code = (insertError as { code?: string }).code;
       if (code === "23505") {
         return new Response(
@@ -184,22 +146,22 @@ Deno.serve(async (req) => {
       });
     }
 
-    // Send both emails in parallel; don't fail the request if email fails.
     const when = new Date(inserted!.created_at as string).toLocaleString("en-US", {
       timeZone: "America/Chicago",
     });
 
+    // Send sequentially via Gmail SMTP — pool handles connection reuse.
     const results = await Promise.allSettled([
-      sendEmail({
+      sendGmail({
         to: rawEmail,
         subject: "Thanks for your interest in Mathos camp 👋",
         html: confirmationHtml(rawEmail),
       }),
-      sendEmail({
+      sendGmail({
         to: DIRECTOR_NOTIFY,
         subject: `New Mathos interest: ${rawEmail}`,
         html: notifyHtml(rawEmail, when),
-        reply_to: rawEmail,
+        replyTo: rawEmail,
       }),
     ]);
 
@@ -207,12 +169,15 @@ Deno.serve(async (req) => {
       if (r.status === "rejected") console.error(`Email ${i} failed:`, r.reason);
     });
 
+    await closeGmail();
+
     return new Response(JSON.stringify({ ok: true, id: inserted!.id }), {
       status: 200,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (err) {
     console.error("Unhandled error", err);
+    await closeGmail();
     return new Response(JSON.stringify({ error: "Unexpected server error." }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
