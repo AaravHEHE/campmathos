@@ -5,6 +5,7 @@ import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { weeks, type Week } from "@/data/weeks";
 import { Countdown } from "@/components/Countdown";
 import { canonical, ogImage, campEventJsonLd } from "@/lib/seo";
+import { Reveal } from "@/components/Reveal";
 
 const OG = ogImage("/og-default.jpg");
 
@@ -54,8 +55,8 @@ function Marquee() {
   ];
   const row = [...items, ...items, ...items, ...items];
   return (
-    <div className="overflow-hidden border-y-2 border-ink bg-ink py-4">
-      <div className="marquee flex whitespace-nowrap font-display text-3xl font-black tracking-tight text-cream md:text-5xl">
+    <div className="overflow-hidden border-y-2 border-ink bg-ink py-6 md:py-8">
+      <div className="marquee flex whitespace-nowrap font-display text-3xl font-black leading-[1.25] tracking-tight text-cream md:text-5xl">
         {row.map((t, i) => (
           <span key={i} className="mx-8 inline-block">
             {t}
@@ -121,7 +122,7 @@ function Index() {
           <div className="md:col-span-7">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-ink bg-cream px-4 py-1.5 font-mono text-xs tracking-widest">
               <span className="h-2 w-2 rounded-full bg-coral" />
-              Jun 15 – Jul 23, 2026 · Naperville Public Library · 100% free
+              Jun 15 – Jul 24, 2026 · Naperville Public Library · 100% free
             </div>
             <h1 className="font-display text-[clamp(2.5rem,8vw,7.5rem)] font-black leading-[0.9] break-words">
               Math is the
@@ -190,70 +191,78 @@ function Index() {
       {/* CURRICULUM TEASER */}
       <section className="border-b-2 border-ink">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
-          <div className="mb-16 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-            <div>
-              <p className="font-mono text-sm tracking-widest text-muted-foreground">
-                Curriculum
+          <Reveal>
+            <div className="mb-16 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+              <div>
+                <p className="font-mono text-sm tracking-widest text-muted-foreground">
+                  Curriculum
+                </p>
+                <h2 className="mt-2 font-display text-5xl font-black md:text-7xl">
+                  Four weeks of
+                  <br />
+                  applied math.
+                </h2>
+              </div>
+              <p className="max-w-sm text-ink/70">
+                A quick look at what each week covers. For full week-by-week breakdowns, head to the
+                curriculum page.
               </p>
-              <h2 className="mt-2 font-display text-5xl font-black md:text-7xl">
-                Four weeks of
-                <br />
-                applied math.
-              </h2>
             </div>
-            <p className="max-w-sm text-ink/70">
-              A quick look at what each week covers. For full week-by-week breakdowns, head to the
-              curriculum page.
-            </p>
-          </div>
+          </Reveal>
 
           <div className="grid gap-6 md:grid-cols-2">
-            {weeks.map((w) => (
-              <WeekTeaser key={w.n} week={w} />
+            {weeks.map((w, i) => (
+              <Reveal key={w.n} delay={i * 0.08} amount={0.2}>
+                <WeekTeaser week={w} />
+              </Reveal>
             ))}
           </div>
 
-          <div className="mt-10 text-center">
-            <Link
-              to="/curriculum"
-              className="inline-flex rounded-full border-2 border-ink bg-ink px-8 py-4 font-semibold text-cream transition hover:bg-electric hover:border-electric"
-            >
-              Read the full curriculum →
-            </Link>
-          </div>
-
-          {/* PythOs teaser */}
-          <div className="mt-12 rounded-3xl border-2 border-ink bg-electric p-8 text-cream md:p-12">
-            <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-              <div className="max-w-2xl">
-                <p className="font-mono text-xs tracking-widest text-cream/70">
-                  Sister program · July
-                </p>
-                <h3 className="mt-2 font-display text-3xl font-black md:text-4xl">
-                  PythOs — build a 2D game in July.
-                </h3>
-                <p className="mt-3 text-cream/85">
-                  After MathOs wraps, our directors run PythOs: a creative computer-science camp
-                  with two age tracks (grades 1–4 in Scratch, grades 5–8 in Python with a custom
-                  Turtle library). Every camper finishes with their own playable 2D game. PythOs
-                  has its own dedicated site coming soon.
-                </p>
-              </div>
+          <Reveal delay={0.05}>
+            <div className="mt-10 text-center">
               <Link
-                to="/about"
-                className="shrink-0 rounded-full border-2 border-cream bg-cream px-6 py-3 font-semibold text-ink transition hover:bg-sun hover:border-sun"
+                to="/curriculum"
+                className="inline-flex rounded-full border-2 border-ink bg-ink px-8 py-4 font-semibold text-cream transition hover:bg-electric hover:border-electric"
               >
-                More about us →
+                Read the full curriculum →
               </Link>
             </div>
-          </div>
+          </Reveal>
+
+          {/* PythOs teaser */}
+          <Reveal direction="scale" amount={0.2}>
+            <div className="mt-12 rounded-3xl border-2 border-ink bg-electric p-8 text-cream md:p-12">
+              <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+                <div className="max-w-2xl">
+                  <p className="font-mono text-xs tracking-widest text-cream/70">
+                    Sister program · July
+                  </p>
+                  <h3 className="mt-2 font-display text-3xl font-black md:text-4xl">
+                    PythOs — build a 2D game in July.
+                  </h3>
+                  <p className="mt-3 text-cream/85">
+                    After MathOs wraps, our directors run PythOs: a creative computer-science camp
+                    with two age tracks (grades 1–4 in Scratch, grades 5–8 in Python with a custom
+                    Turtle library). Every camper finishes with their own playable 2D game. PythOs
+                    has its own dedicated site coming soon.
+                  </p>
+                </div>
+                <Link
+                  to="/about"
+                  className="shrink-0 rounded-full border-2 border-cream bg-cream px-6 py-3 font-semibold text-ink transition hover:bg-sun hover:border-sun"
+                >
+                  More about us →
+                </Link>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
       {/* DETAILS TEASER */}
       <section className="border-b-2 border-ink bg-ink text-cream">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 md:grid-cols-12 md:py-28">
-          <div className="md:col-span-5">
+          <Reveal direction="right" className="md:col-span-5">
             <p className="font-mono text-sm tracking-widest text-cream/60">Details</p>
             <h2 className="mt-2 font-display text-5xl font-black md:text-6xl">
               When, where, <span className="italic text-sun">how much</span>.
@@ -269,21 +278,23 @@ function Index() {
             >
               See full details →
             </Link>
-          </div>
+          </Reveal>
 
           <dl className="grid gap-px overflow-hidden rounded-3xl border-2 border-cream/20 bg-cream/10 md:col-span-7 md:grid-cols-2">
             {[
-              ["When", "Jun 15 – Jul 23, 2026"],
+              ["When", "Jun 15 – Jul 24, 2026"],
               ["Where", "Naperville Public Library (95th St)"],
               ["Days", "Mon · Wed · Fri"],
               ["Time", "1:00 – 3:00 PM"],
               ["Math grades", "4th — 7th (recommended)"],
               ["Cost", "Completely free"],
-            ].map(([k, v]) => (
-              <div key={k} className="bg-ink p-8">
-                <dt className="font-mono text-xs tracking-widest text-cream/50">{k}</dt>
-                <dd className="mt-3 font-display text-2xl font-bold leading-tight">{v}</dd>
-              </div>
+            ].map(([k, v], i) => (
+              <Reveal key={k} delay={i * 0.06} amount={0.3}>
+                <div className="bg-ink p-8">
+                  <dt className="font-mono text-xs tracking-widest text-cream/50">{k}</dt>
+                  <dd className="mt-3 font-display text-2xl font-bold leading-tight">{v}</dd>
+                </div>
+              </Reveal>
             ))}
           </dl>
         </div>
@@ -292,7 +303,7 @@ function Index() {
       {/* EXTRA HELP — stays on home */}
       <section className="border-b-2 border-ink bg-sun">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 md:grid-cols-12 md:py-24">
-          <div className="md:col-span-7">
+          <Reveal direction="right" className="md:col-span-7">
             <p className="font-mono text-sm tracking-widest text-ink/60">Extra help</p>
             <h2 className="mt-2 font-display text-5xl font-black leading-[0.95] md:text-6xl">
               Stuck on something? <span className="italic">Just ask.</span>
@@ -303,8 +314,8 @@ function Index() {
               they've been wanting to understand for a while. We'll find time before or after a
               session and work through it together.
             </p>
-          </div>
-          <div className="md:col-span-5">
+          </Reveal>
+          <Reveal direction="left" delay={0.1} className="md:col-span-5">
             <div className="rounded-3xl border-2 border-ink bg-cream p-8">
               <p className="font-mono text-xs tracking-widest text-muted-foreground">
                 Want more material?
@@ -324,19 +335,21 @@ function Index() {
                 Email campmathos@gmail.com →
               </a>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* FAQ TEASER */}
       <section className="border-b-2 border-ink">
         <div className="mx-auto max-w-4xl px-6 py-20 md:py-28">
-          <p className="font-mono text-sm tracking-widest text-muted-foreground">FAQ</p>
-          <h2 className="mt-2 font-display text-5xl font-black md:text-6xl">Common questions.</h2>
-          <p className="mt-6 max-w-2xl text-lg text-ink/70">
-            A few of the questions families ask most. We have a full FAQ page with everything
-            else — schedule, drop-off, materials, attendance, and more.
-          </p>
+          <Reveal>
+            <p className="font-mono text-sm tracking-widest text-muted-foreground">FAQ</p>
+            <h2 className="mt-2 font-display text-5xl font-black md:text-6xl">Common questions.</h2>
+            <p className="mt-6 max-w-2xl text-lg text-ink/70">
+              A few of the questions families ask most. We have a full FAQ page with everything
+              else — schedule, drop-off, materials, attendance, and more.
+            </p>
+          </Reveal>
 
           <ul className="mt-10 space-y-4">
             {[
@@ -344,45 +357,51 @@ function Index() {
               { q: "How do we sign up?", id: "register" },
               { q: "What days does it meet?", id: "schedule" },
               { q: "What should my child bring?", id: "bring" },
-            ].map(({ q, id }) => (
-              <li key={id}>
-                <Link
-                  to="/faq"
-                  hash={id}
-                  className="block rounded-2xl border-2 border-ink bg-cream px-6 py-4 font-display text-xl font-bold transition hover:bg-electric hover:text-cream"
-                >
-                  {q}
-                </Link>
-              </li>
+            ].map(({ q, id }, i) => (
+              <Reveal key={id} delay={i * 0.06} amount={0.4}>
+                <li>
+                  <Link
+                    to="/faq"
+                    hash={id}
+                    className="block rounded-2xl border-2 border-ink bg-cream px-6 py-4 font-display text-xl font-bold transition hover:bg-electric hover:text-cream"
+                  >
+                    {q}
+                  </Link>
+                </li>
+              </Reveal>
             ))}
           </ul>
 
-          <Link
-            to="/faq"
-            className="mt-10 inline-flex rounded-full bg-ink px-8 py-4 font-semibold text-cream transition hover:bg-electric"
-          >
-            Read the full FAQ →
-          </Link>
+          <Reveal delay={0.1}>
+            <Link
+              to="/faq"
+              className="mt-10 inline-flex rounded-full bg-ink px-8 py-4 font-semibold text-cream transition hover:bg-electric"
+            >
+              Read the full FAQ →
+            </Link>
+          </Reveal>
         </div>
       </section>
 
       {/* CTA */}
       <section className="bg-coral">
         <div className="mx-auto max-w-7xl px-6 py-24 text-center md:py-32">
-          <p className="font-mono text-sm tracking-widest text-cream/80">Register</p>
-          <h2 className="mx-auto mt-4 max-w-4xl font-display text-[clamp(2.75rem,9vw,8rem)] font-black leading-[0.9] text-cream break-words">
-            Spend June <span className="italic">thinking</span> in math.
-          </h2>
-          <p className="mx-auto mt-6 max-w-xl text-lg text-cream/85">
-            Completely free. Drop your email to let us know you're interested — we'll send
-            the schedule and library details as June gets closer. No commitment required.
-          </p>
-          <Link
-            to="/register"
-            className="mt-10 inline-flex rounded-full bg-ink px-8 py-4 font-semibold text-cream shadow-[6px_6px_0_0_oklch(0.18_0.04_260_/_0.25)] transition hover:bg-electric"
-          >
-            I'm interested →
-          </Link>
+          <Reveal direction="scale" amount={0.3}>
+            <p className="font-mono text-sm tracking-widest text-cream/80">Register</p>
+            <h2 className="mx-auto mt-4 max-w-4xl font-display text-[clamp(2.75rem,9vw,8rem)] font-black leading-[0.9] text-cream break-words">
+              Spend June <span className="italic">thinking</span> in math.
+            </h2>
+            <p className="mx-auto mt-6 max-w-xl text-lg text-cream/85">
+              Completely free. Drop your email to let us know you're interested — we'll send
+              the schedule and library details as June gets closer. No commitment required.
+            </p>
+            <Link
+              to="/register"
+              className="mt-10 inline-flex rounded-full bg-ink px-8 py-4 font-semibold text-cream shadow-[6px_6px_0_0_oklch(0.18_0.04_260_/_0.25)] transition hover:bg-electric"
+            >
+              I'm interested →
+            </Link>
+          </Reveal>
         </div>
       </section>
 
