@@ -158,8 +158,8 @@ function Index() {
                 <dd className="font-display text-2xl font-black md:text-3xl">04</dd>
               </div>
               <div>
-                <dt className="text-muted-foreground">Session / wk</dt>
-                <dd className="font-display text-2xl font-black md:text-3xl">03</dd>
+                <dt className="text-muted-foreground">Sessions / wk</dt>
+                <dd className="font-display text-2xl font-black md:text-3xl">04</dd>
               </div>
               <div>
                 <dt className="text-muted-foreground">Grades</dt>

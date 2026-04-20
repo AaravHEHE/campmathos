@@ -80,30 +80,31 @@ function DetailsPage() {
             A typical session
           </p>
           <h2 className="mt-3 font-display text-5xl font-black md:text-6xl">
-            2.5 hours, with room to <span className="italic">breathe</span>.
+            2 hours, with room to <span className="italic">breathe</span>.
           </h2>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            Each MathOs session runs two and a half hours, broken in the middle by a 15-minute
-            break so campers can rest, snack, and reset before diving back in.
+            Each MathOs session runs from 1:00 to 3:00 PM with a short break in
+            the middle so campers can rest, snack, and reset before the second
+            half.
           </p>
 
           <ol className="mt-12 grid gap-6 md:grid-cols-3">
             {[
               {
-                tag: "00:00 — 01:00",
-                title: "First hour",
+                tag: "1:00 — 1:50",
+                title: "First half",
                 body: "Concept, examples, and a hands-on activity. We open with the real-world question of the day, work through the math together, and start applying it.",
                 accent: "bg-electric text-cream",
               },
               {
-                tag: "01:00 — 01:15",
-                title: "15-minute break",
+                tag: "1:50 — 2:05",
+                title: "Short break",
                 body: "Snack, water, stretch. Campers are encouraged to bring a snack or drink — food is not provided.",
                 accent: "bg-sun text-ink",
               },
               {
-                tag: "01:15 — 02:30",
-                title: "Second hour-plus",
+                tag: "2:05 — 3:00",
+                title: "Second half",
                 body: "Project work, group challenges, and Q&A. Instructors circulate to help one-on-one and pull together what we built.",
                 accent: "bg-coral text-cream",
               },
@@ -122,6 +123,28 @@ function DetailsPage() {
               </li>
             ))}
           </ol>
+
+          <div className="mt-12 rounded-3xl border-2 border-ink bg-electric p-6 text-cream md:flex md:items-center md:justify-between md:gap-8 md:p-8">
+            <div className="max-w-xl">
+              <p className="font-mono text-xs uppercase tracking-widest text-cream/70">
+                Add to calendar
+              </p>
+              <h3 className="mt-2 font-display text-2xl font-black md:text-3xl">
+                Drop every session into your calendar.
+              </h3>
+              <p className="mt-2 text-cream/85">
+                Download the .ics file — it includes every Mon–Thu session
+                from June 15 to July 23, 2026, with the library address pre-filled.
+              </p>
+            </div>
+            <a
+              href="/mathos.ics"
+              download="mathos-2026.ics"
+              className="mt-5 inline-flex min-h-11 items-center rounded-full border-2 border-cream bg-cream px-6 py-3 font-semibold text-ink shadow-[6px_6px_0_0_var(--ink)] transition hover:bg-sun hover:border-sun md:mt-0"
+            >
+              Download .ics →
+            </a>
+          </div>
         </div>
       </section>
 
@@ -138,7 +161,7 @@ function DetailsPage() {
                 <span className="text-coral">→</span>A pencil and a notebook (or scratch paper)
               </li>
               <li className="flex gap-3">
-                <span className="text-coral">→</span>A snack and a drink for the 15-minute break
+                <span className="text-coral">→</span>A snack and a drink for the short break
               </li>
               <li className="flex gap-3">
                 <span className="text-coral">→</span>A computer if you join PythOs in July
