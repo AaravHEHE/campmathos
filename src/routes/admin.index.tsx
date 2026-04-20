@@ -190,9 +190,55 @@ function AdminDashboard() {
     return (
       <main className="min-h-screen bg-cream text-ink">
         <SiteHeader />
-        <div className="mx-auto max-w-3xl px-6 py-24 text-center font-mono text-sm text-muted-foreground">
-          Loading…
-        </div>
+        <section className="border-b-2 border-ink">
+          <div className="mx-auto max-w-6xl px-6 py-16">
+            <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
+              <div className="w-full max-w-md">
+                <div className="h-3 w-48 animate-pulse rounded-full bg-ink/15" />
+                <div className="mt-3 h-12 w-72 animate-pulse rounded-2xl bg-ink/15" />
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <div className="h-11 w-40 animate-pulse rounded-full bg-ink/15" />
+                <div className="h-11 w-32 animate-pulse rounded-full bg-ink/15" />
+                <div className="h-11 w-24 animate-pulse rounded-full bg-ink/15" />
+              </div>
+            </div>
+
+            <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-4">
+              {Array.from({ length: 4 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="h-[92px] animate-pulse rounded-3xl border-2 border-ink/20 bg-ink/10"
+                />
+              ))}
+            </div>
+
+            <div className="mt-8 h-11 w-full max-w-sm animate-pulse rounded-full bg-ink/15" />
+
+            <div className="mt-6 overflow-hidden rounded-3xl border-2 border-ink/20">
+              <div className="h-12 w-full bg-ink/80" />
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div
+                  key={i}
+                  className={`flex items-center justify-between gap-4 px-6 py-4 ${
+                    i % 2 === 0 ? "bg-cream" : "bg-cream/60"
+                  }`}
+                >
+                  <div className="h-4 w-1/3 animate-pulse rounded-full bg-ink/15" />
+                  <div className="h-4 w-1/4 animate-pulse rounded-full bg-ink/10" />
+                  <div className="flex gap-2">
+                    <div className="h-7 w-16 animate-pulse rounded-full bg-ink/10" />
+                    <div className="h-7 w-16 animate-pulse rounded-full bg-coral/20" />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <p className="mt-6 text-center font-mono text-xs text-muted-foreground">
+              Loading sign-ups…
+            </p>
+          </div>
+        </section>
       </main>
     );
   }

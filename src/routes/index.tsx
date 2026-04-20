@@ -111,7 +111,7 @@ function Index() {
               <span className="h-2 w-2 rounded-full bg-coral" />
               June 2026 · Naperville Public Library · 100% free
             </div>
-            <h1 className="font-display text-[clamp(3rem,9vw,7.5rem)] font-black leading-[0.9]">
+            <h1 className="font-display text-[clamp(2.5rem,8vw,7.5rem)] font-black leading-[0.9] break-words">
               Math is the
               <br />
               <span className="italic text-electric">operating</span>
@@ -354,7 +354,7 @@ function Index() {
       <section className="bg-coral">
         <div className="mx-auto max-w-7xl px-6 py-24 text-center md:py-32">
           <p className="font-mono text-sm tracking-widest text-cream/80">Register</p>
-          <h2 className="mx-auto mt-4 max-w-4xl font-display text-6xl font-black leading-[0.9] text-cream md:text-8xl">
+          <h2 className="mx-auto mt-4 max-w-4xl font-display text-[clamp(2.75rem,9vw,8rem)] font-black leading-[0.9] text-cream break-words">
             Spend June <span className="italic">thinking</span> in math.
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg text-cream/85">
