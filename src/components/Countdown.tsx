@@ -2,7 +2,29 @@ import { useEffect, useState } from "react";
 import { CAMP } from "@/lib/camp";
 
 /**
- * Live countdown to the first MathOs session.
+ * Returns the ISO date (YYYY-MM-DD) of the first Monday of June for the
+ * upcoming camp year. If we're already past the first Monday of June this
+ * year, rolls forward to next year.
+ */
+function firstMondayOfJuneISO(): string {
+  const now = new Date();
+  let year = now.getFullYear();
+  const candidate = (y: number) => {
+    const d = new Date(y, 5, 1); // June = month index 5
+    const offset = (8 - d.getDay()) % 7; // 0=Sun, 1=Mon … shift to next Mon
+    d.setDate(1 + offset);
+    return d;
+  };
+  let target = candidate(year);
+  if (target.getTime() < now.getTime()) target = candidate(++year);
+  const yyyy = target.getFullYear();
+  const mm = String(target.getMonth() + 1).padStart(2, "0");
+  const dd = String(target.getDate()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+/**
+ * Live countdown to the first Monday of June (the camp's first session).
  * Avoids hydration mismatch by only computing on the client (after mount).
  */
 export function Countdown() {
@@ -14,9 +36,9 @@ export function Countdown() {
     return () => clearInterval(id);
   }, []);
 
-  // First session start, in America/Chicago (CDT = UTC-5 in June)
+  // First Monday of June, 1:00 PM America/Chicago (CDT = UTC-5 in June)
   const target = new Date(
-    `${CAMP.startDateISO}T${CAMP.sessionStartTime}:00-05:00`
+    `${firstMondayOfJuneISO()}T${CAMP.sessionStartTime}:00-05:00`
   ).getTime();
 
   // Render placeholder shell during SSR / pre-mount
