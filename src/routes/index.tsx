@@ -3,26 +3,38 @@ import { useState } from "react";
 import heroImg from "@/assets/hero-math.jpg";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { weeks, type Week } from "@/data/weeks";
+import { Countdown } from "@/components/Countdown";
+import { canonical, ogImage, campEventJsonLd } from "@/lib/seo";
+
+const OG = ogImage("/og-default.jpg");
 
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "MathOs — Free summer applied math camp in Naperville | June 2026" },
+      { title: "MathOs — Free summer applied math camp in Naperville | Summer 2026" },
       {
         name: "description",
         content:
-          "MathOs (Greek for 'learning') is a completely free 4-week applied math camp at Naperville Public Library for grades 4–7. June 2026.",
+          "MathOs is a completely free 4-week applied math camp at Naperville Public Library for grades 4–7. Mon–Thu, 1–3 PM, June 15 – July 23, 2026.",
       },
       { property: "og:title", content: "MathOs — Free summer applied math camp in Naperville" },
       {
         property: "og:description",
         content:
-          "Four weeks of hands-on applied math for grades 4–7. Completely free. Naperville Public Library, June 2026.",
+          "Hands-on applied math for grades 4–7. Completely free. Naperville Public Library, June 15 – July 23, 2026.",
       },
-      { property: "og:image", content: heroImg },
+      { property: "og:image", content: OG },
+      { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: heroImg },
+      { name: "twitter:image", content: OG },
+    ],
+    links: [canonical("/")],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(campEventJsonLd()),
+      },
     ],
   }),
 });
@@ -109,7 +121,7 @@ function Index() {
           <div className="md:col-span-7">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-ink bg-cream px-4 py-1.5 font-mono text-xs tracking-widest">
               <span className="h-2 w-2 rounded-full bg-coral" />
-              June 2026 · Naperville Public Library · 100% free
+              Jun 15 – Jul 23, 2026 · Naperville Public Library · 100% free
             </div>
             <h1 className="font-display text-[clamp(2.5rem,8vw,7.5rem)] font-black leading-[0.9] break-words">
               Math is the
@@ -146,8 +158,8 @@ function Index() {
                 <dd className="font-display text-2xl font-black md:text-3xl">04</dd>
               </div>
               <div>
-                <dt className="text-muted-foreground">Session / wk</dt>
-                <dd className="font-display text-2xl font-black md:text-3xl">03</dd>
+                <dt className="text-muted-foreground">Sessions / wk</dt>
+                <dd className="font-display text-2xl font-black md:text-3xl">04</dd>
               </div>
               <div>
                 <dt className="text-muted-foreground">Grades</dt>
@@ -165,6 +177,9 @@ function Index() {
                 height={1024}
                 className="h-full w-full object-cover"
               />
+            </div>
+            <div className="absolute -bottom-6 left-4 right-4 md:-bottom-8 md:left-6 md:right-6">
+              <Countdown />
             </div>
           </div>
         </div>
@@ -244,8 +259,9 @@ function Index() {
               When, where, <span className="italic text-sun">how much</span>.
             </h2>
             <p className="mt-6 max-w-md text-cream/70">
-              MathOs meets Monday, Wednesday, and Friday throughout June at Naperville Public
-              Library. Every session is 2.5 hours with a 15-minute break in the middle.
+              MathOs meets Monday through Thursday from 1–3 PM at the
+              Naperville Public Library 95th Street branch, June 15 to July
+              23, 2026.
             </p>
             <Link
               to="/details"
@@ -257,10 +273,10 @@ function Index() {
 
           <dl className="grid gap-px overflow-hidden rounded-3xl border-2 border-cream/20 bg-cream/10 md:col-span-7 md:grid-cols-2">
             {[
-              ["When", "June 2026 · 4 weeks"],
-              ["Where", "Naperville Public Library"],
-              ["Days", "Mon · Wed · Fri"],
-              ["Session", "2.5 hrs (with 15-min break)"],
+              ["When", "Jun 15 – Jul 23, 2026"],
+              ["Where", "Naperville Public Library (95th St)"],
+              ["Days", "Mon · Tue · Wed · Thu"],
+              ["Time", "1:00 – 3:00 PM"],
               ["Math grades", "4th — 7th (recommended)"],
               ["Cost", "Completely free"],
             ].map(([k, v]) => (

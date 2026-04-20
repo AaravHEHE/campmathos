@@ -9,7 +9,10 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RegisterRouteImport } from './routes/register'
+import { Route as NapervilleMathCampRouteImport } from './routes/naperville-math-camp'
+import { Route as MathosDoticsRouteImport } from './routes/mathos[.]ics'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as DetailsRouteImport } from './routes/details'
 import { Route as CurriculumRouteImport } from './routes/curriculum'
@@ -19,9 +22,24 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NapervilleMathCampRoute = NapervilleMathCampRouteImport.update({
+  id: '/naperville-math-camp',
+  path: '/naperville-math-camp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MathosDoticsRoute = MathosDoticsRouteImport.update({
+  id: '/mathos.ics',
+  path: '/mathos.ics',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqRoute = FaqRouteImport.update({
@@ -72,7 +90,10 @@ export interface FileRoutesByFullPath {
   '/curriculum': typeof CurriculumRoute
   '/details': typeof DetailsRoute
   '/faq': typeof FaqRoute
+  '/mathos.ics': typeof MathosDoticsRoute
+  '/naperville-math-camp': typeof NapervilleMathCampRoute
   '/register': typeof RegisterRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/': typeof AdminIndexRoute
 }
@@ -83,7 +104,10 @@ export interface FileRoutesByTo {
   '/curriculum': typeof CurriculumRoute
   '/details': typeof DetailsRoute
   '/faq': typeof FaqRoute
+  '/mathos.ics': typeof MathosDoticsRoute
+  '/naperville-math-camp': typeof NapervilleMathCampRoute
   '/register': typeof RegisterRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin': typeof AdminIndexRoute
 }
@@ -95,7 +119,10 @@ export interface FileRoutesById {
   '/curriculum': typeof CurriculumRoute
   '/details': typeof DetailsRoute
   '/faq': typeof FaqRoute
+  '/mathos.ics': typeof MathosDoticsRoute
+  '/naperville-math-camp': typeof NapervilleMathCampRoute
   '/register': typeof RegisterRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/': typeof AdminIndexRoute
 }
@@ -108,7 +135,10 @@ export interface FileRouteTypes {
     | '/curriculum'
     | '/details'
     | '/faq'
+    | '/mathos.ics'
+    | '/naperville-math-camp'
     | '/register'
+    | '/sitemap.xml'
     | '/admin/login'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
@@ -119,7 +149,10 @@ export interface FileRouteTypes {
     | '/curriculum'
     | '/details'
     | '/faq'
+    | '/mathos.ics'
+    | '/naperville-math-camp'
     | '/register'
+    | '/sitemap.xml'
     | '/admin/login'
     | '/admin'
   id:
@@ -130,7 +163,10 @@ export interface FileRouteTypes {
     | '/curriculum'
     | '/details'
     | '/faq'
+    | '/mathos.ics'
+    | '/naperville-math-camp'
     | '/register'
+    | '/sitemap.xml'
     | '/admin/login'
     | '/admin/'
   fileRoutesById: FileRoutesById
@@ -142,18 +178,42 @@ export interface RootRouteChildren {
   CurriculumRoute: typeof CurriculumRoute
   DetailsRoute: typeof DetailsRoute
   FaqRoute: typeof FaqRoute
+  MathosDoticsRoute: typeof MathosDoticsRoute
+  NapervilleMathCampRoute: typeof NapervilleMathCampRoute
   RegisterRoute: typeof RegisterRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   AdminLoginRoute: typeof AdminLoginRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/register': {
       id: '/register'
       path: '/register'
       fullPath: '/register'
       preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/naperville-math-camp': {
+      id: '/naperville-math-camp'
+      path: '/naperville-math-camp'
+      fullPath: '/naperville-math-camp'
+      preLoaderRoute: typeof NapervilleMathCampRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mathos.ics': {
+      id: '/mathos.ics'
+      path: '/mathos.ics'
+      fullPath: '/mathos.ics'
+      preLoaderRoute: typeof MathosDoticsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faq': {
@@ -222,7 +282,10 @@ const rootRouteChildren: RootRouteChildren = {
   CurriculumRoute: CurriculumRoute,
   DetailsRoute: DetailsRoute,
   FaqRoute: FaqRoute,
+  MathosDoticsRoute: MathosDoticsRoute,
+  NapervilleMathCampRoute: NapervilleMathCampRoute,
   RegisterRoute: RegisterRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   AdminLoginRoute: AdminLoginRoute,
   AdminIndexRoute: AdminIndexRoute,
 }

@@ -1,6 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
+import { canonical, ogImage } from "@/lib/seo";
+
+const OG = ogImage("/og-faq.jpg");
 
 export const Route = createFileRoute("/faq")({
   component: FaqPage,
@@ -18,7 +21,11 @@ export const Route = createFileRoute("/faq")({
         content:
           "Cost, schedule, attendance, drop-off, materials, prerequisites, PythOs, and how to register.",
       },
+      { property: "og:image", content: OG },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: OG },
     ],
+    links: [canonical("/faq")],
   }),
 });
 

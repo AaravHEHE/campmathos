@@ -1,5 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
+import { canonical, ogImage } from "@/lib/seo";
+
+const OG = ogImage("/og-about.jpg");
 
 export const Route = createFileRoute("/about")({
   component: AboutPage,
@@ -17,7 +20,11 @@ export const Route = createFileRoute("/about")({
         content:
           "A student-led nonprofit teaching applied math through hands-on activities, real projects, and zero pressure.",
       },
+      { property: "og:image", content: OG },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: OG },
     ],
+    links: [canonical("/about")],
   }),
 });
 
