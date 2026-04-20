@@ -1,5 +1,5 @@
 import { motion, useReducedMotion, type Variants } from "framer-motion";
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 type Direction = "up" | "down" | "left" | "right" | "scale";
 
@@ -9,44 +9,54 @@ interface RevealProps {
   direction?: Direction;
   /** Delay in seconds before animating. */
   delay?: number;
-  /** Animation duration in seconds. Defaults to 0.6. */
+  /** Animation duration in seconds. Defaults to 1.1. */
   duration?: number;
   /** Custom className applied to the wrapper. */
   className?: string;
   /** Trigger once (default true) or every time it scrolls into view. */
   once?: boolean;
-  /** How much of the element must be visible to trigger (0-1). Defaults 0.15. */
+  /** How much of the element must be visible to trigger (0-1). Defaults 0.2. */
   amount?: number;
 }
 
-const offset = 64;
+const offset = 110;
 const directionMap: Record<Direction, { x?: number; y?: number; scale?: number }> = {
   up: { y: offset },
   down: { y: -offset },
   left: { x: offset },
   right: { x: -offset },
-  scale: { scale: 0.82 },
+  scale: { scale: 0.7 },
 };
 
 /**
  * Lightweight scroll-reveal wrapper. Uses framer-motion's `whileInView`
  * (IntersectionObserver under the hood). Respects reduced-motion.
  *
- * Usage:
- *   <Reveal><h2>Title</h2></Reveal>
- *   <Reveal direction="left" delay={0.1}>...</Reveal>
+ * SSR-safe: renders a static wrapper on the server and the first client
+ * paint, then mounts the motion variant after hydration so SSR markup
+ * matches client markup exactly.
  */
 export function Reveal({
   children,
   direction = "up",
   delay = 0,
-  duration = 0.95,
+  duration = 1.1,
   className,
   once = true,
   amount = 0.2,
 }: RevealProps) {
   const reduce = useReducedMotion();
-  if (reduce) return <div className={className}>{children}</div>;
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+
+  // SSR + first paint: render plain wrapper so initial HTML matches.
+  // After hydration (and unless reduced-motion), swap to animated version.
+  if (!hydrated || reduce) {
+    return <div className={className}>{children}</div>;
+  }
 
   const from = directionMap[direction];
   const variants: Variants = {
