@@ -98,8 +98,8 @@ function RegisterPage() {
           </h1>
           <p className="mt-6 text-lg text-ink/75">
             This isn't a commitment — just a heads-up that your family is interested. Drop your
-            email and we'll send the full schedule, library check-in details, and any updates as
-            June gets closer. Decide later whether to come. The camp itself is always free.
+            email and we'll reach out closer to the camp with the full schedule and
+            library check-in details. Decide later whether to come. The camp itself is always free.
           </p>
 
           {status === "success" ? (
@@ -133,7 +133,7 @@ function RegisterPage() {
               </h2>
               <p className="mt-3 text-cream/85">
                 We already have <strong>{email}</strong> on our interest list — no need to sign
-                up again. We'll be in touch as June gets closer with the schedule and library
+                up again. We'll be in touch closer to the camp with the schedule and library
                 details. Questions? Email{" "}
                 <a href="mailto:campmathos@gmail.com" className="underline">
                   campmathos@gmail.com
