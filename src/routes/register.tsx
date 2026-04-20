@@ -114,6 +114,11 @@ function RegisterPage() {
                 We just sent a confirmation with what to expect. We'll reach out with more
                 details closer to the date of the camp. Questions? Reply to that email.
               </p>
+              <p className="mt-3 rounded-2xl border-2 border-ink bg-cream/60 px-4 py-3 font-mono text-xs text-ink/80">
+                📬 Heads up: the email comes from <strong>CampMathos</strong> and may land in your{" "}
+                <strong>Spam</strong> or <strong>Junk</strong> folder — please check there and mark it
+                as "Not spam" so you don't miss our updates.
+              </p>
               <ShareButtons />
               <button
                 type="button"
