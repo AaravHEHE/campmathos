@@ -37,6 +37,8 @@ function AdminDashboard() {
   const [sortDir, setSortDir] = useState<SortDir>("desc");
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [dateFrom, setDateFrom] = useState(""); // YYYY-MM-DD, local
+  const [dateTo, setDateTo] = useState(""); // YYYY-MM-DD, local (inclusive)
 
   useEffect(() => {
     let cancelled = false;
