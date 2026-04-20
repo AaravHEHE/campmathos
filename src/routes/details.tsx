@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { canonical, ogImage } from "@/lib/seo";
 import { CAMP, fullAddress } from "@/lib/camp";
+import { Reveal } from "@/components/Reveal";
 
 const OG = ogImage("/og-details.jpg");
 
