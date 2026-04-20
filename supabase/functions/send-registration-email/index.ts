@@ -68,22 +68,26 @@ function confirmationHtml(email: string) {
     <tr><td align="center">
       <table width="560" cellpadding="0" cellspacing="0" style="background:#ffffff;border:2px solid #1a1a2e;border-radius:16px;padding:32px;">
         <tr><td>
-          <p style="margin:0 0 8px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#666;">Mathos Camp · June 2026</p>
-          <h1 style="margin:0 0 16px;font-size:28px;line-height:1.1;">Thanks for your interest! 👋</h1>
+          <p style="margin:0 0 8px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#666;">Mathos Camp</p>
+          <h1 style="margin:0 0 16px;font-size:28px;line-height:1.1;">Thanks for showing your interest! 🙌</h1>
           <p style="margin:0 0 16px;font-size:16px;line-height:1.5;">
-            We've noted that your family is interested in <strong>Mathos</strong> — the completely free summer applied math camp at Naperville Public Library. This isn't a commitment, just a heads-up so we can keep you in the loop.
+            We've added <strong>${escapeHtml(email)}</strong> to our interest list for <strong>Mathos</strong> — the completely free summer applied math camp at Naperville Public Library. This isn't a commitment — we'll reach out with more details closer to the date of the camp.
           </p>
-          <p style="margin:0 0 16px;font-size:16px;line-height:1.5;">
-            We've got <strong>${escapeHtml(email)}</strong> on the list. In the next few weeks we'll send you:
-          </p>
+          <p style="margin:0 0 8px;font-size:16px;line-height:1.5;font-weight:bold;">For now, here's what to know:</p>
           <ul style="margin:0 0 16px 20px;padding:0;font-size:16px;line-height:1.6;">
-            <li>The full June schedule (Mon · Wed · Fri)</li>
-            <li>Library check-in details and room location</li>
-            <li>What to bring on day one — if you decide to come</li>
+            <li>Sessions run approximately <strong>2.5 hours</strong> each</li>
+            <li><strong>3 sessions per week</strong> (Mon · Wed · Fri)</li>
+            <li>Runs for <strong>4 weeks through June</strong></li>
+            <li>Grades 4–7 · 100% free</li>
           </ul>
-          <p style="margin:0 0 16px;font-size:16px;line-height:1.5;">
-            Sessions are 2.5 hours with a 15-minute break in the middle. Camp is for grades 4–7 and is 100% free. You can decide closer to June whether to attend.
-          </p>
+          <table width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0;background:#fef3c7;border:2px solid #1a1a2e;border-radius:12px;padding:16px;">
+            <tr><td>
+              <p style="margin:0 0 6px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#1a1a2e;">Coming soon · Pythos</p>
+              <p style="margin:0;font-size:15px;line-height:1.5;">
+                If you're interested in coding too, look out for details about our companion <strong>Pythos coding camp</strong> — same vibe, same free, just Python.
+              </p>
+            </td></tr>
+          </table>
           <p style="margin:24px 0 0;font-size:14px;color:#666;">
             Questions? Just reply to this email — it goes straight to our directors at campmathos@gmail.com.
           </p>

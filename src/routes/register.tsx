@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
+import { ShareButtons } from "@/components/ShareButtons";
 import { supabase } from "@/integrations/supabase/client";
 import { canonical, ogImage } from "@/lib/seo";
 
@@ -110,14 +111,14 @@ function RegisterPage() {
                 Thanks for letting us know 📬
               </h2>
               <p className="mt-3 text-ink/80">
-                We just sent a confirmation. We'll follow up with the full schedule and library
-                details as we get closer to June — no commitment until then. Questions? Reply to
-                that email.
+                We just sent a confirmation with what to expect. We'll reach out with more
+                details closer to the date of the camp. Questions? Reply to that email.
               </p>
+              <ShareButtons />
               <button
                 type="button"
                 onClick={() => setStatus("idle")}
-                className="mt-6 inline-flex rounded-full border-2 border-ink bg-cream px-6 py-3 font-semibold text-ink transition hover:bg-ink hover:text-cream"
+                className="mt-6 inline-flex min-h-[44px] rounded-full border-2 border-ink bg-cream px-6 py-3 font-semibold text-ink transition hover:bg-ink hover:text-cream"
               >
                 Add another email
               </button>
