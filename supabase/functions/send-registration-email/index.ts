@@ -12,7 +12,9 @@ const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 
-const FROM = "Mathos Camp <onboarding@resend.dev>";
+// Note: Gmail addresses cannot be used as the literal "from" — providers block this to prevent spoofing.
+// We use Resend's shared sender but set the display name + reply-to so it clearly comes from CampMathos@gmail.com.
+const FROM = "CampMathos <onboarding@resend.dev>";
 const REPLY_TO = "campmathos@gmail.com";
 const DIRECTOR_NOTIFY = "campmathos@gmail.com";
 
