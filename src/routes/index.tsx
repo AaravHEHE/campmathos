@@ -259,8 +259,9 @@ function Index() {
               When, where, <span className="italic text-sun">how much</span>.
             </h2>
             <p className="mt-6 max-w-md text-cream/70">
-              MathOs meets Monday, Wednesday, and Friday throughout June at Naperville Public
-              Library. Every session is 2.5 hours with a 15-minute break in the middle.
+              MathOs meets Monday through Thursday from 1–3 PM at the
+              Naperville Public Library 95th Street branch, June 15 to July
+              23, 2026.
             </p>
             <Link
               to="/details"
@@ -272,10 +273,10 @@ function Index() {
 
           <dl className="grid gap-px overflow-hidden rounded-3xl border-2 border-cream/20 bg-cream/10 md:col-span-7 md:grid-cols-2">
             {[
-              ["When", "June 2026 · 4 weeks"],
-              ["Where", "Naperville Public Library"],
-              ["Days", "Mon · Wed · Fri"],
-              ["Session", "2.5 hrs (with 15-min break)"],
+              ["When", "Jun 15 – Jul 23, 2026"],
+              ["Where", "Naperville Public Library (95th St)"],
+              ["Days", "Mon · Tue · Wed · Thu"],
+              ["Time", "1:00 – 3:00 PM"],
               ["Math grades", "4th — 7th (recommended)"],
               ["Cost", "Completely free"],
             ].map(([k, v]) => (
