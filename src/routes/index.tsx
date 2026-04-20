@@ -17,13 +17,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "MathOs is a completely free 4-week applied math camp at Naperville Public Library for grades 4–7. Mon/Wed/Fri, 1–3 PM, June 15 – July 24, 2026.",
+          "MathOs is a completely free applied math camp at Naperville Public Library for grades 4–7. Mondays, Wednesdays, and Fridays, 1–3 PM, summer 2026.",
       },
       { property: "og:title", content: "MathOs — Free summer applied math camp in Naperville" },
       {
         property: "og:description",
         content:
-          "Hands-on applied math for grades 4–7. Completely free. Naperville Public Library, June 15 – July 24, 2026.",
+          "Hands-on applied math for grades 4–7. Completely free. Naperville Public Library, summer 2026.",
       },
       { property: "og:image", content: OG },
       { property: "og:type", content: "website" },
@@ -122,7 +122,7 @@ function Index() {
           <div className="md:col-span-7">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-ink bg-cream px-4 py-1.5 font-mono text-xs tracking-widest">
               <span className="h-2 w-2 rounded-full bg-coral" />
-              Jun 15 – Jul 24, 2026 · Naperville Public Library · 100% free
+              June 2026 · Naperville Public Library · 100% free
             </div>
             <h1 className="font-display text-[clamp(2.5rem,8vw,7.5rem)] font-black leading-[0.9] break-words">
               Math is the
@@ -268,9 +268,8 @@ function Index() {
               When, where, <span className="italic text-sun">how much</span>.
             </h2>
             <p className="mt-6 max-w-md text-cream/70">
-              MathOs meets Monday, Wednesday, and Friday from 1–3 PM at the
-              Naperville Public Library 95th Street branch, June 15 to July
-              24, 2026.
+              MathOs meets Mondays, Wednesdays, and Fridays from 1–3 PM at the
+              Naperville Public Library 95th Street branch in June 2026.
             </p>
             <Link
               to="/details"
@@ -283,7 +282,7 @@ function Index() {
           <Reveal direction="up" amount={0.2} className="md:col-span-7">
             <dl className="grid gap-px overflow-hidden rounded-3xl border-2 border-cream/20 bg-cream/10 md:grid-cols-2">
               {[
-                ["When", "Jun 15 – Jul 24, 2026"],
+                ["When", "June 2026"],
                 ["Where", "Naperville Public Library (95th St)"],
                 ["Days", "Mon · Wed · Fri"],
                 ["Time", "1:00 – 3:00 PM"],
