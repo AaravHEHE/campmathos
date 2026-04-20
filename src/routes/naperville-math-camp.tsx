@@ -13,7 +13,7 @@ export const Route = createFileRoute("/naperville-math-camp")({
       {
         name: "description",
         content:
-          "Looking for a free summer math camp in Naperville, IL? MathOs runs Mon–Thu 1–3 PM at the 95th Street Library branch, June 15 – July 23, 2026. Grades 4–7. Zero cost.",
+          "Looking for a free summer math camp in Naperville, IL? MathOs runs Mon/Wed/Fri 1–3 PM at the 95th Street Library branch, June 15 – July 24, 2026. Grades 4–7. Zero cost.",
       },
       { property: "og:title", content: "Naperville Math Camp 2026 — Free, grades 4–7" },
       {

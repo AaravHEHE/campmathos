@@ -13,7 +13,7 @@ export const Route = createFileRoute("/details")({
       {
         name: "description",
         content:
-          "MathOs camp logistics: free for all students, Mon–Thu 1–3 PM, June 15 – July 23, 2026, at Naperville Public Library 95th Street branch. 2-hour sessions with a short break.",
+          "MathOs camp logistics: free for all students, Mon/Wed/Fri 1–3 PM, June 15 – July 24, 2026, at Naperville Public Library 95th Street branch. 2-hour sessions with a short break.",
       },
       { property: "og:title", content: "Details — MathOs summer camp" },
       {
@@ -133,8 +133,8 @@ function DetailsPage() {
                 Drop every session into your calendar.
               </h3>
               <p className="mt-2 text-cream/85">
-                Download the .ics file — it includes every Mon–Thu session
-                from June 15 to July 23, 2026, with the library address pre-filled.
+                Download the .ics file — it includes every Mon/Wed/Fri session
+                from June 15 to July 24, 2026, with the library address pre-filled.
               </p>
             </div>
             <a
