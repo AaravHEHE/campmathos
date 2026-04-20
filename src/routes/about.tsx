@@ -83,13 +83,13 @@ function AboutPage() {
       {/* MISSION */}
       <section className="border-b-2 border-ink bg-ink text-cream">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 md:grid-cols-12 md:py-28">
-          <div className="md:col-span-5">
+          <Reveal direction="right" className="md:col-span-5">
             <p className="font-mono text-sm tracking-widest text-cream/60">Mission</p>
             <h2 className="mt-2 font-display text-5xl font-black leading-[0.95] md:text-6xl">
               Math you can <span className="italic text-sun">actually use</span>.
             </h2>
-          </div>
-          <div className="md:col-span-7">
+          </Reveal>
+          <Reveal direction="left" delay={0.2} className="md:col-span-7">
             <p className="text-lg text-cream/80">
               Most kids meet math as a stack of formulas with no obvious purpose. We think that's
               backwards. MathOs teaches incoming 4th–7th graders how the math they already see in
@@ -102,7 +102,7 @@ function AboutPage() {
               project-based. There are no fees, no strict attendance rules, and no exams. Just
               real problems, real tools, and real things to build.
             </p>
-          </div>
+          </Reveal>
         </div>
       </section>
 
