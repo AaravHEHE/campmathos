@@ -46,7 +46,7 @@ export function Countdown() {
         <Unit label="sec" value={seconds} dim={now === null} />
       </dl>
       <p className="mt-3 font-mono text-[11px] tracking-widest text-ink/60">
-        First session · Mon June 15 · 1:00 PM
+        First session · 1:00 PM
       </p>
     </div>
   );
