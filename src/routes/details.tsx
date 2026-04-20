@@ -64,11 +64,13 @@ function DetailsPage() {
       <section className="border-b-2 border-ink bg-ink text-cream">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
           <dl className="grid gap-px overflow-hidden rounded-3xl border-2 border-cream/20 bg-cream/10 md:grid-cols-2">
-            {facts.map(([k, v]) => (
-              <div key={k} className="bg-ink p-8">
-                <dt className="font-mono text-xs tracking-widest text-cream/50">{k}</dt>
-                <dd className="mt-3 font-display text-2xl font-bold leading-tight">{v}</dd>
-              </div>
+            {facts.map(([k, v], i) => (
+              <Reveal key={k} delay={i * 0.18} amount={0.3}>
+                <div className="bg-ink p-8">
+                  <dt className="font-mono text-xs tracking-widest text-cream/50">{k}</dt>
+                  <dd className="mt-3 font-display text-2xl font-bold leading-tight">{v}</dd>
+                </div>
+              </Reveal>
             ))}
           </dl>
         </div>
@@ -77,17 +79,19 @@ function DetailsPage() {
       {/* CLASS STRUCTURE */}
       <section className="border-b-2 border-ink">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
-          <p className="font-mono text-sm tracking-widest text-muted-foreground">
-            A typical session
-          </p>
-          <h2 className="mt-3 font-display text-5xl font-black md:text-6xl">
-            2 hours, with room to <span className="italic">breathe</span>.
-          </h2>
-          <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            Each MathOs session runs from 1:00 to 3:00 PM with a short break in
-            the middle so campers can rest, snack, and reset before the second
-            half.
-          </p>
+          <Reveal>
+            <p className="font-mono text-sm tracking-widest text-muted-foreground">
+              A typical session
+            </p>
+            <h2 className="mt-3 font-display text-5xl font-black md:text-6xl">
+              2 hours, with room to <span className="italic">breathe</span>.
+            </h2>
+            <p className="mt-6 max-w-2xl text-lg text-ink/75">
+              Each MathOs session runs from 1:00 to 3:00 PM with a short break in
+              the middle so campers can rest, snack, and reset before the second
+              half.
+            </p>
+          </Reveal>
 
           <ol className="mt-12 grid gap-6 md:grid-cols-3">
             {[
@@ -109,19 +113,18 @@ function DetailsPage() {
                 body: "Project work, group challenges, and Q&A. Instructors circulate to help one-on-one and pull together what we built.",
                 accent: "bg-coral text-cream",
               },
-            ].map((b) => (
-              <li
-                key={b.title}
-                className="rounded-3xl border-2 border-ink bg-cream p-6 shadow-[6px_6px_0_0_var(--ink)]"
-              >
-                <span
-                  className={`inline-block rounded-full px-3 py-1 font-mono text-xs font-bold ${b.accent}`}
-                >
-                  {b.tag}
-                </span>
-                <h3 className="mt-4 font-display text-2xl font-black">{b.title}</h3>
-                <p className="mt-3 text-ink/70">{b.body}</p>
-              </li>
+            ].map((b, i) => (
+              <Reveal key={b.title} delay={i * 0.25} amount={0.3}>
+                <li className="rounded-3xl border-2 border-ink bg-cream p-6 shadow-[6px_6px_0_0_var(--ink)]">
+                  <span
+                    className={`inline-block rounded-full px-3 py-1 font-mono text-xs font-bold ${b.accent}`}
+                  >
+                    {b.tag}
+                  </span>
+                  <h3 className="mt-4 font-display text-2xl font-black">{b.title}</h3>
+                  <p className="mt-3 text-ink/70">{b.body}</p>
+                </li>
+              </Reveal>
             ))}
           </ol>
 
