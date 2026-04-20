@@ -85,7 +85,7 @@ function BoardPage() {
             The students <span className="italic text-electric">behind</span> MathOs.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            MathOs is built and taught by six Neuqua Valley High School students who believe math
+            MathOs is built and taught by five Neuqua Valley High School students who believe math
             should feel useful, not abstract. We design every session, mentor every camper, and
             run every workshop ourselves.
           </p>
