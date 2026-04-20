@@ -129,7 +129,7 @@ function NapervilleMathCampPage() {
       <section className="bg-coral">
         <div className="mx-auto max-w-5xl px-6 py-20 text-center md:py-24">
           <h2 className="font-display text-5xl font-black leading-[0.9] text-cream md:text-6xl">
-            Ready to sign up your Naperville student?
+            Ready to sign up your student?
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-lg text-cream/85">
             Drop your email and we'll send schedule and library details as June
