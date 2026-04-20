@@ -5,6 +5,7 @@ import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { weeks, type Week } from "@/data/weeks";
 import { Countdown } from "@/components/Countdown";
 import { canonical, ogImage, campEventJsonLd } from "@/lib/seo";
+import { Reveal } from "@/components/Reveal";
 
 const OG = ogImage("/og-default.jpg");
 
@@ -54,8 +55,8 @@ function Marquee() {
   ];
   const row = [...items, ...items, ...items, ...items];
   return (
-    <div className="overflow-hidden border-y-2 border-ink bg-ink py-4">
-      <div className="marquee flex whitespace-nowrap font-display text-3xl font-black tracking-tight text-cream md:text-5xl">
+    <div className="overflow-hidden border-y-2 border-ink bg-ink py-6 md:py-8">
+      <div className="marquee flex whitespace-nowrap font-display text-3xl font-black leading-[1.25] tracking-tight text-cream md:text-5xl">
         {row.map((t, i) => (
           <span key={i} className="mx-8 inline-block">
             {t}
@@ -121,7 +122,7 @@ function Index() {
           <div className="md:col-span-7">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-ink bg-cream px-4 py-1.5 font-mono text-xs tracking-widest">
               <span className="h-2 w-2 rounded-full bg-coral" />
-              Jun 15 – Jul 23, 2026 · Naperville Public Library · 100% free
+              Jun 15 – Jul 24, 2026 · Naperville Public Library · 100% free
             </div>
             <h1 className="font-display text-[clamp(2.5rem,8vw,7.5rem)] font-black leading-[0.9] break-words">
               Math is the
@@ -273,7 +274,7 @@ function Index() {
 
           <dl className="grid gap-px overflow-hidden rounded-3xl border-2 border-cream/20 bg-cream/10 md:col-span-7 md:grid-cols-2">
             {[
-              ["When", "Jun 15 – Jul 23, 2026"],
+              ["When", "Jun 15 – Jul 24, 2026"],
               ["Where", "Naperville Public Library (95th St)"],
               ["Days", "Mon · Wed · Fri"],
               ["Time", "1:00 – 3:00 PM"],
