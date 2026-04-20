@@ -40,10 +40,10 @@ export function Reveal({
   children,
   direction = "up",
   delay = 0,
-  duration = 0.6,
+  duration = 0.95,
   className,
   once = true,
-  amount = 0.15,
+  amount = 0.2,
 }: RevealProps) {
   const reduce = useReducedMotion();
   if (reduce) return <div className={className}>{children}</div>;
