@@ -1,6 +1,20 @@
-import { createServerFn } from "@tanstack/react-start";
+import { createServerFn, createMiddleware } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
+import { supabase } from "@/integrations/supabase/client";
+
+// Client middleware: attach the current Supabase session token to the
+// outgoing server-fn request so requireSupabaseAuth can read it.
+const attachAuthHeader = createMiddleware({ type: "function" }).client(
+  async ({ next }) => {
+    const { data: { session } } = await supabase.auth.getSession();
+    return next({
+      headers: session?.access_token
+        ? { Authorization: `Bearer ${session.access_token}` }
+        : {},
+    });
+  },
+);
 
 async function assertAdmin(userId: string) {
   const { data, error } = await supabaseAdmin
@@ -14,7 +28,7 @@ async function assertAdmin(userId: string) {
 }
 
 export const adminListRegistrations = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([attachAuthHeader, requireSupabaseAuth])
   .handler(async ({ context }) => {
     await assertAdmin(context.userId);
     const { data: rows, error } = await supabaseAdmin
@@ -26,7 +40,7 @@ export const adminListRegistrations = createServerFn({ method: "POST" })
   });
 
 export const adminDeleteRegistration = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([attachAuthHeader, requireSupabaseAuth])
   .inputValidator((input: { id: string }) => input)
   .handler(async ({ data, context }) => {
     await assertAdmin(context.userId);
