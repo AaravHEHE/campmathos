@@ -77,8 +77,8 @@
   /* MathOs palette — cream paper, ink, electric blue, coral, sun yellow */
   --cream: oklch(0.972 0.025 90);
   --ink: oklch(0.18 0.04 260);
-  --electric: oklch(0.62 0.22 255);
-  --coral: oklch(0.7 0.2 25);
+  --electric: oklch(0.55 0.22 255);
+  --coral: oklch(0.62 0.2 25);
   --sun: oklch(0.88 0.17 90);
 
   --background: var(--cream);
@@ -92,7 +92,8 @@
   --secondary: var(--sun);
   --secondary-foreground: var(--ink);
   --muted: oklch(0.94 0.02 90);
-  --muted-foreground: oklch(0.45 0.03 260);
+  /* Bumped contrast for WCAG AA on cream backgrounds */
+  --muted-foreground: oklch(0.38 0.03 260);
   --accent: var(--coral);
   --accent-foreground: var(--cream);
   --destructive: oklch(0.577 0.245 27.325);
