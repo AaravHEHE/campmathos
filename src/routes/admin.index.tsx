@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { adminListRegistrations, adminDeleteRegistration } from "@/lib/admin.functions";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/admin/")({
   component: AdminDashboard,
@@ -22,9 +23,6 @@ interface Registration {
 type SortKey = "created_at" | "email";
 type SortDir = "asc" | "desc";
 
-const STORAGE_KEY = "mathos-admin-ok";
-const PW_KEY = "mathos-admin-pw";
-
 function AdminDashboard() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -41,25 +39,23 @@ function AdminDashboard() {
   useEffect(() => {
     let cancelled = false;
 
-    if (typeof window === "undefined") return;
-    const password = sessionStorage.getItem(PW_KEY);
-    if (sessionStorage.getItem(STORAGE_KEY) !== "1" || !password) {
-      navigate({ to: "/admin/login" });
-      return;
-    }
-
     const load = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (cancelled) return;
+      if (!session) {
+        navigate({ to: "/admin/login" });
+        return;
+      }
       try {
-        const { rows: data } = await adminListRegistrations({ data: { password } });
+        const { rows: data } = await adminListRegistrations();
         if (cancelled) return;
         setRows((data as Registration[]) ?? []);
       } catch (err) {
         if (cancelled) return;
         const msg = err instanceof Error ? err.message : "Failed to load sign-ups";
         setError(msg);
-        if (msg === "Unauthorized") {
-          sessionStorage.removeItem(STORAGE_KEY);
-          sessionStorage.removeItem(PW_KEY);
+        if (/forbidden|unauthorized/i.test(msg)) {
+          await supabase.auth.signOut();
           navigate({ to: "/admin/login" });
           return;
         }
@@ -127,9 +123,8 @@ function AdminDashboard() {
     URL.revokeObjectURL(url);
   };
 
-  const handleSignOut = () => {
-    sessionStorage.removeItem(STORAGE_KEY);
-    sessionStorage.removeItem(PW_KEY);
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
     navigate({ to: "/admin/login" });
   };
 
@@ -161,9 +156,8 @@ function AdminDashboard() {
     if (!ok) return;
     setDeletingId(r.id);
     setError("");
-    const password = sessionStorage.getItem(PW_KEY) ?? "";
     try {
-      await adminDeleteRegistration({ data: { password, id: r.id } });
+      await adminDeleteRegistration({ data: { id: r.id } });
       setRows((prev) => prev.filter((row) => row.id !== r.id));
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Could not delete";

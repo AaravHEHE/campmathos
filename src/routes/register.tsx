@@ -1,10 +1,9 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { supabase } from "@/integrations/supabase/client";
 import { canonical, ogImage } from "@/lib/seo";
 
-const ADMIN_GATE_PASSWORD = "CampMathos123!@#";
 const OG = ogImage("/og-register.jpg");
 
 export const Route = createFileRoute("/register")({
@@ -32,17 +31,11 @@ export const Route = createFileRoute("/register")({
 });
 
 function RegisterPage() {
-  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "duplicate" | "error">(
     "idle",
   );
   const [errorMsg, setErrorMsg] = useState("");
-
-  // Hidden admin gate
-  const [adminOpen, setAdminOpen] = useState(false);
-  const [adminPassword, setAdminPassword] = useState("");
-  const [adminError, setAdminError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -87,16 +80,6 @@ function RegisterPage() {
       const msg = err instanceof Error ? err.message : "Something went wrong.";
       setErrorMsg(msg);
       setStatus("error");
-    }
-  };
-
-  const handleAdminGate = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (adminPassword === ADMIN_GATE_PASSWORD) {
-      setAdminError("");
-      navigate({ to: "/admin/login" });
-    } else {
-      setAdminError("Incorrect password.");
     }
   };
 
@@ -205,49 +188,15 @@ function RegisterPage() {
             .
           </p>
 
-          {/* Hidden admin gate — small, low-contrast button at the bottom */}
-          <div className="mt-12 flex items-center gap-2">
-            {!adminOpen ? (
-              <button
-                type="button"
-                onClick={() => setAdminOpen(true)}
-                aria-label="Admin"
-                className="font-mono text-[10px] tracking-widest text-ink/20 transition hover:text-ink/60"
-              >
-                Admin
-              </button>
-            ) : (
-              <form onSubmit={handleAdminGate} className="flex flex-wrap items-center gap-2">
-                <input
-                  type="password"
-                  autoFocus
-                  value={adminPassword}
-                  onChange={(e) => setAdminPassword(e.target.value)}
-                  placeholder="password"
-                  className="rounded-full border border-ink/30 bg-cream px-3 py-1.5 font-mono text-xs placeholder:text-ink/30 focus:outline-none focus:ring-2 focus:ring-electric/40"
-                />
-                <button
-                  type="submit"
-                  className="rounded-full bg-ink px-3 py-1.5 font-mono text-[10px] tracking-widest text-cream transition hover:bg-electric"
-                >
-                  Enter
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setAdminOpen(false);
-                    setAdminPassword("");
-                    setAdminError("");
-                  }}
-                  className="font-mono text-[10px] tracking-widest text-ink/40 hover:text-ink/70"
-                >
-                  Cancel
-                </button>
-                {adminError && (
-                  <span className="font-mono text-[10px] text-coral">{adminError}</span>
-                )}
-              </form>
-            )}
+          {/* Discreet director link — sign-in is gated by Supabase Auth + admin role. */}
+          <div className="mt-12">
+            <Link
+              to="/admin/login"
+              aria-label="Director sign-in"
+              className="font-mono text-[10px] tracking-widest text-ink/20 transition hover:text-ink/60"
+            >
+              Admin
+            </Link>
           </div>
         </div>
       </section>
