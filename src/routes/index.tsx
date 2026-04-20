@@ -358,7 +358,7 @@ function Index() {
               { q: "What days does it meet?", id: "schedule" },
               { q: "What should my child bring?", id: "bring" },
             ].map(({ q, id }, i) => (
-              <Reveal key={id} delay={i * 0.06} amount={0.4}>
+              <Reveal key={id} delay={i * 0.2} amount={0.4}>
                 <li>
                   <Link
                     to="/faq"
