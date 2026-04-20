@@ -3,6 +3,8 @@ import { useEffect, useMemo, useState } from "react";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { adminListRegistrations, adminDeleteRegistration } from "@/lib/admin.functions";
 import { supabase } from "@/integrations/supabase/client";
+import { SignupsChart } from "@/components/admin/SignupsChart";
+import { BroadcastForm } from "@/components/admin/BroadcastForm";
 
 export const Route = createFileRoute("/admin/")({
   component: AdminDashboard,
@@ -35,6 +37,8 @@ function AdminDashboard() {
   const [sortDir, setSortDir] = useState<SortDir>("desc");
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [dateFrom, setDateFrom] = useState(""); // YYYY-MM-DD, local
+  const [dateTo, setDateTo] = useState(""); // YYYY-MM-DD, local (inclusive)
 
   useEffect(() => {
     let cancelled = false;
@@ -72,7 +76,18 @@ function AdminDashboard() {
   // Filtered + sorted view
   const visibleRows = useMemo(() => {
     const q = search.trim().toLowerCase();
-    const filtered = q ? rows.filter((r) => r.email.toLowerCase().includes(q)) : rows;
+    const fromTs = dateFrom ? new Date(`${dateFrom}T00:00:00`).getTime() : null;
+    // dateTo is inclusive — add 1 day to include the entire selected day.
+    const toTs = dateTo ? new Date(`${dateTo}T00:00:00`).getTime() + 24 * 60 * 60 * 1000 : null;
+    const filtered = rows.filter((r) => {
+      if (q && !r.email.toLowerCase().includes(q)) return false;
+      if (fromTs || toTs) {
+        const t = new Date(r.created_at).getTime();
+        if (fromTs && t < fromTs) return false;
+        if (toTs && t >= toTs) return false;
+      }
+      return true;
+    });
     const sorted = [...filtered].sort((a, b) => {
       let cmp = 0;
       if (sortKey === "email") cmp = a.email.localeCompare(b.email);
@@ -80,7 +95,14 @@ function AdminDashboard() {
       return sortDir === "asc" ? cmp : -cmp;
     });
     return sorted;
-  }, [rows, search, sortKey, sortDir]);
+  }, [rows, search, sortKey, sortDir, dateFrom, dateTo]);
+
+  const filtersActive = Boolean(search || dateFrom || dateTo);
+  const clearFilters = () => {
+    setSearch("");
+    setDateFrom("");
+    setDateTo("");
+  };
 
   // Stats
   const stats = useMemo(() => {
@@ -286,24 +308,65 @@ function AdminDashboard() {
             <StatCard label="Last 24h" value={stats.last24h} accent="bg-coral text-cream" />
           </div>
 
-          {/* Search */}
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div className="relative w-full sm:max-w-sm">
-              <input
-                type="search"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search by email…"
-                className="w-full rounded-full border-2 border-ink bg-cream px-5 py-2.5 font-mono text-sm placeholder:text-ink/40 focus:outline-none focus:ring-4 focus:ring-electric/40"
-              />
-              {search && (
+          {/* Sign-ups chart */}
+          <div className="mt-6">
+            <SignupsChart rows={rows} days={30} />
+          </div>
+
+          {/* Broadcast composer */}
+          <div className="mt-6">
+            <BroadcastForm recipientCount={rows.length} />
+          </div>
+
+          {/* Filters */}
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+            <div className="flex flex-wrap items-center gap-3">
+              <div className="relative w-full sm:w-auto sm:min-w-[16rem]">
+                <input
+                  type="search"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search by email…"
+                  className="w-full rounded-full border-2 border-ink bg-cream px-5 py-2.5 font-mono text-sm placeholder:text-ink/40 focus:outline-none focus:ring-4 focus:ring-electric/40"
+                />
+                {search && (
+                  <button
+                    type="button"
+                    onClick={() => setSearch("")}
+                    aria-label="Clear search"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 font-mono text-xs text-ink/50 hover:text-ink"
+                  >
+                    ✕
+                  </button>
+                )}
+              </div>
+              <label className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-ink/70">
+                From
+                <input
+                  type="date"
+                  value={dateFrom}
+                  max={dateTo || undefined}
+                  onChange={(e) => setDateFrom(e.target.value)}
+                  className="rounded-full border-2 border-ink bg-cream px-3 py-1.5 font-mono text-xs focus:outline-none focus:ring-4 focus:ring-electric/40"
+                />
+              </label>
+              <label className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-ink/70">
+                To
+                <input
+                  type="date"
+                  value={dateTo}
+                  min={dateFrom || undefined}
+                  onChange={(e) => setDateTo(e.target.value)}
+                  className="rounded-full border-2 border-ink bg-cream px-3 py-1.5 font-mono text-xs focus:outline-none focus:ring-4 focus:ring-electric/40"
+                />
+              </label>
+              {filtersActive && (
                 <button
                   type="button"
-                  onClick={() => setSearch("")}
-                  aria-label="Clear search"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 font-mono text-xs text-ink/50 hover:text-ink"
+                  onClick={clearFilters}
+                  className="rounded-full border-2 border-ink/30 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-ink/70 transition hover:border-ink hover:text-ink"
                 >
-                  ✕
+                  Clear filters
                 </button>
               )}
             </div>
@@ -350,7 +413,7 @@ function AdminDashboard() {
                     <td colSpan={3} className="px-6 py-12 text-center text-ink/60">
                       {rows.length === 0
                         ? "No sign-ups yet — they'll show up here as parents register."
-                        : `No sign-ups match "${search}".`}
+                        : "No sign-ups match the current filters."}
                     </td>
                   </tr>
                 ) : (
