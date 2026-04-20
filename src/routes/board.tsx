@@ -18,7 +18,7 @@ export const Route = createFileRoute("/board")({
       {
         property: "og:description",
         content:
-          "Meet the six directors behind MathOs, a free summer applied math camp at Naperville Public Library.",
+          "Meet the five directors behind MathOs, a free summer applied math camp at Naperville Public Library.",
       },
       { property: "og:image", content: OG },
       { name: "twitter:card", content: "summary_large_image" },
@@ -60,11 +60,6 @@ const directors: Director[] = [
     bio: "Neuqua Valley Class of 2029. Math Team State Qualifier and Science Olympiad State Qualifier.",
     accent: "bg-coral text-cream",
   },
-  {
-    name: "Ediz Gusey",
-    bio: "Neuqua Valley Class of 2028. Robotics State Qualifier, 2× AIME qualifier, and Math Team State Qualifier.",
-    accent: "bg-ink text-cream",
-  },
 ];
 
 function initials(name: string) {
@@ -90,7 +85,7 @@ function BoardPage() {
             The students <span className="italic text-electric">behind</span> MathOs.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            MathOs is built and taught by six Neuqua Valley High School students who believe math
+            MathOs is built and taught by five Neuqua Valley High School students who believe math
             should feel useful, not abstract. We design every session, mentor every camper, and
             run every workshop ourselves.
           </p>
