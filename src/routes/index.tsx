@@ -275,7 +275,7 @@ function Index() {
             {[
               ["When", "Jun 15 – Jul 23, 2026"],
               ["Where", "Naperville Public Library (95th St)"],
-              ["Days", "Mon · Tue · Wed · Thu"],
+              ["Days", "Mon · Wed · Fri"],
               ["Time", "1:00 – 3:00 PM"],
               ["Math grades", "4th — 7th (recommended)"],
               ["Cost", "Completely free"],
