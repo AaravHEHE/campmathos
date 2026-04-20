@@ -16,7 +16,17 @@ const FROM = "Mathos Camp <onboarding@resend.dev>";
 const REPLY_TO = "campmathos@gmail.com";
 const DIRECTOR_NOTIFY = "campmathos@gmail.com";
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Restrict to standard printable email characters — explicitly excludes <, >, &, " to prevent HTML injection.
+const EMAIL_RE = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
 
 async function sendEmail(payload: {
   to: string;
@@ -64,7 +74,7 @@ function confirmationHtml(email: string) {
             We've noted that your family is interested in <strong>Mathos</strong> — the completely free summer applied math camp at Naperville Public Library. This isn't a commitment, just a heads-up so we can keep you in the loop.
           </p>
           <p style="margin:0 0 16px;font-size:16px;line-height:1.5;">
-            We've got <strong>${email}</strong> on the list. In the next few weeks we'll send you:
+            We've got <strong>${escapeHtml(email)}</strong> on the list. In the next few weeks we'll send you:
           </p>
           <ul style="margin:0 0 16px 20px;padding:0;font-size:16px;line-height:1.6;">
             <li>The full June schedule (Mon · Wed · Fri)</li>
@@ -90,8 +100,8 @@ function notifyHtml(email: string, when: string) {
 <!doctype html>
 <html><body style="font-family:Arial,sans-serif;color:#111;">
   <h2 style="margin:0 0 12px;">New Mathos interest</h2>
-  <p style="margin:0 0 8px;"><strong>Email:</strong> ${email}</p>
-  <p style="margin:0 0 8px;"><strong>Submitted:</strong> ${when}</p>
+  <p style="margin:0 0 8px;"><strong>Email:</strong> ${escapeHtml(email)}</p>
+  <p style="margin:0 0 8px;"><strong>Submitted:</strong> ${escapeHtml(when)}</p>
   <p style="margin:16px 0 0;font-size:13px;color:#666;">View all interested families in the admin dashboard.</p>
 </body></html>`;
 }
