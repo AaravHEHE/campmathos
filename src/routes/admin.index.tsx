@@ -76,7 +76,18 @@ function AdminDashboard() {
   // Filtered + sorted view
   const visibleRows = useMemo(() => {
     const q = search.trim().toLowerCase();
-    const filtered = q ? rows.filter((r) => r.email.toLowerCase().includes(q)) : rows;
+    const fromTs = dateFrom ? new Date(`${dateFrom}T00:00:00`).getTime() : null;
+    // dateTo is inclusive — add 1 day to include the entire selected day.
+    const toTs = dateTo ? new Date(`${dateTo}T00:00:00`).getTime() + 24 * 60 * 60 * 1000 : null;
+    const filtered = rows.filter((r) => {
+      if (q && !r.email.toLowerCase().includes(q)) return false;
+      if (fromTs || toTs) {
+        const t = new Date(r.created_at).getTime();
+        if (fromTs && t < fromTs) return false;
+        if (toTs && t >= toTs) return false;
+      }
+      return true;
+    });
     const sorted = [...filtered].sort((a, b) => {
       let cmp = 0;
       if (sortKey === "email") cmp = a.email.localeCompare(b.email);
@@ -84,7 +95,14 @@ function AdminDashboard() {
       return sortDir === "asc" ? cmp : -cmp;
     });
     return sorted;
-  }, [rows, search, sortKey, sortDir]);
+  }, [rows, search, sortKey, sortDir, dateFrom, dateTo]);
+
+  const filtersActive = Boolean(search || dateFrom || dateTo);
+  const clearFilters = () => {
+    setSearch("");
+    setDateFrom("");
+    setDateTo("");
+  };
 
   // Stats
   const stats = useMemo(() => {
