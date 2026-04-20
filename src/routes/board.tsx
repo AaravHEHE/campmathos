@@ -60,11 +60,6 @@ const directors: Director[] = [
     bio: "Neuqua Valley Class of 2029. Math Team State Qualifier and Science Olympiad State Qualifier.",
     accent: "bg-coral text-cream",
   },
-  {
-    name: "Ediz Gusey",
-    bio: "Neuqua Valley Class of 2028. Robotics State Qualifier, 2× AIME qualifier, and Math Team State Qualifier.",
-    accent: "bg-ink text-cream",
-  },
 ];
 
 function initials(name: string) {
