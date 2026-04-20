@@ -19,13 +19,13 @@ interface RevealProps {
   amount?: number;
 }
 
-const offset = 28;
+const offset = 64;
 const directionMap: Record<Direction, { x?: number; y?: number; scale?: number }> = {
   up: { y: offset },
   down: { y: -offset },
   left: { x: offset },
   right: { x: -offset },
-  scale: { scale: 0.92 },
+  scale: { scale: 0.82 },
 };
 
 /**
