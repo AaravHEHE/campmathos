@@ -63,16 +63,16 @@ function DetailsPage() {
 
       <section className="border-b-2 border-ink bg-ink text-cream">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
-          <dl className="grid gap-px overflow-hidden rounded-3xl border-2 border-cream/20 bg-cream/10 md:grid-cols-2">
-            {facts.map(([k, v], i) => (
-              <Reveal key={k} delay={i * 0.18} amount={0.3}>
-                <div className="bg-ink p-8">
+          <Reveal amount={0.15}>
+            <dl className="grid gap-px overflow-hidden rounded-3xl border-2 border-cream/20 bg-cream/10 md:grid-cols-2">
+              {facts.map(([k, v]) => (
+                <div key={k} className="bg-ink p-8">
                   <dt className="font-mono text-xs tracking-widest text-cream/50">{k}</dt>
                   <dd className="mt-3 font-display text-2xl font-bold leading-tight">{v}</dd>
                 </div>
-              </Reveal>
-            ))}
-          </dl>
+              ))}
+            </dl>
+          </Reveal>
         </div>
       </section>
 
