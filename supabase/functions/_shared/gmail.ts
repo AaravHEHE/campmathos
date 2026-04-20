@@ -23,6 +23,7 @@ function getClient(): SMTPClient {
     throw new Error("GMAIL_APP_PASSWORD is not configured");
   }
   if (cachedClient) return cachedClient;
+  // No pool — Supabase edge runtime doesn't support Web Workers.
   cachedClient = new SMTPClient({
     connection: {
       hostname: "smtp.gmail.com",
@@ -32,10 +33,6 @@ function getClient(): SMTPClient {
         username: GMAIL_USER,
         password: GMAIL_APP_PASSWORD,
       },
-    },
-    pool: {
-      size: 2,
-      timeout: 60_000,
     },
   });
   return cachedClient;
