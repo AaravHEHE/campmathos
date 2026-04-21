@@ -68,6 +68,8 @@ function Unit({
           dim ? "text-ink/30" : "text-ink"
         }`}
       >
+        <span aria-hidden="true" className="mr-0.5">~</span>
+        <span className="sr-only">approximately </span>
         {String(value).padStart(2, "0")}
       </dd>
       <dt className="mt-1 font-mono text-[10px] uppercase tracking-widest text-ink/60">
