@@ -124,7 +124,7 @@ function BoardPage() {
                 We meet kids where they are.
               </h2>
               <p className="mt-5 max-w-2xl text-cream/80">
-                Every director is happy to meet one-on-one with any camper who needs a little extra
+                Every camp director is happy to meet one-on-one with any camper who needs a little extra
                 help — whether that's reviewing a concept, working through homework from school, or
                 just talking through an idea. Just ask during a session, or email{" "}
                 <a href="mailto:campmathos@gmail.com" className="underline">

@@ -88,8 +88,8 @@ const faqs: { id: string; q: string; a: string }[] = [
   },
   {
     id: "contact",
-    q: "What's the best way to reach the directors?",
-    a: "Email us at campmathos@gmail.com — that's the fastest way to reach the directors with any question.",
+    q: "What's the best way to reach the camp directors?",
+    a: "Email us at campmathos@gmail.com — that's the fastest way to reach the camp directors with any question.",
   },
   {
     id: "waitlist",
@@ -166,7 +166,7 @@ function FaqPage() {
             <a href="mailto:campmathos@gmail.com" className="underline hover:text-electric">
               campmathos@gmail.com
             </a>{" "}
-            and a director will get back to you.
+            and a camp director will get back to you.
           </p>
         </div>
       </section>
