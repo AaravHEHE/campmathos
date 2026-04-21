@@ -44,7 +44,7 @@ const faqs: { id: string; q: string; a: string }[] = [
   {
     id: "schedule",
     q: "What days and times does the camp meet?",
-    a: "The camp runs on Monday, Wednesday, and Friday throughout June 2026 at Naperville Public Library.",
+    a: "The camp runs on Monday, Wednesday, and Friday during June 2026 at Naperville Public Library, in the late morning to early afternoon. We'll share exact session times closer to camp.",
   },
   {
     id: "attendance",

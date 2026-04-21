@@ -285,7 +285,7 @@ function Index() {
                 ["When", "June 2026"],
                 ["Where", "Naperville Library, 95th St"],
                 ["Days", "Mon · Wed · Fri"],
-                ["Time", "1:00 – 3:00 PM"],
+                ["Time", "Late morning – early afternoon"],
                 ["Grades", "4th — 7th"],
                 ["Cost", "Free"],
               ].map(([k, v]) => (
