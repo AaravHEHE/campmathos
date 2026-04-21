@@ -421,7 +421,9 @@ function AdminDashboard() {
                     <tr key={r.id} className={i % 2 === 0 ? "bg-cream" : "bg-cream/60"}>
                       <td className="px-6 py-3 font-mono text-sm">
                         <a
-                          href={`mailto:${r.email}`}
+                          href={`https://mail.google.com/mail/?view=cm&fs=1&authuser=campmathos@gmail.com&to=${encodeURIComponent(r.email)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="hover:text-electric hover:underline"
                         >
                           {r.email}
