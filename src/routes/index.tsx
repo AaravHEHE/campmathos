@@ -17,7 +17,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "MathOs is a completely free applied math camp at Naperville Public Library for grades 4–7. Mondays, Wednesdays, and Fridays, 1–3 PM, summer 2026.",
+          "MathOs is a completely free applied math camp at Naperville Public Library for grades 4–7. Mondays, Wednesdays, and Fridays during June 2026 — late morning to early afternoon.",
       },
       { property: "og:title", content: "MathOs — Free summer applied math camp in Naperville" },
       {
