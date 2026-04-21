@@ -31,9 +31,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b-2 border-ink/80 bg-cream/85 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 md:px-6 md:py-4">
         <Link to="/" className="flex items-baseline gap-2" onClick={() => setOpen(false)}>
-          <span className="font-display text-2xl font-black tracking-tight md:text-3xl">
-            MathOs
-          </span>
+          <span className="font-display text-2xl font-black tracking-tight md:text-3xl">MathOs</span>
           <span className="font-mono text-xs text-muted-foreground">v.2026</span>
         </Link>
 
@@ -69,11 +67,27 @@ export function SiteHeader() {
             className="inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-ink bg-cream text-ink transition hover:bg-ink hover:text-cream md:hidden"
           >
             {open ? (
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+              >
                 <path d="M6 6l12 12M6 18L18 6" />
               </svg>
             ) : (
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+              >
                 <path d="M4 7h16M4 12h16M4 17h16" />
               </svg>
             )}
@@ -90,10 +104,7 @@ export function SiteHeader() {
             onClick={() => setOpen(false)}
             className="fixed inset-0 top-[60px] z-30 bg-ink/40 backdrop-blur-sm md:hidden"
           />
-          <div
-            id="mobile-nav"
-            className="fixed inset-x-0 top-[60px] z-40 border-b-2 border-ink bg-cream md:hidden"
-          >
+          <div id="mobile-nav" className="fixed inset-x-0 top-[60px] z-40 border-b-2 border-ink bg-cream md:hidden">
             <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-4 font-mono text-base">
               {navLinks.map((l) => (
                 <Link
@@ -133,32 +144,18 @@ export function SiteFooter() {
         </div>
         <div className="flex flex-wrap items-center gap-x-6 gap-y-3 font-mono text-xs">
           {navLinks.map((l) => (
-            <Link
-              key={l.to}
-              to={l.to}
-              className="inline-flex min-h-11 items-center hover:text-electric"
-            >
+            <Link key={l.to} to={l.to} className="inline-flex min-h-11 items-center hover:text-electric">
               {l.label}
             </Link>
           ))}
-          <Link
-            to="/register"
-            className="inline-flex min-h-11 items-center hover:text-electric"
-          >
+          <Link to="/register" className="inline-flex min-h-11 items-center hover:text-electric">
             Interest form
           </Link>
-          <Link
-            to="/admin/login"
-            className="text-cream/0 hover:text-ink/40"
-            aria-label="Admin"
-            tabIndex={-1}
-          >
+          <Link to="/admin/login" className="text-cream/0 hover:text-ink/40" aria-label="Admin" tabIndex={-1}>
             Admin
           </Link>
         </div>
-        <p className="font-mono text-xs text-muted-foreground">
-          © 2026 MathOs · Naperville, IL · campmathos@gmail.com
-        </p>
+        <p className="font-mono text-xs text-muted-foreground">2026 MathOs · Naperville, IL · campmathos@gmail.com</p>
       </div>
     </footer>
   );
