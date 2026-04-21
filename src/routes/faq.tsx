@@ -118,18 +118,35 @@ function FaqPage() {
       const el = containerRef.current?.querySelector<HTMLDetailsElement>(
         `details[id="${CSS.escape(hash)}"]`,
       );
-      if (el) {
-        el.open = true;
-        // Defer scroll so layout settles after opening
-        requestAnimationFrame(() => {
-          el.scrollIntoView({ behavior: "smooth", block: "start" });
-        });
-      }
+      if (!el) return;
+      el.open = true;
+      // First scroll attempt for non-animated (reduced-motion) users.
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      // Re-scroll after the Reveal animation settles so the final
+      // (untransformed) position is used.
+      const t1 = window.setTimeout(() => {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 700);
+      const t2 = window.setTimeout(() => {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 1400);
+      return () => {
+        window.clearTimeout(t1);
+        window.clearTimeout(t2);
+      };
     };
 
-    openFromHash();
-    window.addEventListener("hashchange", openFromHash);
-    return () => window.removeEventListener("hashchange", openFromHash);
+    const cleanupRef = { current: undefined as undefined | (() => void) };
+    cleanupRef.current = openFromHash();
+    const handler = () => {
+      cleanupRef.current?.();
+      cleanupRef.current = openFromHash();
+    };
+    window.addEventListener("hashchange", handler);
+    return () => {
+      window.removeEventListener("hashchange", handler);
+      cleanupRef.current?.();
+    };
   }, []);
 
   return (
