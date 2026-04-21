@@ -11,8 +11,7 @@ export const weeks: Week[] = [
   {
     n: "01",
     title: "Graphing for engineering",
-    blurb:
-      "Graphs aren't homework — they're how engineers, athletes, and investors read the world.",
+    blurb: "Graphs aren't homework — they're how engineers, athletes, and investors read the world.",
     bullets: [
       "Plotting data from real measurements",
       "Linear and parabolic motion in sports",
@@ -25,8 +24,7 @@ export const weeks: Week[] = [
   {
     n: "02",
     title: "Probability for decision-making and finance",
-    blurb:
-      "How banks, casinos, and insurance companies all use the same math — and how to read it.",
+    blurb: "How banks, markets, and insurance companies all use the same math — and how to read it.",
     bullets: [
       "Probability with dice, cards, and real games",
       "Compound interest, debt, and the cost of waiting",
@@ -39,8 +37,7 @@ export const weeks: Week[] = [
   {
     n: "03",
     title: "Geometry for architecture",
-    blurb:
-      "Area, volume, and angles aren't decoration — they decide whether a building stands up.",
+    blurb: "Area, volume, and angles aren't decoration — they decide whether a building stands up.",
     bullets: [
       "Area, perimeter, and volume from blueprints",
       "Why triangles hold up bridges and skyscrapers",
@@ -53,8 +50,7 @@ export const weeks: Week[] = [
   {
     n: "04",
     title: "Final project + showcase",
-    blurb:
-      "Pick a real problem. Use the math from weeks 1–3 to design a working solution.",
+    blurb: "Pick a real problem. Use the math from weeks 1–3 to design a working solution.",
     bullets: [
       "City-block planning challenge",
       "Bridge engineering with load testing",
