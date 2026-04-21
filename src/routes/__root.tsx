@@ -10,7 +10,6 @@ import { AnimatePresence } from "framer-motion";
 
 import appCss from "../styles.css?url";
 import { PageTransition } from "@/components/PageTransition";
-import { CursorParallax } from "@/components/CursorParallax";
 
 const FONTS_HREF =
   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800;9..144,900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap";
@@ -120,7 +119,6 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   return (
     <>
-      <CursorParallax />
       <AnimatePresence mode="wait" initial={false}>
         <PageTransition>
           <Outlet />
