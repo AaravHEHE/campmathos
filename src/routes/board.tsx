@@ -9,17 +9,17 @@ export const Route = createFileRoute("/board")({
   component: BoardPage,
   head: () => ({
     meta: [
-      { title: "Board of directors — MathOs" },
+      { title: "Board of camp directors — MathOs" },
       {
         name: "description",
         content:
-          "Meet the MathOs board of directors — the Neuqua Valley students leading our free summer applied math camp in Naperville.",
+          "Meet the MathOs board of camp directors — the Neuqua Valley students leading our free summer applied math camp in Naperville.",
       },
-      { property: "og:title", content: "Board of directors — MathOs" },
+      { property: "og:title", content: "Board of camp directors — MathOs" },
       {
         property: "og:description",
         content:
-          "Meet the five directors behind MathOs, a free summer applied math camp at Naperville Public Library.",
+          "Meet the five camp directors behind MathOs, a free summer applied math camp at Naperville Public Library.",
       },
       { property: "og:image", content: OG },
       { name: "twitter:card", content: "summary_large_image" },
