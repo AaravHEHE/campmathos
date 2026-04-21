@@ -38,7 +38,7 @@ type Director = {
 const directors: Director[] = [
   {
     name: "Aarav Arora",
-    bio: "Neuqua Valley Class of 2029. Neuqua Robotics' first-ever sophomore Executive Board Member and a founding member of NeighbrHub. Ecybermission State Finalist and honorable mention",
+    bio: "Neuqua Valley Class of 2029. Neuqua Robotics' first-ever sophomore Executive Board Member and a co-creator NeighbrHub. Ecybermission State Finalist and honorable mention",
     accent: "bg-electric text-cream",
   },
   {
