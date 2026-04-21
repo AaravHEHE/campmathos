@@ -155,7 +155,9 @@ export function SiteFooter() {
             Admin
           </Link>
         </div>
-        <p className="font-mono text-xs text-muted-foreground">2026 MathOs · Naperville, IL · campmathos@gmail.com</p>
+        <p className="font-mono text-xs text-muted-foreground">
+          2026 MathOs · Naperville, IL · <a href="mailto:campmathos@gmail.com">campmathos@gmail.com</a>
+        </p>
       </div>
     </footer>
   );
