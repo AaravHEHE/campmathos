@@ -37,13 +37,23 @@ export function Countdown() {
       aria-label="Countdown to first MathOs session"
     >
       <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-        {ended ? "Camp is in session" : "Countdown to camp"}
+        {ended ? "Camp is in session" : "Countdown to camp (approx.)"}
       </p>
-      <dl className="mt-3 grid grid-cols-4 gap-3 md:gap-4">
-        <Unit label="days" value={days} dim={now === null} />
-        <Unit label="hrs" value={hours} dim={now === null} />
-        <Unit label="min" value={minutes} dim={now === null} />
-        <Unit label="sec" value={seconds} dim={now === null} />
+      <dl className="mt-3 flex items-start justify-center gap-2 md:gap-3">
+        <span
+          aria-hidden="true"
+          className={`font-display text-3xl font-black leading-none md:text-4xl ${
+            now === null ? "text-ink/30" : "text-ink/70"
+          }`}
+        >
+          ~
+        </span>
+        <div className="grid flex-1 grid-cols-4 gap-3 md:gap-4">
+          <Unit label="days" value={days} dim={now === null} />
+          <Unit label="hrs" value={hours} dim={now === null} />
+          <Unit label="min" value={minutes} dim={now === null} />
+          <Unit label="sec" value={seconds} dim={now === null} />
+        </div>
       </dl>
       <p className="mt-3 font-mono text-[11px] tracking-widest text-ink/60">
         First session opens
@@ -68,8 +78,6 @@ function Unit({
           dim ? "text-ink/30" : "text-ink"
         }`}
       >
-        <span aria-hidden="true" className="mr-0.5">~</span>
-        <span className="sr-only">approximately </span>
         {String(value).padStart(2, "0")}
       </dd>
       <dt className="mt-1 font-mono text-[10px] uppercase tracking-widest text-ink/60">
