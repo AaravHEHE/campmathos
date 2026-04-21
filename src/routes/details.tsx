@@ -37,7 +37,7 @@ const facts: [string, string][] = [
   ["Time", CAMP.humanTime],
   ["Session length", "2 hours (with a short break)"],
   ["Math grades", "4th — 7th (recommended)"],
-  ["Sister program", "PythOs (CS camp) runs in July"],
+  ["Affiliate program", "PythOs (CS camp) runs in July"],
   ["Cost", "Completely free"],
 ];
 

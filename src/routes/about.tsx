@@ -146,7 +146,7 @@ function AboutPage() {
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 text-cream md:grid-cols-12 md:py-28">
           <div className="md:col-span-7">
             <p className="font-mono text-sm tracking-widest text-cream/70">
-              Sister program
+              Affiliate program
             </p>
             <h2 className="mt-2 font-display text-5xl font-black leading-[0.95] md:text-6xl">
               Meet <span className="italic text-sun">PythOs</span>.

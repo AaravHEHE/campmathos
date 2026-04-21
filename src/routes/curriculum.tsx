@@ -175,7 +175,7 @@ function CurriculumPage() {
           <Reveal direction="scale" amount={0.2}>
             <article className="rounded-3xl border-2 border-ink bg-electric p-8 text-cream shadow-[8px_8px_0_0_var(--ink)] md:p-12">
               <span className="rounded-full bg-cream px-4 py-1 font-mono text-xs font-bold text-ink">
-                Sister program · July
+                Affiliate program · July
               </span>
               <h2 className="mt-4 font-display text-4xl font-black md:text-5xl">
                 PythOs — our computer-science camp.
