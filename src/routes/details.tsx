@@ -68,7 +68,7 @@ function DetailsPage() {
               {facts.map(([k, v]) => (
                 <div key={k} className="bg-ink p-8">
                   <dt className="font-mono text-xs tracking-widest text-cream/50">{k}</dt>
-                  <dd className="mt-3 font-display text-2xl font-bold leading-tight">{v}</dd>
+                  <dd className="mt-3 font-display text-2xl font-bold leading-[1.15] pb-1">{v}</dd>
                 </div>
               ))}
             </dl>
