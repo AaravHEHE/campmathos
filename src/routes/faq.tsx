@@ -14,7 +14,7 @@ export const Route = createFileRoute("/faq")({
       {
         name: "description",
         content:
-          "Answers to the most common questions about MathOs: cost, schedule, attendance, drop-off, materials, prerequisites, the PythOs sister CS camp, and how to register.",
+          "Answers to the most common questions about MathOs: cost, schedule, attendance, drop-off, materials, prerequisites, the PythOs affiliate CS camp, and how to register.",
       },
       { property: "og:title", content: "FAQ — MathOs summer camp" },
       {
@@ -64,7 +64,7 @@ const faqs: { id: string; q: string; a: string }[] = [
   {
     id: "bring",
     q: "What should my child bring?",
-    a: "A pencil and a notebook are recommended. A calculator can be helpful but isn't required — instructors will assist whenever it's needed. For our July sister CS camp PythOs, a computer is required.",
+    a: "A pencil and a notebook are recommended. A calculator can be helpful but isn't required — instructors will assist whenever it's needed. For our July affiliate CS camp PythOs, a computer is required.",
   },
   {
     id: "ratio",
