@@ -14,7 +14,7 @@ export const Route = createFileRoute("/details")({
       {
         name: "description",
         content:
-          "MathOs camp logistics: free for all students, Mon/Wed/Fri 1–3 PM, June 15 – July 24, 2026, at Naperville Public Library 95th Street branch. 2-hour sessions with a short break.",
+          "MathOs camp logistics: free for all students, Mon/Wed/Fri sessions in late morning to early afternoon during June 2026, at Naperville Public Library 95th Street branch. 2-hour sessions with a short break.",
       },
       { property: "og:title", content: "Details — MathOs summer camp" },
       {
@@ -55,7 +55,7 @@ function DetailsPage() {
             Everything <span className="italic text-electric">logistical</span>.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            MathOs is a four-week summer camp at Naperville Public Library, completely free for
+            MathOs is a multi-week summer camp at Naperville Public Library, completely free for
             every camper. Here's exactly how it runs.
           </p>
         </div>
@@ -87,28 +87,28 @@ function DetailsPage() {
               2 hours, with room to <span className="italic">breathe</span>.
             </h2>
             <p className="mt-6 max-w-2xl text-lg text-ink/75">
-              Each MathOs session runs from 1:00 to 3:00 PM with a short break in
-              the middle so campers can rest, snack, and reset before the second
-              half.
+              Each MathOs session runs for about two hours in the late morning to
+              early afternoon, with a short break in the middle so campers can
+              rest, snack, and reset before the second half.
             </p>
           </Reveal>
 
           <ol className="mt-12 grid gap-6 md:grid-cols-3">
             {[
               {
-                tag: "1:00 — 1:50",
+                tag: "First ~50 min",
                 title: "First half",
                 body: "Concept, examples, and a hands-on activity. We open with the real-world question of the day, work through the math together, and start applying it.",
                 accent: "bg-electric text-cream",
               },
               {
-                tag: "1:50 — 2:05",
+                tag: "~15 min",
                 title: "Short break",
                 body: "Snack, water, stretch. Campers are encouraged to bring a snack or drink — food is not provided.",
                 accent: "bg-sun text-ink",
               },
               {
-                tag: "2:05 — 3:00",
+                tag: "Final ~55 min",
                 title: "Second half",
                 body: "Project work, group challenges, and Q&A. Instructors circulate to help one-on-one and pull together what we built.",
                 accent: "bg-coral text-cream",
@@ -139,7 +139,7 @@ function DetailsPage() {
                 </h3>
                 <p className="mt-2 text-cream/85">
                   Download the .ics file — it includes every Mon/Wed/Fri session
-                  from June 15 to July 24, 2026, with the library address pre-filled.
+                  during June 2026, with the library address pre-filled.
                 </p>
               </div>
               <a
