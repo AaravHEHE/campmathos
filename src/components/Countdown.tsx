@@ -14,10 +14,8 @@ export function Countdown() {
     return () => clearInterval(id);
   }, []);
 
-  // Camp first session, America/Chicago (CDT = UTC-5 in June)
-  const target = new Date(
-    `${CAMP.startDateISO}T${CAMP.sessionStartTime}:00-05:00`
-  ).getTime();
+  // Countdown to June 1, 2026 at midnight America/Chicago (CDT = UTC-5 in June)
+  const target = new Date("2026-06-01T00:00:00-05:00").getTime();
 
   // Render placeholder shell during SSR / pre-mount
   const diffMs = now === null ? 0 : Math.max(0, target - now);
@@ -56,7 +54,7 @@ export function Countdown() {
         </div>
       </dl>
       <p className="mt-3 font-mono text-[11px] tracking-widest text-ink/60">
-        First session opens
+        Until June 1, 2026
       </p>
     </div>
   );
