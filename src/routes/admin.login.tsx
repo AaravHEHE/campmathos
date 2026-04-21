@@ -64,7 +64,7 @@ function AdminLoginPage() {
 
     if (roleError || !roleRow) {
       await supabase.auth.signOut();
-      setError("This account does not have director access.");
+      setError("This account does not have Director access.");
       setLoading(false);
       return;
     }

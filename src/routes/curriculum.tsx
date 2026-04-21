@@ -159,7 +159,7 @@ function CurriculumPage() {
                 </li>
                 <li>
                   <span className="font-display text-lg font-black">Out-of-class help.</span> Any
-                  camp director will meet one-on-one with any camper — for camp topics, school homework,
+                  Camp Director will meet one-on-one with any camper — for camp topics, school homework,
                   or anything in between.
                 </li>
                 <li>
