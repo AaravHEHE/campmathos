@@ -235,7 +235,7 @@ function Index() {
               <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
                 <div className="max-w-2xl">
                   <p className="font-mono text-xs tracking-widest text-cream/70">
-                    Sister program · July
+                    Affiliate program · July
                   </p>
                   <h3 className="mt-2 font-display text-3xl font-black md:text-4xl">
                     PythOs — build a 2D game in July.
