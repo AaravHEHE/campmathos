@@ -48,7 +48,7 @@ const directors: Director[] = [
   },
   {
     name: "Shaury Sharma",
-    bio: "Neuqua Valley Class of 2029. Member of NVHS Robotics Team, IJAS State Qualifier, and NVHS Science Olympiad State Qualifier.",
+    bio: "Neuqua Valley Class of 2029. Member of NVHS Robotics Team, IJAS State Qualifier, NVHS Science Olympiad State Qualifier, eCybermission state finalist and honorable mention.",
     accent: "bg-coral text-cream",
   },
   {
@@ -79,16 +79,13 @@ function BoardPage() {
 
       <section className="grid-paper border-b-2 border-ink">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
-          <p className="font-mono text-sm tracking-widest text-muted-foreground">
-            Camp Directors
-          </p>
+          <p className="font-mono text-sm tracking-widest text-muted-foreground">Camp Directors</p>
           <h1 className="mt-3 font-display text-5xl font-black leading-[0.95] md:text-7xl">
             The students <span className="italic text-electric">behind</span> MathOs.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            MathOs is built and taught by five Neuqua Valley High School students who believe math
-            should feel useful, not abstract. We design every session, mentor every camper, and
-            run every workshop ourselves.
+            MathOs is built and taught by five Neuqua Valley High School students who believe math should feel useful,
+            not abstract. We design every session, mentor every camper, and run every workshop ourselves.
           </p>
         </div>
       </section>
@@ -117,16 +114,12 @@ function BoardPage() {
 
           <Reveal direction="scale" amount={0.2}>
             <div className="mt-16 rounded-3xl border-2 border-ink bg-ink p-10 text-cream md:p-14">
-              <p className="font-mono text-sm tracking-widest text-cream/60">
-                Extra help
-              </p>
-              <h2 className="mt-3 font-display text-4xl font-black md:text-5xl">
-                We meet kids where they are.
-              </h2>
+              <p className="font-mono text-sm tracking-widest text-cream/60">Extra help</p>
+              <h2 className="mt-3 font-display text-4xl font-black md:text-5xl">We meet kids where they are.</h2>
               <p className="mt-5 max-w-2xl text-cream/80">
-                Every Camp Director is happy to meet one-on-one with any camper who needs a little extra
-                help — whether that's reviewing a concept, working through homework from school, or
-                just talking through an idea. Just ask during a session, or email{" "}
+                Every Camp Director is happy to meet one-on-one with any camper who needs a little extra help — whether
+                that's reviewing a concept, working through homework from school, or just talking through an idea. Just
+                ask during a session, or email{" "}
                 <a href="mailto:campmathos@gmail.com" className="underline">
                   campmathos@gmail.com
                 </a>{" "}
