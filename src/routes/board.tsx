@@ -47,7 +47,7 @@ const directors: Director[] = [
     accent: "bg-sun text-ink",
   },
   {
-    name: "Shaury Sharma",
+    name: "Shaury Sharma",{/* the big boss */}
     bio: "Neuqua Valley Class of 2029. Member of NVHS Robotics Team, IJAS State Qualifier, NVHS Science Olympiad State Qualifier, eCybermission state finalist and honorable mention.",
     accent: "bg-coral text-cream",
   },
