@@ -54,7 +54,7 @@ export function Countdown() {
         </div>
       </dl>
       <p className="mt-3 font-mono text-[11px] tracking-widest text-ink/60">
-        First session opens
+        Until June 1, 2026
       </p>
     </div>
   );
