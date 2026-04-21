@@ -268,8 +268,9 @@ function Index() {
               When, where, <span className="italic text-sun">how much</span>.
             </h2>
             <p className="mt-6 max-w-md text-cream/70">
-              MathOs meets Mondays, Wednesdays, and Fridays from 1–3 PM at the
-              Naperville Public Library 95th Street branch in June 2026.
+              MathOs meets Mondays, Wednesdays, and Fridays in the late morning to
+              early afternoon at the Naperville Public Library 95th Street branch
+              during June 2026.
             </p>
             <Link
               to="/details"
