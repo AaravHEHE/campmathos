@@ -44,7 +44,7 @@ const faqs: { id: string; q: string; a: string }[] = [
   {
     id: "schedule",
     q: "What days and times does the camp meet?",
-    a: "The camp runs on Monday, Wednesday, and Friday throughout June 2026 at Naperville Public Library.",
+    a: "The camp runs on Monday, Wednesday, and Friday during June 2026 at Naperville Public Library, in the late morning to early afternoon. We'll share exact session times closer to camp.",
   },
   {
     id: "attendance",
@@ -88,8 +88,8 @@ const faqs: { id: string; q: string; a: string }[] = [
   },
   {
     id: "contact",
-    q: "What's the best way to reach the camp directors?",
-    a: "Email us at campmathos@gmail.com — that's the fastest way to reach the camp directors with any question.",
+    q: "What's the best way to reach the Camp Directors?",
+    a: "Email us at campmathos@gmail.com — that's the fastest way to reach the Camp Directors with any question.",
   },
   {
     id: "waitlist",
@@ -166,7 +166,7 @@ function FaqPage() {
             <a href="mailto:campmathos@gmail.com" className="underline hover:text-electric">
               campmathos@gmail.com
             </a>{" "}
-            and a camp director will get back to you.
+            and a Camp Director will get back to you.
           </p>
         </div>
       </section>

@@ -159,7 +159,7 @@ function CurriculumPage() {
                 </li>
                 <li>
                   <span className="font-display text-lg font-black">Out-of-class help.</span> Any
-                  camp director will meet one-on-one with any camper — for camp topics, school homework,
+                  Camp Director will meet one-on-one with any camper — for camp topics, school homework,
                   or anything in between.
                 </li>
                 <li>
@@ -181,7 +181,7 @@ function CurriculumPage() {
                 PythOs — our computer-science camp.
               </h2>
               <p className="mt-4 text-lg text-cream/85">
-                After MathOs finishes in June, the same camp directors run{" "}
+                After MathOs finishes in June, the same Camp Directors run{" "}
                 <span className="font-semibold">PythOs</span> in July: a creative CS program for two
                 age groups. Grades 1–4 use Scratch on Mondays and Thursdays; grades 5–8 use Python
                 with a custom Turtle-graphics library on Tuesdays and Fridays. We focus on logic,
@@ -192,7 +192,7 @@ function CurriculumPage() {
                 to="/board"
                 className="mt-8 inline-flex rounded-full border-2 border-cream bg-cream px-6 py-3 font-semibold text-ink transition hover:bg-sun hover:border-sun"
               >
-                Meet the camp directors →
+                Meet the Camp Directors →
               </Link>
             </article>
           </Reveal>

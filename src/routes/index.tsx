@@ -17,7 +17,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "MathOs is a completely free applied math camp at Naperville Public Library for grades 4–7. Mondays, Wednesdays, and Fridays, 1–3 PM, summer 2026.",
+          "MathOs is a completely free applied math camp at Naperville Public Library for grades 4–7. Mondays, Wednesdays, and Fridays during June 2026 — late morning to early afternoon.",
       },
       { property: "og:title", content: "MathOs — Free summer applied math camp in Naperville" },
       {
@@ -241,7 +241,7 @@ function Index() {
                     PythOs — build a 2D game in July.
                   </h3>
                   <p className="mt-3 text-cream/85">
-                    After MathOs wraps, our camp directors run PythOs: a creative computer-science camp
+                    After MathOs wraps, our Camp Directors run PythOs: a creative computer-science camp
                     with two age tracks (grades 1–4 in Scratch, grades 5–8 in Python with a custom
                     Turtle library). Every camper finishes with their own playable 2D game. PythOs
                     has its own dedicated site coming soon.
@@ -268,8 +268,9 @@ function Index() {
               When, where, <span className="italic text-sun">how much</span>.
             </h2>
             <p className="mt-6 max-w-md text-cream/70">
-              MathOs meets Mondays, Wednesdays, and Fridays from 1–3 PM at the
-              Naperville Public Library 95th Street branch in June 2026.
+              MathOs meets Mondays, Wednesdays, and Fridays in the late morning to
+              early afternoon at the Naperville Public Library 95th Street branch
+              during June 2026.
             </p>
             <Link
               to="/details"
@@ -285,7 +286,7 @@ function Index() {
                 ["When", "June 2026"],
                 ["Where", "Naperville Library, 95th St"],
                 ["Days", "Mon · Wed · Fri"],
-                ["Time", "1:00 – 3:00 PM"],
+                ["Time", "Late morning – early afternoon"],
                 ["Grades", "4th — 7th"],
                 ["Cost", "Free"],
               ].map(([k, v]) => (

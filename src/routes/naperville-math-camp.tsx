@@ -13,13 +13,13 @@ export const Route = createFileRoute("/naperville-math-camp")({
       {
         name: "description",
         content:
-          "Looking for a free summer math camp in Naperville, IL? MathOs runs Mon/Wed/Fri 1–3 PM at the 95th Street Library branch, June 15 – July 24, 2026. Grades 4–7. Zero cost.",
+          "Looking for a free summer math camp in Naperville, IL? MathOs runs Mon/Wed/Fri sessions in late morning to early afternoon at the 95th Street Library branch during June 2026. Grades 4–7. Zero cost.",
       },
       { property: "og:title", content: "Naperville Math Camp 2026 — Free, grades 4–7" },
       {
         property: "og:description",
         content:
-          "MathOs is a free four-week applied math camp at Naperville Public Library, summer 2026.",
+          "MathOs is a free multi-week applied math camp at Naperville Public Library, summer 2026.",
       },
       { property: "og:image", content: OG },
       { property: "og:type", content: "website" },
@@ -52,7 +52,7 @@ function NapervilleMathCampPage() {
             for Naperville kids.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            MathOs is a four-week applied math summer camp held at the
+            MathOs is a multi-week applied math summer camp held at the
             Naperville Public Library 95th Street branch. Completely free,
             grades 4–7, taught by Neuqua Valley High School students.
           </p>

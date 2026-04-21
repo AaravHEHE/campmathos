@@ -64,7 +64,7 @@ function AdminLoginPage() {
 
     if (roleError || !roleRow) {
       await supabase.auth.signOut();
-      setError("This account does not have director access.");
+      setError("This account does not have Director access.");
       setLoading(false);
       return;
     }
@@ -90,7 +90,7 @@ function AdminLoginPage() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={loading}
-          placeholder="director@email.com"
+          placeholder="Director@email.com"
           className="mt-6 w-full rounded-full border-2 border-ink bg-cream px-5 py-3 font-mono text-sm focus:outline-none focus:ring-4 focus:ring-electric/40"
         />
         <input

@@ -23,10 +23,10 @@ export const CAMP = {
   sessionStartTime: "13:00",  // 1:00 PM local
   sessionEndTime: "15:00",    // 3:00 PM local
   daysOfWeek: ["Monday", "Wednesday", "Friday"],
-  // Human-friendly strings used across the site
-  humanDateRange: "June 15 – July 24, 2026",
+  // Human-friendly strings used across the site (intentionally vague — exact schedule shared closer to camp)
+  humanDateRange: "June 2026",
   humanDays: "Mon · Wed · Fri",
-  humanTime: "1:00 – 3:00 PM",
+  humanTime: "Late morning – early afternoon",
   cost: "Free",
   ageRange: "Grades 4–7",
   contactEmail: "campmathos@gmail.com",
