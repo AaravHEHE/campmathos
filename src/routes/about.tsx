@@ -45,7 +45,7 @@ const pillars: { tag: string; title: string; body: string; accent: string }[] = 
   {
     tag: "supportive",
     title: "Optional out-of-class help.",
-    body: "Any camp director will meet one-on-one with any camper who needs extra time on a topic — from camp, from school, or just curiosity.",
+    body: "Any Camp Director will meet one-on-one with any camper who needs extra time on a topic — from camp, from school, or just curiosity.",
     accent: "bg-sun text-ink",
   },
   {
