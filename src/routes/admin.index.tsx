@@ -10,7 +10,7 @@ export const Route = createFileRoute("/admin/")({
   component: AdminDashboard,
   head: () => ({
     meta: [
-      { title: "Sign-ups dashboard — MathOs directors" },
+      { title: "Sign-ups dashboard — MathOs camp directors" },
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),
@@ -268,7 +268,7 @@ function AdminDashboard() {
           <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
             <div>
               <p className="font-mono text-sm uppercase tracking-widest text-muted-foreground">
-                DIRECTORS · SIGN-UPS
+                CAMP DIRECTORS · SIGN-UPS
               </p>
               <h1 className="mt-2 font-display text-4xl font-black md:text-5xl">
                 Interest list

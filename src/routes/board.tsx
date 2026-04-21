@@ -9,17 +9,17 @@ export const Route = createFileRoute("/board")({
   component: BoardPage,
   head: () => ({
     meta: [
-      { title: "Board of directors — MathOs" },
+      { title: "Board of camp directors — MathOs" },
       {
         name: "description",
         content:
-          "Meet the MathOs board of directors — the Neuqua Valley students leading our free summer applied math camp in Naperville.",
+          "Meet the MathOs board of camp directors — the Neuqua Valley students leading our free summer applied math camp in Naperville.",
       },
-      { property: "og:title", content: "Board of directors — MathOs" },
+      { property: "og:title", content: "Board of camp directors — MathOs" },
       {
         property: "og:description",
         content:
-          "Meet the five directors behind MathOs, a free summer applied math camp at Naperville Public Library.",
+          "Meet the five camp directors behind MathOs, a free summer applied math camp at Naperville Public Library.",
       },
       { property: "og:image", content: OG },
       { name: "twitter:card", content: "summary_large_image" },
@@ -80,7 +80,7 @@ function BoardPage() {
       <section className="grid-paper border-b-2 border-ink">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
           <p className="font-mono text-sm tracking-widest text-muted-foreground">
-            Board of directors
+            Board of camp directors
           </p>
           <h1 className="mt-3 font-display text-5xl font-black leading-[0.95] md:text-7xl">
             The students <span className="italic text-electric">behind</span> MathOs.
@@ -124,7 +124,7 @@ function BoardPage() {
                 We meet kids where they are.
               </h2>
               <p className="mt-5 max-w-2xl text-cream/80">
-                Every director is happy to meet one-on-one with any camper who needs a little extra
+                Every camp director is happy to meet one-on-one with any camper who needs a little extra
                 help — whether that's reviewing a concept, working through homework from school, or
                 just talking through an idea. Just ask during a session, or email{" "}
                 <a href="mailto:campmathos@gmail.com" className="underline">
