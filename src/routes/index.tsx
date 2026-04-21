@@ -241,7 +241,7 @@ function Index() {
                     PythOs — build a 2D game in July.
                   </h3>
                   <p className="mt-3 text-cream/85">
-                    After MathOs wraps, our directors run PythOs: a creative computer-science camp
+                    After MathOs wraps, our camp directors run PythOs: a creative computer-science camp
                     with two age tracks (grades 1–4 in Scratch, grades 5–8 in Python with a custom
                     Turtle library). Every camper finishes with their own playable 2D game. PythOs
                     has its own dedicated site coming soon.
