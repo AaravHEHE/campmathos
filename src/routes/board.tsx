@@ -38,17 +38,17 @@ type Director = {
 const directors: Director[] = [
   {
     name: "Aarav Arora",
-    bio: "Neuqua Valley Class of 2029. Neuqua Robotics' first-ever sophomore Executive Board Member and a co-creator NeighbrHub. Ecybermission State Finalist and honorable mention",
+    bio: "Neuqua Valley Class of 2029. Neuqua Robotics' first-ever sophomore Executive Board Member and a co-creator NeighbrHub. eCYBERMISSION State Finalist and honorable mention",
     accent: "bg-electric text-cream",
   },
   {
     name: "Alan Zhan",
     bio: "Neuqua Valley Class of 2029. Member of NVHS Computing Team, Chess Team, and Math Team — qualified for State in both Chess and Math.",
-    accent: "bg-sun text-ink",
+    accent: "bg-sun text-cream",
   },
   {
     name: "Shaury Sharma",
-    bio: "Neuqua Valley Class of 2029. Member of NVHS Robotics Team, IJAS State Qualifier, NVHS Science Olympiad State Qualifier, eCybermission state finalist and honorable mention.",
+    bio: "Neuqua Valley Class of 2029. Member of NVHS Robotics Team, IJAS State Qualifier, NVHS Science Olympiad State Qualifier, eCYBERMISSION state finalist and honorable mention.",
     accent: "bg-coral text-cream",
   },
   {
