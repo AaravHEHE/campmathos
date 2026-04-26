@@ -5,6 +5,7 @@ import { adminListRegistrations, adminDeleteRegistration } from "@/lib/admin.fun
 import { supabase } from "@/integrations/supabase/client";
 import { SignupsChart } from "@/components/admin/SignupsChart";
 import { BroadcastForm } from "@/components/admin/BroadcastForm";
+import { wasAdminSignedInThisPageLoad, clearAdminSignedIn } from "@/lib/adminSession";
 
 export const Route = createFileRoute("/admin/")({
   component: AdminDashboard,
@@ -44,6 +45,15 @@ function AdminDashboard() {
     let cancelled = false;
 
     const load = async () => {
+      // Require sign-in within THIS page load. A reload wipes the in-memory
+      // flag, so the Camp Director is forced back through /admin/login.
+      if (!wasAdminSignedInThisPageLoad()) {
+        clearAdminSignedIn();
+        await supabase.auth.signOut();
+        if (cancelled) return;
+        navigate({ to: "/admin/login" });
+        return;
+      }
       const { data: { session } } = await supabase.auth.getSession();
       if (cancelled) return;
       if (!session) {
@@ -146,6 +156,7 @@ function AdminDashboard() {
   };
 
   const handleSignOut = async () => {
+    clearAdminSignedIn();
     await supabase.auth.signOut();
     navigate({ to: "/admin/login" });
   };

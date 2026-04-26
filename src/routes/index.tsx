@@ -232,27 +232,19 @@ function Index() {
           {/* PythOs teaser */}
           <Reveal direction="scale" amount={0.2}>
             <div className="mt-12 rounded-3xl border-2 border-ink bg-electric p-8 text-cream md:p-12">
-              <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-                <div className="max-w-2xl">
-                  <p className="font-mono text-xs tracking-widest text-cream/70">
-                    Affiliate program · July
-                  </p>
-                  <h3 className="mt-2 font-display text-3xl font-black md:text-4xl">
-                    PythOs — build a 2D game in July.
-                  </h3>
-                  <p className="mt-3 text-cream/85">
-                    After MathOs wraps, our Camp Directors run PythOs: a creative computer-science camp
-                    with two age tracks (grades 1–4 in Scratch, grades 5–8 in Python with a custom
-                    Turtle library). Every camper finishes with their own playable 2D game. PythOs
-                    has its own dedicated site coming soon.
-                  </p>
-                </div>
-                <Link
-                  to="/about"
-                  className="shrink-0 rounded-full border-2 border-cream bg-cream px-6 py-3 font-semibold text-ink transition hover:bg-sun hover:border-sun"
-                >
-                  More about us →
-                </Link>
+              <div className="max-w-3xl">
+                <p className="font-mono text-xs tracking-widest text-cream/70">
+                  Affiliate program · July
+                </p>
+                <h3 className="mt-2 font-display text-3xl font-black md:text-4xl">
+                  PythOs — build a 2D game in July.
+                </h3>
+                <p className="mt-3 text-cream/85">
+                  After MathOs wraps, our Camp Directors run PythOs: a creative computer-science camp
+                  with two age tracks (grades 1–4 in Scratch, grades 5–8 in Python with a custom
+                  Turtle library). Every camper finishes with their own playable 2D game. PythOs
+                  has its own dedicated site coming soon.
+                </p>
               </div>
             </div>
           </Reveal>

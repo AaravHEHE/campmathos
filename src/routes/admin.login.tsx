@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { markAdminSignedIn } from "@/lib/adminSession";
 
 export const Route = createFileRoute("/admin/login")({
   component: AdminLoginPage,
@@ -19,24 +20,22 @@ function AdminLoginPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // If already signed in as an admin, skip the form.
+  // On a fresh page load, force sign-out so reloading always returns the
+  // Camp Director to this login form (even if the Supabase token is still
+  // cached in localStorage).
   useEffect(() => {
     let cancelled = false;
     (async () => {
       const { data: { session } } = await supabase.auth.getSession();
-      if (!session || cancelled) return;
-      const { data: roles } = await supabase
-        .from("user_roles")
-        .select("role")
-        .eq("user_id", session.user.id)
-        .eq("role", "admin")
-        .maybeSingle();
-      if (!cancelled && roles) navigate({ to: "/admin" });
+      if (cancelled) return;
+      if (session) {
+        await supabase.auth.signOut();
+      }
     })();
     return () => {
       cancelled = true;
     };
-  }, [navigate]);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,10 +63,12 @@ function AdminLoginPage() {
 
     if (roleError || !roleRow) {
       await supabase.auth.signOut();
-      setError("This account does not have Director access.");
+      setError("This account does not have Camp Director access.");
       setLoading(false);
       return;
     }
+
+    markAdminSignedIn();
 
     navigate({ to: "/admin" });
   };
