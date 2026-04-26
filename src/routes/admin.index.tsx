@@ -156,6 +156,7 @@ function AdminDashboard() {
   };
 
   const handleSignOut = async () => {
+    clearAdminSignedIn();
     await supabase.auth.signOut();
     navigate({ to: "/admin/login" });
   };
