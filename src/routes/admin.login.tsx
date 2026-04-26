@@ -63,10 +63,12 @@ function AdminLoginPage() {
 
     if (roleError || !roleRow) {
       await supabase.auth.signOut();
-      setError("This account does not have Director access.");
+      setError("This account does not have Camp Director access.");
       setLoading(false);
       return;
     }
+
+    markAdminSignedIn();
 
     navigate({ to: "/admin" });
   };
