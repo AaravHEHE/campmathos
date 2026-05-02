@@ -38,28 +38,33 @@ type Director = {
 const directors: Director[] = [
   {
     name: "Aarav Arora",
-    bio: "Neuqua Valley Class of 2029. Neuqua Robotics' first-ever sophomore Executive Board Member and a co-creator NeighbrHub. eCYBERMISSION State Finalist and honorable mention",
+    bio: "NVHS Class of 2029. NVHS Robotics' first-ever sophomore Executive Board Member and a co-creator of NeighbrHub. eCYBERMISSION State Finalist and honorable mention.",
     accent: "bg-electric text-cream",
   },
   {
     name: "Alan Zhan",
-    bio: "Neuqua Valley Class of 2029. Member of NVHS Computing Team, Chess Team, and Math Team — qualified for State in both Chess and Math.",
+    bio: "NVHS Class of 2029. Member of NVHS Computing Team, Chess Team, and Math Team — qualified for State in both Chess and Math.",
     accent: "bg-sun text-cream",
   },
   {
     name: "Shaury Sharma",
-    bio: "Neuqua Valley Class of 2029. Member of NVHS Robotics Team, IJAS State Qualifier, NVHS Science Olympiad State Qualifier, eCYBERMISSION state finalist and honorable mention.",
+    bio: "NVHS Class of 2029. Member of NVHS Robotics Team, IJAS State Qualifier, NVHS Science Olympiad State Qualifier, and eCYBERMISSION State Finalist and honorable mention.",
     accent: "bg-coral text-cream",
   },
   {
     name: "Wenxuan Chen",
-    bio: "Neuqua Valley Class of 2029. Math Team State Qualifier and member of IMSA / NVHS Robotics.",
+    bio: "NVHS Class of 2029. Math Team State Qualifier and member of IMSA / NVHS Robotics.",
     accent: "bg-electric text-cream",
   },
   {
     name: "Yifan Bao",
-    bio: "Neuqua Valley Class of 2029. Math Team State Qualifier and Science Olympiad State Qualifier.",
+    bio: "NVHS Class of 2029. Math Team State Qualifier and Science Olympiad State Qualifier.",
     accent: "bg-coral text-cream",
+  },
+  {
+    name: "Atharv Mishra",
+    bio: "NVHS Class of 2029. Member of NVHS Robotics, Speech, and Youth & Government teams, and eCYBERMISSION Finalist.",
+    accent: "bg-sun text-cream",
   },
 ];
 
