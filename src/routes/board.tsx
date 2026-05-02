@@ -19,7 +19,7 @@ export const Route = createFileRoute("/board")({
       {
         property: "og:description",
         content:
-          "Meet the five Camp Directors behind MathOs, a free summer applied math camp at Naperville Public Library.",
+          "Meet the six Camp Directors behind MathOs, a free summer applied math camp at Naperville Public Library.",
       },
       { property: "og:image", content: OG },
       { name: "twitter:card", content: "summary_large_image" },
@@ -38,28 +38,33 @@ type Director = {
 const directors: Director[] = [
   {
     name: "Aarav Arora",
-    bio: "Neuqua Valley Class of 2029. Neuqua Robotics' first-ever sophomore Executive Board Member and a co-creator NeighbrHub. eCYBERMISSION State Finalist and honorable mention",
+    bio: "NVHS Class of 2029. NVHS Robotics' first-ever sophomore Executive Board Member and a co-creator of NeighbrHub. eCYBERMISSION State Finalist and honorable mention.",
     accent: "bg-electric text-cream",
   },
   {
     name: "Alan Zhan",
-    bio: "Neuqua Valley Class of 2029. Member of NVHS Computing Team, Chess Team, and Math Team — qualified for State in both Chess and Math.",
+    bio: "NVHS Class of 2029. Member of NVHS Computing Team, Chess Team, and Math Team — qualified for State in both Chess and Math.",
     accent: "bg-sun text-cream",
   },
   {
     name: "Shaury Sharma",
-    bio: "Neuqua Valley Class of 2029. Member of NVHS Robotics Team, IJAS State Qualifier, NVHS Science Olympiad State Qualifier, eCYBERMISSION state finalist and honorable mention.",
+    bio: "NVHS Class of 2029. Member of NVHS Robotics Team, IJAS State Qualifier, NVHS Science Olympiad State Qualifier, and eCYBERMISSION State Finalist and honorable mention.",
     accent: "bg-coral text-cream",
   },
   {
     name: "Wenxuan Chen",
-    bio: "Neuqua Valley Class of 2029. Math Team State Qualifier and member of IMSA / NVHS Robotics.",
+    bio: "NVHS Class of 2029. Math Team State Qualifier and member of IMSA / NVHS Robotics.",
     accent: "bg-electric text-cream",
   },
   {
     name: "Yifan Bao",
-    bio: "Neuqua Valley Class of 2029. Math Team State Qualifier and Science Olympiad State Qualifier.",
+    bio: "NVHS Class of 2029. Math Team State Qualifier and Science Olympiad State Qualifier.",
     accent: "bg-coral text-cream",
+  },
+  {
+    name: "Atharv Mishra",
+    bio: "NVHS Class of 2029. Member of NVHS Robotics, Speech, and Youth & Government teams, and eCYBERMISSION Finalist.",
+    accent: "bg-sun text-cream",
   },
 ];
 
@@ -84,7 +89,7 @@ function BoardPage() {
             The students <span className="italic text-electric">behind</span> MathOs.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            MathOs is built and taught by five Neuqua Valley High School students who believe math should feel useful,
+            MathOs is built and taught by six Neuqua Valley High School students who believe math should feel useful,
             not abstract. We design every session, mentor every camper, and run every workshop ourselves.
           </p>
         </div>
