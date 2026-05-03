@@ -302,7 +302,7 @@ function Index() {
               Stuck on something? <span className="italic">Just ask.</span>
             </h2>
             <p className="mt-6 max-w-2xl text-lg text-ink/80">
-              Every MathOs teacher is happy to meet one-on-one with any camper who needs extra
+              Every <Wordmark /> teacher is happy to meet one-on-one with any camper who needs extra
               help — whether that's a tricky topic from camp, homework from school, or a concept
               they've been wanting to understand for a while. We'll find time before or after a
               session and work through it together.
