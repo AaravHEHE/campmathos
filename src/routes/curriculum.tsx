@@ -43,7 +43,7 @@ function CurriculumPage() {
             Four weeks of <span className="italic text-electric">applied</span> math.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            Every MathOs session is built around math you can actually use — money, buildings, sports, decisions. Below
+            Every <Wordmark /> session is built around math you can actually use — money, buildings, sports, decisions. Below
             is the full week-by-week plan for June 2026.
           </p>
         </div>
