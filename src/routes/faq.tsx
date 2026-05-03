@@ -186,7 +186,7 @@ function FaqPage() {
                       +
                     </span>
                   </summary>
-                  <p className="mt-4 max-w-3xl text-ink/70">{f.a}</p>
+                  <p className="mt-4 max-w-3xl text-ink/70">{colorizeMathOs(f.a)}</p>
                 </details>
               </Reveal>
             ))}
