@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import heroImg from "@/assets/hero-math.jpg";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { weeks, type Week } from "@/data/weeks";
