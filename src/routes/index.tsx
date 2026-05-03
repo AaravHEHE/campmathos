@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
 import heroImg from "@/assets/hero-math.jpg";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
+import { Wordmark } from "@/components/Wordmark";
 import { weeks, type Week } from "@/data/weeks";
 import { Countdown } from "@/components/Countdown";
 import { canonical, ogImage, campEventJsonLd } from "@/lib/seo";
