@@ -93,7 +93,7 @@ function AboutPage() {
           <Reveal direction="left" delay={0.2} className="md:col-span-7">
             <p className="text-lg text-cream/80">
               Most kids meet math as a stack of formulas with no obvious purpose. We think that's
-              backwards. MathOs teaches incoming 4th–7th graders how the math they already see in
+              backwards. <Wordmark /> teaches incoming 4th–7th graders how the math they already see in
               school connects to engineering, finance, and architecture — the things adults
               actually pay for and build with.
             </p>
