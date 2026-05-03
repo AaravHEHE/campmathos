@@ -74,7 +74,7 @@ function AboutPage() {
             learning.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            The name comes from the Greek word for "learning" or "knowledge." MathOs is a
+            The name comes from the Greek word for "learning" or "knowledge." <Wordmark /> is a
             one-month summer program designed by a team of Neuqua Valley High School students to
             make math feel useful, hands-on, and genuinely exciting — not abstract.
           </p>
