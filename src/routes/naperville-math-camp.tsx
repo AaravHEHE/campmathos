@@ -105,7 +105,7 @@ function NapervilleMathCampPage() {
             <p>
               Most math summer programs cost hundreds of dollars per week. We
               wanted Naperville families to have a serious applied-math option
-              that's genuinely accessible — so we made MathOs completely free.
+              that's genuinely accessible — so we made <Wordmark /> completely free.
             </p>
             <p>
               Sessions are at the 95th Street branch of Naperville Public
