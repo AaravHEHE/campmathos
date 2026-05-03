@@ -69,7 +69,7 @@ function AboutPage() {
             About
           </p>
           <h1 className="mt-3 font-display text-5xl font-black leading-[0.95] md:text-7xl">
-            <span className="italic text-electric">MathOs</span> means
+            <span className="italic"><Wordmark /></span> means
             <br />
             learning.
           </h1>
