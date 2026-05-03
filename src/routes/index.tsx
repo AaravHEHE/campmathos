@@ -41,7 +41,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Marquee() {
-  const items: React.ReactNode[] = [
+  const items: ReactNode[] = [
     <><span className="text-electric">Math</span><span className="text-coral">Os</span> '26</>,
     "★",
     "Completely free",
