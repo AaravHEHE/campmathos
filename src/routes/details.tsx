@@ -56,7 +56,7 @@ function DetailsPage() {
             Everything <span className="italic text-electric">logistical</span>.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            MathOs is a multi-week summer camp at Naperville Public Library, completely free for
+            <Wordmark /> is a multi-week summer camp at Naperville Public Library, completely free for
             every camper. Here's exactly how it runs.
           </p>
         </div>
