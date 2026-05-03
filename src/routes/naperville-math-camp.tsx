@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
+import { Wordmark } from "@/components/Wordmark";
 import { CAMP, fullAddress } from "@/lib/camp";
 import { canonical, ogImage, campEventJsonLd } from "@/lib/seo";
 
