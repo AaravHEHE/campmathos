@@ -15,7 +15,7 @@ export const Route = createFileRoute("/details")({
       {
         name: "description",
         content:
-          "MathOs camp logistics: free for all students, Mon/Wed/Fri sessions in late morning to early afternoon during June 2026, at Naperville Public Library 95th Street branch. 2-hour sessions with a short break.",
+          "MathOs camp logistics: free for all students, Tue/Thu sessions in the early afternoon from June 2 through July 9, 2026, at Naperville Public Library 95th Street branch. 3-hour sessions with a short break.",
       },
       { property: "og:title", content: "Details — MathOs summer camp" },
       {
@@ -36,7 +36,7 @@ const facts: [string, string][] = [
   ["Where", fullAddress()],
   ["Days", CAMP.humanDays],
   ["Time", CAMP.humanTime],
-  ["Session length", "2 hours (with a short break)"],
+  ["Session length", "3 hours (with a short break)"],
   ["Math grades", "4th — 7th (recommended)"],
   ["Affiliate program", "PythOs (CS camp) runs in July"],
   ["Cost", "Completely free"],
@@ -85,7 +85,7 @@ function DetailsPage() {
               A typical session
             </p>
             <h2 className="mt-3 font-display text-5xl font-black md:text-6xl">
-              2 hours, with room to <span className="italic">breathe</span>.
+              3 hours, with room to <span className="italic">breathe</span>.
             </h2>
             <p className="mt-6 max-w-2xl text-lg text-ink/75">
               Each <Wordmark /> session runs for about two hours in the late morning to
@@ -139,8 +139,8 @@ function DetailsPage() {
                   Drop every session into your calendar.
                 </h3>
                 <p className="mt-2 text-cream/85">
-                  Download the .ics file — it includes every Mon/Wed/Fri session
-                  during June 2026, with the library address pre-filled.
+                  Download the .ics file — it includes every Tue/Thu session
+                  from June 2 through July 9, 2026, with the library address pre-filled.
                 </p>
               </div>
               <a
