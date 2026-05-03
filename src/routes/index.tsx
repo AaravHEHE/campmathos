@@ -42,7 +42,7 @@ export const Route = createFileRoute("/")({
 
 function Marquee() {
   const items = [
-    "MathOs '26",
+    <span><span className="text-electric">Math</span><span className="text-coral">Os</span> '26</span> as unknown as string,
     "★",
     "Completely free",
     "★",
