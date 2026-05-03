@@ -88,7 +88,7 @@ function DetailsPage() {
               2 hours, with room to <span className="italic">breathe</span>.
             </h2>
             <p className="mt-6 max-w-2xl text-lg text-ink/75">
-              Each MathOs session runs for about two hours in the late morning to
+              Each <Wordmark /> session runs for about two hours in the late morning to
               early afternoon, with a short break in the middle so campers can
               rest, snack, and reset before the second half.
             </p>
