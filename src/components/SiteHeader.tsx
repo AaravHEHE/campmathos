@@ -30,9 +30,9 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b-2 border-ink/80 bg-cream/85 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 md:px-6 md:py-4">
-        <Link to="/" className="flex items-baseline gap-2" onClick={() => setOpen(false)}>
-          <span className="font-display text-2xl font-black tracking-tight md:text-3xl">MathOs</span>
-          <span className="font-mono text-xs text-muted-foreground">v.2026</span>
+        <Link to="/" aria-label="MathOs home" className="flex items-center gap-1" onClick={() => setOpen(false)}>
+          <span className="font-display text-3xl font-black leading-none tracking-tight text-electric md:text-4xl">M</span>
+          <span className="font-display text-3xl font-black leading-none tracking-tight text-coral md:text-4xl">O</span>
         </Link>
 
         <nav className="hidden items-center gap-7 font-mono text-sm md:flex">
