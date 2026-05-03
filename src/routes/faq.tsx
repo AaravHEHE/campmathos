@@ -85,7 +85,7 @@ const faqs: { id: string; q: string; a: string }[] = [
   {
     id: "showcase",
     q: "When is the showcase, and can families come?",
-    a: "Showcase day is the Friday of week 4. Campers will present their final projects, and parents are strongly encouraged to attend.",
+    a: "Showcase day is the final Thursday of camp. Campers will present their final projects, and parents are strongly encouraged to attend.",
   },
   {
     id: "contact",
