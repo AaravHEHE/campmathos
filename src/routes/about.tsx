@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
+import { Wordmark } from "@/components/Wordmark";
 import { canonical, ogImage } from "@/lib/seo";
 import { Reveal } from "@/components/Reveal";
 
@@ -68,12 +69,12 @@ function AboutPage() {
             About
           </p>
           <h1 className="mt-3 font-display text-5xl font-black leading-[0.95] md:text-7xl">
-            <span className="italic text-electric">MathOs</span> means
+            <span className="italic"><Wordmark /></span> means
             <br />
             learning.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            The name comes from the Greek word for "learning" or "knowledge." MathOs is a
+            The name comes from the Greek word for "learning" or "knowledge." <Wordmark /> is a
             one-month summer program designed by a team of Neuqua Valley High School students to
             make math feel useful, hands-on, and genuinely exciting — not abstract.
           </p>
@@ -92,7 +93,7 @@ function AboutPage() {
           <Reveal direction="left" delay={0.2} className="md:col-span-7">
             <p className="text-lg text-cream/80">
               Most kids meet math as a stack of formulas with no obvious purpose. We think that's
-              backwards. MathOs teaches incoming 4th–7th graders how the math they already see in
+              backwards. <Wordmark /> teaches incoming 4th–7th graders how the math they already see in
               school connects to engineering, finance, and architecture — the things adults
               actually pay for and build with.
             </p>
@@ -152,7 +153,7 @@ function AboutPage() {
               Meet <span className="italic text-sun">PythOs</span>.
             </h2>
             <p className="mt-6 max-w-2xl text-cream/85">
-              After MathOs wraps in June, our Camp Directors run an affiliate computer-science program
+              After <Wordmark /> wraps in June, our Camp Directors run an affiliate computer-science program
               called <span className="font-semibold">PythOs</span> in July. Two age tracks, both
               focused on building real games — not memorizing syntax. PythOs has its own
               dedicated website coming soon.

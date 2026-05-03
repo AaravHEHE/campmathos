@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
+import { Wordmark } from "@/components/Wordmark";
 import { canonical, ogImage } from "@/lib/seo";
 import { CAMP, fullAddress } from "@/lib/camp";
 import { Reveal } from "@/components/Reveal";
@@ -55,7 +56,7 @@ function DetailsPage() {
             Everything <span className="italic text-electric">logistical</span>.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            MathOs is a multi-week summer camp at Naperville Public Library, completely free for
+            <Wordmark /> is a multi-week summer camp at Naperville Public Library, completely free for
             every camper. Here's exactly how it runs.
           </p>
         </div>
@@ -87,7 +88,7 @@ function DetailsPage() {
               2 hours, with room to <span className="italic">breathe</span>.
             </h2>
             <p className="mt-6 max-w-2xl text-lg text-ink/75">
-              Each MathOs session runs for about two hours in the late morning to
+              Each <Wordmark /> session runs for about two hours in the late morning to
               early afternoon, with a short break in the middle so campers can
               rest, snack, and reset before the second half.
             </p>

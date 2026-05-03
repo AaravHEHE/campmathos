@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
+import { Wordmark } from "@/components/Wordmark";
 import { weeks } from "@/data/weeks";
 import { canonical, ogImage } from "@/lib/seo";
 import { Reveal } from "@/components/Reveal";
@@ -42,7 +43,7 @@ function CurriculumPage() {
             Four weeks of <span className="italic text-electric">applied</span> math.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            Every MathOs session is built around math you can actually use — money, buildings, sports, decisions. Below
+            Every <Wordmark /> session is built around math you can actually use — money, buildings, sports, decisions. Below
             is the full week-by-week plan for June 2026.
           </p>
         </div>
@@ -159,7 +160,7 @@ function CurriculumPage() {
               </span>
               <h2 className="mt-4 font-display text-4xl font-black md:text-5xl">PythOs — our computer-science camp.</h2>
               <p className="mt-4 text-lg text-cream/85">
-                After MathOs finishes in June, the same Camp Directors run <span className="font-semibold">PythOs</span>{" "}
+                After <Wordmark /> finishes in June, the same Camp Directors run <span className="font-semibold">PythOs</span>{" "}
                 in July: a creative CS program for two age groups. Grades 1–4 use Scratch on Mondays and Thursdays;
                 grades 5–8 use Python with a custom Turtle-graphics library on Tuesdays and Fridays. We focus on logic,
                 creativity, and problem-solving over memorizing syntax — and every camper finishes with their own

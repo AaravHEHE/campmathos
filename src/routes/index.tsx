@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import heroImg from "@/assets/hero-math.jpg";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
+import { Wordmark } from "@/components/Wordmark";
 import { weeks, type Week } from "@/data/weeks";
 import { Countdown } from "@/components/Countdown";
 import { canonical, ogImage, campEventJsonLd } from "@/lib/seo";
@@ -41,8 +42,8 @@ export const Route = createFileRoute("/")({
 });
 
 function Marquee() {
-  const items = [
-    "MathOs '26",
+  const items: ReactNode[] = [
+    <><span className="text-electric">Math</span><span className="text-coral">Os</span> '26</>,
     "★",
     "Completely free",
     "★",
@@ -240,7 +241,7 @@ function Index() {
                   PythOs — build a 2D game in July.
                 </h3>
                 <p className="mt-3 text-cream/85">
-                  After MathOs wraps, our Camp Directors run PythOs: a creative computer-science camp
+                  After <Wordmark /> wraps, our Camp Directors run PythOs: a creative computer-science camp
                   with two age tracks (grades 1–4 in Scratch, grades 5–8 in Python with a custom
                   Turtle library). Every camper finishes with their own playable 2D game. PythOs
                   has its own dedicated site coming soon.
@@ -260,7 +261,7 @@ function Index() {
               When, where, <span className="italic text-sun">how much</span>.
             </h2>
             <p className="mt-6 max-w-md text-cream/70">
-              MathOs meets Mondays, Wednesdays, and Fridays in the late morning to
+              <Wordmark /> meets Mondays, Wednesdays, and Fridays in the late morning to
               early afternoon at the Naperville Public Library 95th Street branch
               during June 2026.
             </p>
@@ -301,7 +302,7 @@ function Index() {
               Stuck on something? <span className="italic">Just ask.</span>
             </h2>
             <p className="mt-6 max-w-2xl text-lg text-ink/80">
-              Every MathOs teacher is happy to meet one-on-one with any camper who needs extra
+              Every <Wordmark /> teacher is happy to meet one-on-one with any camper who needs extra
               help — whether that's a tricky topic from camp, homework from school, or a concept
               they've been wanting to understand for a while. We'll find time before or after a
               session and work through it together.

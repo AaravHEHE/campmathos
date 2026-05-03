@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
+import { Wordmark } from "@/components/Wordmark";
 import { canonical, ogImage } from "@/lib/seo";
 import { Reveal } from "@/components/Reveal";
 
@@ -86,10 +87,10 @@ function BoardPage() {
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
           <p className="font-mono text-sm tracking-widest text-muted-foreground">Camp Directors</p>
           <h1 className="mt-3 font-display text-5xl font-black leading-[0.95] md:text-7xl">
-            The students <span className="italic text-electric">behind</span> MathOs.
+            The students <span className="italic text-electric">behind</span> <Wordmark />.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            MathOs is built and taught by six Neuqua Valley High School students who believe math should feel useful,
+            <Wordmark /> is built and taught by six Neuqua Valley High School students who believe math should feel useful,
             not abstract. We design every session, mentor every camper, and run every workshop ourselves.
           </p>
         </div>

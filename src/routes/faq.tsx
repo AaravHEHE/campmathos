@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
+import { colorizeMathOs } from "@/components/Wordmark";
 import { canonical, ogImage } from "@/lib/seo";
 import { Reveal } from "@/components/Reveal";
 
@@ -186,7 +187,7 @@ function FaqPage() {
                       +
                     </span>
                   </summary>
-                  <p className="mt-4 max-w-3xl text-ink/70">{f.a}</p>
+                  <p className="mt-4 max-w-3xl text-ink/70">{colorizeMathOs(f.a)}</p>
                 </details>
               </Reveal>
             ))}

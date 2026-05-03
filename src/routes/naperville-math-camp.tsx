@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
+import { Wordmark } from "@/components/Wordmark";
 import { CAMP, fullAddress } from "@/lib/camp";
 import { canonical, ogImage, campEventJsonLd } from "@/lib/seo";
 
@@ -52,7 +53,7 @@ function NapervilleMathCampPage() {
             for Naperville kids.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            MathOs is a multi-week applied math summer camp held at the
+            <Wordmark /> is a multi-week applied math summer camp held at the
             Naperville Public Library 95th Street branch. Completely free,
             grades 4–7, taught by Neuqua Valley High School students.
           </p>
@@ -104,7 +105,7 @@ function NapervilleMathCampPage() {
             <p>
               Most math summer programs cost hundreds of dollars per week. We
               wanted Naperville families to have a serious applied-math option
-              that's genuinely accessible — so we made MathOs completely free.
+              that's genuinely accessible — so we made <Wordmark /> completely free.
             </p>
             <p>
               Sessions are at the 95th Street branch of Naperville Public
