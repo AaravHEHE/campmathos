@@ -53,7 +53,7 @@ function NapervilleMathCampPage() {
             for Naperville kids.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            MathOs is a multi-week applied math summer camp held at the
+            <Wordmark /> is a multi-week applied math summer camp held at the
             Naperville Public Library 95th Street branch. Completely free,
             grades 4–7, taught by Neuqua Valley High School students.
           </p>
