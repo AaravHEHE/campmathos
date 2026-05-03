@@ -153,7 +153,7 @@ function AboutPage() {
               Meet <span className="italic text-sun">PythOs</span>.
             </h2>
             <p className="mt-6 max-w-2xl text-cream/85">
-              After MathOs wraps in June, our Camp Directors run an affiliate computer-science program
+              After <Wordmark /> wraps in June, our Camp Directors run an affiliate computer-science program
               called <span className="font-semibold">PythOs</span> in July. Two age tracks, both
               focused on building real games — not memorizing syntax. PythOs has its own
               dedicated website coming soon.
