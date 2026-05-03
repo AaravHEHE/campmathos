@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "MathOs is a completely free applied math camp at Naperville Public Library for grades 4–7. Mondays, Wednesdays, and Fridays during June 2026 — late morning to early afternoon.",
+          "MathOs is a completely free applied math camp at Naperville Public Library for grades 4–7. Tuesdays and Thursdays, 3-hour sessions in the early afternoon, June 2 – July 9, 2026.",
       },
       { property: "og:title", content: "MathOs — Free summer applied math camp in Naperville" },
       {
@@ -261,9 +261,9 @@ function Index() {
               When, where, <span className="italic text-sun">how much</span>.
             </h2>
             <p className="mt-6 max-w-md text-cream/70">
-              <Wordmark /> meets Mondays, Wednesdays, and Fridays in the late morning to
-              early afternoon at the Naperville Public Library 95th Street branch
-              during June 2026.
+              <Wordmark /> meets Tuesdays and Thursdays in the early afternoon
+              at the Naperville Public Library 95th Street branch from June 2
+              through July 9, 2026.
             </p>
             <Link
               to="/details"
@@ -276,10 +276,10 @@ function Index() {
           <Reveal direction="up" amount={0.2} className="md:col-span-7">
             <dl className="grid gap-px overflow-hidden rounded-3xl border-2 border-cream/20 bg-cream/10 md:grid-cols-2">
               {[
-                ["When", "June 2026"],
+                ["When", "June – July 2026"],
                 ["Where", "Naperville Library, 95th St"],
-                ["Days", "Mon · Wed · Fri"],
-                ["Time", "Late morning – early afternoon"],
+                ["Days", "Tue · Thu"],
+                ["Time", "Early afternoon (3 hr)"],
                 ["Grades", "4th — 7th"],
                 ["Cost", "Free"],
               ].map(([k, v]) => (
