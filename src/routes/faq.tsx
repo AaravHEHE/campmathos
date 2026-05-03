@@ -45,7 +45,7 @@ const faqs: { id: string; q: string; a: string }[] = [
   {
     id: "schedule",
     q: "What days and times does the camp meet?",
-    a: "The camp runs on Monday, Wednesday, and Friday during June 2026 at Naperville Public Library, in the late morning to early afternoon. We'll share exact session times closer to camp.",
+    a: "The camp runs on Tuesday and Thursday from June 2 through July 9, 2026 at Naperville Public Library. Each session is about three hours in the early afternoon, with a short break in the middle.",
   },
   {
     id: "attendance",
@@ -85,7 +85,7 @@ const faqs: { id: string; q: string; a: string }[] = [
   {
     id: "showcase",
     q: "When is the showcase, and can families come?",
-    a: "Showcase day is the Friday of week 4. Campers will present their final projects, and parents are strongly encouraged to attend.",
+    a: "Showcase day is the final Thursday of camp. Campers will present their final projects, and parents are strongly encouraged to attend.",
   },
   {
     id: "contact",

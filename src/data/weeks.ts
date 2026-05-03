@@ -54,10 +54,10 @@ export const weeks: Week[] = [
     bullets: [
       "City-block planning challenge",
       "Bridge engineering with load testing",
-      "Showcase day (Friday) for parents and family",
+      "Showcase day on the final Thursday for parents and family",
     ],
     detail:
-      "Week four is when everything connects. Students choose a project — planning a city block, engineering a bridge, or pitching their own — and use graphing, probability, and geometry from earlier weeks to defend their design. We finish on the Friday of week 4 with a showcase day where every camper presents their final project to family and friends.",
+      "Week four is when everything connects. Students choose a project — planning a city block, engineering a bridge, or pitching their own — and use graphing, probability, and geometry from earlier weeks to defend their design. We finish on the final Thursday of camp with a showcase day where every camper presents their final project to family and friends.",
     accent: "bg-ink text-cream",
   },
 ];

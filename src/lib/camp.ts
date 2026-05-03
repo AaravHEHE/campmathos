@@ -16,16 +16,16 @@ export const CAMP = {
     lat: 41.7222,
     lng: -88.1469,
   },
-  // Camp runs Mon/Wed/Fri, 1:00–3:00 PM local (America/Chicago, CDT = UTC-5 in June/July)
+  // Camp runs Tue/Thu, 1:00–4:00 PM local (America/Chicago, CDT = UTC-5 in June/July)
   // Use the FIRST session date as the canonical "start" for countdown + ics.
-  startDateISO: "2026-06-15", // Monday June 15 2026
-  endDateISO: "2026-07-24",   // Friday July 24 2026
+  startDateISO: "2026-06-02", // Tuesday June 2 2026
+  endDateISO: "2026-07-09",   // Thursday July 9 2026
   sessionStartTime: "13:00",  // 1:00 PM local
-  sessionEndTime: "15:00",    // 3:00 PM local
-  daysOfWeek: ["Monday", "Wednesday", "Friday"],
+  sessionEndTime: "16:00",    // 4:00 PM local
+  daysOfWeek: ["Tuesday", "Thursday"],
   // Human-friendly strings used across the site (intentionally vague — exact schedule shared closer to camp)
-  humanDateRange: "June 2026",
-  humanDays: "Mon · Wed · Fri",
+  humanDateRange: "June – July 2026",
+  humanDays: "Tue · Thu",
   humanTime: "Late morning – early afternoon",
   cost: "Free",
   ageRange: "Grades 4–7",
