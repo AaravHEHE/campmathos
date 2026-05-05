@@ -71,7 +71,7 @@ function Marquee() {
 function WeekTeaser({ week }: { week: Week }) {
   const [open, setOpen] = useState(false);
   return (
-    <article className="group relative overflow-hidden rounded-3xl border-2 border-ink bg-cream p-8 transition hover:-translate-y-1 hover:shadow-[8px_8px_0_0_var(--ink)]">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl border-2 border-ink bg-cream p-8 transition hover:-translate-y-1 hover:shadow-[8px_8px_0_0_var(--ink)]">
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
@@ -211,9 +211,9 @@ function Index() {
             </div>
           </Reveal>
 
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-2 md:items-stretch">
             {weeks.map((w, i) => (
-              <Reveal key={w.n} delay={i * 0.25} amount={0.2}>
+              <Reveal key={w.n} delay={i * 0.25} amount={0.2} className="h-full">
                 <WeekTeaser week={w} />
               </Reveal>
             ))}
