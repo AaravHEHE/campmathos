@@ -71,7 +71,7 @@ function Marquee() {
 function WeekTeaser({ week }: { week: Week }) {
   const [open, setOpen] = useState(false);
   return (
-    <article className="group relative overflow-hidden rounded-3xl border-2 border-ink bg-cream p-8 transition hover:-translate-y-1 hover:shadow-[8px_8px_0_0_var(--ink)]">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl border-2 border-ink bg-cream p-8 transition hover:-translate-y-1 hover:shadow-[8px_8px_0_0_var(--ink)]">
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
