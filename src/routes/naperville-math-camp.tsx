@@ -82,7 +82,7 @@ function NapervilleMathCampPage() {
               ["Days", CAMP.humanDays],
               ["Time", CAMP.humanTime],
               ["Cost", "Completely free ($0)"],
-              ["Grades", "4th – 7th (recommended)"],
+              ["Skill range", "5th grade math → Geometry (recommended)"],
               ["Location", fullAddress()],
             ].map(([k, v]) => (
               <div key={k} className="bg-ink p-6 md:p-8">
