@@ -211,9 +211,9 @@ function Index() {
             </div>
           </Reveal>
 
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-2 md:items-stretch">
             {weeks.map((w, i) => (
-              <Reveal key={w.n} delay={i * 0.25} amount={0.2}>
+              <Reveal key={w.n} delay={i * 0.25} amount={0.2} className="h-full">
                 <WeekTeaser week={w} />
               </Reveal>
             ))}
