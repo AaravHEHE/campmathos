@@ -20,7 +20,7 @@ export const Route = createFileRoute("/naperville-math-camp")({
       {
         property: "og:description",
         content:
-          "MathOs is a free multi-week applied math camp at Naperville Public Library, summer 2026.",
+          "MathOs is a free multi-week applied math camp at Neuqua Valley High School, summer 2026.",
       },
       { property: "og:image", content: OG },
       { property: "og:type", content: "website" },
