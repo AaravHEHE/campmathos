@@ -37,7 +37,7 @@ function confirmationHtml(email: string) {
           <p style="margin:0 0 8px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#666;">Mathos Camp</p>
           <h1 style="margin:0 0 16px;font-size:28px;line-height:1.1;">Thanks for showing your interest! 🙌</h1>
           <p style="margin:0 0 16px;font-size:16px;line-height:1.5;">
-            We've added <strong>${escapeHtml(email)}</strong> to our interest list for <strong>Mathos</strong> — the completely free summer applied math camp at Naperville Public Library. This isn't a commitment — we'll reach out with more details closer to the date of the camp.
+            We've added <strong>${escapeHtml(email)}</strong> to our interest list for <strong>Mathos</strong> — the completely free summer applied math camp hosted at Neuqua Valley High School. This isn't a commitment — we'll reach out with more details closer to the date of the camp.
           </p>
           <p style="margin:0 0 8px;font-size:16px;line-height:1.5;font-weight:bold;">For now, here's what to know:</p>
           <ul style="margin:0 0 16px 20px;padding:0;font-size:16px;line-height:1.6;">
