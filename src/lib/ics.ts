@@ -25,7 +25,7 @@ export function buildCampIcs(): string {
         `SUMMARY:MathOs session`,
         `LOCATION:${escapeIcs(`${CAMP.venue.name}, ${CAMP.venue.street}, ${CAMP.venue.city}, ${CAMP.venue.region} ${CAMP.venue.postalCode}`)}`,
         `DESCRIPTION:${escapeIcs(
-          "MathOs — free applied math camp for grades 4–7. Bring a notebook, pencil, and a snack. Questions: campmathos@gmail.com"
+          "MathOs — free applied math camp (5th grade math → Geometry). Bring a notebook, pencil, and a snack. Questions: campmathos@gmail.com"
         )}`,
         `URL:${CAMP.url}/details`,
         "END:VEVENT",
