@@ -15,7 +15,7 @@ export const Route = createFileRoute("/register")({
       {
         name: "description",
         content:
-          "Let us know your child is interested in MathOs, the free summer applied math camp at Neuqua Valley High School. No commitment — we'll send schedule and venue details as June gets closer.",
+          "Let us know your child is interested in MathOs, the free summer applied math camp at Neuqua Valley High School. No commitment — we'll send schedule and venue details as July gets closer.",
       },
       { property: "og:title", content: "Express interest — MathOs summer camp" },
       {

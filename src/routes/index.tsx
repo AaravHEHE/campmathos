@@ -51,7 +51,7 @@ function Marquee() {
     "★",
     "Neuqua Valley HS",
     "★",
-    "June",
+    "July",
     "★",
   ];
   const row = [...items, ...items, ...items, ...items];
@@ -123,7 +123,7 @@ function Index() {
           <div className="md:col-span-7">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-ink bg-cream px-4 py-1.5 font-mono text-xs tracking-widest">
               <span className="h-2 w-2 rounded-full bg-coral" />
-              June 2026 · Neuqua Valley High School · 100% free
+              July 2026 · Neuqua Valley High School · 100% free
             </div>
             <h1 className="font-display text-[clamp(2.5rem,8vw,7.5rem)] font-black leading-[0.9] break-words">
               Math is the
@@ -253,7 +253,7 @@ function Index() {
           <Reveal direction="up" amount={0.2} className="md:col-span-7">
             <dl className="grid gap-px overflow-hidden rounded-3xl border-2 border-cream/20 bg-cream/10 md:grid-cols-2">
               {[
-                ["When", "June – July 2026"],
+                ["When", "July – August 2026"],
                 ["Where", "Neuqua Valley HS"],
                 ["Days", "Tue · Thu"],
                 ["Time", "Early afternoon (3 hr)"],
@@ -359,11 +359,11 @@ function Index() {
           <Reveal direction="scale" amount={0.3}>
             <p className="font-mono text-sm tracking-widest text-cream/80">Register</p>
             <h2 className="mx-auto mt-4 max-w-4xl font-display text-[clamp(2.75rem,9vw,8rem)] font-black leading-[0.9] text-cream break-words">
-              Spend June <span className="italic">thinking</span> in math.
+              Spend July <span className="italic">thinking</span> in math.
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-lg text-cream/85">
               Completely free. Drop your email to let us know you're interested — we'll send
-              the schedule and venue details as June gets closer. No commitment required.
+              the schedule and venue details as July gets closer. No commitment required.
             </p>
             <Link
               to="/register"

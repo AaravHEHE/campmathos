@@ -44,7 +44,7 @@ function CurriculumPage() {
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
             Every <Wordmark /> session is built around math you can actually use — money, buildings, sports, decisions. Below
-            is the full week-by-week plan for June 2026.
+            is the full week-by-week plan for July 2026.
           </p>
         </div>
       </section>
@@ -158,7 +158,7 @@ function CurriculumPage() {
       <section className="bg-coral">
         <div className="mx-auto max-w-7xl px-6 py-20 text-center md:py-28">
           <h2 className="mx-auto max-w-3xl font-display text-5xl font-black leading-[0.9] text-cream md:text-7xl">
-            Ready to join us in June?
+            Ready to join us in July?
           </h2>
           <Link
             to="/register"
