@@ -164,8 +164,8 @@ function Index() {
                 <dd className="font-display text-2xl font-black md:text-3xl">03</dd>
               </div>
               <div>
-                <dt className="text-muted-foreground">Grades</dt>
-                <dd className="font-display text-2xl font-black md:text-3xl">4–7</dd>
+                <dt className="text-muted-foreground">Skill</dt>
+                <dd className="font-display text-lg font-black leading-tight md:text-xl">5th gr → Geo</dd>
               </div>
             </dl>
           </div>
