@@ -180,6 +180,8 @@ function Index() {
                 className="h-full w-full object-cover"
               />
             </div>
+          </div>
+        </div>
       </section>
 
       <Marquee />
