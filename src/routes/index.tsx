@@ -277,7 +277,7 @@ function Index() {
                 ["Where", "Naperville Library, 95th St"],
                 ["Days", "Tue · Thu"],
                 ["Time", "Early afternoon (3 hr)"],
-                ["Grades", "4th — 7th"],
+                ["Skill", "5th gr → Geometry"],
                 ["Cost", "Free"],
               ].map(([k, v]) => (
                 <div key={k} className="bg-ink p-8">
