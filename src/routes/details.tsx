@@ -172,10 +172,6 @@ function DetailsPage() {
                   <span className="text-coral">→</span>A snack and a drink for the short break
                 </li>
                 <li className="flex gap-3">
-                  <span className="text-coral">→</span>A computer if you join PythOs in July
-                  (required for the CS camp)
-                </li>
-                <li className="flex gap-3">
                   <span className="text-coral">→</span>A calculator if you have one — not required,
                   instructors will help when needed
                 </li>
