@@ -53,8 +53,8 @@ function NapervilleMathCampPage() {
             for Naperville kids.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            <Wordmark /> is a multi-week applied math summer camp held at the
-            Naperville Public Library 95th Street branch. Completely free,
+            <Wordmark /> is a multi-week applied math summer camp hosted at
+            Neuqua Valley High School. Completely free,
             recommended for campers working at 5th-grade math through Geometry,
             taught by Neuqua Valley High School students.
           </p>
