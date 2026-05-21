@@ -24,7 +24,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Hands-on applied math for grades 4–7. Completely free. Naperville Public Library, summer 2026.",
+          "Hands-on applied math from 5th-grade arithmetic through Geometry. Completely free. Naperville Public Library, summer 2026.",
       },
       { property: "og:image", content: OG },
       { property: "og:type", content: "website" },
