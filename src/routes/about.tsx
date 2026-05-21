@@ -52,7 +52,7 @@ const pillars: { tag: string; title: string; body: string; accent: string }[] = 
   {
     tag: "stretching",
     title: "Extra material for the curious.",
-    body: "Campers who want to go further get harder problem sets, project ideas, and reading recommendations matched to their grade.",
+    body: "Campers who want to go further get harder problem sets, project ideas, and reading recommendations matched to their current skill level.",
     accent: "bg-ink text-cream",
   },
 ];
