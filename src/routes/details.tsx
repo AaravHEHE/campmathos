@@ -38,7 +38,7 @@ const facts: [string, string][] = [
   ["Time", CAMP.humanTime],
   ["Session length", "3 hours (with a short break)"],
   ["Skill range", "5th grade math → Geometry (recommended)"],
-  ["Affiliate program", "PythOs (CS camp) runs in July"],
+  ["Hosted at", "Neuqua Valley High School"],
   ["Cost", "Completely free"],
 ];
 
