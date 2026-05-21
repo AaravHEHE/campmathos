@@ -4,17 +4,17 @@
 export const CAMP = {
   name: "MathOs",
   tagline: "Free summer applied math camp",
-  // Naperville Public Library — 95th Street Branch
+  // Neuqua Valley High School
   venue: {
-    name: "Naperville Public Library — 95th Street Branch",
-    street: "3015 Cedar Glade Dr",
+    name: "Neuqua Valley High School",
+    street: "2360 95th St",
     city: "Naperville",
     region: "IL",
     postalCode: "60564",
     country: "US",
-    // Approximate coordinates for the 95th Street Branch
-    lat: 41.7222,
-    lng: -88.1469,
+    // Approximate coordinates for Neuqua Valley High School
+    lat: 41.7195,
+    lng: -88.1395,
   },
   // Camp runs Tue/Thu, 1:00–4:00 PM local (America/Chicago, CDT = UTC-5 in June/July)
   // Use the FIRST session date as the canonical "start" for countdown + ics.
