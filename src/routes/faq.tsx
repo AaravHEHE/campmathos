@@ -65,7 +65,7 @@ const faqs: { id: string; q: string; a: string }[] = [
   {
     id: "bring",
     q: "What should my child bring?",
-    a: "A pencil and a notebook are recommended. A calculator can be helpful but isn't required — instructors will assist whenever it's needed. For our July affiliate CS camp PythOs, a computer is required.",
+    a: "A pencil and a notebook are recommended. A calculator can be helpful but isn't required — instructors will assist whenever it's needed.",
   },
   {
     id: "ratio",
