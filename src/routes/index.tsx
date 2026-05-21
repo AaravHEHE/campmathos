@@ -240,8 +240,7 @@ function Index() {
             </h2>
             <p className="mt-6 max-w-md text-cream/70">
               <Wordmark /> meets Tuesdays and Thursdays in the early afternoon
-              at the Naperville Public Library 95th Street branch from June 2
-              through July 9, 2026.
+              at Neuqua Valley High School from June 2 through July 9, 2026.
             </p>
             <Link
               to="/details"
