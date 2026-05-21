@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "MathOs is a completely free applied math camp at Naperville Public Library for grades 4–7. Tuesdays and Thursdays, 3-hour sessions in the early afternoon, June 2 – July 9, 2026.",
+          "MathOs is a completely free applied math camp at Naperville Public Library. Recommended skill range 5th grade math through Geometry. Tuesdays and Thursdays, 3-hour sessions in the early afternoon, June 2 – July 9, 2026.",
       },
       { property: "og:title", content: "MathOs — Free summer applied math camp in Naperville" },
       {
