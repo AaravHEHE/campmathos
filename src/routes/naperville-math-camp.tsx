@@ -134,7 +134,7 @@ function NapervilleMathCampPage() {
             Ready to sign up your student?
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-lg text-cream/85">
-            Drop your email and we'll send schedule and library details as June
+            Drop your email and we'll send schedule and venue details as June
             gets closer. No commitment.
           </p>
           <Link
