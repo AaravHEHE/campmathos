@@ -10,13 +10,13 @@ export const Route = createFileRoute("/naperville-math-camp")({
   component: NapervilleMathCampPage,
   head: () => ({
     meta: [
-      { title: "Naperville Math Camp 2026 — Free summer camp for kids (grades 4–7)" },
+      { title: "Naperville Math Camp 2026 — Free summer camp (5th grade math → Geometry)" },
       {
         name: "description",
         content:
-          "Looking for a free summer math camp in Naperville, IL? MathOs runs Tue/Thu sessions in the early afternoon at the 95th Street Library branch from June 2 through July 9, 2026. Grades 4–7. Zero cost.",
+          "Looking for a free summer math camp in Naperville, IL? MathOs runs Tue/Thu sessions in the early afternoon at the 95th Street Library branch from June 2 through July 9, 2026. Recommended skill range: 5th grade math through Geometry. Zero cost.",
       },
-      { property: "og:title", content: "Naperville Math Camp 2026 — Free, grades 4–7" },
+      { property: "og:title", content: "Naperville Math Camp 2026 — Free, 5th grade math → Geometry" },
       {
         property: "og:description",
         content:
