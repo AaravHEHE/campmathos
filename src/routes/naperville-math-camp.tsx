@@ -109,9 +109,9 @@ function NapervilleMathCampPage() {
               that's genuinely accessible — so we made <Wordmark /> completely free.
             </p>
             <p>
-              Sessions are at the 95th Street branch of Naperville Public
-              Library. Drop your child off, browse the library, or sit quietly
-              in the back of the room — parents are welcome.
+              Sessions are hosted at Neuqua Valley High School. Drop your
+              child off or sit quietly in the back of the room — parents are
+              welcome.
             </p>
             <p>
               The curriculum is hands-on: graphing real-world data, probability
