@@ -15,7 +15,7 @@ export const Route = createFileRoute("/details")({
       {
         name: "description",
         content:
-          "MathOs camp logistics: free for all students, Tue/Thu sessions in the early afternoon from June 2 through July 9, 2026, at Naperville Public Library 95th Street branch. 3-hour sessions with a short break.",
+          "MathOs camp logistics: free for all students, Tue/Thu sessions in the early afternoon from June 2 through July 9, 2026, at Neuqua Valley High School. 3-hour sessions with a short break.",
       },
       { property: "og:title", content: "Details — MathOs summer camp" },
       {
