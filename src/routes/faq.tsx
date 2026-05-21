@@ -35,7 +35,7 @@ const faqs: { id: string; q: string; a: string }[] = [
   {
     id: "register",
     q: "How do we register?",
-    a: "Sign up using your email through the registration page, and then just show up to Naperville Public Library using the details we share with you after you register.",
+    a: "Sign up using your email through the registration page, and then just show up to Neuqua Valley High School using the details we share with you after you register.",
   },
   {
     id: "free",
