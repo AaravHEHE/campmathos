@@ -180,11 +180,6 @@ function Index() {
                 className="h-full w-full object-cover"
               />
             </div>
-            <div className="absolute -bottom-6 left-4 right-4 md:-bottom-8 md:left-6 md:right-6">
-              <Countdown />
-            </div>
-          </div>
-        </div>
       </section>
 
       <Marquee />
