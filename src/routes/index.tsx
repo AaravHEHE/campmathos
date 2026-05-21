@@ -47,7 +47,7 @@ function Marquee() {
     "★",
     "Completely free",
     "★",
-    "Grades 4–7",
+    "5th grade math → Geometry",
     "★",
     "Naperville Public Library",
     "★",
