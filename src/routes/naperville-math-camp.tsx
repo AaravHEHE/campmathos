@@ -14,7 +14,7 @@ export const Route = createFileRoute("/naperville-math-camp")({
       {
         name: "description",
         content:
-          "Looking for a free summer math camp in Naperville, IL? MathOs runs Tue/Thu sessions in the early afternoon at the 95th Street Library branch from June 2 through July 9, 2026. Recommended skill range: 5th grade math through Geometry. Zero cost.",
+          "Looking for a free summer math camp in Naperville, IL? MathOs runs Tue/Thu sessions in the early afternoon at Neuqua Valley High School from June 2 through July 9, 2026. Recommended skill range: 5th grade math through Geometry. Zero cost.",
       },
       { property: "og:title", content: "Naperville Math Camp 2026 — Free, 5th grade math → Geometry" },
       {
