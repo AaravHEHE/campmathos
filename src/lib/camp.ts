@@ -28,7 +28,7 @@ export const CAMP = {
   humanDays: "Tue · Thu",
   humanTime: "Late morning – early afternoon",
   cost: "Free",
-  ageRange: "Grades 4–7",
+  skillRange: "5th grade math → Geometry",
   contactEmail: "campmathos@gmail.com",
   url: "https://campmathos.lovable.app",
 } as const;

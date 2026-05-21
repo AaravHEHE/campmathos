@@ -52,7 +52,7 @@ const pillars: { tag: string; title: string; body: string; accent: string }[] = 
   {
     tag: "stretching",
     title: "Extra material for the curious.",
-    body: "Campers who want to go further get harder problem sets, project ideas, and reading recommendations matched to their grade.",
+    body: "Campers who want to go further get harder problem sets, project ideas, and reading recommendations matched to their current skill level.",
     accent: "bg-ink text-cream",
   },
 ];
@@ -93,9 +93,9 @@ function AboutPage() {
           <Reveal direction="left" delay={0.2} className="md:col-span-7">
             <p className="text-lg text-cream/80">
               Most kids meet math as a stack of formulas with no obvious purpose. We think that's
-              backwards. <Wordmark /> teaches incoming 4th–7th graders how the math they already see in
-              school connects to engineering, finance, and architecture — the things adults
-              actually pay for and build with.
+              backwards. <Wordmark /> teaches campers working anywhere from 5th-grade arithmetic
+              through Geometry how the math they already see in school connects to engineering,
+              finance, and architecture — the things adults actually pay for and build with.
             </p>
             <p className="mt-5 text-lg text-cream/80">
               The whole program is{" "}

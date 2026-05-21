@@ -29,7 +29,7 @@ export function campEventJsonLd() {
     "@type": "EducationEvent",
     name: `${CAMP.name} — ${CAMP.tagline}`,
     description:
-      "Free four-week applied math summer camp for grades 4–7, taught by Neuqua Valley High School students at Naperville Public Library.",
+      "Free multi-week applied math summer camp, taught by Neuqua Valley High School students at Naperville Public Library. Recommended skill range: 5th grade math through Geometry.",
     startDate: `${CAMP.startDateISO}T${CAMP.sessionStartTime}:00-05:00`,
     endDate: `${CAMP.endDateISO}T${CAMP.sessionEndTime}:00-05:00`,
     eventSchedule: {
@@ -74,7 +74,7 @@ export function campEventJsonLd() {
     audience: {
       "@type": "EducationalAudience",
       educationalRole: "student",
-      audienceType: CAMP.ageRange,
+      audienceType: CAMP.skillRange,
     },
     isAccessibleForFree: true,
   };

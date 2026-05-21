@@ -74,8 +74,8 @@ const faqs: { id: string; q: string; a: string }[] = [
   },
   {
     id: "grades",
-    q: "What if my child is just outside the 4th–7th grade range?",
-    a: "Grades 4–7 is a recommendation, not a hard rule. If you'd still like your child to attend, please reach out and they can be admitted on a special-request basis.",
+    q: "What if my child is just outside the recommended skill range?",
+    a: "The 5th-grade-math-to-Geometry range is a recommendation, not a hard rule. If you'd still like your child to attend, please reach out and they can be admitted on a special-request basis.",
   },
   {
     id: "pythos",

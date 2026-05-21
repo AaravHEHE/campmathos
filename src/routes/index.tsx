@@ -4,7 +4,7 @@ import heroImg from "@/assets/hero-math.jpg";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { Wordmark } from "@/components/Wordmark";
 import { weeks, type Week } from "@/data/weeks";
-import { Countdown } from "@/components/Countdown";
+
 import { canonical, ogImage, campEventJsonLd } from "@/lib/seo";
 import { Reveal } from "@/components/Reveal";
 
@@ -18,13 +18,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "MathOs is a completely free applied math camp at Naperville Public Library for grades 4–7. Tuesdays and Thursdays, 3-hour sessions in the early afternoon, June 2 – July 9, 2026.",
+          "MathOs is a completely free applied math camp at Naperville Public Library. Recommended skill range 5th grade math through Geometry. Tuesdays and Thursdays, 3-hour sessions in the early afternoon, June 2 – July 9, 2026.",
       },
       { property: "og:title", content: "MathOs — Free summer applied math camp in Naperville" },
       {
         property: "og:description",
         content:
-          "Hands-on applied math for grades 4–7. Completely free. Naperville Public Library, summer 2026.",
+          "Hands-on applied math from 5th-grade arithmetic through Geometry. Completely free. Naperville Public Library, summer 2026.",
       },
       { property: "og:image", content: OG },
       { property: "og:type", content: "website" },
@@ -47,7 +47,7 @@ function Marquee() {
     "★",
     "Completely free",
     "★",
-    "Grades 4–7",
+    "5th grade math → Geometry",
     "★",
     "Naperville Public Library",
     "★",
@@ -133,7 +133,7 @@ function Index() {
               system.
             </h1>
             <p className="mt-8 max-w-xl text-lg text-ink/75 md:text-xl">
-              For grades 4–7, taught by Neuqua Valley students.
+              For 5th-grade math through Geometry, taught by Neuqua Valley students.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Link
@@ -164,8 +164,8 @@ function Index() {
                 <dd className="font-display text-2xl font-black md:text-3xl">03</dd>
               </div>
               <div>
-                <dt className="text-muted-foreground">Grades</dt>
-                <dd className="font-display text-2xl font-black md:text-3xl">4–7</dd>
+                <dt className="text-muted-foreground">Skill</dt>
+                <dd className="font-display text-lg font-black leading-tight md:text-xl">5th gr → Geo</dd>
               </div>
             </dl>
           </div>
@@ -179,9 +179,6 @@ function Index() {
                 height={1024}
                 className="h-full w-full object-cover"
               />
-            </div>
-            <div className="absolute -bottom-6 left-4 right-4 md:-bottom-8 md:left-6 md:right-6">
-              <Countdown />
             </div>
           </div>
         </div>
@@ -280,7 +277,7 @@ function Index() {
                 ["Where", "Naperville Library, 95th St"],
                 ["Days", "Tue · Thu"],
                 ["Time", "Early afternoon (3 hr)"],
-                ["Grades", "4th — 7th"],
+                ["Skill", "5th gr → Geometry"],
                 ["Cost", "Free"],
               ].map(([k, v]) => (
                 <div key={k} className="bg-ink p-8">
@@ -319,7 +316,7 @@ function Index() {
               <p className="mt-3 text-ink/70">
                 If your child is interested and wants to keep going between sessions, students or
                 parents can email us and we'll share extra problem sets, project ideas, and
-                reading recommendations matched to their grade.
+                reading recommendations matched to their current skill level.
               </p>
               <a
                 href="mailto:campmathos@gmail.com?subject=More%20Mathos%20material"
