@@ -133,7 +133,7 @@ function Index() {
               system.
             </h1>
             <p className="mt-8 max-w-xl text-lg text-ink/75 md:text-xl">
-              For grades 4–7, taught by Neuqua Valley students.
+              For 5th-grade math through Geometry, taught by Neuqua Valley students.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Link
