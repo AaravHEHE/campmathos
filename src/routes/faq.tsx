@@ -78,11 +78,6 @@ const faqs: { id: string; q: string; a: string }[] = [
     a: "The 5th-grade-math-to-Geometry range is a recommendation, not a hard rule. If you'd still like your child to attend, please reach out and they can be admitted on a special-request basis.",
   },
   {
-    id: "pythos",
-    q: "Are there any prerequisites for PythOs (the July CS camp)?",
-    a: "There are no prerequisites — beginners are welcome. PythOs runs in July with two age tracks: grades 1–4 use Scratch on Mondays and Thursdays, and grades 5–8 use Python with a custom Turtle library on Tuesdays and Fridays. The only requirement is bringing a computer.",
-  },
-  {
     id: "showcase",
     q: "When is the showcase, and can families come?",
     a: "Showcase day is the final Thursday of camp. Campers will present their final projects, and parents are strongly encouraged to attend.",
