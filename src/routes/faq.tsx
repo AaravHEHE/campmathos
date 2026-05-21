@@ -15,13 +15,13 @@ export const Route = createFileRoute("/faq")({
       {
         name: "description",
         content:
-          "Answers to the most common questions about MathOs: cost, schedule, attendance, drop-off, materials, prerequisites, the PythOs affiliate CS camp, and how to register.",
+          "Answers to the most common questions about MathOs: cost, schedule, attendance, drop-off, materials, prerequisites, and how to register.",
       },
       { property: "og:title", content: "FAQ — MathOs summer camp" },
       {
         property: "og:description",
         content:
-          "Cost, schedule, attendance, drop-off, materials, prerequisites, PythOs, and how to register.",
+          "Cost, schedule, attendance, drop-off, materials, prerequisites, and how to register.",
       },
       { property: "og:image", content: OG },
       { name: "twitter:card", content: "summary_large_image" },
