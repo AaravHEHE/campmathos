@@ -14,13 +14,13 @@ export const Route = createFileRoute("/naperville-math-camp")({
       {
         name: "description",
         content:
-          "Looking for a free summer math camp in Naperville, IL? MathOs runs Tue/Thu sessions in the early afternoon at the 95th Street Library branch from June 2 through July 9, 2026. Recommended skill range: 5th grade math through Geometry. Zero cost.",
+          "Looking for a free summer math camp in Naperville, IL? MathOs runs Tue/Thu sessions in the early afternoon at Neuqua Valley High School from June 2 through July 9, 2026. Recommended skill range: 5th grade math through Geometry. Zero cost.",
       },
       { property: "og:title", content: "Naperville Math Camp 2026 — Free, 5th grade math → Geometry" },
       {
         property: "og:description",
         content:
-          "MathOs is a free multi-week applied math camp at Naperville Public Library, summer 2026.",
+          "MathOs is a free multi-week applied math camp at Neuqua Valley High School, summer 2026.",
       },
       { property: "og:image", content: OG },
       { property: "og:type", content: "website" },
@@ -53,8 +53,8 @@ function NapervilleMathCampPage() {
             for Naperville kids.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            <Wordmark /> is a multi-week applied math summer camp held at the
-            Naperville Public Library 95th Street branch. Completely free,
+            <Wordmark /> is a multi-week applied math summer camp hosted at
+            Neuqua Valley High School. Completely free,
             recommended for campers working at 5th-grade math through Geometry,
             taught by Neuqua Valley High School students.
           </p>
@@ -109,9 +109,9 @@ function NapervilleMathCampPage() {
               that's genuinely accessible — so we made <Wordmark /> completely free.
             </p>
             <p>
-              Sessions are at the 95th Street branch of Naperville Public
-              Library. Drop your child off, browse the library, or sit quietly
-              in the back of the room — parents are welcome.
+              Sessions are hosted at Neuqua Valley High School. Drop your
+              child off or sit quietly in the back of the room — parents are
+              welcome.
             </p>
             <p>
               The curriculum is hands-on: graphing real-world data, probability
@@ -134,7 +134,7 @@ function NapervilleMathCampPage() {
             Ready to sign up your student?
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-lg text-cream/85">
-            Drop your email and we'll send schedule and library details as June
+            Drop your email and we'll send schedule and venue details as June
             gets closer. No commitment.
           </p>
           <Link

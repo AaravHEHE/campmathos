@@ -15,13 +15,13 @@ export const Route = createFileRoute("/faq")({
       {
         name: "description",
         content:
-          "Answers to the most common questions about MathOs: cost, schedule, attendance, drop-off, materials, prerequisites, the PythOs affiliate CS camp, and how to register.",
+          "Answers to the most common questions about MathOs: cost, schedule, attendance, drop-off, materials, prerequisites, and how to register.",
       },
       { property: "og:title", content: "FAQ — MathOs summer camp" },
       {
         property: "og:description",
         content:
-          "Cost, schedule, attendance, drop-off, materials, prerequisites, PythOs, and how to register.",
+          "Cost, schedule, attendance, drop-off, materials, prerequisites, and how to register.",
       },
       { property: "og:image", content: OG },
       { name: "twitter:card", content: "summary_large_image" },
@@ -35,7 +35,7 @@ const faqs: { id: string; q: string; a: string }[] = [
   {
     id: "register",
     q: "How do we register?",
-    a: "Sign up using your email through the registration page, and then just show up to Naperville Public Library using the details we share with you after you register.",
+    a: "Sign up using your email through the registration page, and then just show up to Neuqua Valley High School using the details we share with you after you register.",
   },
   {
     id: "free",
@@ -45,7 +45,7 @@ const faqs: { id: string; q: string; a: string }[] = [
   {
     id: "schedule",
     q: "What days and times does the camp meet?",
-    a: "The camp runs on Tuesday and Thursday from June 2 through July 9, 2026 at Naperville Public Library. Each session is about three hours in the early afternoon, with a short break in the middle.",
+    a: "The camp runs on Tuesday and Thursday from June 2 through July 9, 2026 at Neuqua Valley High School. Each session is about three hours in the early afternoon, with a short break in the middle.",
   },
   {
     id: "attendance",
@@ -65,7 +65,7 @@ const faqs: { id: string; q: string; a: string }[] = [
   {
     id: "bring",
     q: "What should my child bring?",
-    a: "A pencil and a notebook are recommended. A calculator can be helpful but isn't required — instructors will assist whenever it's needed. For our July affiliate CS camp PythOs, a computer is required.",
+    a: "A pencil and a notebook are recommended. A calculator can be helpful but isn't required — instructors will assist whenever it's needed.",
   },
   {
     id: "ratio",
@@ -76,11 +76,6 @@ const faqs: { id: string; q: string; a: string }[] = [
     id: "grades",
     q: "What if my child is just outside the recommended skill range?",
     a: "The 5th-grade-math-to-Geometry range is a recommendation, not a hard rule. If you'd still like your child to attend, please reach out and they can be admitted on a special-request basis.",
-  },
-  {
-    id: "pythos",
-    q: "Are there any prerequisites for PythOs (the July CS camp)?",
-    a: "There are no prerequisites — beginners are welcome. PythOs runs in July with two age tracks: grades 1–4 use Scratch on Mondays and Thursdays, and grades 5–8 use Python with a custom Turtle library on Tuesdays and Fridays. The only requirement is bringing a computer.",
   },
   {
     id: "showcase",

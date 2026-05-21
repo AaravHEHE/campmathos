@@ -18,13 +18,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "MathOs is a completely free applied math camp at Naperville Public Library. Recommended skill range 5th grade math through Geometry. Tuesdays and Thursdays, 3-hour sessions in the early afternoon, June 2 – July 9, 2026.",
+          "MathOs is a completely free applied math camp at Neuqua Valley High School. Recommended skill range 5th grade math through Geometry. Tuesdays and Thursdays, 3-hour sessions in the early afternoon, June 2 – July 9, 2026.",
       },
       { property: "og:title", content: "MathOs — Free summer applied math camp in Naperville" },
       {
         property: "og:description",
         content:
-          "Hands-on applied math from 5th-grade arithmetic through Geometry. Completely free. Naperville Public Library, summer 2026.",
+          "Hands-on applied math from 5th-grade arithmetic through Geometry. Completely free. Neuqua Valley High School, summer 2026.",
       },
       { property: "og:image", content: OG },
       { property: "og:type", content: "website" },
@@ -49,7 +49,7 @@ function Marquee() {
     "★",
     "5th grade math → Geometry",
     "★",
-    "Naperville Public Library",
+    "Neuqua Valley HS",
     "★",
     "June",
     "★",
@@ -123,7 +123,7 @@ function Index() {
           <div className="md:col-span-7">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-ink bg-cream px-4 py-1.5 font-mono text-xs tracking-widest">
               <span className="h-2 w-2 rounded-full bg-coral" />
-              June 2026 · Naperville Public Library · 100% free
+              June 2026 · Neuqua Valley High School · 100% free
             </div>
             <h1 className="font-display text-[clamp(2.5rem,8vw,7.5rem)] font-black leading-[0.9] break-words">
               Math is the
@@ -227,25 +227,6 @@ function Index() {
             </div>
           </Reveal>
 
-          {/* PythOs teaser */}
-          <Reveal direction="scale" amount={0.2}>
-            <div className="mt-12 rounded-3xl border-2 border-ink bg-electric p-8 text-cream md:p-12">
-              <div className="max-w-3xl">
-                <p className="font-mono text-xs tracking-widest text-cream/70">
-                  Affiliate program · July
-                </p>
-                <h3 className="mt-2 font-display text-3xl font-black md:text-4xl">
-                  PythOs — build a 2D game in July.
-                </h3>
-                <p className="mt-3 text-cream/85">
-                  After <Wordmark /> wraps, our Camp Directors run PythOs: a creative computer-science camp
-                  with two age tracks (grades 1–4 in Scratch, grades 5–8 in Python with a custom
-                  Turtle library). Every camper finishes with their own playable 2D game. PythOs
-                  has its own dedicated site coming soon.
-                </p>
-              </div>
-            </div>
-          </Reveal>
         </div>
       </section>
 
@@ -259,8 +240,7 @@ function Index() {
             </h2>
             <p className="mt-6 max-w-md text-cream/70">
               <Wordmark /> meets Tuesdays and Thursdays in the early afternoon
-              at the Naperville Public Library 95th Street branch from June 2
-              through July 9, 2026.
+              at Neuqua Valley High School from June 2 through July 9, 2026.
             </p>
             <Link
               to="/details"
@@ -274,7 +254,7 @@ function Index() {
             <dl className="grid gap-px overflow-hidden rounded-3xl border-2 border-cream/20 bg-cream/10 md:grid-cols-2">
               {[
                 ["When", "June – July 2026"],
-                ["Where", "Naperville Library, 95th St"],
+                ["Where", "Neuqua Valley HS"],
                 ["Days", "Tue · Thu"],
                 ["Time", "Early afternoon (3 hr)"],
                 ["Skill", "5th gr → Geometry"],
@@ -383,7 +363,7 @@ function Index() {
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-lg text-cream/85">
               Completely free. Drop your email to let us know you're interested — we'll send
-              the schedule and library details as June gets closer. No commitment required.
+              the schedule and venue details as June gets closer. No commitment required.
             </p>
             <Link
               to="/register"

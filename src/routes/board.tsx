@@ -20,7 +20,7 @@ export const Route = createFileRoute("/board")({
       {
         property: "og:description",
         content:
-          "Meet the six Camp Directors behind MathOs, a free summer applied math camp at Naperville Public Library.",
+          "Meet the six Camp Directors behind MathOs, a free summer applied math camp at Neuqua Valley High School.",
       },
       { property: "og:image", content: OG },
       { name: "twitter:card", content: "summary_large_image" },

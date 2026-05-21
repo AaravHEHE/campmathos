@@ -14,7 +14,7 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "MathOs comes from the Greek word for 'learning.' We're a student-led nonprofit running a free, hands-on applied math camp at Naperville Public Library, with an affiliate CS program called PythOs.",
+          "MathOs comes from the Greek word for 'learning.' We're a student-led nonprofit running a free, hands-on applied math camp at Neuqua Valley High School.",
       },
       { property: "og:title", content: "About MathOs — Free applied math camp" },
       {
@@ -142,44 +142,6 @@ function AboutPage() {
         </div>
       </section>
 
-      {/* PYTHOS */}
-      <section className="border-b-2 border-ink bg-electric">
-        <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 text-cream md:grid-cols-12 md:py-28">
-          <div className="md:col-span-7">
-            <p className="font-mono text-sm tracking-widest text-cream/70">
-              Affiliate program
-            </p>
-            <h2 className="mt-2 font-display text-5xl font-black leading-[0.95] md:text-6xl">
-              Meet <span className="italic text-sun">PythOs</span>.
-            </h2>
-            <p className="mt-6 max-w-2xl text-cream/85">
-              After <Wordmark /> wraps in June, our Camp Directors run an affiliate computer-science program
-              called <span className="font-semibold">PythOs</span> in July. Two age tracks, both
-              focused on building real games — not memorizing syntax. PythOs has its own
-              dedicated website coming soon.
-            </p>
-          </div>
-          <div className="md:col-span-5">
-            <div className="rounded-3xl border-2 border-cream bg-cream/10 p-6">
-              <p className="font-mono text-xs tracking-widest text-cream/70">
-                July tracks
-              </p>
-              <ul className="mt-4 space-y-3 font-mono text-sm">
-                <li className="flex gap-3">
-                  <span className="text-sun">→</span>Grades 1–4 · Mondays &amp; Thursdays · Scratch
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-sun">→</span>Grades 5–8 · Tuesdays &amp; Fridays · Python +
-                  Turtle
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-sun">→</span>Final showcase: every camper ships a 2D game
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* CTA */}
       <section className="bg-coral">

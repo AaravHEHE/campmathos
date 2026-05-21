@@ -15,7 +15,7 @@ export const Route = createFileRoute("/details")({
       {
         name: "description",
         content:
-          "MathOs camp logistics: free for all students, Tue/Thu sessions in the early afternoon from June 2 through July 9, 2026, at Naperville Public Library 95th Street branch. 3-hour sessions with a short break.",
+          "MathOs camp logistics: free for all students, Tue/Thu sessions in the early afternoon from June 2 through July 9, 2026, at Neuqua Valley High School. 3-hour sessions with a short break.",
       },
       { property: "og:title", content: "Details — MathOs summer camp" },
       {
@@ -38,7 +38,7 @@ const facts: [string, string][] = [
   ["Time", CAMP.humanTime],
   ["Session length", "3 hours (with a short break)"],
   ["Skill range", "5th grade math → Geometry (recommended)"],
-  ["Affiliate program", "PythOs (CS camp) runs in July"],
+  ["Hosted at", "Neuqua Valley High School"],
   ["Cost", "Completely free"],
 ];
 
@@ -56,7 +56,7 @@ function DetailsPage() {
             Everything <span className="italic text-electric">logistical</span>.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            <Wordmark /> is a multi-week summer camp at Naperville Public Library, completely free for
+            <Wordmark /> is a multi-week summer camp hosted at Neuqua Valley High School, completely free for
             every camper. Here's exactly how it runs.
           </p>
         </div>
@@ -170,10 +170,6 @@ function DetailsPage() {
                 </li>
                 <li className="flex gap-3">
                   <span className="text-coral">→</span>A snack and a drink for the short break
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-coral">→</span>A computer if you join PythOs in July
-                  (required for the CS camp)
                 </li>
                 <li className="flex gap-3">
                   <span className="text-coral">→</span>A calculator if you have one — not required,
