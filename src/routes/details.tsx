@@ -15,7 +15,7 @@ export const Route = createFileRoute("/details")({
       {
         name: "description",
         content:
-          "MathOs camp logistics: free for all students, Tue/Thu sessions in the early afternoon from June 2 through July 9, 2026, at Neuqua Valley High School. 3-hour sessions with a short break.",
+          "MathOs camp logistics: free for all students, Tue/Thu sessions in the early afternoon from July 7 through August 13, 2026, at Neuqua Valley High School. 3-hour sessions with a short break.",
       },
       { property: "og:title", content: "Details — MathOs summer camp" },
       {
@@ -140,7 +140,7 @@ function DetailsPage() {
                 </h3>
                 <p className="mt-2 text-cream/85">
                   Download the .ics file — it includes every Tue/Thu session
-                  from June 2 through July 9, 2026, with the library address pre-filled.
+                  from July 7 through August 13, 2026, with the library address pre-filled.
                 </p>
               </div>
               <a

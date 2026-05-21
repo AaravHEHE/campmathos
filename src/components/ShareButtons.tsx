@@ -3,7 +3,7 @@ import { Check, Copy, Facebook, Mail } from "lucide-react";
 
 const SHARE_URL = "https://campmathos.lovable.app";
 const SHARE_TEXT =
-  "MathOs is a completely free summer applied math camp at Neuqua Valley High School — recommended for campers working at 5th-grade math through Geometry. Tue/Thu, June 2 – July 9, 2026. Worth a look:";
+  "MathOs is a completely free summer applied math camp at Neuqua Valley High School — recommended for campers working at 5th-grade math through Geometry. Tue/Thu, July 7 – August 13, 2026. Worth a look:";
 
 export function ShareButtons() {
   const [copied, setCopied] = useState(false);
