@@ -55,7 +55,8 @@ function NapervilleMathCampPage() {
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
             <Wordmark /> is a multi-week applied math summer camp held at the
             Naperville Public Library 95th Street branch. Completely free,
-            grades 4–7, taught by Neuqua Valley High School students.
+            recommended for campers working at 5th-grade math through Geometry,
+            taught by Neuqua Valley High School students.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
