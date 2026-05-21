@@ -14,7 +14,7 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "MathOs comes from the Greek word for 'learning.' We're a student-led nonprofit running a free, hands-on applied math camp at Naperville Public Library, with an affiliate CS program called PythOs.",
+          "MathOs comes from the Greek word for 'learning.' We're a student-led nonprofit running a free, hands-on applied math camp at Neuqua Valley High School.",
       },
       { property: "og:title", content: "About MathOs — Free applied math camp" },
       {
