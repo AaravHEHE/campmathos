@@ -45,7 +45,7 @@ const faqs: { id: string; q: string; a: string }[] = [
   {
     id: "schedule",
     q: "What days and times does the camp meet?",
-    a: "The camp runs on Tuesday and Thursday from June 2 through July 9, 2026 at Naperville Public Library. Each session is about three hours in the early afternoon, with a short break in the middle.",
+    a: "The camp runs on Tuesday and Thursday from June 2 through July 9, 2026 at Neuqua Valley High School. Each session is about three hours in the early afternoon, with a short break in the middle.",
   },
   {
     id: "attendance",
