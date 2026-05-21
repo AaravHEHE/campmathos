@@ -74,7 +74,7 @@ export function campEventJsonLd() {
     audience: {
       "@type": "EducationalAudience",
       educationalRole: "student",
-      audienceType: CAMP.ageRange,
+      audienceType: CAMP.skillRange,
     },
     isAccessibleForFree: true,
   };
