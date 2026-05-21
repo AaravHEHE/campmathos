@@ -254,7 +254,7 @@ function Index() {
             <dl className="grid gap-px overflow-hidden rounded-3xl border-2 border-cream/20 bg-cream/10 md:grid-cols-2">
               {[
                 ["When", "June – July 2026"],
-                ["Where", "Naperville Library, 95th St"],
+                ["Where", "Neuqua Valley HS"],
                 ["Days", "Tue · Thu"],
                 ["Time", "Early afternoon (3 hr)"],
                 ["Skill", "5th gr → Geometry"],
