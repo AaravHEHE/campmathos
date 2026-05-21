@@ -316,7 +316,7 @@ function Index() {
               <p className="mt-3 text-ink/70">
                 If your child is interested and wants to keep going between sessions, students or
                 parents can email us and we'll share extra problem sets, project ideas, and
-                reading recommendations matched to their grade.
+                reading recommendations matched to their current skill level.
               </p>
               <a
                 href="mailto:campmathos@gmail.com?subject=More%20Mathos%20material"
