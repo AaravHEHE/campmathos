@@ -363,7 +363,7 @@ function Index() {
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-lg text-cream/85">
               Completely free. Drop your email to let us know you're interested — we'll send
-              the schedule and library details as June gets closer. No commitment required.
+              the schedule and venue details as June gets closer. No commitment required.
             </p>
             <Link
               to="/register"
