@@ -147,7 +147,7 @@ function AboutPage() {
       <section className="bg-coral">
         <div className="mx-auto max-w-7xl px-6 py-20 text-center md:py-28">
           <h2 className="mx-auto max-w-3xl font-display text-5xl font-black leading-[0.9] text-cream md:text-7xl">
-            Spend June learning the way it should feel.
+            Spend July learning the way it should feel.
           </h2>
           <Link
             to="/register"

@@ -14,7 +14,7 @@ export const Route = createFileRoute("/naperville-math-camp")({
       {
         name: "description",
         content:
-          "Looking for a free summer math camp in Naperville, IL? MathOs runs Tue/Thu sessions in the early afternoon at Neuqua Valley High School from June 2 through July 9, 2026. Recommended skill range: 5th grade math through Geometry. Zero cost.",
+          "Looking for a free summer math camp in Naperville, IL? MathOs runs Tue/Thu sessions in the early afternoon at Neuqua Valley High School from July 7 through August 13, 2026. Recommended skill range: 5th grade math through Geometry. Zero cost.",
       },
       { property: "og:title", content: "Naperville Math Camp 2026 — Free, 5th grade math → Geometry" },
       {
@@ -134,7 +134,7 @@ function NapervilleMathCampPage() {
             Ready to sign up your student?
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-lg text-cream/85">
-            Drop your email and we'll send schedule and venue details as June
+            Drop your email and we'll send schedule and venue details as July
             gets closer. No commitment.
           </p>
           <Link
