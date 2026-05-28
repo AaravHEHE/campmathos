@@ -2,7 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { Wordmark } from "@/components/Wordmark";
 import { canonical, ogImage } from "@/lib/seo";
-import { CAMP, fullAddress } from "@/lib/camp";
+import { CAMP } from "@/lib/camp";
+
 import { Reveal } from "@/components/Reveal";
 
 const OG = ogImage("/og-details.jpg");
@@ -13,14 +14,19 @@ export const Route = createFileRoute("/details")({
     meta: [
       { title: "Details — MathOs summer camp schedule and logistics" },
       {
+      { title: "Details — MathOs online summer camp schedule and logistics" },
+      {
         name: "description",
         content:
-          "MathOs camp logistics: free for all students, Tue/Thu sessions in the early afternoon from July 7 through August 13, 2026, at Neuqua Valley High School. 3-hour sessions with a short break.",
+          "MathOs camp logistics: free for all students, Tue/Thu live online sessions in the early afternoon Central time from July 7 through August 13, 2026. 3-hour sessions with a short break. Taught over Zoom.",
       },
-      { property: "og:title", content: "Details — MathOs summer camp" },
+      { property: "og:title", content: "Details — MathOs online summer camp" },
       {
         property: "og:description",
         content:
+          "Schedule, platform, session structure, and what to bring. MathOs is completely free and fully online.",
+      },
+
           "Schedule, location, session structure, and what to bring. MathOs is completely free.",
       },
       { property: "og:image", content: OG },
@@ -33,14 +39,15 @@ export const Route = createFileRoute("/details")({
 
 const facts: [string, string][] = [
   ["When", CAMP.humanDateRange],
-  ["Where", fullAddress()],
+  ["Where", "Online — live over Zoom"],
   ["Days", CAMP.humanDays],
   ["Time", CAMP.humanTime],
   ["Session length", "3 hours (with a short break)"],
   ["Skill range", "5th grade math → Geometry (recommended)"],
-  ["Hosted at", "Neuqua Valley High School"],
+  ["Platform", "Zoom link sent before each session"],
   ["Cost", "Completely free"],
 ];
+
 
 function DetailsPage() {
   return (
@@ -58,9 +65,10 @@ function DetailsPage() {
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
             <Wordmark /> is a multi-week summer camp hosted at Neuqua Valley High School, completely free for
             every camper. Here's exactly how it runs.
+          <p className="mt-6 max-w-2xl text-lg text-ink/75">
+            <Wordmark /> is a multi-week summer camp taught live online over Zoom, completely free for
+            every camper. Here's exactly how it runs.
           </p>
-        </div>
-      </section>
 
       <section className="border-b-2 border-ink bg-ink text-cream">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
@@ -109,9 +117,10 @@ function DetailsPage() {
                 accent: "bg-sun text-ink",
               },
               {
-                tag: "Final ~80 min",
-                title: "Second half",
-                body: "Project work, group challenges, and Q&A. Instructors circulate to help one-on-one and pull together what we built.",
+                body: "Snack, water, stretch. Cameras off, mics off — campers can step away from the screen and reset before the second half.",
+                accent: "bg-sun text-ink",
+              },
+
                 accent: "bg-coral text-cream",
               },
             ].map((b, i) => (
@@ -134,16 +143,20 @@ function DetailsPage() {
               <div className="max-w-xl">
                 <p className="font-mono text-xs uppercase tracking-widest text-cream/70">
                   Add to calendar
+              <div className="max-w-xl">
+                <p className="font-mono text-xs uppercase tracking-widest text-cream/70">
+                  Add to calendar
                 </p>
                 <h3 className="mt-2 font-display text-2xl font-black md:text-3xl">
                   Drop every session into your calendar.
                 </h3>
                 <p className="mt-2 text-cream/85">
                   Download the .ics file — it includes every Tue/Thu session
-                  from July 7 through August 13, 2026, with the library address pre-filled.
+                  from July 7 through August 13, 2026, with a reminder that the Zoom link
+                  arrives by email.
                 </p>
               </div>
-              <a
+
                 href="/mathos.ics"
                 download="mathos-2026.ics"
                 className="mt-5 inline-flex min-h-11 items-center rounded-full border-2 border-cream bg-cream px-6 py-3 font-semibold text-ink shadow-[6px_6px_0_0_var(--ink)] transition hover:bg-sun hover:border-sun md:mt-0"
@@ -162,14 +175,24 @@ function DetailsPage() {
             <div>
               <p className="font-mono text-sm tracking-widest text-ink/60">Bring</p>
               <h2 className="mt-3 font-display text-5xl font-black leading-[0.95]">
-                What to bring.
+      {/* WHAT YOU NEED */}
+      <section className="border-b-2 border-ink bg-sun">
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 md:grid-cols-2 md:py-24">
+          <Reveal direction="right">
+            <div>
+              <p className="font-mono text-sm tracking-widest text-ink/60">Set up</p>
+              <h2 className="mt-3 font-display text-5xl font-black leading-[0.95]">
+                What you need.
               </h2>
               <ul className="mt-8 space-y-3 font-mono text-sm">
                 <li className="flex gap-3">
-                  <span className="text-coral">→</span>A pencil and a notebook (or scratch paper)
+                  <span className="text-coral">→</span>A laptop, desktop, tablet, or phone with Zoom
                 </li>
                 <li className="flex gap-3">
-                  <span className="text-coral">→</span>A snack and a drink for the short break
+                  <span className="text-coral">→</span>A reliable internet connection
+                </li>
+                <li className="flex gap-3">
+                  <span className="text-coral">→</span>A pencil and a notebook (or scratch paper) on the side
                 </li>
                 <li className="flex gap-3">
                   <span className="text-coral">→</span>A calculator if you have one — not required,
@@ -177,30 +200,27 @@ function DetailsPage() {
                 </li>
               </ul>
               <p className="mt-6 max-w-md text-ink/75">
-                Don't have something? Don't worry — basic materials will be provided so no camper is
-                left out.
+                Don't have something? Reach out — we'll figure it out so no camper is left out.
               </p>
             </div>
           </Reveal>
           <Reveal direction="left" delay={0.2}>
             <div>
-              <p className="font-mono text-sm tracking-widest text-ink/60">Drop-off</p>
+              <p className="font-mono text-sm tracking-widest text-ink/60">Joining a session</p>
               <h2 className="mt-3 font-display text-5xl font-black leading-[0.95]">
-                Drop-off and pick-up.
+                How sessions work.
               </h2>
               <p className="mt-6 text-lg text-ink/80">
-                Parents sign their child in at the start of each session and sign them out at the
-                end. You're welcome to stay for the session if you'd like — we just ask that you keep
-                quiet so the class can focus. Instructors are happy to answer parent questions
-                before or after class.
+                Before each session we email the Zoom link to every registered family. Cameras
+                are encouraged but not required, mics can stay muted until it's time to share.
+                Parents are welcome to sit in alongside their child if they'd like — Camp Directors
+                are happy to answer parent questions before or after class.
               </p>
             </div>
           </Reveal>
         </div>
       </section>
 
-      <section className="bg-coral">
-        <div className="mx-auto max-w-7xl px-6 py-20 text-center md:py-28">
           <h2 className="mx-auto max-w-3xl font-display text-5xl font-black leading-[0.9] text-cream md:text-7xl">
             Save your spot — it's free.
           </h2>
