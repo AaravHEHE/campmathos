@@ -240,7 +240,7 @@ function Index() {
             </h2>
             <p className="mt-6 max-w-md text-cream/70">
               <Wordmark /> meets Tuesdays and Thursdays in the early afternoon
-              at Neuqua Valley High School from July 7 through August 13, 2026.
+              Central — live over Zoom — from July 7 through August 13, 2026.
             </p>
             <Link
               to="/details"
@@ -254,7 +254,7 @@ function Index() {
             <dl className="grid gap-px overflow-hidden rounded-3xl border-2 border-cream/20 bg-cream/10 md:grid-cols-2">
               {[
                 ["When", "July – August 2026"],
-                ["Where", "Neuqua Valley HS"],
+                ["Where", "Online (Zoom)"],
                 ["Days", "Tue · Thu"],
                 ["Time", "Early afternoon (3 hr)"],
                 ["Skill", "5th gr → Geometry"],
@@ -317,7 +317,7 @@ function Index() {
             <h2 className="mt-2 font-display text-5xl font-black md:text-6xl">Common questions.</h2>
             <p className="mt-6 max-w-2xl text-lg text-ink/70">
               A few of the questions families ask most. We have a full FAQ page with everything
-              else — schedule, drop-off, materials, attendance, and more.
+              else — schedule, joining instructions, materials, attendance, and more.
             </p>
           </Reveal>
 
@@ -363,7 +363,7 @@ function Index() {
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-lg text-cream/85">
               Completely free. Drop your email to let us know you're interested — we'll send
-              the schedule and venue details as July gets closer. No commitment required.
+              the schedule and Zoom joining details as July gets closer. No commitment required.
             </p>
             <Link
               to="/register"
