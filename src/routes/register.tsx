@@ -15,13 +15,13 @@ export const Route = createFileRoute("/register")({
       {
         name: "description",
         content:
-          "Let us know your child is interested in MathOs, the free summer applied math camp at Neuqua Valley High School. No commitment — we'll send schedule and venue details as July gets closer.",
+          "Let us know your child is interested in MathOs, the free online summer applied math camp taught live over Zoom. No commitment — we'll send schedule and Zoom joining details as July gets closer.",
       },
       { property: "og:title", content: "Express interest — MathOs summer camp" },
       {
         property: "og:description",
         content:
-          "Drop your email to express interest. No commitment required. MathOs is a completely free summer math camp at Neuqua Valley High School.",
+          "Drop your email to express interest. No commitment required. MathOs is a completely free online summer math camp.",
       },
       { property: "og:image", content: OG },
       { name: "twitter:card", content: "summary_large_image" },
@@ -98,8 +98,8 @@ function RegisterPage() {
           </h1>
           <p className="mt-6 text-lg text-ink/75">
             This isn't a commitment — just a heads-up that your family is interested. Drop your
-            email and we'll reach out closer to the camp with the full schedule and
-            library check-in details. Decide later whether to come. The camp itself is always free.
+            email and we'll reach out closer to the camp with the full schedule and the
+            Zoom joining details. Decide later whether to come. The camp itself is always free.
           </p>
 
           {status === "success" ? (
@@ -138,7 +138,7 @@ function RegisterPage() {
               </h2>
               <p className="mt-3 text-cream/85">
                 We already have <strong>{email}</strong> on our interest list — no need to sign
-                up again. We'll be in touch closer to the camp with the schedule and library
+                up again. We'll be in touch closer to the camp with the schedule and Zoom
                 details. Questions? Email{" "}
                 <a href="mailto:campmathos@gmail.com" className="underline">
                   campmathos@gmail.com

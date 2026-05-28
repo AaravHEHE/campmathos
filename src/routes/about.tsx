@@ -10,11 +10,12 @@ export const Route = createFileRoute("/about")({
   component: AboutPage,
   head: () => ({
     meta: [
-      { title: "About MathOs — Free applied math camp in Naperville" },
+      { title: "About MathOs — Free online applied math camp" },
       {
         name: "description",
         content:
-          "MathOs comes from the Greek word for 'learning.' We're a student-led nonprofit running a free, hands-on applied math camp at Neuqua Valley High School.",
+          "MathOs comes from the Greek word for 'learning.' We're a student-led nonprofit running a free, hands-on online applied math camp taught live over Zoom.",
+      },
       },
       { property: "og:title", content: "About MathOs — Free applied math camp" },
       {
@@ -75,7 +76,7 @@ function AboutPage() {
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
             The name comes from the Greek word for "learning" or "knowledge." <Wordmark /> is a
-            one-month summer program designed by a team of Neuqua Valley High School students to
+            one-month online summer program designed by a team of high school students to
             make math feel useful, hands-on, and genuinely exciting — not abstract.
           </p>
         </div>

@@ -14,13 +14,13 @@ export const Route = createFileRoute("/board")({
       {
         name: "description",
         content:
-          "Meet the MathOs Camp Directors — the Neuqua Valley students leading our free summer applied math camp in Naperville.",
+          "Meet the MathOs Camp Directors — the high school students leading our free online summer applied math camp.",
       },
       { property: "og:title", content: "Camp Directors — MathOs" },
       {
         property: "og:description",
         content:
-          "Meet the six Camp Directors behind MathOs, a free summer applied math camp at Neuqua Valley High School.",
+          "Meet the six Camp Directors behind MathOs, a free online summer applied math camp.",
       },
       { property: "og:image", content: OG },
       { name: "twitter:card", content: "summary_large_image" },
@@ -90,7 +90,7 @@ function BoardPage() {
             The students <span className="italic text-electric">behind</span> <Wordmark />.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            <Wordmark /> is built and taught by six Neuqua Valley High School students who believe math should feel useful,
+            <Wordmark /> is built and taught by six high school students who believe math should feel useful,
             not abstract. We design every session, mentor every camper, and run every workshop ourselves.
           </p>
         </div>
