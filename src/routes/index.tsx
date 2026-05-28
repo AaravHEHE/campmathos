@@ -123,7 +123,7 @@ function Index() {
           <div className="md:col-span-7">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-ink bg-cream px-4 py-1.5 font-mono text-xs tracking-widest">
               <span className="h-2 w-2 rounded-full bg-coral" />
-              July 2026 · Neuqua Valley High School · 100% free
+              July 2026 · Live online over Zoom · 100% free
             </div>
             <h1 className="font-display text-[clamp(2.5rem,8vw,7.5rem)] font-black leading-[0.9] break-words">
               Math is the
@@ -133,7 +133,7 @@ function Index() {
               system.
             </h1>
             <p className="mt-8 max-w-xl text-lg text-ink/75 md:text-xl">
-              For 5th-grade math through Geometry, taught by Neuqua Valley students.
+              For 5th-grade math through Geometry, taught live online by high school students.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Link
