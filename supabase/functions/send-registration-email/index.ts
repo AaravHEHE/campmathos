@@ -37,23 +37,16 @@ function confirmationHtml(email: string) {
           <p style="margin:0 0 8px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#666;">Mathos Camp</p>
           <h1 style="margin:0 0 16px;font-size:28px;line-height:1.1;">Thanks for showing your interest! 🙌</h1>
           <p style="margin:0 0 16px;font-size:16px;line-height:1.5;">
-            We've added <strong>${escapeHtml(email)}</strong> to our interest list for <strong>Mathos</strong> — the completely free summer applied math camp hosted at Neuqua Valley High School. This isn't a commitment — we'll reach out with more details closer to the date of the camp.
+            We've added <strong>${escapeHtml(email)}</strong> to our interest list for <strong>Mathos</strong> — the completely free online summer applied math camp taught live over Zoom. This isn't a commitment — we'll reach out with more details closer to the date of the camp.
           </p>
           <p style="margin:0 0 8px;font-size:16px;line-height:1.5;font-weight:bold;">For now, here's what to know:</p>
           <ul style="margin:0 0 16px 20px;padding:0;font-size:16px;line-height:1.6;">
-            <li>Sessions run approximately <strong>2.5 hours</strong> each</li>
-            <li><strong>3 sessions per week</strong> (Mon · Wed · Fri)</li>
-            <li>Runs for <strong>4 weeks through June</strong></li>
-            <li>Grades 4–7 · 100% free</li>
+            <li>Sessions run about <strong>3 hours</strong> each, with a short break</li>
+            <li><strong>Tuesdays and Thursdays</strong> in the early afternoon Central</li>
+            <li>Runs <strong>July 7 – August 13, 2026</strong></li>
+            <li>Live online over Zoom · 100% free</li>
+            <li>Recommended for campers working at <strong>5th-grade math through Geometry</strong></li>
           </ul>
-          <table width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0;background:#fef3c7;border:2px solid #1a1a2e;border-radius:12px;padding:16px;">
-            <tr><td>
-              <p style="margin:0 0 6px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#1a1a2e;">Coming soon · Pythos</p>
-              <p style="margin:0;font-size:15px;line-height:1.5;">
-                If you're interested in coding too, look out for details about our companion <strong>Pythos coding camp</strong> — same vibe, same free, just Python.
-              </p>
-            </td></tr>
-          </table>
           <p style="margin:24px 0 0;font-size:14px;color:#666;">
             Questions? Just reply to this email — it goes straight to campmathos@gmail.com.
           </p>

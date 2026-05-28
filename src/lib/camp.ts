@@ -1,39 +1,28 @@
 // Single source of truth for all camp logistics.
-// Update this file to change dates, address, etc. across the entire site.
+// Update this file to change dates, platform, etc. across the entire site.
 
 export const CAMP = {
   name: "MathOs",
-  tagline: "Free summer applied math camp",
-  // Neuqua Valley High School
-  venue: {
-    name: "Neuqua Valley High School",
-    street: "2360 95th St",
-    city: "Naperville",
-    region: "IL",
-    postalCode: "60564",
-    country: "US",
-    // Approximate coordinates for Neuqua Valley High School
-    lat: 41.7195,
-    lng: -88.1395,
+  tagline: "Free online summer applied math camp",
+  // MathOs is fully online — sessions run over Zoom.
+  platform: {
+    name: "Online (Zoom)",
+    // Joining link is shared with registered families closer to camp.
+    joinNote: "Zoom link sent by email before each session",
   },
-  // Camp runs Tue/Thu, 1:00–4:00 PM local (America/Chicago, CDT = UTC-5 in July/August)
-  // Use the FIRST session date as the canonical "start" for countdown + ics.
+  // Camp runs Tue/Thu, 1:00–4:00 PM Central (America/Chicago, CDT = UTC-5 in July/August)
+  // Use the FIRST session date as the canonical "start" for ics.
   startDateISO: "2026-07-07", // Tuesday July 7 2026
   endDateISO: "2026-08-13",   // Thursday August 13 2026
-  sessionStartTime: "13:00",  // 1:00 PM local
-  sessionEndTime: "16:00",    // 4:00 PM local
+  sessionStartTime: "13:00",  // 1:00 PM Central
+  sessionEndTime: "16:00",    // 4:00 PM Central
   daysOfWeek: ["Tuesday", "Thursday"],
-  // Human-friendly strings used across the site (intentionally vague — exact schedule shared closer to camp)
+  // Human-friendly strings used across the site
   humanDateRange: "July – August 2026",
   humanDays: "Tue · Thu",
-  humanTime: "Late morning – early afternoon",
+  humanTime: "Early afternoon Central (3 hr)",
   cost: "Free",
   skillRange: "5th grade math → Geometry",
   contactEmail: "campmathos@gmail.com",
   url: "https://campmathos.lovable.app",
 } as const;
-
-export function fullAddress(): string {
-  const v = CAMP.venue;
-  return `${v.name}, ${v.street}, ${v.city}, ${v.region} ${v.postalCode}`;
-}

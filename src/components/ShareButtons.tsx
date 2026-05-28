@@ -3,7 +3,8 @@ import { Check, Copy, Facebook, Mail } from "lucide-react";
 
 const SHARE_URL = "https://campmathos.lovable.app";
 const SHARE_TEXT =
-  "MathOs is a completely free summer applied math camp at Neuqua Valley High School — recommended for campers working at 5th-grade math through Geometry. Tue/Thu, July 7 – August 13, 2026. Worth a look:";
+  "MathOs is a completely free online summer applied math camp — live over Zoom, recommended for campers working at 5th-grade math through Geometry. Tue/Thu, July 7 – August 13, 2026. Worth a look:";
+
 
 export function ShareButtons() {
   const [copied, setCopied] = useState(false);
@@ -18,7 +19,8 @@ export function ShareButtons() {
     }
   };
 
-  const subject = "Free summer math camp in Naperville";
+  const subject = "Free online summer math camp";
+
   const body = `${SHARE_TEXT}\n\n${SHARE_URL}`;
   const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(SHARE_TEXT)}&url=${encodeURIComponent(SHARE_URL)}`;
   const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(SHARE_URL)}`;

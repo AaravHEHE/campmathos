@@ -15,13 +15,13 @@ export const Route = createFileRoute("/faq")({
       {
         name: "description",
         content:
-          "Answers to the most common questions about MathOs: cost, schedule, attendance, drop-off, materials, prerequisites, and how to register.",
+          "Answers to the most common questions about MathOs: cost, schedule, joining online, materials, prerequisites, and how to register.",
       },
       { property: "og:title", content: "FAQ — MathOs summer camp" },
       {
         property: "og:description",
         content:
-          "Cost, schedule, attendance, drop-off, materials, prerequisites, and how to register.",
+          "Cost, schedule, joining online, materials, prerequisites, and how to register.",
       },
       { property: "og:image", content: OG },
       { name: "twitter:card", content: "summary_large_image" },
@@ -35,17 +35,17 @@ const faqs: { id: string; q: string; a: string }[] = [
   {
     id: "register",
     q: "How do we register?",
-    a: "Sign up using your email through the registration page, and then just show up to Neuqua Valley High School using the details we share with you after you register.",
+    a: "Sign up using your email through the registration page. Before each session we'll email you the Zoom link and a short reminder.",
   },
   {
     id: "free",
     q: "Is the camp really free? Are there any fees or materials we have to pay for?",
-    a: "MathOs is completely free. We recommend students bring a pencil and scratch paper, but if you don't have those, materials will be provided.",
+    a: "MathOs is completely free. We recommend students have a pencil and scratch paper on the side, but nothing else is required.",
   },
   {
     id: "schedule",
     q: "What days and times does the camp meet?",
-    a: "The camp runs on Tuesday and Thursday from July 7 through August 13, 2026 at Neuqua Valley High School. Each session is about three hours in the early afternoon, with a short break in the middle.",
+    a: "The camp runs on Tuesday and Thursday from July 7 through August 13, 2026, live online over Zoom. Each session is about three hours in the early afternoon Central time, with a short break in the middle.",
   },
   {
     id: "attendance",
@@ -53,14 +53,14 @@ const faqs: { id: string; q: string; a: string }[] = [
     a: "There's no strict attendance policy. After each lesson, notes and slideshows are emailed home so families can catch up if a session is missed. Be aware that missing a class can put a camper a little behind, but our instructors are always there to help your child get right back on track.",
   },
   {
-    id: "dropoff",
-    q: "Do parents drop off, sign in, or stay for the session?",
-    a: "Parents will sign their child in at the start of each lesson and sign them out at the end. You're welcome to stay for the session if you'd like — we just ask that you not be disruptive to the class. If you have any questions, instructors will be happy to answer them before or after class.",
+    id: "joining",
+    q: "How does my child join each session?",
+    a: "We email the Zoom link to every registered family before each session. Click the link a few minutes early — cameras are encouraged but not required, and mics can stay muted until it's time to share. Parents are welcome to sit in alongside their child.",
   },
   {
     id: "snacks",
     q: "Are there snacks or breaks?",
-    a: "Each session includes a 15-minute break. Campers are encouraged to bring a snack or a drink if they need one. Food will not be provided.",
+    a: "Each session includes a short break (about 15 minutes). Campers can grab a snack or a drink and step away from the screen.",
   },
   {
     id: "bring",

@@ -10,7 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RegisterRouteImport } from './routes/register'
-import { Route as NapervilleMathCampRouteImport } from './routes/naperville-math-camp'
 import { Route as MathosDoticsRouteImport } from './routes/mathos[.]ics'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as DetailsRouteImport } from './routes/details'
@@ -24,11 +23,6 @@ import { Route as AdminLoginRouteImport } from './routes/admin.login'
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const NapervilleMathCampRoute = NapervilleMathCampRouteImport.update({
-  id: '/naperville-math-camp',
-  path: '/naperville-math-camp',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MathosDoticsRoute = MathosDoticsRouteImport.update({
@@ -85,7 +79,6 @@ export interface FileRoutesByFullPath {
   '/details': typeof DetailsRoute
   '/faq': typeof FaqRoute
   '/mathos.ics': typeof MathosDoticsRoute
-  '/naperville-math-camp': typeof NapervilleMathCampRoute
   '/register': typeof RegisterRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/': typeof AdminIndexRoute
@@ -98,7 +91,6 @@ export interface FileRoutesByTo {
   '/details': typeof DetailsRoute
   '/faq': typeof FaqRoute
   '/mathos.ics': typeof MathosDoticsRoute
-  '/naperville-math-camp': typeof NapervilleMathCampRoute
   '/register': typeof RegisterRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin': typeof AdminIndexRoute
@@ -112,7 +104,6 @@ export interface FileRoutesById {
   '/details': typeof DetailsRoute
   '/faq': typeof FaqRoute
   '/mathos.ics': typeof MathosDoticsRoute
-  '/naperville-math-camp': typeof NapervilleMathCampRoute
   '/register': typeof RegisterRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/': typeof AdminIndexRoute
@@ -127,7 +118,6 @@ export interface FileRouteTypes {
     | '/details'
     | '/faq'
     | '/mathos.ics'
-    | '/naperville-math-camp'
     | '/register'
     | '/admin/login'
     | '/admin/'
@@ -140,7 +130,6 @@ export interface FileRouteTypes {
     | '/details'
     | '/faq'
     | '/mathos.ics'
-    | '/naperville-math-camp'
     | '/register'
     | '/admin/login'
     | '/admin'
@@ -153,7 +142,6 @@ export interface FileRouteTypes {
     | '/details'
     | '/faq'
     | '/mathos.ics'
-    | '/naperville-math-camp'
     | '/register'
     | '/admin/login'
     | '/admin/'
@@ -167,7 +155,6 @@ export interface RootRouteChildren {
   DetailsRoute: typeof DetailsRoute
   FaqRoute: typeof FaqRoute
   MathosDoticsRoute: typeof MathosDoticsRoute
-  NapervilleMathCampRoute: typeof NapervilleMathCampRoute
   RegisterRoute: typeof RegisterRoute
   AdminLoginRoute: typeof AdminLoginRoute
   AdminIndexRoute: typeof AdminIndexRoute
@@ -180,13 +167,6 @@ declare module '@tanstack/react-router' {
       path: '/register'
       fullPath: '/register'
       preLoaderRoute: typeof RegisterRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/naperville-math-camp': {
-      id: '/naperville-math-camp'
-      path: '/naperville-math-camp'
-      fullPath: '/naperville-math-camp'
-      preLoaderRoute: typeof NapervilleMathCampRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/mathos.ics': {
@@ -263,7 +243,6 @@ const rootRouteChildren: RootRouteChildren = {
   DetailsRoute: DetailsRoute,
   FaqRoute: FaqRoute,
   MathosDoticsRoute: MathosDoticsRoute,
-  NapervilleMathCampRoute: NapervilleMathCampRoute,
   RegisterRoute: RegisterRoute,
   AdminLoginRoute: AdminLoginRoute,
   AdminIndexRoute: AdminIndexRoute,

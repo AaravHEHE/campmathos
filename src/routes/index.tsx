@@ -14,17 +14,17 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "MathOs — Free summer applied math camp in Naperville | Summer 2026" },
+      { title: "MathOs — Free online summer applied math camp | Summer 2026" },
       {
         name: "description",
         content:
-          "MathOs is a completely free applied math camp at Neuqua Valley High School. Recommended skill range 5th grade math through Geometry. Tuesdays and Thursdays, 3-hour sessions in the early afternoon, July 7 – August 13, 2026.",
+          "MathOs is a completely free online applied math camp, taught live over Zoom. Recommended skill range 5th grade math through Geometry. Tuesdays and Thursdays, 3-hour sessions in the early afternoon Central, July 7 – August 13, 2026.",
       },
-      { property: "og:title", content: "MathOs — Free summer applied math camp in Naperville" },
+      { property: "og:title", content: "MathOs — Free online summer applied math camp" },
       {
         property: "og:description",
         content:
-          "Hands-on applied math from 5th-grade arithmetic through Geometry. Completely free. Neuqua Valley High School, summer 2026.",
+          "Hands-on applied math from 5th-grade arithmetic through Geometry. Completely free. Fully online via Zoom, summer 2026.",
       },
       { property: "og:image", content: OG },
       { property: "og:type", content: "website" },
@@ -49,7 +49,7 @@ function Marquee() {
     "★",
     "5th grade math → Geometry",
     "★",
-    "Neuqua Valley HS",
+    "Online · Zoom",
     "★",
     "July",
     "★",
@@ -123,7 +123,7 @@ function Index() {
           <div className="md:col-span-7">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-ink bg-cream px-4 py-1.5 font-mono text-xs tracking-widest">
               <span className="h-2 w-2 rounded-full bg-coral" />
-              July 2026 · Neuqua Valley High School · 100% free
+              July 2026 · Live online over Zoom · 100% free
             </div>
             <h1 className="font-display text-[clamp(2.5rem,8vw,7.5rem)] font-black leading-[0.9] break-words">
               Math is the
@@ -133,7 +133,7 @@ function Index() {
               system.
             </h1>
             <p className="mt-8 max-w-xl text-lg text-ink/75 md:text-xl">
-              For 5th-grade math through Geometry, taught by Neuqua Valley students.
+              For 5th-grade math through Geometry, taught live online by high school students.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Link
@@ -240,7 +240,7 @@ function Index() {
             </h2>
             <p className="mt-6 max-w-md text-cream/70">
               <Wordmark /> meets Tuesdays and Thursdays in the early afternoon
-              at Neuqua Valley High School from July 7 through August 13, 2026.
+              Central — live over Zoom — from July 7 through August 13, 2026.
             </p>
             <Link
               to="/details"
@@ -254,7 +254,7 @@ function Index() {
             <dl className="grid gap-px overflow-hidden rounded-3xl border-2 border-cream/20 bg-cream/10 md:grid-cols-2">
               {[
                 ["When", "July – August 2026"],
-                ["Where", "Neuqua Valley HS"],
+                ["Where", "Online (Zoom)"],
                 ["Days", "Tue · Thu"],
                 ["Time", "Early afternoon (3 hr)"],
                 ["Skill", "5th gr → Geometry"],
@@ -317,7 +317,7 @@ function Index() {
             <h2 className="mt-2 font-display text-5xl font-black md:text-6xl">Common questions.</h2>
             <p className="mt-6 max-w-2xl text-lg text-ink/70">
               A few of the questions families ask most. We have a full FAQ page with everything
-              else — schedule, drop-off, materials, attendance, and more.
+              else — schedule, joining instructions, materials, attendance, and more.
             </p>
           </Reveal>
 
@@ -363,7 +363,7 @@ function Index() {
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-lg text-cream/85">
               Completely free. Drop your email to let us know you're interested — we'll send
-              the schedule and venue details as July gets closer. No commitment required.
+              the schedule and Zoom joining details as July gets closer. No commitment required.
             </p>
             <Link
               to="/register"
