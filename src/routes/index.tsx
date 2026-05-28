@@ -26,8 +26,6 @@ export const Route = createFileRoute("/")({
         content:
           "Hands-on applied math from 5th-grade arithmetic through Geometry. Completely free. Fully online via Zoom, summer 2026.",
       },
-
-      },
       { property: "og:image", content: OG },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
