@@ -77,16 +77,17 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "MathOs — Summer applied math camp in Naperville" },
-      { name: "description", content: "Sign up for the MathOs summer camp and learn applied math with Neuqua Valley High School students at Neuqua Valley High School." },
+      { title: "MathOs — Free online summer applied math camp" },
+      { name: "description", content: "Sign up for MathOs — a free online summer math camp taught live over Zoom by high school students." },
       { name: "author", content: "MathOs" },
       { name: "theme-color", content: "#f6f1e3" },
-      { property: "og:title", content: "MathOs — Summer applied math camp" },
-      { property: "og:description", content: "Sign up for the MathOs summer camp and learn applied math with Neuqua Valley High School students at Neuqua Valley High School." },
+      { property: "og:title", content: "MathOs — Free online summer applied math camp" },
+      { property: "og:description", content: "Sign up for MathOs — a free online summer math camp taught live over Zoom by high school students." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:title", content: "MathOs — Summer applied math camp" },
-      { name: "twitter:description", content: "Sign up for the MathOs summer camp and learn applied math with Neuqua Valley High School students at Neuqua Valley High School." },
+      { name: "twitter:title", content: "MathOs — Free online summer applied math camp" },
+      { name: "twitter:description", content: "Sign up for MathOs — a free online summer math camp taught live over Zoom by high school students." },
+
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },

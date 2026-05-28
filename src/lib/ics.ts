@@ -22,12 +22,13 @@ export function buildCampIcs(): string {
         `DTSTAMP:${dtstamp}`,
         `DTSTART;TZID=America/Chicago:${dtStart}`,
         `DTEND;TZID=America/Chicago:${dtEnd}`,
-        `SUMMARY:MathOs session`,
-        `LOCATION:${escapeIcs(`${CAMP.venue.name}, ${CAMP.venue.street}, ${CAMP.venue.city}, ${CAMP.venue.region} ${CAMP.venue.postalCode}`)}`,
+        `SUMMARY:MathOs session (online)`,
+        `LOCATION:${escapeIcs("Online — Zoom link shared by email")}`,
         `DESCRIPTION:${escapeIcs(
-          "MathOs — free applied math camp (5th grade math → Geometry). Bring a notebook, pencil, and a snack. Questions: campmathos@gmail.com"
+          "MathOs — free online applied math camp (5th grade math → Geometry). Joining link sent by email before each session. Questions: campmathos@gmail.com"
         )}`,
         `URL:${CAMP.url}/details`,
+
         "END:VEVENT",
       ].join("\r\n");
     })

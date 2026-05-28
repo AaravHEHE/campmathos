@@ -20,16 +20,15 @@ export function ogImage(path: string): string {
 }
 
 /**
- * JSON-LD EducationEvent schema for the camp. Used on home + local landing.
+ * JSON-LD EducationEvent schema for the camp (fully online).
  */
 export function campEventJsonLd() {
-  const v = CAMP.venue;
   return {
     "@context": "https://schema.org",
     "@type": "EducationEvent",
     name: `${CAMP.name} — ${CAMP.tagline}`,
     description:
-      "Free multi-week applied math summer camp, taught by Neuqua Valley High School students and hosted at Neuqua Valley High School. Recommended skill range: 5th grade math through Geometry.",
+      "Free multi-week online applied math summer camp, taught live over Zoom by high school students. Recommended skill range: 5th grade math through Geometry.",
     startDate: `${CAMP.startDateISO}T${CAMP.sessionStartTime}:00-05:00`,
     endDate: `${CAMP.endDateISO}T${CAMP.sessionEndTime}:00-05:00`,
     eventSchedule: {
@@ -39,24 +38,11 @@ export function campEventJsonLd() {
       endTime: `${CAMP.sessionEndTime}:00`,
       scheduleTimezone: "America/Chicago",
     },
-    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
     eventStatus: "https://schema.org/EventScheduled",
     location: {
-      "@type": "Place",
-      name: v.name,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: v.street,
-        addressLocality: v.city,
-        addressRegion: v.region,
-        postalCode: v.postalCode,
-        addressCountry: v.country,
-      },
-      geo: {
-        "@type": "GeoCoordinates",
-        latitude: v.lat,
-        longitude: v.lng,
-      },
+      "@type": "VirtualLocation",
+      url: `${SITE_URL}/register`,
     },
     organizer: {
       "@type": "Organization",
