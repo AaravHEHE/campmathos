@@ -14,6 +14,7 @@ export const Route = createFileRoute("/faq")({
       { title: "FAQ — MathOs summer camp" },
       {
         name: "description",
+        content:
           "Answers to the most common questions about MathOs: cost, schedule, joining online, materials, prerequisites, and how to register.",
       },
       { property: "og:title", content: "FAQ — MathOs summer camp" },
