@@ -49,7 +49,7 @@ function Marquee() {
     "★",
     "5th grade math → Geometry",
     "★",
-    "Neuqua Valley HS",
+    "Online · Zoom",
     "★",
     "July",
     "★",
