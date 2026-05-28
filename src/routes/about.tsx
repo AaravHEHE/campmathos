@@ -16,7 +16,6 @@ export const Route = createFileRoute("/about")({
         content:
           "MathOs comes from the Greek word for 'learning.' We're a student-led nonprofit running a free, hands-on online applied math camp taught live over Zoom.",
       },
-      },
       { property: "og:title", content: "About MathOs — Free applied math camp" },
       {
         property: "og:description",
