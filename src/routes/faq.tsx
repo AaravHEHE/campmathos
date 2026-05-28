@@ -62,7 +62,6 @@ const faqs: { id: string; q: string; a: string }[] = [
     q: "Are there snacks or breaks?",
     a: "Each session includes a short break (about 15 minutes). Campers can grab a snack or a drink and step away from the screen.",
   },
-  },
   {
     id: "bring",
     q: "What should my child bring?",
