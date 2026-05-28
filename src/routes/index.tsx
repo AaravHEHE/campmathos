@@ -14,17 +14,19 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "MathOs — Free summer applied math camp in Naperville | Summer 2026" },
+      { title: "MathOs — Free online summer applied math camp | Summer 2026" },
       {
         name: "description",
         content:
-          "MathOs is a completely free applied math camp at Neuqua Valley High School. Recommended skill range 5th grade math through Geometry. Tuesdays and Thursdays, 3-hour sessions in the early afternoon, July 7 – August 13, 2026.",
+          "MathOs is a completely free online applied math camp, taught live over Zoom. Recommended skill range 5th grade math through Geometry. Tuesdays and Thursdays, 3-hour sessions in the early afternoon Central, July 7 – August 13, 2026.",
       },
-      { property: "og:title", content: "MathOs — Free summer applied math camp in Naperville" },
+      { property: "og:title", content: "MathOs — Free online summer applied math camp" },
       {
         property: "og:description",
         content:
-          "Hands-on applied math from 5th-grade arithmetic through Geometry. Completely free. Neuqua Valley High School, summer 2026.",
+          "Hands-on applied math from 5th-grade arithmetic through Geometry. Completely free. Fully online via Zoom, summer 2026.",
+      },
+
       },
       { property: "og:image", content: OG },
       { property: "og:type", content: "website" },
