@@ -3,7 +3,6 @@ import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { Wordmark } from "@/components/Wordmark";
 import { canonical, ogImage } from "@/lib/seo";
 import { CAMP } from "@/lib/camp";
-
 import { Reveal } from "@/components/Reveal";
 
 const OG = ogImage("/og-details.jpg");
@@ -12,8 +11,6 @@ export const Route = createFileRoute("/details")({
   component: DetailsPage,
   head: () => ({
     meta: [
-      { title: "Details — MathOs summer camp schedule and logistics" },
-      {
       { title: "Details — MathOs online summer camp schedule and logistics" },
       {
         name: "description",
@@ -25,9 +22,6 @@ export const Route = createFileRoute("/details")({
         property: "og:description",
         content:
           "Schedule, platform, session structure, and what to bring. MathOs is completely free and fully online.",
-      },
-
-          "Schedule, location, session structure, and what to bring. MathOs is completely free.",
       },
       { property: "og:image", content: OG },
       { name: "twitter:card", content: "summary_large_image" },
@@ -48,7 +42,6 @@ const facts: [string, string][] = [
   ["Cost", "Completely free"],
 ];
 
-
 function DetailsPage() {
   return (
     <main className="min-h-screen bg-cream text-ink">
@@ -63,12 +56,11 @@ function DetailsPage() {
             Everything <span className="italic text-electric">logistical</span>.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            <Wordmark /> is a multi-week summer camp hosted at Neuqua Valley High School, completely free for
-            every camper. Here's exactly how it runs.
-          <p className="mt-6 max-w-2xl text-lg text-ink/75">
             <Wordmark /> is a multi-week summer camp taught live online over Zoom, completely free for
             every camper. Here's exactly how it runs.
           </p>
+        </div>
+      </section>
 
       <section className="border-b-2 border-ink bg-ink text-cream">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
@@ -96,7 +88,7 @@ function DetailsPage() {
               3 hours, with room to <span className="italic">breathe</span>.
             </h2>
             <p className="mt-6 max-w-2xl text-lg text-ink/75">
-              Each <Wordmark /> session runs for about three hours in the early afternoon,
+              Each <Wordmark /> session runs for about three hours in the early afternoon Central,
               with a short break in the middle so campers can rest, snack, and reset
               before the second half.
             </p>
@@ -113,14 +105,13 @@ function DetailsPage() {
               {
                 tag: "~20 min",
                 title: "Short break",
-                body: "Snack, water, stretch. Campers are encouraged to bring a snack or drink — food is not provided.",
-                accent: "bg-sun text-ink",
-              },
-              {
                 body: "Snack, water, stretch. Cameras off, mics off — campers can step away from the screen and reset before the second half.",
                 accent: "bg-sun text-ink",
               },
-
+              {
+                tag: "Final ~80 min",
+                title: "Second half",
+                body: "Project work, group challenges, and Q&A in breakout rooms. Instructors hop room to room to help one-on-one and pull together what we built.",
                 accent: "bg-coral text-cream",
               },
             ].map((b, i) => (
@@ -143,20 +134,17 @@ function DetailsPage() {
               <div className="max-w-xl">
                 <p className="font-mono text-xs uppercase tracking-widest text-cream/70">
                   Add to calendar
-              <div className="max-w-xl">
-                <p className="font-mono text-xs uppercase tracking-widest text-cream/70">
-                  Add to calendar
                 </p>
                 <h3 className="mt-2 font-display text-2xl font-black md:text-3xl">
                   Drop every session into your calendar.
                 </h3>
                 <p className="mt-2 text-cream/85">
                   Download the .ics file — it includes every Tue/Thu session
-                  from July 7 through August 13, 2026, with a reminder that the Zoom link
-                  arrives by email.
+                  from July 7 through August 13, 2026, with a reminder that the Zoom
+                  link arrives by email.
                 </p>
               </div>
-
+              <a
                 href="/mathos.ics"
                 download="mathos-2026.ics"
                 className="mt-5 inline-flex min-h-11 items-center rounded-full border-2 border-cream bg-cream px-6 py-3 font-semibold text-ink shadow-[6px_6px_0_0_var(--ink)] transition hover:bg-sun hover:border-sun md:mt-0"
@@ -168,13 +156,6 @@ function DetailsPage() {
         </div>
       </section>
 
-      {/* WHAT TO BRING */}
-      <section className="border-b-2 border-ink bg-sun">
-        <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 md:grid-cols-2 md:py-24">
-          <Reveal direction="right">
-            <div>
-              <p className="font-mono text-sm tracking-widest text-ink/60">Bring</p>
-              <h2 className="mt-3 font-display text-5xl font-black leading-[0.95]">
       {/* WHAT YOU NEED */}
       <section className="border-b-2 border-ink bg-sun">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 md:grid-cols-2 md:py-24">
@@ -211,16 +192,18 @@ function DetailsPage() {
                 How sessions work.
               </h2>
               <p className="mt-6 text-lg text-ink/80">
-                Before each session we email the Zoom link to every registered family. Cameras
-                are encouraged but not required, mics can stay muted until it's time to share.
-                Parents are welcome to sit in alongside their child if they'd like — Camp Directors
-                are happy to answer parent questions before or after class.
+                Before each session we email the Zoom link to every registered family.
+                Cameras are encouraged but not required, mics can stay muted until it's time
+                to share. Parents are welcome to sit in alongside their child if they'd like —
+                Camp Directors are happy to answer parent questions before or after class.
               </p>
             </div>
           </Reveal>
         </div>
       </section>
 
+      <section className="bg-coral">
+        <div className="mx-auto max-w-7xl px-6 py-20 text-center md:py-28">
           <h2 className="mx-auto max-w-3xl font-display text-5xl font-black leading-[0.9] text-cream md:text-7xl">
             Save your spot — it's free.
           </h2>
