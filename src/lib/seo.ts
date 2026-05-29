@@ -28,7 +28,7 @@ export function campEventJsonLd() {
     "@type": "EducationEvent",
     name: `${CAMP.name} — ${CAMP.tagline}`,
     description:
-      "Free multi-week online applied math summer camp, taught live over Zoom by high school students. Recommended skill range: 5th grade math through Geometry.",
+      "Free multi-week online applied math summer camp, taught live over Zoom by high school students. Recommended skill range: 4th grade math through 7th grade math.",
     startDate: `${CAMP.startDateISO}T${CAMP.sessionStartTime}:00-05:00`,
     endDate: `${CAMP.endDateISO}T${CAMP.sessionEndTime}:00-05:00`,
     eventSchedule: {

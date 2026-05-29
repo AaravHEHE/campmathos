@@ -75,7 +75,7 @@ const faqs: { id: string; q: string; a: string }[] = [
   {
     id: "grades",
     q: "What if my child is just outside the recommended skill range?",
-    a: "The 5th-grade-math-to-Geometry range is a recommendation, not a hard rule. If you'd still like your child to attend, please reach out and they can be admitted on a special-request basis.",
+    a: "The 4th-grade-math-to-7th-grade-math range is a recommendation, not a hard rule. If you'd still like your child to attend, please reach out and they can be admitted on a special-request basis.",
   },
   {
     id: "showcase",
