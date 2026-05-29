@@ -97,19 +97,19 @@ function DetailsPage() {
           <ol className="mt-12 grid gap-6 md:grid-cols-3">
             {[
               {
-                tag: "First ~80 min",
+                tag: "First ~55 min",
                 title: "First half",
                 body: "Concept, examples, and a hands-on activity. We open with the real-world question of the day, work through the math together, and start applying it.",
                 accent: "bg-electric text-cream",
               },
               {
-                tag: "~20 min",
+                tag: "~10 min",
                 title: "Short break",
                 body: "Snack, water, stretch. Cameras off, mics off — campers can step away from the screen and reset before the second half.",
                 accent: "bg-sun text-ink",
               },
               {
-                tag: "Final ~80 min",
+                tag: "Final ~55 min",
                 title: "Second half",
                 body: "Project work, group challenges, and Q&A in breakout rooms. Instructors hop room to room to help one-on-one and pull together what we built.",
                 accent: "bg-coral text-cream",
