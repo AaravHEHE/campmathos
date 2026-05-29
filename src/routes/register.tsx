@@ -183,6 +183,19 @@ function RegisterPage() {
                   {errorMsg || "Something went wrong. Please try again."}
                 </p>
               )}
+
+              <p className="mt-6 font-mono text-xs text-muted-foreground">
+                Or fill out{" "}
+                <a
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSepdv-4mPcb9gOWptBgugQl__Xm-k5DnghAQ_ctkkwyT7Npqg/viewform?usp=dialog"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-electric"
+                >
+                  this Google Form
+                </a>{" "}
+                instead.
+              </p>
             </>
           )}
 
