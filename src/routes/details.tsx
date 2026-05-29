@@ -140,7 +140,7 @@ function DetailsPage() {
                 </h3>
                 <p className="mt-2 text-cream/85">
                   Download the .ics file — it includes every Tue/Thu session
-                  from July 7 through August 13, 2026, with a reminder that the Zoom
+                  from July 7 through July 30, 2026, with a reminder that the Zoom
                   link arrives by email.
                 </p>
               </div>
