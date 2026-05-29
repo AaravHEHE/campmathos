@@ -184,18 +184,25 @@ function RegisterPage() {
                 </p>
               )}
 
-              <p className="mt-6 font-mono text-muted-foreground text-lg">
-                Or fill out{" "}
-                <a
-                  href="https://docs.google.com/forms/d/e/1FAIpQLSepdv-4mPcb9gOWptBgugQl__Xm-k5DnghAQ_ctkkwyT7Npqg/viewform?usp=dialog"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline hover:text-electric"
-                >
-                  this Google Form
-                </a>{" "}
-                instead.
-              </p>
+              <div className="mt-8">
+                <p className="font-mono text-sm tracking-widest text-muted-foreground mb-3">
+                  Or fill out the form below:
+                </p>
+                <div className="overflow-hidden rounded-3xl border-2 border-ink bg-cream">
+                  <iframe
+                    src="https://docs.google.com/forms/d/e/1FAIpQLSepdv-4mPcb9gOWptBgugQl__Xm-k5DnghAQ_ctkkwyT7Npqg/viewform?embedded=true"
+                    width="100%"
+                    height="900"
+                    frameBorder={0}
+                    marginHeight={0}
+                    marginWidth={0}
+                    title="MathOs interest form"
+                    className="block w-full"
+                  >
+                    Loading…
+                  </iframe>
+                </div>
+              </div>
             </>
           )}
 
