@@ -186,7 +186,7 @@ function RegisterPage() {
 
               <div className="mt-8">
                 <p className="font-mono text-sm tracking-widest text-muted-foreground mb-3">
-                  Or fill out the form below:
+                  Or sign up using the form below.
                 </p>
                 <div className="overflow-hidden rounded-3xl border-2 border-ink bg-cream">
                   <iframe
