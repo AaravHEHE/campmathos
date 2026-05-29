@@ -45,11 +45,13 @@ const directors: Director[] = [
     name: "Aarav Arora",
     bio: "NVHS Class of 2029. NVHS Robotics' first-ever sophomore Executive Board Member and a co-creator of NeighbrHub. eCYBERMISSION State Finalist and honorable mention.",
     accent: "bg-electric text-cream",
+    photo: aaravPhoto,
   },
   {
     name: "Alan Zhan",
     bio: "NVHS Class of 2029. Member of NVHS Computing Team, Chess Team, and Math Team — qualified for State in both Chess and Math.",
     accent: "bg-sun text-cream",
+    photo: alanPhoto,
   },
   {
     name: "Shaury Sharma",
@@ -65,6 +67,7 @@ const directors: Director[] = [
     name: "Yifan Bao",
     bio: "NVHS Class of 2029. Math Team State Qualifier and Science Olympiad State Qualifier.",
     accent: "bg-coral text-cream",
+    photo: yifanPhoto,
   },
   {
     name: "Atharv Mishra",
