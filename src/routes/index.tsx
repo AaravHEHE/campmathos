@@ -18,13 +18,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "MathOs is a completely free online applied math camp, taught live over Zoom. Recommended skill range 4th grade math through 7th grade math. Tuesdays and Thursdays, 2-hour sessions from 3–5 PM Central, July 7 – 30, 2026.",
+          "MathOs is a completely free online applied math camp, taught live over Zoom. Recommended skill range 5th grade math through Geometry. Tuesdays and Thursdays, 2-hour sessions from 3–5 PM Central, July 7 – 30, 2026.",
       },
       { property: "og:title", content: "MathOs — Free online summer applied math camp" },
       {
         property: "og:description",
         content:
-          "Hands-on applied math from 4th-grade arithmetic through 7th-grade math. Completely free. Fully online via Zoom, summer 2026.",
+          "Hands-on applied math from 5th-grade arithmetic through Geometry. Completely free. Fully online via Zoom, summer 2026.",
       },
       { property: "og:image", content: OG },
       { property: "og:type", content: "website" },
@@ -43,11 +43,14 @@ export const Route = createFileRoute("/")({
 
 function Marquee() {
   const items: ReactNode[] = [
-    <><span className="text-electric">Math</span><span className="text-coral">Os</span> '26</>,
+    <>
+      <span className="text-electric">Math</span>
+      <span className="text-coral">Os</span> '26
+    </>,
     "★",
     "Completely free",
     "★",
-    "4th grade math → 7th grade math",
+    "5th grade math → Geometry",
     "★",
     "Online · Zoom",
     "★",
@@ -72,16 +75,9 @@ function WeekTeaser({ week }: { week: Week }) {
   const [open, setOpen] = useState(false);
   return (
     <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl border-2 border-ink bg-cream p-8 transition hover:-translate-y-1 hover:shadow-[8px_8px_0_0_var(--ink)]">
-      <button
-        type="button"
-        onClick={() => setOpen((o) => !o)}
-        aria-expanded={open}
-        className="block w-full text-left"
-      >
+      <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} className="block w-full text-left">
         <div className="flex items-start justify-between">
-          <span className={`rounded-full px-4 py-1 font-mono text-xs font-bold ${week.accent}`}>
-            Week {week.n}
-          </span>
+          <span className={`rounded-full px-4 py-1 font-mono text-xs font-bold ${week.accent}`}>Week {week.n}</span>
           <span className="font-display text-6xl font-black text-ink/10 transition group-hover:text-ink/20">
             {week.n}
           </span>
@@ -133,7 +129,7 @@ function Index() {
               system.
             </h1>
             <p className="mt-8 max-w-xl text-lg text-ink/75 md:text-xl">
-              For 4th-grade math through 7th-grade math, taught live online by high school students.
+              For 4th-grade math through 7th-grade, taught live online by high school students.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Link
@@ -192,9 +188,7 @@ function Index() {
           <Reveal>
             <div className="mb-16 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
               <div>
-                <p className="font-mono text-sm tracking-widest text-muted-foreground">
-                  Curriculum
-                </p>
+                <p className="font-mono text-sm tracking-widest text-muted-foreground">Curriculum</p>
                 <h2 className="mt-2 font-display text-5xl font-black md:text-7xl">
                   Four weeks of
                   <br />
@@ -202,8 +196,7 @@ function Index() {
                 </h2>
               </div>
               <p className="max-w-sm text-ink/70">
-                A quick look at what each week covers. For full week-by-week breakdowns, head to the
-                curriculum page.
+                A quick look at what each week covers. For full week-by-week breakdowns, head to the curriculum page.
               </p>
             </div>
           </Reveal>
@@ -226,7 +219,6 @@ function Index() {
               </Link>
             </div>
           </Reveal>
-
         </div>
       </section>
 
@@ -239,8 +231,8 @@ function Index() {
               When, where, <span className="italic text-sun">how much</span>.
             </h2>
             <p className="mt-6 max-w-md text-cream/70">
-              <Wordmark /> meets Tuesdays and Thursdays from 3–5 PM
-              Central — live over Zoom — from July 7 through July 30, 2026.
+              <Wordmark /> meets Tuesdays and Thursdays from 3–5 PM Central — live over Zoom — from July 7 through July
+              30, 2026.
             </p>
             <Link
               to="/details"
@@ -257,7 +249,7 @@ function Index() {
                 ["Where", "Online (Zoom)"],
                 ["Days", "Tue · Thu"],
                 ["Time", "3–5 PM Central (2 hr)"],
-                ["Skill", "4th gr → 7th gr math"],
+                ["Skill", "5th gr → Geometry"],
                 ["Cost", "Free"],
               ].map(([k, v]) => (
                 <div key={k} className="bg-ink p-8">
@@ -279,24 +271,19 @@ function Index() {
               Stuck on something? <span className="italic">Just ask.</span>
             </h2>
             <p className="mt-6 max-w-2xl text-lg text-ink/80">
-              Every <Wordmark /> teacher is happy to meet one-on-one with any camper who needs extra
-              help — whether that's a tricky topic from camp, homework from school, or a concept
-              they've been wanting to understand for a while. We'll find time before or after a
-              session and work through it together.
+              Every <Wordmark /> teacher is happy to meet one-on-one with any camper who needs extra help — whether
+              that's a tricky topic from camp, homework from school, or a concept they've been wanting to understand for
+              a while. We'll find time before or after a session and work through it together.
             </p>
           </Reveal>
           <Reveal direction="left" delay={0.1} className="md:col-span-5">
             <div className="rounded-3xl border-2 border-ink bg-cream p-8">
-              <p className="font-mono text-xs tracking-widest text-muted-foreground">
-                Want more material?
-              </p>
-              <h3 className="mt-2 font-display text-3xl font-black">
-                Reach out — we'll send more.
-              </h3>
+              <p className="font-mono text-xs tracking-widest text-muted-foreground">Want more material?</p>
+              <h3 className="mt-2 font-display text-3xl font-black">Reach out — we'll send more.</h3>
               <p className="mt-3 text-ink/70">
-                If your child is interested and wants to keep going between sessions, students or
-                parents can email us and we'll share extra problem sets, project ideas, and
-                reading recommendations matched to their current skill level.
+                If your child is interested and wants to keep going between sessions, students or parents can email us
+                and we'll share extra problem sets, project ideas, and reading recommendations matched to their current
+                skill level.
               </p>
               <a
                 href="mailto:campmathos@gmail.com?subject=More%20Mathos%20material"
@@ -316,8 +303,8 @@ function Index() {
             <p className="font-mono text-sm tracking-widest text-muted-foreground">FAQ</p>
             <h2 className="mt-2 font-display text-5xl font-black md:text-6xl">Common questions.</h2>
             <p className="mt-6 max-w-2xl text-lg text-ink/70">
-              A few of the questions families ask most. We have a full FAQ page with everything
-              else — schedule, joining instructions, materials, attendance, and more.
+              A few of the questions families ask most. We have a full FAQ page with everything else — schedule, joining
+              instructions, materials, attendance, and more.
             </p>
           </Reveal>
 
@@ -362,8 +349,8 @@ function Index() {
               Spend July <span className="italic">thinking</span> in math.
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-lg text-cream/85">
-              Completely free. Drop your email to let us know you're interested — we'll send
-              the schedule and Zoom joining details as July gets closer. No commitment required.
+              Completely free. Drop your email to let us know you're interested — we'll send the schedule and Zoom
+              joining details as July gets closer. No commitment required.
             </p>
             <Link
               to="/register"
