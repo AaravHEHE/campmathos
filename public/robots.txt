@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /admin/*
+
+Sitemap: https://campmathos.com/sitemap.xml

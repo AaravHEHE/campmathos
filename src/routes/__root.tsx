@@ -87,6 +87,7 @@ export const Route = createRootRoute({
       { name: "twitter:card", content: "summary" },
       { name: "twitter:title", content: "MathOs — Free online summer applied math camp" },
       { name: "twitter:description", content: "Sign up for MathOs — a free online summer math camp taught live over Zoom by high school students." },
+      { name: "google-site-verification", content: "dXMpzAOy3Cvqx_18iVe_bCRF36D4mZ3P5D98mFRAVyI" },
 
     ],
     links: [
