@@ -109,14 +109,25 @@ function BoardPage() {
             {directors.map((d, i) => (
               <Reveal key={d.name} delay={(i % 3) * 0.2} amount={0.25}>
                 <article className="group flex flex-col rounded-3xl border-2 border-ink bg-cream p-8 transition hover:-translate-y-1 hover:shadow-[8px_8px_0_0_var(--ink)]">
-                  {/* Photo placeholder */}
+                  {/* Photo */}
                   <div
-                    className={`relative flex h-40 w-full items-center justify-center overflow-hidden rounded-2xl border-2 border-ink ${d.accent}`}
+                    className={`relative flex h-56 w-full items-center justify-center overflow-hidden rounded-2xl border-2 border-ink ${d.accent}`}
                   >
-                    <span className="font-display text-5xl font-black">{initials(d.name)}</span>
-                    <span className="absolute bottom-2 right-3 font-mono text-[10px] tracking-widest opacity-70">
-                      Photo soon
-                    </span>
+                    {d.photo ? (
+                      <img
+                        src={d.photo}
+                        alt={`${d.name}, Camp Director`}
+                        loading="lazy"
+                        className="h-full w-full object-cover"
+                      />
+                    ) : (
+                      <>
+                        <span className="font-display text-5xl font-black">{initials(d.name)}</span>
+                        <span className="absolute bottom-2 right-3 font-mono text-[10px] tracking-widest opacity-70">
+                          Photo soon
+                        </span>
+                      </>
+                    )}
                   </div>
                   <h2 className="mt-6 font-display text-2xl font-black leading-tight">{d.name}</h2>
                   <p className="mt-4 text-sm text-ink/70">{d.bio}</p>
