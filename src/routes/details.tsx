@@ -36,7 +36,7 @@ const facts: [string, string][] = [
   ["Where", "Online — live over Zoom"],
   ["Days", CAMP.humanDays],
   ["Time", CAMP.humanTime],
-  ["Session length", "3 hours (with a short break)"],
+  ["Session length", "2 hours (with a short break)"],
   ["Skill range", "5th grade math → Geometry (recommended)"],
   ["Platform", "Zoom link sent before each session"],
   ["Cost", "Completely free"],
