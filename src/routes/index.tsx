@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "MathOs is a completely free online applied math camp, taught live over Zoom. Recommended skill range 5th grade math through Geometry. Tuesdays and Thursdays, 3-hour sessions in the early afternoon Central, July 7 – August 13, 2026.",
+          "MathOs is a completely free online applied math camp, taught live over Zoom. Recommended skill range 5th grade math through Geometry. Tuesdays and Thursdays, 2-hour sessions from 3–5 PM Central, July 7 – 30, 2026.",
       },
       { property: "og:title", content: "MathOs — Free online summer applied math camp" },
       {
