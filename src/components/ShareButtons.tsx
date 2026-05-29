@@ -3,7 +3,7 @@ import { Check, Copy, Facebook, Mail } from "lucide-react";
 
 const SHARE_URL = "https://campmathos.lovable.app";
 const SHARE_TEXT =
-  "MathOs is a completely free online summer applied math camp — live over Zoom, recommended for campers working at 5th-grade math through Geometry. Tue/Thu, July 7 – August 13, 2026. Worth a look:";
+  "MathOs is a completely free online summer applied math camp — live over Zoom, recommended for campers working at 5th-grade math through Geometry. Tue/Thu, 3–5 PM Central, July 7 – 30, 2026. Worth a look:";
 
 
 export function ShareButtons() {
