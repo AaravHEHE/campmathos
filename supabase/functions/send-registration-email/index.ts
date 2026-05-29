@@ -45,7 +45,7 @@ function confirmationHtml(email: string) {
             <li><strong>Tuesdays and Thursdays</strong>, 3–5 PM Central</li>
             <li>Runs <strong>July 7 – 30, 2026</strong></li>
             <li>Live online over Zoom · 100% free</li>
-            <li>Recommended for campers working at <strong>5th-grade math through Geometry</strong></li>
+            <li>Recommended for campers working at <strong>4th-grade math through 7th grade math</strong></li>
           </ul>
           <p style="margin:24px 0 0;font-size:14px;color:#666;">
             Questions? Just reply to this email — it goes straight to campmathos@gmail.com.
