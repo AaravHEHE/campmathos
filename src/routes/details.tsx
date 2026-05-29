@@ -85,10 +85,10 @@ function DetailsPage() {
               A typical session
             </p>
             <h2 className="mt-3 font-display text-5xl font-black md:text-6xl">
-              3 hours, with room to <span className="italic">breathe</span>.
+              2 hours, with room to <span className="italic">breathe</span>.
             </h2>
             <p className="mt-6 max-w-2xl text-lg text-ink/75">
-              Each <Wordmark /> session runs for about three hours in the early afternoon Central,
+              Each <Wordmark /> session runs for two hours from 3–5 PM Central,
               with a short break in the middle so campers can rest, snack, and reset
               before the second half.
             </p>
