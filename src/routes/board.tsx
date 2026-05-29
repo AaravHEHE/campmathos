@@ -65,7 +65,7 @@ const directors: Director[] = [
   },
   {
     name: "Yifan Bao",
-    bio: "NVHS Class of 2029. Math Team State Qualifier and Science Olympiad State Qualifier.",
+    bio: "NVHS Class of 2029. Math Team State Qualifier and Science Olympiad State Qualifier. Sci Oly executive board, 2nd place at state.",
     accent: "bg-coral text-cream",
     photo: yifanPhoto,
   },
