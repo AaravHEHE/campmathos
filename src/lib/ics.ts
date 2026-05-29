@@ -1,11 +1,11 @@
 import { CAMP } from "./camp";
 
 /**
- * Generate an .ics calendar string for every camp session (Tue/Thu 1–4 PM local)
+ * Generate an .ics calendar string for every camp session (Tue/Thu 3–5 PM local)
  * between CAMP.startDateISO and CAMP.endDateISO.
  *
  * Times are emitted in floating local time with TZID=America/Chicago so
- * calendars render them as 1:00 PM CT regardless of the user's locale.
+ * calendars render them as 3:00 PM CT regardless of the user's locale.
  */
 export function buildCampIcs(): string {
   const sessions = enumerateSessions();

@@ -10,17 +10,17 @@ export const CAMP = {
     // Joining link is shared with registered families closer to camp.
     joinNote: "Zoom link sent by email before each session",
   },
-  // Camp runs Tue/Thu, 1:00–4:00 PM Central (America/Chicago, CDT = UTC-5 in July/August)
+  // Camp runs Tue/Thu, 3:00–5:00 PM Central (America/Chicago, CDT = UTC-5 in July)
   // Use the FIRST session date as the canonical "start" for ics.
   startDateISO: "2026-07-07", // Tuesday July 7 2026
-  endDateISO: "2026-08-13",   // Thursday August 13 2026
-  sessionStartTime: "13:00",  // 1:00 PM Central
-  sessionEndTime: "16:00",    // 4:00 PM Central
+  endDateISO: "2026-07-30",   // Thursday July 30 2026
+  sessionStartTime: "15:00",  // 3:00 PM Central
+  sessionEndTime: "17:00",    // 5:00 PM Central
   daysOfWeek: ["Tuesday", "Thursday"],
   // Human-friendly strings used across the site
-  humanDateRange: "July – August 2026",
+  humanDateRange: "July 2026",
   humanDays: "Tue · Thu",
-  humanTime: "Early afternoon Central (3 hr)",
+  humanTime: "3–5 PM Central (2 hr)",
   cost: "Free",
   skillRange: "5th grade math → Geometry",
   contactEmail: "campmathos@gmail.com",

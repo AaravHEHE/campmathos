@@ -1,66 +1,44 @@
-## Plan: 33 Features in 5 Phases
+# Update camp schedule: 2-hour sessions, 3–5 PM, July only
 
-You'll approve each phase before I start it. Camp dates/address you'll send next message — until then I'll use placeholders for #2, #7, #36 and swap them in Phase 2.
+## Changes
 
----
+### `src/lib/camp.ts` (source of truth)
+- `sessionStartTime`: `"13:00"` → `"15:00"`
+- `sessionEndTime`: `"16:00"` → `"17:00"`
+- `endDateISO`: `"2026-08-13"` → `"2026-07-30"` (last Thursday of July)
+- `humanDateRange`: `"July – August 2026"` → `"July 2026"`
+- `humanTime`: `"Early afternoon Central (3 hr)"` → `"3–5 PM Central (2 hr)"`
 
-### Phase 1 — Mobile, Accessibility & Polish (8 features)
+### `src/components/ShareButtons.tsx`
+- Update `SHARE_TEXT`: "Tue/Thu, July 7 – August 13, 2026" → "Tue/Thu, July 7 – 30, 2026"
 
-**#19** Mobile hamburger menu in `SiteHeader` (sheet drawer, all nav links + register CTA)
-**#18/21** Mobile-responsive hero — fix clamp() overflow, scale typography on small screens
-**#20** Audit all buttons/links to ≥44×44px tap targets
-**#14** Global `:focus-visible` ring styles using existing `--electric` color
-**#15** Color contrast fixes (cream-on-coral, muted-foreground combos) to WCAG AA
-**#27** Dark mode toggle in header — design tokens already exist in `styles.css`
-**#30** Custom 404 illustration (replace plain text in `__root.tsx`)
-**#31** Loading skeletons for admin dashboard table
+### `src/lib/seo.ts`
+- Description: drop "multi-week" framing if it now reads oddly (keep as-is otherwise — still multi-week within July)
 
-### Phase 2 — SEO & Discoverability (7 features) _needs camp info_
+### `src/routes/details.tsx`
+- Meta description: "early afternoon Central time from July 7 through August 13, 2026. 3-hour sessions with a short break" → "from 3–5 PM Central, July 7 through July 30, 2026. 2-hour sessions"
+- Facts list: "Session length" → `"2 hours"` (no break needed at 2 hrs — remove "with a short break")
+- Hero/sub copy: "three hours in the early afternoon" → "two hours in the late afternoon"
+- Three-card session structure: rework from First 80 min / 20 min break / Final 80 min to a 2-hour shape — e.g. First ~55 min (concept + activity) / ~10 min break / Final ~55 min (project + Q&A). Or drop the break card entirely and use two cards. **Decision below.**
+- "Add to calendar" copy: "July 7 through August 13, 2026" → "July 7 through July 30, 2026"
 
-**#7** JSON-LD Event schema on home page (uses your real dates/address)
-**#8** `sitemap.xml` server route + `robots.txt` static file
-**#9** Per-page OG images for About, Curriculum, Details, Board, FAQ, Register (generated as PNGs in `/public`)
-**#10** Canonical `<link>` tags on every route
-**#12** New `/naperville-math-camp` local SEO landing page
-**#36** "Add to calendar" `.ics` download on Details page (uses real dates)
-**#2** Countdown timer to camp start date on homepage hero (uses real start date)
+### Other route files (sweep)
+Search for and update any remaining mentions of:
+- "August" / "August 13" / "July – August"
+- "3 hour" / "three hours" / "1–4" / "1:00 PM" / "early afternoon"
+in `src/routes/index.tsx`, `about.tsx`, `faq.tsx`, `curriculum.tsx`, `register.tsx`, and `supabase/functions/send-registration-email/index.ts`.
 
-### Phase 3 — Animations & Visual Polish (4 features)
+### Memory
+Update `mem://index.md` Core line to reflect 2-hour sessions, 3–5 PM, July 7–30, 2026.
 
-**#28** Page transitions with framer-motion (fade between routes)
-**#29** Scroll-triggered fade-in animations on section reveals
-**#32** Subtle on-brand cursor effect on hero (parallax dots following cursor)
-**#25** Self-host Inter + display fonts (remove Google Fonts request)
+## Auto-derived (no code changes needed)
+- `.ics` calendar regenerates from `CAMP` constants → correct sessions, times, end date automatically.
+- JSON-LD schema regenerates from `CAMP` constants automatically.
 
-### Phase 4 — Admin Dashboard Upgrades (4 features)
+## One open question
+The Details page currently shows a 3-card "First half / Break / Second half" layout built around a 3-hour session. At 2 hours a mid-session break is tighter. Options:
 
-**#46** Sign-ups-over-time line chart using recharts (already installed)
-**#47** Date-range filter + grade filter on the registrations table
-**#45** "Email all registrants" form — textarea + send button, sends via existing Resend setup
-**#44** Daily email digest to director — new edge function on cron, lists previous 24h sign-ups
+1. **Keep 3 cards**, shrink to ~55 / 10 / ~55 min.
+2. **Drop the break card**, show 2 cards (First hour: concept + activity / Second hour: project + Q&A).
 
-### Phase 5 — Lifecycle Communications (5 features)
-
-**#4** Referral / share buttons on register success screen (X, Facebook, copy link, email)
-**#51** Welcome email drip — 3 emails (T-30 days, T-7 days, T-1 day before camp)
-**#52** SMS reminders — **needs Twilio**: I'll add a phone field to register form, build the integration, you add Twilio creds when ready
-**#53** Post-camp survey email — sent automatically 1 day after camp ends, links to a Google Form (you provide URL)
-
----
-
-### Dropped from your list
-
-**#54, #55, #57** Tests/CI — per your answer, skipped entirely
-**#56** Sentry — per your earlier answer, no DSN yet, skipped
-
----
-
-### How approval works
-
-After this plan, reply with camp info + "approve Phase 1" → I build Phase 1 → you test → reply "approve Phase 2" → and so on. Each phase is one message round so the diff stays reviewable.
-
-### Things I'll need from you mid-build
-
-- Phase 2: real camp dates, times, full street address (next message)
-- Phase 4: confirm director email for daily digest (default: campmathos@gmail.com)
-- Phase 5: Google Form URL for post-camp survey, Twilio account when ready for SMS, Venmo/PayPal handles for donate page
+I'll go with option 1 (keep the break, just shorter) unless you prefer option 2.

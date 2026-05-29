@@ -45,7 +45,7 @@ const faqs: { id: string; q: string; a: string }[] = [
   {
     id: "schedule",
     q: "What days and times does the camp meet?",
-    a: "The camp runs on Tuesday and Thursday from July 7 through August 13, 2026, live online over Zoom. Each session is about three hours in the early afternoon Central time, with a short break in the middle.",
+    a: "The camp runs on Tuesday and Thursday from July 7 through July 30, 2026, live online over Zoom. Each session is two hours, 3–5 PM Central, with a short break in the middle.",
   },
   {
     id: "attendance",

@@ -15,7 +15,7 @@ export const Route = createFileRoute("/details")({
       {
         name: "description",
         content:
-          "MathOs camp logistics: free for all students, Tue/Thu live online sessions in the early afternoon Central time from July 7 through August 13, 2026. 3-hour sessions with a short break. Taught over Zoom.",
+          "MathOs camp logistics: free for all students, Tue/Thu live online sessions from 3–5 PM Central, July 7 through July 30, 2026. 2-hour sessions taught over Zoom.",
       },
       { property: "og:title", content: "Details — MathOs online summer camp" },
       {
@@ -36,7 +36,7 @@ const facts: [string, string][] = [
   ["Where", "Online — live over Zoom"],
   ["Days", CAMP.humanDays],
   ["Time", CAMP.humanTime],
-  ["Session length", "3 hours (with a short break)"],
+  ["Session length", "2 hours (with a short break)"],
   ["Skill range", "5th grade math → Geometry (recommended)"],
   ["Platform", "Zoom link sent before each session"],
   ["Cost", "Completely free"],
@@ -85,10 +85,10 @@ function DetailsPage() {
               A typical session
             </p>
             <h2 className="mt-3 font-display text-5xl font-black md:text-6xl">
-              3 hours, with room to <span className="italic">breathe</span>.
+              2 hours, with room to <span className="italic">breathe</span>.
             </h2>
             <p className="mt-6 max-w-2xl text-lg text-ink/75">
-              Each <Wordmark /> session runs for about three hours in the early afternoon Central,
+              Each <Wordmark /> session runs for two hours from 3–5 PM Central,
               with a short break in the middle so campers can rest, snack, and reset
               before the second half.
             </p>
@@ -97,19 +97,19 @@ function DetailsPage() {
           <ol className="mt-12 grid gap-6 md:grid-cols-3">
             {[
               {
-                tag: "First ~80 min",
+                tag: "First ~55 min",
                 title: "First half",
                 body: "Concept, examples, and a hands-on activity. We open with the real-world question of the day, work through the math together, and start applying it.",
                 accent: "bg-electric text-cream",
               },
               {
-                tag: "~20 min",
+                tag: "~10 min",
                 title: "Short break",
                 body: "Snack, water, stretch. Cameras off, mics off — campers can step away from the screen and reset before the second half.",
                 accent: "bg-sun text-ink",
               },
               {
-                tag: "Final ~80 min",
+                tag: "Final ~55 min",
                 title: "Second half",
                 body: "Project work, group challenges, and Q&A in breakout rooms. Instructors hop room to room to help one-on-one and pull together what we built.",
                 accent: "bg-coral text-cream",
@@ -140,7 +140,7 @@ function DetailsPage() {
                 </h3>
                 <p className="mt-2 text-cream/85">
                   Download the .ics file — it includes every Tue/Thu session
-                  from July 7 through August 13, 2026, with a reminder that the Zoom
+                  from July 7 through July 30, 2026, with a reminder that the Zoom
                   link arrives by email.
                 </p>
               </div>
