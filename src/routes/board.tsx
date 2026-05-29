@@ -49,7 +49,7 @@ const directors: Director[] = [
   },
   {
     name: "Alan Zhan",
-    bio: "NVHS Class of 2029. Member of NVHS Computing Team, Chess Team, and Math Team — qualified for State in both Chess and Math.",
+    bio: "NVHS Class of 2029. Member of NVHS Computing Team, Chess Team, and Math Team. #1 Neuqua Freshman in State Math, Highest record at state Chess.",
     accent: "bg-sun text-cream",
     photo: alanPhoto,
   },
@@ -60,7 +60,7 @@ const directors: Director[] = [
   },
   {
     name: "Wenxuan Chen",
-    bio: "NVHS Class of 2029. Math Team State Qualifier and member of IMSA / NVHS Robotics.",
+    bio: "NVHS Class of 2029. Math Team State Qualifier and member of IMSA / NVHS Robotics. AMC 8 Honor Roll",
     accent: "bg-electric text-cream",
   },
   {
