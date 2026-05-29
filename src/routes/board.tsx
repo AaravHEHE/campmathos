@@ -3,6 +3,9 @@ import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { Wordmark } from "@/components/Wordmark";
 import { canonical, ogImage } from "@/lib/seo";
 import { Reveal } from "@/components/Reveal";
+import aaravPhoto from "@/assets/directors/aarav-arora.jpg";
+import yifanPhoto from "@/assets/directors/yifan-bao.jpg";
+import alanPhoto from "@/assets/directors/alan-zhan.jpg";
 
 const OG = ogImage("/og-board.jpg");
 
@@ -34,6 +37,7 @@ type Director = {
   name: string;
   bio: string;
   accent: string;
+  photo?: string;
 };
 
 const directors: Director[] = [
@@ -41,11 +45,13 @@ const directors: Director[] = [
     name: "Aarav Arora",
     bio: "NVHS Class of 2029. NVHS Robotics' first-ever sophomore Executive Board Member and a co-creator of NeighbrHub. eCYBERMISSION State Finalist and honorable mention.",
     accent: "bg-electric text-cream",
+    photo: aaravPhoto,
   },
   {
     name: "Alan Zhan",
     bio: "NVHS Class of 2029. Member of NVHS Computing Team, Chess Team, and Math Team — qualified for State in both Chess and Math.",
     accent: "bg-sun text-cream",
+    photo: alanPhoto,
   },
   {
     name: "Shaury Sharma",
@@ -61,6 +67,7 @@ const directors: Director[] = [
     name: "Yifan Bao",
     bio: "NVHS Class of 2029. Math Team State Qualifier and Science Olympiad State Qualifier.",
     accent: "bg-coral text-cream",
+    photo: yifanPhoto,
   },
   {
     name: "Atharv Mishra",
@@ -102,14 +109,25 @@ function BoardPage() {
             {directors.map((d, i) => (
               <Reveal key={d.name} delay={(i % 3) * 0.2} amount={0.25}>
                 <article className="group flex flex-col rounded-3xl border-2 border-ink bg-cream p-8 transition hover:-translate-y-1 hover:shadow-[8px_8px_0_0_var(--ink)]">
-                  {/* Photo placeholder */}
+                  {/* Photo */}
                   <div
-                    className={`relative flex h-40 w-full items-center justify-center overflow-hidden rounded-2xl border-2 border-ink ${d.accent}`}
+                    className={`relative flex h-56 w-full items-center justify-center overflow-hidden rounded-2xl border-2 border-ink ${d.accent}`}
                   >
-                    <span className="font-display text-5xl font-black">{initials(d.name)}</span>
-                    <span className="absolute bottom-2 right-3 font-mono text-[10px] tracking-widest opacity-70">
-                      Photo soon
-                    </span>
+                    {d.photo ? (
+                      <img
+                        src={d.photo}
+                        alt={`${d.name}, Camp Director`}
+                        loading="lazy"
+                        className="h-full w-full object-cover"
+                      />
+                    ) : (
+                      <>
+                        <span className="font-display text-5xl font-black">{initials(d.name)}</span>
+                        <span className="absolute bottom-2 right-3 font-mono text-[10px] tracking-widest opacity-70">
+                          Photo soon
+                        </span>
+                      </>
+                    )}
                   </div>
                   <h2 className="mt-6 font-display text-2xl font-black leading-tight">{d.name}</h2>
                   <p className="mt-4 text-sm text-ink/70">{d.bio}</p>
