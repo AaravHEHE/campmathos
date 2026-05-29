@@ -8,6 +8,7 @@ const navLinks = [
   { to: "/details", label: "Details" },
   { to: "/board", label: "Camp Directors" },
   { to: "/faq", label: "FAQ" },
+  { to: "/register", label: "Register" },
 ] as const;
 
 export function SiteHeader() {
