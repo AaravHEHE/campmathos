@@ -65,18 +65,19 @@ function AboutPage() {
       {/* HERO */}
       <section className="grid-paper border-b-2 border-ink">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
-          <p className="font-mono text-sm tracking-widest text-muted-foreground">
-            About
-          </p>
+          <p className="font-mono text-sm tracking-widest text-muted-foreground">About</p>
           <h1 className="mt-3 font-display text-5xl font-black leading-[0.95] md:text-7xl">
-            <span className="italic"><Wordmark /></span> means
+            <span className="italic">
+              <Wordmark />
+            </span>{" "}
+            means
             <br />
             learning.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            The name comes from the Greek word for "learning" or "knowledge." <Wordmark /> is a
-            one-month online summer program designed by a team of high school students to
-            make math feel useful, hands-on, and genuinely exciting — not abstract.
+            The name comes from the Greek word for "learning" or "knowledge." <Wordmark /> is a one-month online summer
+            program designed by a team of high school students to make math feel useful, hands-on, and genuinely
+            exciting — not abstract.
           </p>
         </div>
       </section>
@@ -92,16 +93,15 @@ function AboutPage() {
           </Reveal>
           <Reveal direction="left" delay={0.2} className="md:col-span-7">
             <p className="text-lg text-cream/80">
-              Most kids meet math as a stack of formulas with no obvious purpose. We think that's
-              backwards. <Wordmark /> teaches campers working anywhere from 5th-grade arithmetic
-              through Geometry how the math they already see in school connects to engineering,
-              finance, and architecture — the things adults actually pay for and build with.
+              Most kids meet math as a stack of formulas with no obvious purpose. We think that's backwards.{" "}
+              <Wordmark /> teaches campers working anywhere from 4th grade math through 7th grade level complexity how
+              the math they already see in school connects to engineering, finance, and architecture — the things adults
+              actually pay for and build with.
             </p>
             <p className="mt-5 text-lg text-cream/80">
-              The whole program is{" "}
-              <span className="font-semibold text-cream">completely free</span>, low-pressure, and
-              project-based. There are no fees, no strict attendance rules, and no exams. Just
-              real problems, real tools, and real things to build.
+              The whole program is <span className="font-semibold text-cream">completely free</span>, low-pressure, and
+              project-based. There are no fees, no strict attendance rules, and no exams. Just real problems, real
+              tools, and real things to build.
             </p>
           </Reveal>
         </div>
@@ -110,27 +110,22 @@ function AboutPage() {
       {/* PHILOSOPHY */}
       <section className="border-b-2 border-ink">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
-          <p className="font-mono text-sm tracking-widest text-muted-foreground">
-            How we teach
-          </p>
+          <p className="font-mono text-sm tracking-widest text-muted-foreground">How we teach</p>
           <h2 className="mt-3 font-display text-5xl font-black leading-[0.95] md:text-6xl">
             Built around how kids
             <br />
             actually learn.
           </h2>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            Our teaching philosophy prioritizes hands-on learning over passive instruction. Every
-            session is built so campers spend most of their time doing — building, debating,
-            testing — instead of copying from a board.
+            Our teaching philosophy prioritizes hands-on learning over passive instruction. Every session is built so
+            campers spend most of their time doing — building, debating, testing — instead of copying from a board.
           </p>
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2">
             {pillars.map((p, i) => (
               <Reveal key={p.title} delay={i * 0.22} amount={0.3}>
                 <article className="rounded-3xl border-2 border-ink bg-cream p-8 shadow-[6px_6px_0_0_var(--ink)]">
-                  <span
-                    className={`inline-block rounded-full px-3 py-1 font-mono text-xs font-bold ${p.accent}`}
-                  >
+                  <span className={`inline-block rounded-full px-3 py-1 font-mono text-xs font-bold ${p.accent}`}>
                     {p.tag}
                   </span>
                   <h3 className="mt-4 font-display text-2xl font-black">{p.title}</h3>
@@ -141,7 +136,6 @@ function AboutPage() {
           </div>
         </div>
       </section>
-
 
       {/* CTA */}
       <section className="bg-coral">
