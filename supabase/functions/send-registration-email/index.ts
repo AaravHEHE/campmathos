@@ -41,9 +41,9 @@ function confirmationHtml(email: string) {
           </p>
           <p style="margin:0 0 8px;font-size:16px;line-height:1.5;font-weight:bold;">For now, here's what to know:</p>
           <ul style="margin:0 0 16px 20px;padding:0;font-size:16px;line-height:1.6;">
-            <li>Sessions run about <strong>3 hours</strong> each, with a short break</li>
-            <li><strong>Tuesdays and Thursdays</strong> in the early afternoon Central</li>
-            <li>Runs <strong>July 7 – August 13, 2026</strong></li>
+            <li>Sessions run <strong>2 hours</strong> each (3–5 PM Central), with a short break</li>
+            <li><strong>Tuesdays and Thursdays</strong>, 3–5 PM Central</li>
+            <li>Runs <strong>July 7 – 30, 2026</strong></li>
             <li>Live online over Zoom · 100% free</li>
             <li>Recommended for campers working at <strong>5th-grade math through Geometry</strong></li>
           </ul>
