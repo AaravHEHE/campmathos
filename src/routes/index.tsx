@@ -18,13 +18,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "MathOs is a completely free online applied math camp, taught live over Zoom. Recommended skill range 5th grade math through Geometry. Tuesdays and Thursdays, 2-hour sessions from 3–5 PM Central, July 7 – 30, 2026.",
+          "MathOs is a completely free online applied math camp, taught live over Zoom. Recommended skill range 4th grade math through 7th grade math. Tuesdays and Thursdays, 2-hour sessions from 3–5 PM Central, July 7 – 30, 2026.",
       },
       { property: "og:title", content: "MathOs — Free online summer applied math camp" },
       {
         property: "og:description",
         content:
-          "Hands-on applied math from 5th-grade arithmetic through Geometry. Completely free. Fully online via Zoom, summer 2026.",
+          "Hands-on applied math from 4th-grade arithmetic through 7th-grade math. Completely free. Fully online via Zoom, summer 2026.",
       },
       { property: "og:image", content: OG },
       { property: "og:type", content: "website" },
@@ -47,7 +47,7 @@ function Marquee() {
     "★",
     "Completely free",
     "★",
-    "5th grade math → Geometry",
+    "4th grade math → 7th grade math",
     "★",
     "Online · Zoom",
     "★",
@@ -133,7 +133,7 @@ function Index() {
               system.
             </h1>
             <p className="mt-8 max-w-xl text-lg text-ink/75 md:text-xl">
-              For 5th-grade math through Geometry, taught live online by high school students.
+              For 4th-grade math through 7th-grade math, taught live online by high school students.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Link
@@ -257,7 +257,7 @@ function Index() {
                 ["Where", "Online (Zoom)"],
                 ["Days", "Tue · Thu"],
                 ["Time", "3–5 PM Central (2 hr)"],
-                ["Skill", "5th gr → Geometry"],
+                ["Skill", "4th gr → 7th gr math"],
                 ["Cost", "Free"],
               ].map(([k, v]) => (
                 <div key={k} className="bg-ink p-8">

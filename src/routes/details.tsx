@@ -37,7 +37,7 @@ const facts: [string, string][] = [
   ["Days", CAMP.humanDays],
   ["Time", CAMP.humanTime],
   ["Session length", "2 hours (with a short break)"],
-  ["Skill range", "5th grade math → Geometry (recommended)"],
+  ["Skill range", "4th grade math → 7th grade math (recommended)"],
   ["Platform", "Zoom link sent before each session"],
   ["Cost", "Completely free"],
 ];
