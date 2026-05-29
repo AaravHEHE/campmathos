@@ -239,8 +239,8 @@ function Index() {
               When, where, <span className="italic text-sun">how much</span>.
             </h2>
             <p className="mt-6 max-w-md text-cream/70">
-              <Wordmark /> meets Tuesdays and Thursdays in the early afternoon
-              Central — live over Zoom — from July 7 through August 13, 2026.
+              <Wordmark /> meets Tuesdays and Thursdays from 3–5 PM
+              Central — live over Zoom — from July 7 through July 30, 2026.
             </p>
             <Link
               to="/details"
@@ -253,10 +253,10 @@ function Index() {
           <Reveal direction="up" amount={0.2} className="md:col-span-7">
             <dl className="grid gap-px overflow-hidden rounded-3xl border-2 border-cream/20 bg-cream/10 md:grid-cols-2">
               {[
-                ["When", "July – August 2026"],
+                ["When", "July 2026"],
                 ["Where", "Online (Zoom)"],
                 ["Days", "Tue · Thu"],
-                ["Time", "Early afternoon (3 hr)"],
+                ["Time", "3–5 PM Central (2 hr)"],
                 ["Skill", "5th gr → Geometry"],
                 ["Cost", "Free"],
               ].map(([k, v]) => (
