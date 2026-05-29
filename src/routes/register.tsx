@@ -184,7 +184,7 @@ function RegisterPage() {
                 </p>
               )}
 
-              <p className="mt-6 font-mono text-xs text-muted-foreground">
+              <p className="mt-6 font-mono text-muted-foreground text-lg">
                 Or fill out{" "}
                 <a
                   href="https://docs.google.com/forms/d/e/1FAIpQLSepdv-4mPcb9gOWptBgugQl__Xm-k5DnghAQ_ctkkwyT7Npqg/viewform?usp=dialog"
@@ -199,7 +199,7 @@ function RegisterPage() {
             </>
           )}
 
-          <p className="mt-6 font-mono text-xs text-muted-foreground">
+          <p className="mt-6 font-mono text-muted-foreground text-lg">
             Questions? Email{" "}
             <a href="mailto:campmathos@gmail.com" className="underline hover:text-electric">
               campmathos@gmail.com
