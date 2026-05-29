@@ -15,7 +15,7 @@ export const Route = createFileRoute("/details")({
       {
         name: "description",
         content:
-          "MathOs camp logistics: free for all students, Tue/Thu live online sessions in the early afternoon Central time from July 7 through August 13, 2026. 3-hour sessions with a short break. Taught over Zoom.",
+          "MathOs camp logistics: free for all students, Tue/Thu live online sessions from 3–5 PM Central, July 7 through July 30, 2026. 2-hour sessions taught over Zoom.",
       },
       { property: "og:title", content: "Details — MathOs online summer camp" },
       {
