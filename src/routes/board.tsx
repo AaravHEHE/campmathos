@@ -3,6 +3,9 @@ import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { Wordmark } from "@/components/Wordmark";
 import { canonical, ogImage } from "@/lib/seo";
 import { Reveal } from "@/components/Reveal";
+import aaravPhoto from "@/assets/directors/aarav-arora.jpg";
+import yifanPhoto from "@/assets/directors/yifan-bao.jpg";
+import alanPhoto from "@/assets/directors/alan-zhan.jpg";
 
 const OG = ogImage("/og-board.jpg");
 
@@ -34,6 +37,7 @@ type Director = {
   name: string;
   bio: string;
   accent: string;
+  photo?: string;
 };
 
 const directors: Director[] = [
