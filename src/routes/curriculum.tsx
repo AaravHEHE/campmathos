@@ -65,13 +65,13 @@ function CurriculumPage() {
               {
                 tag: "engineering",
                 title: "Graphing",
-                body: "Read, build, and defend graphs the way engineers and analysts do.",
+                body: "Read, build, and use graphs to create things in the real world the way engineers and analysts do.",
                 accent: "bg-electric text-cream",
               },
               {
                 tag: "decision-making",
-                title: "Probability + Finance",
-                body: "Use the same math banks, markets, and insurance companies use every day.",
+                title: "Probability ",
+                body: "Use the same math banks, markets, and insurance companies use every day for many things.",
                 accent: "bg-coral text-cream",
               },
               {
