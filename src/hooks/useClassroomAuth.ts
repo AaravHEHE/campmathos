@@ -30,10 +30,14 @@ export function useClassroomAuth(requireRole?: "teacher" | "student") {
       const user = userRes.user;
       if (!user) {
         setState({ status: "unauthenticated" });
-        navigate({
-          to: "/login",
-          search: { redirect: window.location.pathname + window.location.search },
-        });
+        if (requireRole === "teacher") {
+          navigate({ to: "/admin/login", replace: true });
+        } else {
+          navigate({
+            to: "/login",
+            search: { redirect: window.location.pathname + window.location.search },
+          });
+        }
         return;
       }
       const [{ data: roles }, { data: profile }] = await Promise.all([
