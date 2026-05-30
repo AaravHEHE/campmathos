@@ -20,6 +20,7 @@ import { Route as CurriculumRouteImport } from './routes/curriculum'
 import { Route as BoardRouteImport } from './routes/board'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TeacherIndexRouteImport } from './routes/teacher.index'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AppJoinRouteImport } from './routes/app.join'
@@ -83,6 +84,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TeacherIndexRoute = TeacherIndexRouteImport.update({
+  id: '/teacher/',
+  path: '/teacher/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AppIndexRoute = AppIndexRouteImport.update({
   id: '/app/',
   path: '/app/',
@@ -137,6 +143,7 @@ export interface FileRoutesByFullPath {
   '/app/join': typeof AppJoinRoute
   '/admin/': typeof AdminIndexRoute
   '/app/': typeof AppIndexRoute
+  '/teacher/': typeof TeacherIndexRoute
   '/app/assignment/$assignmentId': typeof AppAssignmentAssignmentIdRouteWithChildren
   '/app/class/$classId': typeof AppClassClassIdRoute
   '/app/assignment/$assignmentId/result': typeof AppAssignmentAssignmentIdResultRoute
@@ -157,6 +164,7 @@ export interface FileRoutesByTo {
   '/app/join': typeof AppJoinRoute
   '/admin': typeof AdminIndexRoute
   '/app': typeof AppIndexRoute
+  '/teacher': typeof TeacherIndexRoute
   '/app/assignment/$assignmentId': typeof AppAssignmentAssignmentIdRouteWithChildren
   '/app/class/$classId': typeof AppClassClassIdRoute
   '/app/assignment/$assignmentId/result': typeof AppAssignmentAssignmentIdResultRoute
@@ -178,6 +186,7 @@ export interface FileRoutesById {
   '/app/join': typeof AppJoinRoute
   '/admin/': typeof AdminIndexRoute
   '/app/': typeof AppIndexRoute
+  '/teacher/': typeof TeacherIndexRoute
   '/app/assignment/$assignmentId': typeof AppAssignmentAssignmentIdRouteWithChildren
   '/app/class/$classId': typeof AppClassClassIdRoute
   '/app/assignment/$assignmentId/result': typeof AppAssignmentAssignmentIdResultRoute
@@ -200,6 +209,7 @@ export interface FileRouteTypes {
     | '/app/join'
     | '/admin/'
     | '/app/'
+    | '/teacher/'
     | '/app/assignment/$assignmentId'
     | '/app/class/$classId'
     | '/app/assignment/$assignmentId/result'
@@ -220,6 +230,7 @@ export interface FileRouteTypes {
     | '/app/join'
     | '/admin'
     | '/app'
+    | '/teacher'
     | '/app/assignment/$assignmentId'
     | '/app/class/$classId'
     | '/app/assignment/$assignmentId/result'
@@ -240,6 +251,7 @@ export interface FileRouteTypes {
     | '/app/join'
     | '/admin/'
     | '/app/'
+    | '/teacher/'
     | '/app/assignment/$assignmentId'
     | '/app/class/$classId'
     | '/app/assignment/$assignmentId/result'
@@ -261,6 +273,7 @@ export interface RootRouteChildren {
   AppJoinRoute: typeof AppJoinRoute
   AdminIndexRoute: typeof AdminIndexRoute
   AppIndexRoute: typeof AppIndexRoute
+  TeacherIndexRoute: typeof TeacherIndexRoute
   AppAssignmentAssignmentIdRoute: typeof AppAssignmentAssignmentIdRouteWithChildren
   AppClassClassIdRoute: typeof AppClassClassIdRoute
 }
@@ -342,6 +355,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teacher/': {
+      id: '/teacher/'
+      path: '/teacher'
+      fullPath: '/teacher/'
+      preLoaderRoute: typeof TeacherIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/app/': {
@@ -426,9 +446,19 @@ const rootRouteChildren: RootRouteChildren = {
   AppJoinRoute: AppJoinRoute,
   AdminIndexRoute: AdminIndexRoute,
   AppIndexRoute: AppIndexRoute,
+  TeacherIndexRoute: TeacherIndexRoute,
   AppAssignmentAssignmentIdRoute: AppAssignmentAssignmentIdRouteWithChildren,
   AppClassClassIdRoute: AppClassClassIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
