@@ -143,15 +143,15 @@ const AppAssignmentAssignmentIdIndexRoute =
   } as any)
 const TeacherAssignmentAssignmentIdSubmissionsRoute =
   TeacherAssignmentAssignmentIdSubmissionsRouteImport.update({
-    id: '/submissions',
-    path: '/submissions',
-    getParentRoute: () => TeacherAssignmentAssignmentIdRoute,
+    id: '/teacher/assignment/$assignmentId/submissions',
+    path: '/teacher/assignment/$assignmentId/submissions',
+    getParentRoute: () => rootRouteImport,
   } as any)
 const AppAssignmentAssignmentIdResultRoute =
   AppAssignmentAssignmentIdResultRouteImport.update({
-    id: '/result',
-    path: '/result',
-    getParentRoute: () => AppAssignmentAssignmentIdRoute,
+    id: '/app/assignment/$assignmentId/result',
+    path: '/app/assignment/$assignmentId/result',
+    getParentRoute: () => rootRouteImport,
   } as any)
 
 export interface FileRoutesByFullPath {
@@ -328,6 +328,8 @@ export interface RootRouteChildren {
   AppClassClassIdRoute: typeof AppClassClassIdRoute
   TeacherClassClassIdRoute: typeof TeacherClassClassIdRoute
   TeacherSubmissionSubmissionIdRoute: typeof TeacherSubmissionSubmissionIdRoute
+  AppAssignmentAssignmentIdResultRoute: typeof AppAssignmentAssignmentIdResultRoute
+  TeacherAssignmentAssignmentIdSubmissionsRoute: typeof TeacherAssignmentAssignmentIdSubmissionsRoute
   AppAssignmentAssignmentIdIndexRoute: typeof AppAssignmentAssignmentIdIndexRoute
   TeacherAssignmentAssignmentIdIndexRoute: typeof TeacherAssignmentAssignmentIdIndexRoute
 }
@@ -483,17 +485,17 @@ declare module '@tanstack/react-router' {
     }
     '/teacher/assignment/$assignmentId/submissions': {
       id: '/teacher/assignment/$assignmentId/submissions'
-      path: '/submissions'
+      path: '/teacher/assignment/$assignmentId/submissions'
       fullPath: '/teacher/assignment/$assignmentId/submissions'
       preLoaderRoute: typeof TeacherAssignmentAssignmentIdSubmissionsRouteImport
-      parentRoute: typeof TeacherAssignmentAssignmentIdRoute
+      parentRoute: typeof rootRouteImport
     }
     '/app/assignment/$assignmentId/result': {
       id: '/app/assignment/$assignmentId/result'
-      path: '/result'
+      path: '/app/assignment/$assignmentId/result'
       fullPath: '/app/assignment/$assignmentId/result'
       preLoaderRoute: typeof AppAssignmentAssignmentIdResultRouteImport
-      parentRoute: typeof AppAssignmentAssignmentIdRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -518,6 +520,9 @@ const rootRouteChildren: RootRouteChildren = {
   AppClassClassIdRoute: AppClassClassIdRoute,
   TeacherClassClassIdRoute: TeacherClassClassIdRoute,
   TeacherSubmissionSubmissionIdRoute: TeacherSubmissionSubmissionIdRoute,
+  AppAssignmentAssignmentIdResultRoute: AppAssignmentAssignmentIdResultRoute,
+  TeacherAssignmentAssignmentIdSubmissionsRoute:
+    TeacherAssignmentAssignmentIdSubmissionsRoute,
   AppAssignmentAssignmentIdIndexRoute: AppAssignmentAssignmentIdIndexRoute,
   TeacherAssignmentAssignmentIdIndexRoute:
     TeacherAssignmentAssignmentIdIndexRoute,
