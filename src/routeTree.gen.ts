@@ -27,9 +27,9 @@ import { Route as AppJoinRouteImport } from './routes/app.join'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as TeacherSubmissionSubmissionIdRouteImport } from './routes/teacher.submission.$submissionId'
 import { Route as TeacherClassClassIdRouteImport } from './routes/teacher.class.$classId'
-import { Route as TeacherAssignmentAssignmentIdRouteImport } from './routes/teacher.assignment.$assignmentId'
 import { Route as AppClassClassIdRouteImport } from './routes/app.class.$classId'
-import { Route as AppAssignmentAssignmentIdRouteImport } from './routes/app.assignment.$assignmentId'
+import { Route as TeacherAssignmentAssignmentIdIndexRouteImport } from './routes/teacher.assignment.$assignmentId.index'
+import { Route as AppAssignmentAssignmentIdIndexRouteImport } from './routes/app.assignment.$assignmentId.index'
 import { Route as TeacherAssignmentAssignmentIdSubmissionsRouteImport } from './routes/teacher.assignment.$assignmentId.submissions'
 import { Route as AppAssignmentAssignmentIdResultRouteImport } from './routes/app.assignment.$assignmentId.result'
 
@@ -124,34 +124,34 @@ const TeacherClassClassIdRoute = TeacherClassClassIdRouteImport.update({
   path: '/teacher/class/$classId',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TeacherAssignmentAssignmentIdRoute =
-  TeacherAssignmentAssignmentIdRouteImport.update({
-    id: '/teacher/assignment/$assignmentId',
-    path: '/teacher/assignment/$assignmentId',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const AppClassClassIdRoute = AppClassClassIdRouteImport.update({
   id: '/app/class/$classId',
   path: '/app/class/$classId',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AppAssignmentAssignmentIdRoute =
-  AppAssignmentAssignmentIdRouteImport.update({
-    id: '/app/assignment/$assignmentId',
-    path: '/app/assignment/$assignmentId',
+const TeacherAssignmentAssignmentIdIndexRoute =
+  TeacherAssignmentAssignmentIdIndexRouteImport.update({
+    id: '/teacher/assignment/$assignmentId/',
+    path: '/teacher/assignment/$assignmentId/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AppAssignmentAssignmentIdIndexRoute =
+  AppAssignmentAssignmentIdIndexRouteImport.update({
+    id: '/app/assignment/$assignmentId/',
+    path: '/app/assignment/$assignmentId/',
     getParentRoute: () => rootRouteImport,
   } as any)
 const TeacherAssignmentAssignmentIdSubmissionsRoute =
   TeacherAssignmentAssignmentIdSubmissionsRouteImport.update({
-    id: '/submissions',
-    path: '/submissions',
-    getParentRoute: () => TeacherAssignmentAssignmentIdRoute,
+    id: '/teacher/assignment/$assignmentId/submissions',
+    path: '/teacher/assignment/$assignmentId/submissions',
+    getParentRoute: () => rootRouteImport,
   } as any)
 const AppAssignmentAssignmentIdResultRoute =
   AppAssignmentAssignmentIdResultRouteImport.update({
-    id: '/result',
-    path: '/result',
-    getParentRoute: () => AppAssignmentAssignmentIdRoute,
+    id: '/app/assignment/$assignmentId/result',
+    path: '/app/assignment/$assignmentId/result',
+    getParentRoute: () => rootRouteImport,
   } as any)
 
 export interface FileRoutesByFullPath {
@@ -171,13 +171,13 @@ export interface FileRoutesByFullPath {
   '/admin/': typeof AdminIndexRoute
   '/app/': typeof AppIndexRoute
   '/teacher/': typeof TeacherIndexRoute
-  '/app/assignment/$assignmentId': typeof AppAssignmentAssignmentIdRouteWithChildren
   '/app/class/$classId': typeof AppClassClassIdRoute
-  '/teacher/assignment/$assignmentId': typeof TeacherAssignmentAssignmentIdRouteWithChildren
   '/teacher/class/$classId': typeof TeacherClassClassIdRoute
   '/teacher/submission/$submissionId': typeof TeacherSubmissionSubmissionIdRoute
   '/app/assignment/$assignmentId/result': typeof AppAssignmentAssignmentIdResultRoute
   '/teacher/assignment/$assignmentId/submissions': typeof TeacherAssignmentAssignmentIdSubmissionsRoute
+  '/app/assignment/$assignmentId/': typeof AppAssignmentAssignmentIdIndexRoute
+  '/teacher/assignment/$assignmentId/': typeof TeacherAssignmentAssignmentIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -196,13 +196,13 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminIndexRoute
   '/app': typeof AppIndexRoute
   '/teacher': typeof TeacherIndexRoute
-  '/app/assignment/$assignmentId': typeof AppAssignmentAssignmentIdRouteWithChildren
   '/app/class/$classId': typeof AppClassClassIdRoute
-  '/teacher/assignment/$assignmentId': typeof TeacherAssignmentAssignmentIdRouteWithChildren
   '/teacher/class/$classId': typeof TeacherClassClassIdRoute
   '/teacher/submission/$submissionId': typeof TeacherSubmissionSubmissionIdRoute
   '/app/assignment/$assignmentId/result': typeof AppAssignmentAssignmentIdResultRoute
   '/teacher/assignment/$assignmentId/submissions': typeof TeacherAssignmentAssignmentIdSubmissionsRoute
+  '/app/assignment/$assignmentId': typeof AppAssignmentAssignmentIdIndexRoute
+  '/teacher/assignment/$assignmentId': typeof TeacherAssignmentAssignmentIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -222,13 +222,13 @@ export interface FileRoutesById {
   '/admin/': typeof AdminIndexRoute
   '/app/': typeof AppIndexRoute
   '/teacher/': typeof TeacherIndexRoute
-  '/app/assignment/$assignmentId': typeof AppAssignmentAssignmentIdRouteWithChildren
   '/app/class/$classId': typeof AppClassClassIdRoute
-  '/teacher/assignment/$assignmentId': typeof TeacherAssignmentAssignmentIdRouteWithChildren
   '/teacher/class/$classId': typeof TeacherClassClassIdRoute
   '/teacher/submission/$submissionId': typeof TeacherSubmissionSubmissionIdRoute
   '/app/assignment/$assignmentId/result': typeof AppAssignmentAssignmentIdResultRoute
   '/teacher/assignment/$assignmentId/submissions': typeof TeacherAssignmentAssignmentIdSubmissionsRoute
+  '/app/assignment/$assignmentId/': typeof AppAssignmentAssignmentIdIndexRoute
+  '/teacher/assignment/$assignmentId/': typeof TeacherAssignmentAssignmentIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -249,13 +249,13 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/app/'
     | '/teacher/'
-    | '/app/assignment/$assignmentId'
     | '/app/class/$classId'
-    | '/teacher/assignment/$assignmentId'
     | '/teacher/class/$classId'
     | '/teacher/submission/$submissionId'
     | '/app/assignment/$assignmentId/result'
     | '/teacher/assignment/$assignmentId/submissions'
+    | '/app/assignment/$assignmentId/'
+    | '/teacher/assignment/$assignmentId/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -274,13 +274,13 @@ export interface FileRouteTypes {
     | '/admin'
     | '/app'
     | '/teacher'
-    | '/app/assignment/$assignmentId'
     | '/app/class/$classId'
-    | '/teacher/assignment/$assignmentId'
     | '/teacher/class/$classId'
     | '/teacher/submission/$submissionId'
     | '/app/assignment/$assignmentId/result'
     | '/teacher/assignment/$assignmentId/submissions'
+    | '/app/assignment/$assignmentId'
+    | '/teacher/assignment/$assignmentId'
   id:
     | '__root__'
     | '/'
@@ -299,13 +299,13 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/app/'
     | '/teacher/'
-    | '/app/assignment/$assignmentId'
     | '/app/class/$classId'
-    | '/teacher/assignment/$assignmentId'
     | '/teacher/class/$classId'
     | '/teacher/submission/$submissionId'
     | '/app/assignment/$assignmentId/result'
     | '/teacher/assignment/$assignmentId/submissions'
+    | '/app/assignment/$assignmentId/'
+    | '/teacher/assignment/$assignmentId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -325,11 +325,13 @@ export interface RootRouteChildren {
   AdminIndexRoute: typeof AdminIndexRoute
   AppIndexRoute: typeof AppIndexRoute
   TeacherIndexRoute: typeof TeacherIndexRoute
-  AppAssignmentAssignmentIdRoute: typeof AppAssignmentAssignmentIdRouteWithChildren
   AppClassClassIdRoute: typeof AppClassClassIdRoute
-  TeacherAssignmentAssignmentIdRoute: typeof TeacherAssignmentAssignmentIdRouteWithChildren
   TeacherClassClassIdRoute: typeof TeacherClassClassIdRoute
   TeacherSubmissionSubmissionIdRoute: typeof TeacherSubmissionSubmissionIdRoute
+  AppAssignmentAssignmentIdResultRoute: typeof AppAssignmentAssignmentIdResultRoute
+  TeacherAssignmentAssignmentIdSubmissionsRoute: typeof TeacherAssignmentAssignmentIdSubmissionsRoute
+  AppAssignmentAssignmentIdIndexRoute: typeof AppAssignmentAssignmentIdIndexRoute
+  TeacherAssignmentAssignmentIdIndexRoute: typeof TeacherAssignmentAssignmentIdIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -460,13 +462,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeacherClassClassIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/teacher/assignment/$assignmentId': {
-      id: '/teacher/assignment/$assignmentId'
-      path: '/teacher/assignment/$assignmentId'
-      fullPath: '/teacher/assignment/$assignmentId'
-      preLoaderRoute: typeof TeacherAssignmentAssignmentIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/app/class/$classId': {
       id: '/app/class/$classId'
       path: '/app/class/$classId'
@@ -474,58 +469,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppClassClassIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/app/assignment/$assignmentId': {
-      id: '/app/assignment/$assignmentId'
+    '/teacher/assignment/$assignmentId/': {
+      id: '/teacher/assignment/$assignmentId/'
+      path: '/teacher/assignment/$assignmentId'
+      fullPath: '/teacher/assignment/$assignmentId/'
+      preLoaderRoute: typeof TeacherAssignmentAssignmentIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app/assignment/$assignmentId/': {
+      id: '/app/assignment/$assignmentId/'
       path: '/app/assignment/$assignmentId'
-      fullPath: '/app/assignment/$assignmentId'
-      preLoaderRoute: typeof AppAssignmentAssignmentIdRouteImport
+      fullPath: '/app/assignment/$assignmentId/'
+      preLoaderRoute: typeof AppAssignmentAssignmentIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/teacher/assignment/$assignmentId/submissions': {
       id: '/teacher/assignment/$assignmentId/submissions'
-      path: '/submissions'
+      path: '/teacher/assignment/$assignmentId/submissions'
       fullPath: '/teacher/assignment/$assignmentId/submissions'
       preLoaderRoute: typeof TeacherAssignmentAssignmentIdSubmissionsRouteImport
-      parentRoute: typeof TeacherAssignmentAssignmentIdRoute
+      parentRoute: typeof rootRouteImport
     }
     '/app/assignment/$assignmentId/result': {
       id: '/app/assignment/$assignmentId/result'
-      path: '/result'
+      path: '/app/assignment/$assignmentId/result'
       fullPath: '/app/assignment/$assignmentId/result'
       preLoaderRoute: typeof AppAssignmentAssignmentIdResultRouteImport
-      parentRoute: typeof AppAssignmentAssignmentIdRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
-
-interface AppAssignmentAssignmentIdRouteChildren {
-  AppAssignmentAssignmentIdResultRoute: typeof AppAssignmentAssignmentIdResultRoute
-}
-
-const AppAssignmentAssignmentIdRouteChildren: AppAssignmentAssignmentIdRouteChildren =
-  {
-    AppAssignmentAssignmentIdResultRoute: AppAssignmentAssignmentIdResultRoute,
-  }
-
-const AppAssignmentAssignmentIdRouteWithChildren =
-  AppAssignmentAssignmentIdRoute._addFileChildren(
-    AppAssignmentAssignmentIdRouteChildren,
-  )
-
-interface TeacherAssignmentAssignmentIdRouteChildren {
-  TeacherAssignmentAssignmentIdSubmissionsRoute: typeof TeacherAssignmentAssignmentIdSubmissionsRoute
-}
-
-const TeacherAssignmentAssignmentIdRouteChildren: TeacherAssignmentAssignmentIdRouteChildren =
-  {
-    TeacherAssignmentAssignmentIdSubmissionsRoute:
-      TeacherAssignmentAssignmentIdSubmissionsRoute,
-  }
-
-const TeacherAssignmentAssignmentIdRouteWithChildren =
-  TeacherAssignmentAssignmentIdRoute._addFileChildren(
-    TeacherAssignmentAssignmentIdRouteChildren,
-  )
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -544,12 +517,15 @@ const rootRouteChildren: RootRouteChildren = {
   AdminIndexRoute: AdminIndexRoute,
   AppIndexRoute: AppIndexRoute,
   TeacherIndexRoute: TeacherIndexRoute,
-  AppAssignmentAssignmentIdRoute: AppAssignmentAssignmentIdRouteWithChildren,
   AppClassClassIdRoute: AppClassClassIdRoute,
-  TeacherAssignmentAssignmentIdRoute:
-    TeacherAssignmentAssignmentIdRouteWithChildren,
   TeacherClassClassIdRoute: TeacherClassClassIdRoute,
   TeacherSubmissionSubmissionIdRoute: TeacherSubmissionSubmissionIdRoute,
+  AppAssignmentAssignmentIdResultRoute: AppAssignmentAssignmentIdResultRoute,
+  TeacherAssignmentAssignmentIdSubmissionsRoute:
+    TeacherAssignmentAssignmentIdSubmissionsRoute,
+  AppAssignmentAssignmentIdIndexRoute: AppAssignmentAssignmentIdIndexRoute,
+  TeacherAssignmentAssignmentIdIndexRoute:
+    TeacherAssignmentAssignmentIdIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
