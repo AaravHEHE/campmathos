@@ -25,9 +25,9 @@ function LoginPage() {
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const { data } = await supabase.auth.getUser();
-      if (cancelled || !data.user) return;
-      await routeByRole(data.user.id);
+      const { data } = await supabase.auth.getSession();
+      if (cancelled || !data.session) return;
+      await routeByRole(data.session.user.id);
     })();
     return () => {
       cancelled = true;
@@ -41,14 +41,16 @@ function LoginPage() {
       .select("role")
       .eq("user_id", userId);
     const list = (roles ?? []).map((r) => r.role as string);
-    const dest = search.redirect && search.redirect !== "/app"
-      ? search.redirect
-      : list.includes("admin")
-        ? "/admin"
-        : list.includes("teacher")
-          ? "/teacher"
-          : "/app";
-    window.location.href = dest;
+    // Camper sign-in is for students only. Directors and teachers must use
+    // the Director sign-in page so their workflows stay separate.
+    if (list.includes("admin") || list.includes("teacher")) {
+      await supabase.auth.signOut();
+      setError("This account is a Director or Teacher. Please use the Director sign-in.");
+      setLoading(false);
+      return;
+    }
+    const dest = search.redirect && search.redirect !== "/app" ? search.redirect : "/app";
+    navigate({ to: dest, replace: true });
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
