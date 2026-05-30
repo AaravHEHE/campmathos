@@ -3,7 +3,7 @@ import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import { attachAuthHeader, generateJoinCode } from "./classroom-auth";
-import { assertTeacherOrAdmin, assertAdmin } from "./classroom-auth.server";
+import { assertTeacherOrAdmin } from "./classroom-auth.server";
 
 async function ownsClass(classId: string, userId: string): Promise<boolean> {
   const role = await import("./classroom-auth.server").then((m) => m.getUserRole(userId));
