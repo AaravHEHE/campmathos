@@ -35,7 +35,7 @@ const faqs: { id: string; q: string; a: string }[] = [
   {
     id: "register",
     q: "How do we register?",
-    a: "Sign up using your email through the registration page. Before each session we'll email you the Zoom link and a short reminder.",
+    a: "Sign up using your email through the registration page and filling out a short google form. Before each session we'll email you the Zoom link and a short reminder.",
   },
   {
     id: "free",
