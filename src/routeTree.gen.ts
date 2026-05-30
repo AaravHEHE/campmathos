@@ -26,6 +26,7 @@ import { Route as AppJoinRouteImport } from './routes/app.join'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as AppClassClassIdRouteImport } from './routes/app.class.$classId'
 import { Route as AppAssignmentAssignmentIdRouteImport } from './routes/app.assignment.$assignmentId'
+import { Route as AppAssignmentAssignmentIdResultRouteImport } from './routes/app.assignment.$assignmentId.result'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -113,6 +114,12 @@ const AppAssignmentAssignmentIdRoute =
     path: '/app/assignment/$assignmentId',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AppAssignmentAssignmentIdResultRoute =
+  AppAssignmentAssignmentIdResultRouteImport.update({
+    id: '/result',
+    path: '/result',
+    getParentRoute: () => AppAssignmentAssignmentIdRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -130,8 +137,9 @@ export interface FileRoutesByFullPath {
   '/app/join': typeof AppJoinRoute
   '/admin/': typeof AdminIndexRoute
   '/app/': typeof AppIndexRoute
-  '/app/assignment/$assignmentId': typeof AppAssignmentAssignmentIdRoute
+  '/app/assignment/$assignmentId': typeof AppAssignmentAssignmentIdRouteWithChildren
   '/app/class/$classId': typeof AppClassClassIdRoute
+  '/app/assignment/$assignmentId/result': typeof AppAssignmentAssignmentIdResultRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -149,8 +157,9 @@ export interface FileRoutesByTo {
   '/app/join': typeof AppJoinRoute
   '/admin': typeof AdminIndexRoute
   '/app': typeof AppIndexRoute
-  '/app/assignment/$assignmentId': typeof AppAssignmentAssignmentIdRoute
+  '/app/assignment/$assignmentId': typeof AppAssignmentAssignmentIdRouteWithChildren
   '/app/class/$classId': typeof AppClassClassIdRoute
+  '/app/assignment/$assignmentId/result': typeof AppAssignmentAssignmentIdResultRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -169,8 +178,9 @@ export interface FileRoutesById {
   '/app/join': typeof AppJoinRoute
   '/admin/': typeof AdminIndexRoute
   '/app/': typeof AppIndexRoute
-  '/app/assignment/$assignmentId': typeof AppAssignmentAssignmentIdRoute
+  '/app/assignment/$assignmentId': typeof AppAssignmentAssignmentIdRouteWithChildren
   '/app/class/$classId': typeof AppClassClassIdRoute
+  '/app/assignment/$assignmentId/result': typeof AppAssignmentAssignmentIdResultRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -192,6 +202,7 @@ export interface FileRouteTypes {
     | '/app/'
     | '/app/assignment/$assignmentId'
     | '/app/class/$classId'
+    | '/app/assignment/$assignmentId/result'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -211,6 +222,7 @@ export interface FileRouteTypes {
     | '/app'
     | '/app/assignment/$assignmentId'
     | '/app/class/$classId'
+    | '/app/assignment/$assignmentId/result'
   id:
     | '__root__'
     | '/'
@@ -230,6 +242,7 @@ export interface FileRouteTypes {
     | '/app/'
     | '/app/assignment/$assignmentId'
     | '/app/class/$classId'
+    | '/app/assignment/$assignmentId/result'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -248,7 +261,7 @@ export interface RootRouteChildren {
   AppJoinRoute: typeof AppJoinRoute
   AdminIndexRoute: typeof AdminIndexRoute
   AppIndexRoute: typeof AppIndexRoute
-  AppAssignmentAssignmentIdRoute: typeof AppAssignmentAssignmentIdRoute
+  AppAssignmentAssignmentIdRoute: typeof AppAssignmentAssignmentIdRouteWithChildren
   AppClassClassIdRoute: typeof AppClassClassIdRoute
 }
 
@@ -373,8 +386,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppAssignmentAssignmentIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/assignment/$assignmentId/result': {
+      id: '/app/assignment/$assignmentId/result'
+      path: '/result'
+      fullPath: '/app/assignment/$assignmentId/result'
+      preLoaderRoute: typeof AppAssignmentAssignmentIdResultRouteImport
+      parentRoute: typeof AppAssignmentAssignmentIdRoute
+    }
   }
 }
+
+interface AppAssignmentAssignmentIdRouteChildren {
+  AppAssignmentAssignmentIdResultRoute: typeof AppAssignmentAssignmentIdResultRoute
+}
+
+const AppAssignmentAssignmentIdRouteChildren: AppAssignmentAssignmentIdRouteChildren =
+  {
+    AppAssignmentAssignmentIdResultRoute: AppAssignmentAssignmentIdResultRoute,
+  }
+
+const AppAssignmentAssignmentIdRouteWithChildren =
+  AppAssignmentAssignmentIdRoute._addFileChildren(
+    AppAssignmentAssignmentIdRouteChildren,
+  )
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -392,9 +426,18 @@ const rootRouteChildren: RootRouteChildren = {
   AppJoinRoute: AppJoinRoute,
   AdminIndexRoute: AdminIndexRoute,
   AppIndexRoute: AppIndexRoute,
-  AppAssignmentAssignmentIdRoute: AppAssignmentAssignmentIdRoute,
+  AppAssignmentAssignmentIdRoute: AppAssignmentAssignmentIdRouteWithChildren,
   AppClassClassIdRoute: AppClassClassIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
