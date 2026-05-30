@@ -3,7 +3,7 @@ import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import { attachAuthHeader, generateJoinCode } from "./classroom-auth";
-import { assertTeacherOrAdmin, assertAdmin } from "./classroom-auth.server";
+import { assertTeacherOrAdmin } from "./classroom-auth.server";
 
 async function ownsClass(classId: string, userId: string): Promise<boolean> {
   const role = await import("./classroom-auth.server").then((m) => m.getUserRole(userId));
@@ -19,12 +19,16 @@ async function ownsClass(classId: string, userId: string): Promise<boolean> {
 export const getTeacherDashboard = createServerFn({ method: "POST" })
   .middleware([attachAuthHeader, requireSupabaseAuth])
   .handler(async ({ context }) => {
-    await assertTeacherOrAdmin(context.userId);
-    const { data: classes } = await supabaseAdmin
+    const role = await assertTeacherOrAdmin(context.userId);
+    // Admins see every class; teachers only their own.
+    const classesQuery = supabaseAdmin
       .from("classes")
-      .select("id, name, description, join_code, archived, created_at")
-      .eq("teacher_id", context.userId)
+      .select("id, name, description, join_code, archived, created_at, teacher_id")
       .order("created_at", { ascending: false });
+    const { data: classes } =
+      role === "admin"
+        ? await classesQuery
+        : await classesQuery.eq("teacher_id", context.userId);
 
     const classIds = (classes ?? []).map((c) => c.id);
     const [{ count: studentCount }, { data: recentSubs }] = await Promise.all([
@@ -48,8 +52,10 @@ export const getTeacherDashboard = createServerFn({ method: "POST" })
       classes: classes ?? [],
       studentCount: studentCount ?? 0,
       pendingSubmissions: recentSubs ?? [],
+      viewerRole: role,
     };
   });
+
 
 export const createClass = createServerFn({ method: "POST" })
   .middleware([attachAuthHeader, requireSupabaseAuth])
@@ -400,91 +406,3 @@ export const gradeSubmission = createServerFn({ method: "POST" })
     return { ok: true, finalScore: final };
   });
 
-// Admin: list users + promote/demote
-export const adminListUsersWithRoles = createServerFn({ method: "POST" })
-  .middleware([attachAuthHeader, requireSupabaseAuth])
-  .handler(async ({ context }) => {
-    await assertAdmin(context.userId);
-    const { data: profiles } = await supabaseAdmin
-      .from("profiles")
-      .select("id, display_name, created_at")
-      .order("created_at", { ascending: false })
-      .limit(500);
-    const { data: roles } = await supabaseAdmin.from("user_roles").select("user_id, role");
-    const map = new Map<string, string[]>();
-    for (const r of roles ?? []) {
-      const arr = map.get(r.user_id) ?? [];
-      arr.push(r.role);
-      map.set(r.user_id, arr);
-    }
-    return {
-      users: (profiles ?? []).map((p) => ({
-        ...p,
-        roles: map.get(p.id) ?? [],
-      })),
-    };
-  });
-
-export const adminSetTeacherRole = createServerFn({ method: "POST" })
-  .middleware([attachAuthHeader, requireSupabaseAuth])
-  .inputValidator((input) =>
-    z.object({ userId: z.string().uuid(), isTeacher: z.boolean() }).parse(input),
-  )
-  .handler(async ({ data, context }) => {
-    await assertAdmin(context.userId);
-    if (data.isTeacher) {
-      await supabaseAdmin
-        .from("user_roles")
-        .insert({ user_id: data.userId, role: "teacher" })
-        .select();
-    } else {
-      await supabaseAdmin
-        .from("user_roles")
-        .delete()
-        .eq("user_id", data.userId)
-        .eq("role", "teacher");
-    }
-    return { ok: true };
-  });
-
-// Admin-only: provision a new teacher account directly (email + password).
-export const adminCreateTeacher = createServerFn({ method: "POST" })
-  .middleware([attachAuthHeader, requireSupabaseAuth])
-  .inputValidator((input) =>
-    z
-      .object({
-        email: z.string().email().max(320),
-        password: z.string().min(8).max(200),
-        displayName: z.string().min(1).max(120),
-      })
-      .parse(input),
-  )
-  .handler(async ({ data, context }) => {
-    await assertAdmin(context.userId);
-
-    const { data: created, error: createErr } = await supabaseAdmin.auth.admin.createUser({
-      email: data.email.toLowerCase().trim(),
-      password: data.password,
-      email_confirm: true,
-      user_metadata: { display_name: data.displayName.trim() },
-    });
-    if (createErr || !created.user) {
-      throw new Error(createErr?.message ?? "Could not create account");
-    }
-    const userId = created.user.id;
-
-    // Ensure profile exists (the handle_new_user trigger usually does this,
-    // but we upsert just in case).
-    await supabaseAdmin
-      .from("profiles")
-      .upsert({ id: userId, display_name: data.displayName.trim() }, { onConflict: "id" });
-
-    // Remove auto-assigned student role and grant teacher role.
-    await supabaseAdmin.from("user_roles").delete().eq("user_id", userId).eq("role", "student");
-    await supabaseAdmin
-      .from("user_roles")
-      .insert({ user_id: userId, role: "teacher" })
-      .select();
-
-    return { ok: true, userId };
-  });

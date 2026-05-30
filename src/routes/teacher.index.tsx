@@ -30,6 +30,7 @@ function TeacherDashboard() {
   const [pending, setPending] = useState<Array<{ id: string; assignment_id: string }>>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [viewerRole, setViewerRole] = useState<"admin" | "teacher" | null>(null);
 
   // create-class form
   const [name, setName] = useState("");
@@ -46,6 +47,7 @@ function TeacherDashboard() {
         setClasses(res.classes as ClassRow[]);
         setStudentCount(res.studentCount);
         setPending(res.pendingSubmissions as Array<{ id: string; assignment_id: string }>);
+        setViewerRole((res.viewerRole ?? null) as "admin" | "teacher" | null);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Failed to load");
       }
@@ -75,18 +77,35 @@ function TeacherDashboard() {
     return <div className="min-h-screen bg-cream" />;
   }
 
+  const isAdmin = viewerRole === "admin";
+
   return (
     <AppShell
       role={auth.role}
-      title="Teacher dashboard"
+      title={isAdmin ? "All classes (admin view)" : "Teacher dashboard"}
       displayName={auth.displayName}
       onSignOut={signOut}
     >
+      {isAdmin && (
+        <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border-2 border-ink bg-sun/40 px-5 py-3">
+          <p className="font-mono text-xs uppercase tracking-widest">
+            Admin · viewing every class in the camp
+          </p>
+          <Link
+            to="/admin"
+            className="rounded-full border-2 border-ink px-4 py-1.5 font-mono text-xs uppercase tracking-widest hover:bg-ink hover:text-cream"
+          >
+            ← Sign-ups dashboard
+          </Link>
+        </div>
+      )}
+
       <div className="grid gap-3 md:grid-cols-3">
         <Stat label="Classes" value={classes.length} accent="bg-electric text-cream" />
         <Stat label="Students" value={studentCount} accent="bg-sun text-ink" />
         <Stat label="Pending grading" value={pending.length} accent="bg-coral text-cream" />
       </div>
+
 
       <section className="mt-10 grid gap-8 md:grid-cols-[2fr_1fr]">
         <div>
