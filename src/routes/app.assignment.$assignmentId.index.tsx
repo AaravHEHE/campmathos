@@ -12,7 +12,7 @@ import {
   submitAssignment,
 } from "@/lib/classroom.functions";
 
-export const Route = createFileRoute("/app/assignment/$assignmentId")({
+export const Route = createFileRoute("/app/assignment/$assignmentId/")({
   component: SolveAssignment,
   head: () => ({
     meta: [

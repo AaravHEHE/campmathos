@@ -5,7 +5,7 @@ import { MathInput } from "@/components/classroom/MathKeyboard";
 import { useClassroomAuth, signOut } from "@/hooks/useClassroomAuth";
 import { getAssignmentForEdit, saveAssignment } from "@/lib/teacher.functions";
 
-export const Route = createFileRoute("/teacher/assignment/$assignmentId")({
+export const Route = createFileRoute("/teacher/assignment/$assignmentId/")({
   component: AssignmentEditor,
   head: () => ({
     meta: [
