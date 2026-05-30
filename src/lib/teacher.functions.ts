@@ -112,7 +112,7 @@ export const getTeacherClass = createServerFn({ method: "POST" })
         .maybeSingle(),
       supabaseAdmin
         .from("enrollments")
-        .select("id, joined_at, student_id, profiles:profiles!enrollments_student_id_fkey(display_name)")
+        .select("id, joined_at, student_id")
         .eq("class_id", data.classId)
         .order("joined_at", { ascending: false }),
       supabaseAdmin
@@ -123,21 +123,17 @@ export const getTeacherClass = createServerFn({ method: "POST" })
     ]);
     if (!cls) throw new Error("Class not found");
 
-    // Fall back: profiles join may not auto-resolve if no FK relationship is declared.
-    let rosterOut = roster ?? [];
-    if (rosterOut.length && rosterOut[0] && !(rosterOut[0] as { profiles?: unknown }).profiles) {
-      const ids = rosterOut.map((r) => r.student_id);
-      const { data: profs } = await supabaseAdmin
-        .from("profiles")
-        .select("id, display_name")
-        .in("id", ids);
-      const map = new Map((profs ?? []).map((p) => [p.id, p.display_name] as const));
-      rosterOut = rosterOut.map((r) => ({
-        ...r,
-        profiles: { display_name: map.get(r.student_id) ?? null },
-      }));
-    }
+    const ids = (roster ?? []).map((r) => r.student_id);
+    const { data: profs } = ids.length
+      ? await supabaseAdmin.from("profiles").select("id, display_name").in("id", ids)
+      : { data: [] };
+    const profMap = new Map((profs ?? []).map((p) => [p.id, p.display_name] as const));
+    const rosterOut = (roster ?? []).map((r) => ({
+      ...r,
+      display_name: profMap.get(r.student_id) ?? null,
+    }));
     return { class: cls, roster: rosterOut, assignments: assignments ?? [] };
+
   });
 
 export const removeStudent = createServerFn({ method: "POST" })
