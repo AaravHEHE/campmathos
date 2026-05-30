@@ -446,3 +446,45 @@ export const adminSetTeacherRole = createServerFn({ method: "POST" })
     }
     return { ok: true };
   });
+
+// Admin-only: provision a new teacher account directly (email + password).
+export const adminCreateTeacher = createServerFn({ method: "POST" })
+  .middleware([attachAuthHeader, requireSupabaseAuth])
+  .inputValidator((input) =>
+    z
+      .object({
+        email: z.string().email().max(320),
+        password: z.string().min(8).max(200),
+        displayName: z.string().min(1).max(120),
+      })
+      .parse(input),
+  )
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context.userId);
+
+    const { data: created, error: createErr } = await supabaseAdmin.auth.admin.createUser({
+      email: data.email.toLowerCase().trim(),
+      password: data.password,
+      email_confirm: true,
+      user_metadata: { display_name: data.displayName.trim() },
+    });
+    if (createErr || !created.user) {
+      throw new Error(createErr?.message ?? "Could not create account");
+    }
+    const userId = created.user.id;
+
+    // Ensure profile exists (the handle_new_user trigger usually does this,
+    // but we upsert just in case).
+    await supabaseAdmin
+      .from("profiles")
+      .upsert({ id: userId, display_name: data.displayName.trim() }, { onConflict: "id" });
+
+    // Remove auto-assigned student role and grant teacher role.
+    await supabaseAdmin.from("user_roles").delete().eq("user_id", userId).eq("role", "student");
+    await supabaseAdmin
+      .from("user_roles")
+      .insert({ user_id: userId, role: "teacher" })
+      .select();
+
+    return { ok: true, userId };
+  });

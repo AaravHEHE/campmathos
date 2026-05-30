@@ -53,24 +53,29 @@ function AdminLoginPage() {
       return;
     }
 
-    // Verify the signed-in user actually has the admin role.
-    const { data: roleRow, error: roleError } = await supabase
+    // Look up roles — admin OR teacher may sign in here.
+    const { data: roleRows, error: roleError } = await supabase
       .from("user_roles")
       .select("role")
-      .eq("user_id", signInData.session.user.id)
-      .eq("role", "admin")
-      .maybeSingle();
+      .eq("user_id", signInData.session.user.id);
 
-    if (roleError || !roleRow) {
+    const roles = (roleRows ?? []).map((r) => r.role as string);
+    const isAdmin = roles.includes("admin");
+    const isTeacher = roles.includes("teacher");
+
+    if (roleError || (!isAdmin && !isTeacher)) {
       await supabase.auth.signOut();
-      setError("This account does not have Camp Director access.");
+      setError("This account does not have Director or Teacher access.");
       setLoading(false);
       return;
     }
 
-    markAdminSignedIn();
-
-    navigate({ to: "/admin" });
+    if (isAdmin) {
+      markAdminSignedIn();
+      navigate({ to: "/admin" });
+    } else {
+      navigate({ to: "/teacher" });
+    }
   };
 
   return (
@@ -80,7 +85,7 @@ function AdminLoginPage() {
         className="w-full max-w-sm rounded-3xl border-2 border-ink bg-cream p-8 shadow-[8px_8px_0_0_var(--ink)]"
       >
         <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-          DIRECTORS ONLY
+          DIRECTORS & TEACHERS
         </p>
         <h1 className="mt-2 font-display text-3xl font-black">Sign in</h1>
         <input
