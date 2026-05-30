@@ -45,7 +45,7 @@ function LoginPage() {
     // the Director sign-in page so their workflows stay separate.
     if (list.includes("admin") || list.includes("teacher")) {
       await supabase.auth.signOut();
-      setError("This account is a Director or Teacher. Please use the Director sign-in.");
+      setError("Incorrect email or password.");
       setLoading(false);
       return;
     }
@@ -115,12 +115,6 @@ function LoginPage() {
           New here?{" "}
           <Link to="/signup" className="underline">
             Create an account
-          </Link>
-        </p>
-        <p className="mt-2 font-mono text-xs text-ink/70">
-          Director or teacher?{" "}
-          <Link to="/admin/login" className="underline">
-            Sign in here
           </Link>
         </p>
       </form>
