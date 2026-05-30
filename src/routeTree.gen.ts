@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as MathosDoticsRouteImport } from './routes/mathos[.]ics'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as DetailsRouteImport } from './routes/details'
 import { Route as CurriculumRouteImport } from './routes/curriculum'
@@ -34,6 +35,11 @@ const RegisterRoute = RegisterRouteImport.update({
 const MathosDoticsRoute = MathosDoticsRouteImport.update({
   id: '/mathos.ics',
   path: '/mathos.ics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqRoute = FaqRouteImport.update({
@@ -84,6 +90,7 @@ export interface FileRoutesByFullPath {
   '/curriculum': typeof CurriculumRoute
   '/details': typeof DetailsRoute
   '/faq': typeof FaqRoute
+  '/login': typeof LoginRoute
   '/mathos.ics': typeof MathosDoticsRoute
   '/register': typeof RegisterRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -97,6 +104,7 @@ export interface FileRoutesByTo {
   '/curriculum': typeof CurriculumRoute
   '/details': typeof DetailsRoute
   '/faq': typeof FaqRoute
+  '/login': typeof LoginRoute
   '/mathos.ics': typeof MathosDoticsRoute
   '/register': typeof RegisterRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -111,6 +119,7 @@ export interface FileRoutesById {
   '/curriculum': typeof CurriculumRoute
   '/details': typeof DetailsRoute
   '/faq': typeof FaqRoute
+  '/login': typeof LoginRoute
   '/mathos.ics': typeof MathosDoticsRoute
   '/register': typeof RegisterRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -126,6 +135,7 @@ export interface FileRouteTypes {
     | '/curriculum'
     | '/details'
     | '/faq'
+    | '/login'
     | '/mathos.ics'
     | '/register'
     | '/sitemap.xml'
@@ -139,6 +149,7 @@ export interface FileRouteTypes {
     | '/curriculum'
     | '/details'
     | '/faq'
+    | '/login'
     | '/mathos.ics'
     | '/register'
     | '/sitemap.xml'
@@ -152,6 +163,7 @@ export interface FileRouteTypes {
     | '/curriculum'
     | '/details'
     | '/faq'
+    | '/login'
     | '/mathos.ics'
     | '/register'
     | '/sitemap.xml'
@@ -166,6 +178,7 @@ export interface RootRouteChildren {
   CurriculumRoute: typeof CurriculumRoute
   DetailsRoute: typeof DetailsRoute
   FaqRoute: typeof FaqRoute
+  LoginRoute: typeof LoginRoute
   MathosDoticsRoute: typeof MathosDoticsRoute
   RegisterRoute: typeof RegisterRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -194,6 +207,13 @@ declare module '@tanstack/react-router' {
       path: '/mathos.ics'
       fullPath: '/mathos.ics'
       preLoaderRoute: typeof MathosDoticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faq': {
@@ -262,6 +282,7 @@ const rootRouteChildren: RootRouteChildren = {
   CurriculumRoute: CurriculumRoute,
   DetailsRoute: DetailsRoute,
   FaqRoute: FaqRoute,
+  LoginRoute: LoginRoute,
   MathosDoticsRoute: MathosDoticsRoute,
   RegisterRoute: RegisterRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
@@ -271,3 +292,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
