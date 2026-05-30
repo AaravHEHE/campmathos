@@ -112,7 +112,6 @@ function LoginPage() {
           {loading ? "…" : "Sign in"}
         </button>
         <p className="mt-4 font-mono text-xs text-ink/70">
-        <p className="mt-4 font-mono text-xs text-ink/70">
           New here?{" "}
           <Link to="/signup" className="underline">
             Create an account
