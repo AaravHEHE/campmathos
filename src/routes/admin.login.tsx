@@ -85,7 +85,7 @@ function AdminLoginPage() {
         className="w-full max-w-sm rounded-3xl border-2 border-ink bg-cream p-8 shadow-[8px_8px_0_0_var(--ink)]"
       >
         <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-          DIRECTORS ONLY
+          DIRECTORS & TEACHERS
         </p>
         <h1 className="mt-2 font-display text-3xl font-black">Sign in</h1>
         <input
