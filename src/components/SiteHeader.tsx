@@ -127,6 +127,13 @@ export function SiteHeader() {
               <div className="mt-3 flex items-center gap-3 border-t-2 border-ink/15 px-2 pt-4">
                 <ThemeToggle />
                 <Link
+                  to="/login"
+                  onClick={() => setOpen(false)}
+                  className="flex min-h-11 items-center justify-center rounded-full border-2 border-ink bg-cream px-5 py-3 font-semibold text-ink"
+                >
+                  Sign in
+                </Link>
+                <Link
                   to="/register"
                   onClick={() => setOpen(false)}
                   className="flex min-h-11 flex-1 items-center justify-center rounded-full border-2 border-ink bg-coral px-5 py-3 font-semibold text-cream"
