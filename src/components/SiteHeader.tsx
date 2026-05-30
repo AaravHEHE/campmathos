@@ -50,13 +50,13 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <ThemeToggle className="hidden sm:inline-flex" />
           <Link
             to="/login"
             className="hidden items-center rounded-md px-2 py-2 font-mono text-sm hover:text-electric md:inline-flex"
           >
             Sign in
           </Link>
+          <ThemeToggle className="hidden sm:inline-flex" />
           <Link
             to="/register"
             className="hidden min-h-11 items-center rounded-full border-2 border-ink bg-ink px-5 py-2 text-sm font-semibold text-cream transition hover:bg-electric hover:border-electric md:inline-flex"
