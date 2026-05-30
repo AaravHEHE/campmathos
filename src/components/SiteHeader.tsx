@@ -165,6 +165,9 @@ export function SiteFooter() {
           <Link to="/register" className="inline-flex min-h-11 items-center hover:text-electric">
             Interest form
           </Link>
+          <Link to="/login" className="inline-flex min-h-11 items-center hover:text-electric">
+            Student sign in
+          </Link>
           <Link to="/admin/login" className="text-cream/0 hover:text-ink/40" aria-label="Admin" tabIndex={-1}>
             Admin
           </Link>
