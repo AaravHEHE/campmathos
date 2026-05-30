@@ -117,12 +117,6 @@ function LoginPage() {
             Create an account
           </Link>
         </p>
-        <p className="mt-2 font-mono text-xs text-ink/70">
-          Director or teacher?{" "}
-          <Link to="/admin/login" className="underline">
-            Sign in here
-          </Link>
-        </p>
       </form>
     </main>
   );
