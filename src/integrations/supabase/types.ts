@@ -14,6 +14,231 @@ export type Database = {
   }
   public: {
     Tables: {
+      answers: {
+        Row: {
+          auto_correct: boolean | null
+          created_at: string
+          id: string
+          image_url: string | null
+          points_awarded: number | null
+          problem_id: string
+          response_text: string | null
+          selected_choice: string | null
+          submission_id: string
+          teacher_comment: string | null
+          updated_at: string
+        }
+        Insert: {
+          auto_correct?: boolean | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          points_awarded?: number | null
+          problem_id: string
+          response_text?: string | null
+          selected_choice?: string | null
+          submission_id: string
+          teacher_comment?: string | null
+          updated_at?: string
+        }
+        Update: {
+          auto_correct?: boolean | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          points_awarded?: number | null
+          problem_id?: string
+          response_text?: string | null
+          selected_choice?: string | null
+          submission_id?: string
+          teacher_comment?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "answers_problem_id_fkey"
+            columns: ["problem_id"]
+            isOneToOne: false
+            referencedRelation: "problems"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "answers_submission_id_fkey"
+            columns: ["submission_id"]
+            isOneToOne: false
+            referencedRelation: "submissions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      assignments: {
+        Row: {
+          class_id: string
+          created_at: string
+          due_at: string | null
+          id: string
+          instructions: string | null
+          published: boolean
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          class_id: string
+          created_at?: string
+          due_at?: string | null
+          id?: string
+          instructions?: string | null
+          published?: boolean
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          class_id?: string
+          created_at?: string
+          due_at?: string | null
+          id?: string
+          instructions?: string | null
+          published?: boolean
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "assignments_class_id_fkey"
+            columns: ["class_id"]
+            isOneToOne: false
+            referencedRelation: "classes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      classes: {
+        Row: {
+          archived: boolean
+          created_at: string
+          description: string | null
+          id: string
+          join_code: string
+          name: string
+          teacher_id: string
+          updated_at: string
+        }
+        Insert: {
+          archived?: boolean
+          created_at?: string
+          description?: string | null
+          id?: string
+          join_code: string
+          name: string
+          teacher_id: string
+          updated_at?: string
+        }
+        Update: {
+          archived?: boolean
+          created_at?: string
+          description?: string | null
+          id?: string
+          join_code?: string
+          name?: string
+          teacher_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      enrollments: {
+        Row: {
+          class_id: string
+          id: string
+          joined_at: string
+          student_id: string
+        }
+        Insert: {
+          class_id: string
+          id?: string
+          joined_at?: string
+          student_id: string
+        }
+        Update: {
+          class_id?: string
+          id?: string
+          joined_at?: string
+          student_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "enrollments_class_id_fkey"
+            columns: ["class_id"]
+            isOneToOne: false
+            referencedRelation: "classes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      problems: {
+        Row: {
+          assignment_id: string
+          choices: Json | null
+          correct_answer: string | null
+          created_at: string
+          id: string
+          points: number
+          position: number
+          prompt: string
+          type: Database["public"]["Enums"]["problem_type"]
+        }
+        Insert: {
+          assignment_id: string
+          choices?: Json | null
+          correct_answer?: string | null
+          created_at?: string
+          id?: string
+          points?: number
+          position?: number
+          prompt: string
+          type: Database["public"]["Enums"]["problem_type"]
+        }
+        Update: {
+          assignment_id?: string
+          choices?: Json | null
+          correct_answer?: string | null
+          created_at?: string
+          id?: string
+          points?: number
+          position?: number
+          prompt?: string
+          type?: Database["public"]["Enums"]["problem_type"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "problems_assignment_id_fkey"
+            columns: ["assignment_id"]
+            isOneToOne: false
+            referencedRelation: "assignments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       registrations: {
         Row: {
           created_at: string
@@ -31,6 +256,62 @@ export type Database = {
           id?: string
         }
         Relationships: []
+      }
+      submissions: {
+        Row: {
+          assignment_id: string
+          auto_score: number | null
+          created_at: string
+          final_score: number | null
+          graded_at: string | null
+          graded_by: string | null
+          id: string
+          max_score: number
+          status: Database["public"]["Enums"]["submission_status"]
+          student_id: string
+          submitted_at: string | null
+          teacher_feedback: string | null
+          updated_at: string
+        }
+        Insert: {
+          assignment_id: string
+          auto_score?: number | null
+          created_at?: string
+          final_score?: number | null
+          graded_at?: string | null
+          graded_by?: string | null
+          id?: string
+          max_score?: number
+          status?: Database["public"]["Enums"]["submission_status"]
+          student_id: string
+          submitted_at?: string | null
+          teacher_feedback?: string | null
+          updated_at?: string
+        }
+        Update: {
+          assignment_id?: string
+          auto_score?: number | null
+          created_at?: string
+          final_score?: number | null
+          graded_at?: string | null
+          graded_by?: string | null
+          id?: string
+          max_score?: number
+          status?: Database["public"]["Enums"]["submission_status"]
+          student_id?: string
+          submitted_at?: string | null
+          teacher_feedback?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "submissions_assignment_id_fkey"
+            columns: ["assignment_id"]
+            isOneToOne: false
+            referencedRelation: "assignments"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {
@@ -65,9 +346,31 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_enrolled: {
+        Args: { _class_id: string; _user_id: string }
+        Returns: boolean
+      }
+      join_class_by_code: {
+        Args: { _code: string }
+        Returns: {
+          already_enrolled: boolean
+          class_id: string
+          class_name: string
+        }[]
+      }
+      owns_assignment: {
+        Args: { _assignment_id: string; _user_id: string }
+        Returns: boolean
+      }
+      owns_class: {
+        Args: { _class_id: string; _user_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
-      app_role: "admin" | "user"
+      app_role: "admin" | "user" | "teacher" | "student"
+      problem_type: "short" | "mcq" | "free"
+      submission_status: "in_progress" | "submitted" | "graded"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -195,7 +498,9 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["admin", "user"],
+      app_role: ["admin", "user", "teacher", "student"],
+      problem_type: ["short", "mcq", "free"],
+      submission_status: ["in_progress", "submitted", "graded"],
     },
   },
 } as const
