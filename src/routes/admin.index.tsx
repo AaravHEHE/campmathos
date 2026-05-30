@@ -5,7 +5,6 @@ import { adminListRegistrations, adminDeleteRegistration } from "@/lib/admin.fun
 import { supabase } from "@/integrations/supabase/client";
 import { SignupsChart } from "@/components/admin/SignupsChart";
 import { BroadcastForm } from "@/components/admin/BroadcastForm";
-import { wasAdminSignedInThisPageLoad, clearAdminSignedIn } from "@/lib/adminSession";
 
 export const Route = createFileRoute("/admin/")({
   component: AdminDashboard,
