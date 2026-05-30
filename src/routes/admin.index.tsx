@@ -5,7 +5,6 @@ import { adminListRegistrations, adminDeleteRegistration } from "@/lib/admin.fun
 import { supabase } from "@/integrations/supabase/client";
 import { SignupsChart } from "@/components/admin/SignupsChart";
 import { BroadcastForm } from "@/components/admin/BroadcastForm";
-import { wasAdminSignedInThisPageLoad, clearAdminSignedIn } from "@/lib/adminSession";
 
 export const Route = createFileRoute("/admin/")({
   component: AdminDashboard,
@@ -45,18 +44,21 @@ function AdminDashboard() {
     let cancelled = false;
 
     const load = async () => {
-      // Require sign-in within THIS page load. A reload wipes the in-memory
-      // flag, so the Camp Director is forced back through /admin/login.
-      if (!wasAdminSignedInThisPageLoad()) {
-        clearAdminSignedIn();
-        await supabase.auth.signOut();
-        if (cancelled) return;
-        navigate({ to: "/admin/login" });
-        return;
-      }
       const { data: { session } } = await supabase.auth.getSession();
       if (cancelled) return;
       if (!session) {
+        navigate({ to: "/admin/login" });
+        return;
+      }
+      // Verify admin role server-side via RLS-protected user_roles read.
+      const { data: roles } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", session.user.id);
+      if (cancelled) return;
+      const isAdmin = (roles ?? []).some((r) => r.role === "admin");
+      if (!isAdmin) {
+        await supabase.auth.signOut();
         navigate({ to: "/admin/login" });
         return;
       }
@@ -156,7 +158,6 @@ function AdminDashboard() {
   };
 
   const handleSignOut = async () => {
-    clearAdminSignedIn();
     await supabase.auth.signOut();
     navigate({ to: "/admin/login" });
   };
