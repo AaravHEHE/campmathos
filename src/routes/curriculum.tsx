@@ -4,6 +4,9 @@ import { Wordmark } from "@/components/Wordmark";
 import { weeks } from "@/data/weeks";
 import { canonical, ogImage } from "@/lib/seo";
 import { Reveal } from "@/components/Reveal";
+import themeGraphing from "@/assets/theme-graphing.png";
+import themeProbability from "@/assets/theme-probability.png";
+import themeGeometry from "@/assets/theme-geometry.png";
 
 const OG = ogImage("/og-curriculum.jpg");
 
