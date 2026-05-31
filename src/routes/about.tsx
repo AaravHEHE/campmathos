@@ -3,6 +3,7 @@ import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { Wordmark } from "@/components/Wordmark";
 import { canonical, ogImage } from "@/lib/seo";
 import { Reveal } from "@/components/Reveal";
+import aboutLearning from "@/assets/about-learning.png";
 
 const OG = ogImage("/og-about.jpg");
 
