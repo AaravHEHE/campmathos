@@ -17,7 +17,7 @@ export const Route = createFileRoute("/board")({
       {
         name: "description",
         content:
-          "Meet the MathOs Camp Directors — the high school students leading our free online summer applied math camp.",
+          "Meet the MathOs Camp Directors — the math team leading our free online summer applied math camp.",
       },
       { property: "og:title", content: "Camp Directors — MathOs" },
       {
@@ -97,7 +97,7 @@ function BoardPage() {
             The students <span className="italic text-electric">behind</span> <Wordmark />.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            <Wordmark /> is built and taught by six high school students who believe math should feel useful,
+            <Wordmark /> is built and taught by the math team, who believe math should feel useful,
             not abstract. We design every session, mentor every camper, and run every workshop ourselves.
           </p>
         </div>
