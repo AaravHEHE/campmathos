@@ -1,139 +1,46 @@
-# Classroom System Plan
 
-A clean, modern classroom feature for Camp Mathos with two roles (student, teacher) layered onto the existing admin system. Built foundation-first: auth, role gating, schema, then UI.
+## Goal
 
-## Roles & Access
+Add four hand-crafted illustrations that match the existing MathOs visual style (cream/ink/electric/coral/sun palette, paper grain, bold outlines, slight zine/blueprint feel).
 
-- Existing `app_role` enum extended to `admin | teacher | student`.
-- **Admin-only provisioning** for teachers: admins promote a registered user to teacher from the admin panel.
-- Students self-register at `/signup` and get role `student` automatically.
-- Route gating via `_authenticated` layout + child `beforeLoad` checks using `has_role()`.
+## Images to generate
 
-## Core User Flows
+1. **Graphing → paper-style bridge graph** (`src/assets/theme-graphing.png`)
+   - A suspension/truss bridge plotted on graph paper, drawn with ink lines and a parabolic cable curve overlaid on a coordinate grid. Cream background, electric-blue accents.
 
-**Student**
-1. Sign up / log in → `/app` dashboard shows enrolled classes + pending assignments.
-2. Enter class code → instantly enrolled.
-3. Open class → list of assignments (with due date, status, score).
-4. Open assignment → solve problems one-by-one, submit → see auto-graded score + teacher feedback when available.
-5. Progress view: per-class completion %, scores, history.
+2. **Probability → rolling pair of dice** (`src/assets/theme-probability.png`)
+   - Two tumbling dice mid-roll with motion lines and small probability fractions floating around them. Paper-grain texture, coral accents.
 
-**Teacher**
-1. Log in → `/teacher` dashboard: their classes, recent submissions needing review.
-2. Create class → auto-generated 6-char join code (regenerable).
-3. View roster, remove students.
-4. Create assignment → add problems of three types:
-   - Short answer (numeric/text, exact-match auto-grade, case/whitespace-insensitive)
-   - Multiple choice (auto-grade)
-   - Free response (manual grade, text + optional image upload)
-5. Review submissions per assignment → see auto-score, override score, leave feedback.
+3. **Geometry → shape decomposition / blueprint** (`src/assets/theme-geometry.png`)
+   - A complex building silhouette broken down into triangles, rectangles, and circles, drawn in blueprint style (white linework on cream/blue) with dimension marks. Sun-yellow accent.
 
-**Admin**
-- Existing admin panel gets a "Promote to teacher" action on user rows.
+4. **About hero → "learning" composite** (`src/assets/about-learning.png`)
+   - One illustration combining a graph curve, dice, and geometric shapes into a single editorial collage. Ink outlines, all four brand colors, paper texture. Square-ish for the hero right column.
 
-## Problem Authoring & Solving UX
+All generated via `imagegen--generate_image` at `premium` quality (these are hero/feature illustrations, no text required, so standard tier is fine — using premium for the about hero only, standard for the three theme cards to keep cost down).
 
-- LaTeX rendering with KaTeX in problem statements and student answers.
-- **Math keyboard**: floating toolbar attached to text inputs with buttons for π, ², ³, √, ±, ×, ÷, ≤, ≥, ≠, ∞, fractions, parens, and common variables (x, y, n). Inserts at cursor position. Toggle-visible via a button next to the input.
-- Free-response problems support optional image upload (Supabase Storage bucket `submissions`).
+## Code changes
 
-## Visual Design
+### `src/routes/curriculum.tsx` — Three themes grid (around lines 65–95)
 
-Matches existing brand: cream/ink/electric/coral palette, Fraunces display, Space Grotesk body, 2px ink borders + chunky shadow cards. Dashboards use clean assignment cards with status pills (Not started / In progress / Submitted / Graded), progress bars per class, and a focused single-problem view when solving. Page transitions + reveals reuse Phase 3 primitives.
+Each of the three theme `<article>` cards currently has just a tag + title + body. Add an image above the tag:
 
-## Routes
-
-```
-/signup, /login                       public auth
-/app                                  student dashboard (enrolled classes, upcoming work)
-/app/join                             enter class code
-/app/class/$classId                   class detail + assignment list
-/app/assignment/$assignmentId         solve view (one problem at a time)
-/app/assignment/$assignmentId/result  graded view + feedback
-
-/teacher                              teacher dashboard
-/teacher/class/new                    create class
-/teacher/class/$classId               manage class (roster, code, assignments)
-/teacher/class/$classId/assignment/new
-/teacher/assignment/$assignmentId     edit problems
-/teacher/assignment/$assignmentId/submissions          list student submissions
-/teacher/submission/$submissionId     grade & feedback view
-
-/admin                                existing — add Promote-to-Teacher action
+```tsx
+<img src={themeImg} alt="" className="mb-5 h-40 w-full rounded-2xl border-2 border-cream/30 object-cover" />
 ```
 
-All under `_authenticated` layout; child `beforeLoad` redirects students hitting `/teacher/*` and vice-versa.
+Import the three new assets at the top of the file and map them into the theme objects.
 
-## Database Schema
+### `src/routes/about.tsx` — Hero section (around lines 73–93)
 
-```text
-app_role enum: admin | teacher | student   (extend existing)
+Currently the hero is a single column. Restructure into a two-column grid on `md+`:
+- Left (md:col-span-7): existing eyebrow + h1 + paragraph
+- Right (md:col-span-5): new `about-learning.png` in a rounded bordered frame with the signature `shadow-[8px_8px_0_0_var(--ink)]` treatment, slight rotation for character
 
-classes
-  id, name, description, join_code (unique, 6 char), teacher_id, archived, created_at
+Mobile stays single column (image below text).
 
-enrollments
-  id, class_id, student_id, joined_at  (unique: class_id+student_id)
+## Out of scope
 
-assignments
-  id, class_id, title, instructions, due_at, published, created_at
-
-problems
-  id, assignment_id, position, type ('short'|'mcq'|'free'),
-  prompt (text, LaTeX allowed), points,
-  correct_answer (text, nullable),   -- short
-  choices (jsonb, nullable),         -- mcq: [{id,label,correct}]
-
-submissions
-  id, assignment_id, student_id, status ('in_progress'|'submitted'|'graded'),
-  submitted_at, auto_score, final_score, teacher_feedback, graded_by, graded_at
-  unique(assignment_id, student_id)
-
-answers
-  id, submission_id, problem_id, response_text, image_url,
-  auto_correct (bool nullable), points_awarded, teacher_comment
-  unique(submission_id, problem_id)
-```
-
-Plus Storage bucket `submissions` (private; signed URLs).
-
-## Security (RLS)
-
-Use the existing `has_role()` security-definer pattern; add a `is_enrolled(class_id, user_id)` and `owns_class(class_id, user_id)` helper.
-
-- **classes**: teacher reads/writes own; students read enrolled classes; admins all.
-- **enrollments**: student inserts self with valid join_code (validated via security-definer fn `join_class_by_code(code)`); teacher reads roster of owned classes; admins all.
-- **assignments / problems**: teacher full CRUD on own class; students read published assignments in enrolled classes; correct_answer column **never exposed** to students — return via a view that strips it for student-side reads, or fetch via server fn.
-- **submissions / answers**: student CRUD own (insert/update while `in_progress`, no edits after `submitted`); teacher reads/grades for own classes.
-
-All DB access goes through TanStack `createServerFn` with `requireSupabaseAuth`; admin operations through `supabaseAdmin` after server-side role checks.
-
-## Auto-Grading
-
-- Short answer: trim + lowercase + collapse whitespace, compare to `correct_answer`. Numeric answers parsed as floats with tolerance 1e-6.
-- MCQ: compare selected choice id to the choice flagged `correct`.
-- Free response: `auto_correct = null`, awaits teacher.
-- On submit, server fn computes `auto_score`, sets `final_score = auto_score` if no free-response problems, status `graded`; otherwise `submitted`.
-- Teacher grading view lets them override `points_awarded` per problem, recomputes `final_score`, sets status `graded`.
-
-## Technical Notes (for the implementer)
-
-- New deps: `katex`, `react-katex` (lightweight).
-- Math keyboard: standalone `<MathKeyboard onInsert={...} />` component, used by short-answer + free-response inputs; tracks textarea cursor with `selectionStart`.
-- Server fns organized under `src/lib/classroom.functions.ts` (student-facing) and `src/lib/teacher.functions.ts` (teacher-facing), with helpers in `*.server.ts`.
-- Join code generator: 6 chars from `ABCDEFGHJKLMNPQRSTUVWXYZ23456789` (no ambiguous chars), retry on uniqueness collision.
-- Reuse `Reveal`, `PageTransition` for consistent motion; honor `prefers-reduced-motion`.
-- Extend existing admin page with a user-list + promote action (server fn that inserts a `teacher` row into `user_roles`).
-
-## Build Order
-
-1. Migration: extend enum, create tables + RLS + helpers + storage bucket.
-2. Auth pages: `/signup`, `/login`, session wiring + role-aware redirect from `/login`.
-3. `_authenticated` layout + role gates for `/app/*` and `/teacher/*`.
-4. Student dashboard + join-by-code flow.
-5. Teacher dashboard + class create + roster.
-6. Assignment + problem authoring (teacher) with KaTeX preview.
-7. Student assignment solve view + math keyboard + submit + auto-grade.
-8. Teacher submissions list + grading view + feedback.
-9. Admin promote-to-teacher action.
-10. End-to-end smoke test through both roles; fix issues.
+- No copy changes.
+- No changes to the four week cards lower on the curriculum page.
+- No new routes or components.
