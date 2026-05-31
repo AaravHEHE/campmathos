@@ -129,7 +129,8 @@ function Index() {
               system.
             </h1>
             <p className="mt-8 max-w-xl text-lg text-ink/75 md:text-xl">
-              For 4th-grade math through 7th-grade, organized and taught live online by the Neuqua Valley math team.
+              For 4th-grade math through 7th-grade, organized and taught live online by members of the Neuqua Valley
+              math team.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Link
