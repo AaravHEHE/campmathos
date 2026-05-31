@@ -1,9 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { colorizeMathOs } from "@/components/Wordmark";
 import { canonical, ogImage } from "@/lib/seo";
 import { Reveal } from "@/components/Reveal";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const OG = ogImage("/og-faq.jpg");
 
@@ -105,30 +111,34 @@ const faqs: { id: string; q: string; a: string }[] = [
 ];
 
 function FaqPage() {
+  const [openId, setOpenId] = useState<string>("");
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const openFromHash = () => {
       const hash = window.location.hash.replace("#", "");
-      if (!hash) return;
-      const el = containerRef.current?.querySelector<HTMLDetailsElement>(
-        `details[id="${CSS.escape(hash)}"]`,
+      if (!hash) {
+        setOpenId("");
+        return;
+      }
+      const el = containerRef.current?.querySelector<HTMLElement>(
+        `[data-faq-id="${CSS.escape(hash)}"]`,
       );
       if (!el) return;
-      el.open = true;
-      // First scroll attempt for non-animated (reduced-motion) users.
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-      // Re-scroll after the Reveal animation settles so the final
-      // (untransformed) position is used.
+      setOpenId(hash);
       const t1 = window.setTimeout(() => {
         el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 700);
+      }, 100);
       const t2 = window.setTimeout(() => {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 700);
+      const t3 = window.setTimeout(() => {
         el.scrollIntoView({ behavior: "smooth", block: "start" });
       }, 1400);
       return () => {
         window.clearTimeout(t1);
         window.clearTimeout(t2);
+        window.clearTimeout(t3);
       };
     };
 
@@ -145,6 +155,15 @@ function FaqPage() {
     };
   }, []);
 
+  const handleValueChange = (value: string) => {
+    setOpenId(value);
+    if (value) {
+      window.history.replaceState(null, "", `#${value}`);
+    } else {
+      window.history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
+  };
+
   return (
     <main className="min-h-screen bg-cream text-ink">
       <SiteHeader />
@@ -158,7 +177,7 @@ function FaqPage() {
             Good <span className="italic text-electric">questions</span>.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            If you don't see your question below, email us at{" "}
+            Run by the Neuqua Valley math team. If you don't see your question below, email us at{" "}
             <a href="mailto:campmathos@gmail.com" className="underline hover:text-electric">
               campmathos@gmail.com
             </a>{" "}
@@ -169,24 +188,40 @@ function FaqPage() {
 
       <section className="border-b-2 border-ink">
         <div className="mx-auto max-w-4xl px-6 py-20 md:py-28">
-          <div ref={containerRef} className="divide-y-2 divide-ink/15">
-            {faqs.map((f, i) => (
-              <Reveal key={f.id} delay={(i % 4) * 0.12} amount={0.4}>
-                <details
-                  id={f.id}
-                  className="group py-6 scroll-mt-28"
-                >
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-6">
-                    <span className="font-display text-2xl font-bold md:text-3xl">{f.q}</span>
-                    <span className="font-display text-3xl font-black text-electric transition group-open:rotate-45">
-                      +
-                    </span>
-                  </summary>
-                  <p className="mt-4 max-w-3xl text-ink/70">{colorizeMathOs(f.a)}</p>
-                </details>
-              </Reveal>
-            ))}
-          </div>
+          <Accordion
+            type="single"
+            collapsible
+            value={openId}
+            onValueChange={handleValueChange}
+          >
+            <div ref={containerRef} className="divide-y-2 divide-ink/15">
+              {faqs.map((f, i) => (
+                <Reveal key={f.id} delay={(i % 4) * 0.12} amount={0.4}>
+                  <AccordionItem
+                    value={f.id}
+                    data-faq-id={f.id}
+                    className="border-none scroll-mt-28"
+                  >
+                    <AccordionTrigger className="py-6 hover:no-underline [&>svg]:hidden">
+                      <span className="flex w-full items-center justify-between gap-6">
+                        <span className="text-left font-display text-2xl font-bold md:text-3xl">
+                          {f.q}
+                        </span>
+                        <span
+                          className={`font-display text-3xl font-black text-electric transition-transform duration-300 ${openId === f.id ? "rotate-45" : ""}`}
+                        >
+                          +
+                        </span>
+                      </span>
+                    </AccordionTrigger>
+                    <AccordionContent className="pb-6">
+                      <p className="max-w-3xl text-ink/70">{colorizeMathOs(f.a)}</p>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Reveal>
+              ))}
+            </div>
+          </Accordion>
         </div>
       </section>
 
