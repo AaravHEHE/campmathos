@@ -70,27 +70,40 @@ function CurriculumPage() {
                 title: "Graphing",
                 body: "Read, build, and use graphs to create things in the real world the way engineers and analysts do.",
                 accent: "bg-electric text-cream",
+                img: themeGraphing,
               },
               {
                 tag: "decision-making",
                 title: "Probability ",
                 body: "Use the same math banks, markets, and insurance companies use every day for many things.",
                 accent: "bg-coral text-cream",
+                img: themeProbability,
               },
               {
                 tag: "architecture",
                 title: "Geometry",
                 body: "Design structures with area, volume, and angle relationships that have to actually hold up.",
                 accent: "bg-sun text-ink",
+                img: themeGeometry,
               },
             ].map((t, i) => (
               <Reveal key={t.title} delay={i * 0.25} amount={0.3}>
-                <article className="rounded-3xl border-2 border-cream/30 bg-cream/5 p-6">
-                  <span className={`inline-block rounded-full px-3 py-1 font-mono text-xs font-bold ${t.accent}`}>
-                    {t.tag}
-                  </span>
-                  <h3 className="mt-4 font-display text-3xl font-black">{t.title}</h3>
-                  <p className="mt-3 text-cream/75">{t.body}</p>
+                <article className="overflow-hidden rounded-3xl border-2 border-cream/30 bg-cream/5">
+                  <img
+                    src={t.img}
+                    alt=""
+                    loading="lazy"
+                    width={1024}
+                    height={768}
+                    className="h-44 w-full border-b-2 border-cream/30 object-cover"
+                  />
+                  <div className="p-6">
+                    <span className={`inline-block rounded-full px-3 py-1 font-mono text-xs font-bold ${t.accent}`}>
+                      {t.tag}
+                    </span>
+                    <h3 className="mt-4 font-display text-3xl font-black">{t.title}</h3>
+                    <p className="mt-3 text-cream/75">{t.body}</p>
+                  </div>
                 </article>
               </Reveal>
             ))}
