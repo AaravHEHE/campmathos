@@ -95,7 +95,7 @@ function CurriculumPage() {
                     loading="lazy"
                     width={1024}
                     height={768}
-                    className="h-44 w-full border-b-2 border-cream/30 bg-cream object-contain p-2"
+                    className="h-44 w-full border-b-2 border-cream/30 object-cover"
                   />
                   <div className="p-6">
                     <span className={`inline-block rounded-full px-3 py-1 font-mono text-xs font-bold ${t.accent}`}>
