@@ -78,7 +78,7 @@ function AboutPage() {
             </h1>
             <p className="mt-6 max-w-2xl text-lg text-ink/75">
               The name comes from the Greek word for "learning" or "knowledge." <Wordmark /> is a one-month online summer
-              program designed by the math team to make math feel useful, hands-on, and genuinely
+              program designed by the Neuqua Valley math team to make math feel useful, hands-on, and genuinely
               exciting — not abstract.
             </p>
           </div>
