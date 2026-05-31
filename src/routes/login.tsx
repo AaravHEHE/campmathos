@@ -117,6 +117,9 @@ function LoginPage() {
             Create an account
           </Link>
         </p>
+        <p className="mt-3 font-mono text-xs text-ink/70">
+          <Link to="/" className="underline">← Back to home</Link>
+        </p>
       </form>
     </main>
   );
