@@ -65,21 +65,34 @@ function AboutPage() {
 
       {/* HERO */}
       <section className="grid-paper border-b-2 border-ink">
-        <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
-          <p className="font-mono text-sm tracking-widest text-muted-foreground">About</p>
-          <h1 className="mt-3 font-display text-5xl font-black leading-[0.95] md:text-7xl">
-            <span className="italic">
-              <Wordmark />
-            </span>{" "}
-            means
-            <br />
-            learning.
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            The name comes from the Greek word for "learning" or "knowledge." <Wordmark /> is a one-month online summer
-            program designed by the math team to make math feel useful, hands-on, and genuinely
-            exciting — not abstract.
-          </p>
+        <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 py-20 md:grid-cols-12 md:py-28">
+          <div className="md:col-span-7">
+            <p className="font-mono text-sm tracking-widest text-muted-foreground">About</p>
+            <h1 className="mt-3 font-display text-5xl font-black leading-[0.95] md:text-7xl">
+              <span className="italic">
+                <Wordmark />
+              </span>{" "}
+              means
+              <br />
+              learning.
+            </h1>
+            <p className="mt-6 max-w-2xl text-lg text-ink/75">
+              The name comes from the Greek word for "learning" or "knowledge." <Wordmark /> is a one-month online summer
+              program designed by the math team to make math feel useful, hands-on, and genuinely
+              exciting — not abstract.
+            </p>
+          </div>
+          <Reveal direction="scale" className="md:col-span-5">
+            <div className="rotate-1 rounded-3xl border-2 border-ink bg-cream p-3 shadow-[8px_8px_0_0_var(--ink)]">
+              <img
+                src={aboutLearning}
+                alt="A collage of graphs, dice, and geometric shapes representing the MathOs curriculum"
+                width={1024}
+                height={1024}
+                className="aspect-square w-full rounded-2xl object-cover"
+              />
+            </div>
+          </Reveal>
         </div>
       </section>
 
