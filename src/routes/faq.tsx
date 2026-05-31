@@ -177,7 +177,7 @@ function FaqPage() {
             Good <span className="italic text-electric">questions</span>.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/75">
-            Run by the Neuqua Valley math team. If you don't see your question below, email us at{" "}
+            If you don't see your question below, email us at{" "}
             <a href="mailto:campmathos@gmail.com" className="underline hover:text-electric">
               campmathos@gmail.com
             </a>{" "}
