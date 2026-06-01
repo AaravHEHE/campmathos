@@ -51,3 +51,36 @@ export const adminDeleteRegistration = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     return { ok: true };
   });
+
+const SPREADSHEET_ID = "15Oq536NyApV9gC0YqFBV0hj6xFJ3gjoDLqkTwiq3vz0";
+const SHEET_RANGE = "Form Responses 1!F2:F";
+
+export const adminListFormEmails = createServerFn({ method: "POST" })
+  .middleware([attachAuthHeader, requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    await assertAdmin(context.userId);
+    const lovableKey = process.env.LOVABLE_API_KEY;
+    const sheetsKey = process.env.GOOGLE_SHEETS_API_KEY;
+    if (!lovableKey || !sheetsKey) {
+      return { emails: [] as string[], error: "Google Sheets not connected" };
+    }
+    const url = `https://connector-gateway.lovable.dev/google_sheets/v4/spreadsheets/${SPREADSHEET_ID}/values/${encodeURI(SHEET_RANGE)}`;
+    const res = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${lovableKey}`,
+        "X-Connection-Api-Key": sheetsKey,
+      },
+    });
+    if (!res.ok) {
+      return { emails: [] as string[], error: `Sheets read failed (${res.status})` };
+    }
+    const json = (await res.json()) as { values?: string[][] };
+    const emails = Array.from(
+      new Set(
+        (json.values ?? [])
+          .map((r) => (r?.[0] ?? "").trim().toLowerCase())
+          .filter((e) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)),
+      ),
+    );
+    return { emails, error: null as string | null };
+  });

@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
-import { adminListRegistrations, adminDeleteRegistration } from "@/lib/admin.functions";
+import { adminListRegistrations, adminDeleteRegistration, adminListFormEmails } from "@/lib/admin.functions";
 import { supabase } from "@/integrations/supabase/client";
 import { SignupsChart } from "@/components/admin/SignupsChart";
 import { BroadcastForm } from "@/components/admin/BroadcastForm";
@@ -24,11 +24,14 @@ interface Registration {
 
 type SortKey = "created_at" | "email";
 type SortDir = "asc" | "desc";
+type FormFilter = "all" | "filled" | "not_filled";
 
 function AdminDashboard() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [rows, setRows] = useState<Registration[]>([]);
+  const [formEmails, setFormEmails] = useState<Set<string>>(new Set());
+  const [formSyncError, setFormSyncError] = useState<string | null>(null);
   const [error, setError] = useState("");
 
   // UI state
@@ -39,6 +42,7 @@ function AdminDashboard() {
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [dateFrom, setDateFrom] = useState(""); // YYYY-MM-DD, local
   const [dateTo, setDateTo] = useState(""); // YYYY-MM-DD, local (inclusive)
+  const [formFilter, setFormFilter] = useState<FormFilter>("all");
 
   useEffect(() => {
     let cancelled = false;
@@ -63,9 +67,17 @@ function AdminDashboard() {
         return;
       }
       try {
-        const { rows: data } = await adminListRegistrations();
+        const [{ rows: data }, formRes] = await Promise.all([
+          adminListRegistrations(),
+          adminListFormEmails().catch((e) => ({
+            emails: [] as string[],
+            error: e instanceof Error ? e.message : "Could not load form responses",
+          })),
+        ]);
         if (cancelled) return;
         setRows((data as Registration[]) ?? []);
+        setFormEmails(new Set(formRes.emails ?? []));
+        setFormSyncError(formRes.error ?? null);
       } catch (err) {
         if (cancelled) return;
         const msg = err instanceof Error ? err.message : "Failed to load sign-ups";
@@ -85,6 +97,9 @@ function AdminDashboard() {
     };
   }, [navigate]);
 
+  const hasFilledForm = (email: string) =>
+    formEmails.has(email.trim().toLowerCase());
+
   // Filtered + sorted view
   const visibleRows = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -98,6 +113,8 @@ function AdminDashboard() {
         if (fromTs && t < fromTs) return false;
         if (toTs && t >= toTs) return false;
       }
+      if (formFilter === "filled" && !hasFilledForm(r.email)) return false;
+      if (formFilter === "not_filled" && hasFilledForm(r.email)) return false;
       return true;
     });
     const sorted = [...filtered].sort((a, b) => {
@@ -107,13 +124,14 @@ function AdminDashboard() {
       return sortDir === "asc" ? cmp : -cmp;
     });
     return sorted;
-  }, [rows, search, sortKey, sortDir, dateFrom, dateTo]);
+  }, [rows, search, sortKey, sortDir, dateFrom, dateTo, formFilter, formEmails]);
 
-  const filtersActive = Boolean(search || dateFrom || dateTo);
+  const filtersActive = Boolean(search || dateFrom || dateTo || formFilter !== "all");
   const clearFilters = () => {
     setSearch("");
     setDateFrom("");
     setDateTo("");
+    setFormFilter("all");
   };
 
   // Stats
@@ -129,14 +147,18 @@ function AdminDashboard() {
     let last24h = 0;
     let today = 0;
     let thisWeek = 0;
+    let filled = 0;
+    let notFilled = 0;
     for (const r of rows) {
       const t = new Date(r.created_at).getTime();
       if (now - t <= day) last24h++;
       if (t >= todayStart.getTime()) today++;
       if (t >= weekStart.getTime()) thisWeek++;
+      if (hasFilledForm(r.email)) filled++;
+      else notFilled++;
     }
-    return { total: rows.length, last24h, today, thisWeek };
-  }, [rows]);
+    return { total: rows.length, last24h, today, thisWeek, filled, notFilled };
+  }, [rows, formEmails]);
 
   const csv = useMemo(() => {
     // CSV reflects the current filtered/sorted view so directors can export a slice.
@@ -321,10 +343,16 @@ function AdminDashboard() {
           {/* Stat cards */}
           <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-4">
             <StatCard label="Total" value={stats.total} accent="bg-ink text-cream" />
-            <StatCard label="Today" value={stats.today} accent="bg-electric text-cream" />
+            <StatCard label="Form filled" value={stats.filled} accent="bg-electric text-cream" />
+            <StatCard label="Form NOT filled" value={stats.notFilled} accent="bg-coral text-cream" />
             <StatCard label="This week" value={stats.thisWeek} accent="bg-sun text-ink" />
-            <StatCard label="Last 24h" value={stats.last24h} accent="bg-coral text-cream" />
           </div>
+
+          {formSyncError && (
+            <p className="mt-4 font-mono text-xs text-coral">
+              Google Form sync issue: {formSyncError}
+            </p>
+          )}
 
           {/* Sign-ups chart */}
           <div className="mt-6">
@@ -378,6 +406,22 @@ function AdminDashboard() {
                   className="rounded-full border-2 border-ink bg-cream px-3 py-1.5 font-mono text-xs focus:outline-none focus:ring-4 focus:ring-electric/40"
                 />
               </label>
+              <div className="inline-flex items-center rounded-full border-2 border-ink p-0.5 font-mono text-[10px] uppercase tracking-widest">
+                {(["all", "filled", "not_filled"] as FormFilter[]).map((f) => (
+                  <button
+                    key={f}
+                    type="button"
+                    onClick={() => setFormFilter(f)}
+                    className={`rounded-full px-3 py-1 transition ${
+                      formFilter === f
+                        ? "bg-ink text-cream"
+                        : "text-ink/70 hover:text-ink"
+                    }`}
+                  >
+                    {f === "all" ? "All" : f === "filled" ? "Form ✓" : "Form ✗"}
+                  </button>
+                ))}
+              </div>
               {filtersActive && (
                 <button
                   type="button"
@@ -420,6 +464,9 @@ function AdminDashboard() {
                       Submitted{sortIndicator("created_at")}
                     </button>
                   </th>
+                  <th className="px-6 py-3 font-mono text-xs uppercase tracking-widest">
+                    Form
+                  </th>
                   <th className="px-6 py-3 text-right font-mono text-xs uppercase tracking-widest">
                     Actions
                   </th>
@@ -428,14 +475,16 @@ function AdminDashboard() {
               <tbody>
                 {visibleRows.length === 0 ? (
                   <tr>
-                    <td colSpan={3} className="px-6 py-12 text-center text-ink/60">
+                    <td colSpan={4} className="px-6 py-12 text-center text-ink/60">
                       {rows.length === 0
                         ? "No sign-ups yet — they'll show up here as parents register."
                         : "No sign-ups match the current filters."}
                     </td>
                   </tr>
                 ) : (
-                  visibleRows.map((r, i) => (
+                  visibleRows.map((r, i) => {
+                    const filled = hasFilledForm(r.email);
+                    return (
                     <tr key={r.id} className={i % 2 === 0 ? "bg-cream" : "bg-cream/60"}>
                       <td className="px-6 py-3 font-mono text-sm">
                         <a
@@ -451,6 +500,17 @@ function AdminDashboard() {
                         {new Date(r.created_at).toLocaleString("en-US", {
                           timeZone: "America/Chicago",
                         })}
+                      </td>
+                      <td className="px-6 py-3">
+                        <span
+                          className={`inline-flex items-center rounded-full border px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-widest ${
+                            filled
+                              ? "border-electric/40 bg-electric/10 text-electric"
+                              : "border-coral/40 bg-coral/10 text-coral"
+                          }`}
+                        >
+                          {filled ? "Filled ✓" : "Not filled"}
+                        </span>
                       </td>
                       <td className="px-6 py-3 text-right">
                         <div className="inline-flex gap-2">
@@ -472,7 +532,8 @@ function AdminDashboard() {
                         </div>
                       </td>
                     </tr>
-                  ))
+                    );
+                  })
                 )}
               </tbody>
             </table>
