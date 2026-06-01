@@ -93,7 +93,7 @@ Deno.serve(async (req) => {
     });
   }
 
-  let body: { subject?: string; message?: string };
+  let body: { subject?: string; message?: string; recipients?: string[] };
   try {
     body = await req.json();
   } catch {
