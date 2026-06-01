@@ -464,6 +464,9 @@ function AdminDashboard() {
                       Submitted{sortIndicator("created_at")}
                     </button>
                   </th>
+                  <th className="px-6 py-3 font-mono text-xs uppercase tracking-widest">
+                    Form
+                  </th>
                   <th className="px-6 py-3 text-right font-mono text-xs uppercase tracking-widest">
                     Actions
                   </th>
@@ -472,14 +475,16 @@ function AdminDashboard() {
               <tbody>
                 {visibleRows.length === 0 ? (
                   <tr>
-                    <td colSpan={3} className="px-6 py-12 text-center text-ink/60">
+                    <td colSpan={4} className="px-6 py-12 text-center text-ink/60">
                       {rows.length === 0
                         ? "No sign-ups yet — they'll show up here as parents register."
                         : "No sign-ups match the current filters."}
                     </td>
                   </tr>
                 ) : (
-                  visibleRows.map((r, i) => (
+                  visibleRows.map((r, i) => {
+                    const filled = hasFilledForm(r.email);
+                    return (
                     <tr key={r.id} className={i % 2 === 0 ? "bg-cream" : "bg-cream/60"}>
                       <td className="px-6 py-3 font-mono text-sm">
                         <a
@@ -495,6 +500,17 @@ function AdminDashboard() {
                         {new Date(r.created_at).toLocaleString("en-US", {
                           timeZone: "America/Chicago",
                         })}
+                      </td>
+                      <td className="px-6 py-3">
+                        <span
+                          className={`inline-flex items-center rounded-full border px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-widest ${
+                            filled
+                              ? "border-electric/40 bg-electric/10 text-electric"
+                              : "border-coral/40 bg-coral/10 text-coral"
+                          }`}
+                        >
+                          {filled ? "Filled ✓" : "Not filled"}
+                        </span>
                       </td>
                       <td className="px-6 py-3 text-right">
                         <div className="inline-flex gap-2">
