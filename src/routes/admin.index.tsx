@@ -406,6 +406,22 @@ function AdminDashboard() {
                   className="rounded-full border-2 border-ink bg-cream px-3 py-1.5 font-mono text-xs focus:outline-none focus:ring-4 focus:ring-electric/40"
                 />
               </label>
+              <div className="inline-flex items-center rounded-full border-2 border-ink p-0.5 font-mono text-[10px] uppercase tracking-widest">
+                {(["all", "filled", "not_filled"] as FormFilter[]).map((f) => (
+                  <button
+                    key={f}
+                    type="button"
+                    onClick={() => setFormFilter(f)}
+                    className={`rounded-full px-3 py-1 transition ${
+                      formFilter === f
+                        ? "bg-ink text-cream"
+                        : "text-ink/70 hover:text-ink"
+                    }`}
+                  >
+                    {f === "all" ? "All" : f === "filled" ? "Form ✓" : "Form ✗"}
+                  </button>
+                ))}
+              </div>
               {filtersActive && (
                 <button
                   type="button"
