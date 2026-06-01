@@ -535,7 +535,6 @@ function AdminDashboard() {
                     );
                   })
                 )}
-                )}
               </tbody>
             </table>
           </div>
