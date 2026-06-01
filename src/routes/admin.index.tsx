@@ -24,11 +24,14 @@ interface Registration {
 
 type SortKey = "created_at" | "email";
 type SortDir = "asc" | "desc";
+type FormFilter = "all" | "filled" | "not_filled";
 
 function AdminDashboard() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [rows, setRows] = useState<Registration[]>([]);
+  const [formEmails, setFormEmails] = useState<Set<string>>(new Set());
+  const [formSyncError, setFormSyncError] = useState<string | null>(null);
   const [error, setError] = useState("");
 
   // UI state
@@ -39,6 +42,7 @@ function AdminDashboard() {
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [dateFrom, setDateFrom] = useState(""); // YYYY-MM-DD, local
   const [dateTo, setDateTo] = useState(""); // YYYY-MM-DD, local (inclusive)
+  const [formFilter, setFormFilter] = useState<FormFilter>("all");
 
   useEffect(() => {
     let cancelled = false;
