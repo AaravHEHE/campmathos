@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
-import { adminListRegistrations, adminDeleteRegistration } from "@/lib/admin.functions";
+import { adminListRegistrations, adminDeleteRegistration, adminListFormEmails } from "@/lib/admin.functions";
 import { supabase } from "@/integrations/supabase/client";
 import { SignupsChart } from "@/components/admin/SignupsChart";
 import { BroadcastForm } from "@/components/admin/BroadcastForm";
