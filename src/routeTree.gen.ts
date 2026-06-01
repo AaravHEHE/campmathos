@@ -32,6 +32,7 @@ import { Route as TeacherAssignmentAssignmentIdIndexRouteImport } from './routes
 import { Route as AppAssignmentAssignmentIdIndexRouteImport } from './routes/app.assignment.$assignmentId.index'
 import { Route as TeacherAssignmentAssignmentIdSubmissionsRouteImport } from './routes/teacher.assignment.$assignmentId.submissions'
 import { Route as AppAssignmentAssignmentIdResultRouteImport } from './routes/app.assignment.$assignmentId.result'
+import { Route as ApiPublicHooksSyncFormEmailsRouteImport } from './routes/api.public.hooks.sync-form-emails'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -153,6 +154,12 @@ const AppAssignmentAssignmentIdResultRoute =
     path: '/app/assignment/$assignmentId/result',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicHooksSyncFormEmailsRoute =
+  ApiPublicHooksSyncFormEmailsRouteImport.update({
+    id: '/api/public/hooks/sync-form-emails',
+    path: '/api/public/hooks/sync-form-emails',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -174,6 +181,7 @@ export interface FileRoutesByFullPath {
   '/app/class/$classId': typeof AppClassClassIdRoute
   '/teacher/class/$classId': typeof TeacherClassClassIdRoute
   '/teacher/submission/$submissionId': typeof TeacherSubmissionSubmissionIdRoute
+  '/api/public/hooks/sync-form-emails': typeof ApiPublicHooksSyncFormEmailsRoute
   '/app/assignment/$assignmentId/result': typeof AppAssignmentAssignmentIdResultRoute
   '/teacher/assignment/$assignmentId/submissions': typeof TeacherAssignmentAssignmentIdSubmissionsRoute
   '/app/assignment/$assignmentId/': typeof AppAssignmentAssignmentIdIndexRoute
@@ -199,6 +207,7 @@ export interface FileRoutesByTo {
   '/app/class/$classId': typeof AppClassClassIdRoute
   '/teacher/class/$classId': typeof TeacherClassClassIdRoute
   '/teacher/submission/$submissionId': typeof TeacherSubmissionSubmissionIdRoute
+  '/api/public/hooks/sync-form-emails': typeof ApiPublicHooksSyncFormEmailsRoute
   '/app/assignment/$assignmentId/result': typeof AppAssignmentAssignmentIdResultRoute
   '/teacher/assignment/$assignmentId/submissions': typeof TeacherAssignmentAssignmentIdSubmissionsRoute
   '/app/assignment/$assignmentId': typeof AppAssignmentAssignmentIdIndexRoute
@@ -225,6 +234,7 @@ export interface FileRoutesById {
   '/app/class/$classId': typeof AppClassClassIdRoute
   '/teacher/class/$classId': typeof TeacherClassClassIdRoute
   '/teacher/submission/$submissionId': typeof TeacherSubmissionSubmissionIdRoute
+  '/api/public/hooks/sync-form-emails': typeof ApiPublicHooksSyncFormEmailsRoute
   '/app/assignment/$assignmentId/result': typeof AppAssignmentAssignmentIdResultRoute
   '/teacher/assignment/$assignmentId/submissions': typeof TeacherAssignmentAssignmentIdSubmissionsRoute
   '/app/assignment/$assignmentId/': typeof AppAssignmentAssignmentIdIndexRoute
@@ -252,6 +262,7 @@ export interface FileRouteTypes {
     | '/app/class/$classId'
     | '/teacher/class/$classId'
     | '/teacher/submission/$submissionId'
+    | '/api/public/hooks/sync-form-emails'
     | '/app/assignment/$assignmentId/result'
     | '/teacher/assignment/$assignmentId/submissions'
     | '/app/assignment/$assignmentId/'
@@ -277,6 +288,7 @@ export interface FileRouteTypes {
     | '/app/class/$classId'
     | '/teacher/class/$classId'
     | '/teacher/submission/$submissionId'
+    | '/api/public/hooks/sync-form-emails'
     | '/app/assignment/$assignmentId/result'
     | '/teacher/assignment/$assignmentId/submissions'
     | '/app/assignment/$assignmentId'
@@ -302,6 +314,7 @@ export interface FileRouteTypes {
     | '/app/class/$classId'
     | '/teacher/class/$classId'
     | '/teacher/submission/$submissionId'
+    | '/api/public/hooks/sync-form-emails'
     | '/app/assignment/$assignmentId/result'
     | '/teacher/assignment/$assignmentId/submissions'
     | '/app/assignment/$assignmentId/'
@@ -328,6 +341,7 @@ export interface RootRouteChildren {
   AppClassClassIdRoute: typeof AppClassClassIdRoute
   TeacherClassClassIdRoute: typeof TeacherClassClassIdRoute
   TeacherSubmissionSubmissionIdRoute: typeof TeacherSubmissionSubmissionIdRoute
+  ApiPublicHooksSyncFormEmailsRoute: typeof ApiPublicHooksSyncFormEmailsRoute
   AppAssignmentAssignmentIdResultRoute: typeof AppAssignmentAssignmentIdResultRoute
   TeacherAssignmentAssignmentIdSubmissionsRoute: typeof TeacherAssignmentAssignmentIdSubmissionsRoute
   AppAssignmentAssignmentIdIndexRoute: typeof AppAssignmentAssignmentIdIndexRoute
@@ -497,6 +511,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppAssignmentAssignmentIdResultRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/hooks/sync-form-emails': {
+      id: '/api/public/hooks/sync-form-emails'
+      path: '/api/public/hooks/sync-form-emails'
+      fullPath: '/api/public/hooks/sync-form-emails'
+      preLoaderRoute: typeof ApiPublicHooksSyncFormEmailsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -520,6 +541,7 @@ const rootRouteChildren: RootRouteChildren = {
   AppClassClassIdRoute: AppClassClassIdRoute,
   TeacherClassClassIdRoute: TeacherClassClassIdRoute,
   TeacherSubmissionSubmissionIdRoute: TeacherSubmissionSubmissionIdRoute,
+  ApiPublicHooksSyncFormEmailsRoute: ApiPublicHooksSyncFormEmailsRoute,
   AppAssignmentAssignmentIdResultRoute: AppAssignmentAssignmentIdResultRoute,
   TeacherAssignmentAssignmentIdSubmissionsRoute:
     TeacherAssignmentAssignmentIdSubmissionsRoute,
@@ -530,12 +552,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
