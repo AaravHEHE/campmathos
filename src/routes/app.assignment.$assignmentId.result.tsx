@@ -134,11 +134,13 @@ function ResultPage() {
                     )}
                   </div>
                   {p.type !== "free" && p.correct_answer && (
-                    <div className="mt-2 rounded-xl border-2 border-ink/30 bg-sun/30 p-3 font-mono text-sm">
-                      <span className="text-ink/60">Correct: </span>
-                      {p.type === "mcq"
-                        ? choices.find((c) => c.correct)?.label
-                        : p.correct_answer}
+                    <div className="mt-2 rounded-xl border-2 border-ink/30 bg-sun/30 p-3 text-sm">
+                      <span className="font-mono text-ink/60">Correct: </span>
+                      {p.type === "mcq" ? (
+                        <span>{choices.find((c) => c.correct)?.label}</span>
+                      ) : (
+                        <RichPrompt text={p.correct_answer} />
+                      )}
                     </div>
                   )}
                   {a?.teacher_comment && (
