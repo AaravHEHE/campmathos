@@ -97,6 +97,9 @@ function AdminDashboard() {
     };
   }, [navigate]);
 
+  const hasFilledForm = (email: string) =>
+    formEmails.has(email.trim().toLowerCase());
+
   // Filtered + sorted view
   const visibleRows = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -110,6 +113,8 @@ function AdminDashboard() {
         if (fromTs && t < fromTs) return false;
         if (toTs && t >= toTs) return false;
       }
+      if (formFilter === "filled" && !hasFilledForm(r.email)) return false;
+      if (formFilter === "not_filled" && hasFilledForm(r.email)) return false;
       return true;
     });
     const sorted = [...filtered].sort((a, b) => {
@@ -119,13 +124,14 @@ function AdminDashboard() {
       return sortDir === "asc" ? cmp : -cmp;
     });
     return sorted;
-  }, [rows, search, sortKey, sortDir, dateFrom, dateTo]);
+  }, [rows, search, sortKey, sortDir, dateFrom, dateTo, formFilter, formEmails]);
 
-  const filtersActive = Boolean(search || dateFrom || dateTo);
+  const filtersActive = Boolean(search || dateFrom || dateTo || formFilter !== "all");
   const clearFilters = () => {
     setSearch("");
     setDateFrom("");
     setDateTo("");
+    setFormFilter("all");
   };
 
   // Stats
@@ -141,14 +147,18 @@ function AdminDashboard() {
     let last24h = 0;
     let today = 0;
     let thisWeek = 0;
+    let filled = 0;
+    let notFilled = 0;
     for (const r of rows) {
       const t = new Date(r.created_at).getTime();
       if (now - t <= day) last24h++;
       if (t >= todayStart.getTime()) today++;
       if (t >= weekStart.getTime()) thisWeek++;
+      if (hasFilledForm(r.email)) filled++;
+      else notFilled++;
     }
-    return { total: rows.length, last24h, today, thisWeek };
-  }, [rows]);
+    return { total: rows.length, last24h, today, thisWeek, filled, notFilled };
+  }, [rows, formEmails]);
 
   const csv = useMemo(() => {
     // CSV reflects the current filtered/sorted view so directors can export a slice.
