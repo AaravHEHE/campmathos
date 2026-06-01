@@ -67,9 +67,17 @@ function AdminDashboard() {
         return;
       }
       try {
-        const { rows: data } = await adminListRegistrations();
+        const [{ rows: data }, formRes] = await Promise.all([
+          adminListRegistrations(),
+          adminListFormEmails().catch((e) => ({
+            emails: [] as string[],
+            error: e instanceof Error ? e.message : "Could not load form responses",
+          })),
+        ]);
         if (cancelled) return;
         setRows((data as Registration[]) ?? []);
+        setFormEmails(new Set(formRes.emails ?? []));
+        setFormSyncError(formRes.error ?? null);
       } catch (err) {
         if (cancelled) return;
         const msg = err instanceof Error ? err.message : "Failed to load sign-ups";
