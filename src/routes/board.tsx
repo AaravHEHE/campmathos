@@ -60,7 +60,7 @@ const directors: Director[] = [
   },
   {
     name: "Wenxuan Chen",
-    bio: "NVHS Class of 2029. Math Team State Qualifier and member of IMSA / NVHS Robotics. AMC 8 Honor Roll",
+    bio: "NVHS Class of 2029. Math Team State Qualifier and member of NVHS Freshman A soccer team. AMC 8 Honor Roll.",
     accent: "bg-electric text-cream",
   },
   {
