@@ -58,7 +58,14 @@ function digestHtml(rows: { email: string; created_at: string }[], total: number
 </body></html>`;
 }
 
-Deno.serve(async (_req) => {
+Deno.serve(async (req) => {
+  // Shared-secret auth: pg_cron must send the X-Cron-Secret header.
+  const expected = Deno.env.get("CRON_SECRET");
+  const provided = req.headers.get("x-cron-secret");
+  if (!expected || provided !== expected) {
+    return new Response("Unauthorized", { status: 401 });
+  }
+
   try {
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
       auth: { persistSession: false, autoRefreshToken: false },
