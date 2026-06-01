@@ -343,10 +343,16 @@ function AdminDashboard() {
           {/* Stat cards */}
           <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-4">
             <StatCard label="Total" value={stats.total} accent="bg-ink text-cream" />
-            <StatCard label="Today" value={stats.today} accent="bg-electric text-cream" />
+            <StatCard label="Form filled" value={stats.filled} accent="bg-electric text-cream" />
+            <StatCard label="Form NOT filled" value={stats.notFilled} accent="bg-coral text-cream" />
             <StatCard label="This week" value={stats.thisWeek} accent="bg-sun text-ink" />
-            <StatCard label="Last 24h" value={stats.last24h} accent="bg-coral text-cream" />
           </div>
+
+          {formSyncError && (
+            <p className="mt-4 font-mono text-xs text-coral">
+              Google Form sync issue: {formSyncError}
+            </p>
+          )}
 
           {/* Sign-ups chart */}
           <div className="mt-6">
