@@ -93,7 +93,7 @@ Deno.serve(async (req) => {
     });
   }
 
-  let body: { subject?: string; message?: string };
+  let body: { subject?: string; message?: string; recipients?: string[] };
   try {
     body = await req.json();
   } catch {
@@ -118,18 +118,46 @@ Deno.serve(async (req) => {
     });
   }
 
-  const { data: regs, error: regsErr } = await admin
-    .from("registrations")
-    .select("email");
-  if (regsErr) {
-    console.error("List regs failed", regsErr);
-    return new Response(JSON.stringify({ error: "Could not load registrants" }), {
-      status: 500,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  let emails: string[];
+  if (Array.isArray(body.recipients)) {
+    emails = Array.from(
+      new Set(
+        body.recipients
+          .filter((e): e is string => typeof e === "string")
+          .map((e) => e.trim().toLowerCase())
+          .filter((e) => emailRe.test(e)),
+      ),
+    );
+    // Constrain to actual registrants to prevent abuse.
+    const { data: regs, error: regsErr } = await admin
+      .from("registrations")
+      .select("email");
+    if (regsErr) {
+      console.error("List regs failed", regsErr);
+      return new Response(JSON.stringify({ error: "Could not load registrants" }), {
+        status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    const allowed = new Set(
+      (regs ?? []).map((r) => (r.email ?? "").trim().toLowerCase()).filter(Boolean),
+    );
+    emails = emails.filter((e) => allowed.has(e));
+  } else {
+    const { data: regs, error: regsErr } = await admin
+      .from("registrations")
+      .select("email");
+    if (regsErr) {
+      console.error("List regs failed", regsErr);
+      return new Response(JSON.stringify({ error: "Could not load registrants" }), {
+        status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    emails = Array.from(new Set((regs ?? []).map((r) => r.email).filter(Boolean)));
   }
 
-  const emails = Array.from(new Set((regs ?? []).map((r) => r.email).filter(Boolean)));
   const html = bodyHtml(message);
 
   let sent = 0;

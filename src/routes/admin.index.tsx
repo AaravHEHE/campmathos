@@ -361,7 +361,7 @@ function AdminDashboard() {
 
           {/* Broadcast composer */}
           <div className="mt-6">
-            <BroadcastForm recipientCount={rows.length} />
+            <BroadcastForm registrations={rows} formEmails={formEmails} />
           </div>
 
           {/* Filters */}

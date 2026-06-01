@@ -1,6 +1,6 @@
-// Admin broadcast composer — sends a one-off message to every registrant.
+// Admin broadcast composer — sends a one-off message to a chosen audience.
 // Calls the broadcast-email edge function with the user's session JWT.
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
 const FUNCTION_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/broadcast-email`;
@@ -12,13 +12,48 @@ interface Result {
   errors: string[];
 }
 
-export function BroadcastForm({ recipientCount }: { recipientCount: number }) {
+type Audience = "all" | "filled" | "not_filled";
+
+interface BroadcastFormProps {
+  registrations: { email: string }[];
+  formEmails: Set<string>;
+}
+
+export function BroadcastForm({ registrations, formEmails }: BroadcastFormProps) {
   const [open, setOpen] = useState(false);
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [audience, setAudience] = useState<Audience>("all");
   const [sending, setSending] = useState(false);
   const [result, setResult] = useState<Result | null>(null);
   const [error, setError] = useState("");
+
+  const allEmails = useMemo(
+    () =>
+      Array.from(
+        new Set(
+          registrations
+            .map((r) => (r.email ?? "").trim().toLowerCase())
+            .filter(Boolean),
+        ),
+      ),
+    [registrations],
+  );
+
+  const recipients = useMemo(() => {
+    if (audience === "all") return allEmails;
+    if (audience === "filled") return allEmails.filter((e) => formEmails.has(e));
+    return allEmails.filter((e) => !formEmails.has(e));
+  }, [allEmails, formEmails, audience]);
+
+  const recipientCount = recipients.length;
+
+  const audienceLabel =
+    audience === "all"
+      ? "all registrants"
+      : audience === "filled"
+        ? "registrants who FILLED the form"
+        : "registrants who did NOT fill the form";
 
   const send = async () => {
     setError("");
@@ -27,8 +62,12 @@ export function BroadcastForm({ recipientCount }: { recipientCount: number }) {
       setError("Subject and message are both required.");
       return;
     }
+    if (recipientCount === 0) {
+      setError("No recipients match the selected audience.");
+      return;
+    }
     const ok = window.confirm(
-      `Send this message to all ${recipientCount} registrant${recipientCount === 1 ? "" : "s"}?\n\nThis cannot be undone.`,
+      `Send this message to ${recipientCount} ${audienceLabel}?\n\nThis cannot be undone.`,
     );
     if (!ok) return;
 
@@ -43,7 +82,12 @@ export function BroadcastForm({ recipientCount }: { recipientCount: number }) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${session.access_token}`,
         },
-        body: JSON.stringify({ subject: subject.trim(), message: message.trim() }),
+        body: JSON.stringify({
+          subject: subject.trim(),
+          message: message.trim(),
+          // Always send explicit recipients so the audience filter applies.
+          recipients,
+        }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data?.error ?? `Server returned ${res.status}`);
@@ -65,7 +109,7 @@ export function BroadcastForm({ recipientCount }: { recipientCount: number }) {
         onClick={() => setOpen(true)}
         className="rounded-full border-2 border-ink bg-electric px-5 py-2.5 font-semibold text-cream transition hover:bg-ink"
       >
-        Email all registrants
+        Email registrants
       </button>
     );
   }
@@ -78,7 +122,7 @@ export function BroadcastForm({ recipientCount }: { recipientCount: number }) {
             Broadcast
           </p>
           <h2 className="mt-1 font-display text-xl font-black">
-            Email all {recipientCount} registrant{recipientCount === 1 ? "" : "s"}
+            Email {recipientCount} {audienceLabel}
           </h2>
         </div>
         <button
@@ -96,6 +140,43 @@ export function BroadcastForm({ recipientCount }: { recipientCount: number }) {
       </div>
 
       <div className="mt-4 space-y-3">
+        {/* Audience selector */}
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="font-mono text-[10px] uppercase tracking-widest text-ink/70">
+            Audience
+          </span>
+          <div className="inline-flex items-center rounded-full border-2 border-ink p-0.5 font-mono text-[10px] uppercase tracking-widest">
+            {(
+              [
+                { id: "all" as Audience, label: "Everyone" },
+                { id: "filled" as Audience, label: "Form ✓" },
+                { id: "not_filled" as Audience, label: "Form ✗" },
+              ]
+            ).map((opt) => {
+              const count =
+                opt.id === "all"
+                  ? allEmails.length
+                  : opt.id === "filled"
+                    ? allEmails.filter((e) => formEmails.has(e)).length
+                    : allEmails.filter((e) => !formEmails.has(e)).length;
+              const active = audience === opt.id;
+              return (
+                <button
+                  key={opt.id}
+                  type="button"
+                  onClick={() => setAudience(opt.id)}
+                  disabled={sending}
+                  className={`rounded-full px-3 py-1 transition ${
+                    active ? "bg-ink text-cream" : "text-ink/70 hover:text-ink"
+                  }`}
+                >
+                  {opt.label} · {count}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
         <input
           type="text"
           value={subject}
