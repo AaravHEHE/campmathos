@@ -71,7 +71,7 @@ const directors: Director[] = [
   },
   {
     name: "Atharv Mishra",
-    bio: "NVHS Class of 2029. Member of NVHS Robotics, Speech, and Youth & Government teams, and eCYBERMISSION Finalist.",
+    bio: "NVHS Class of 2029. Member of NVHS Robotics, Speech, and Youth & Government teams, and eCYBERMISSION State Finalist and honorable mention.",
     accent: "bg-sun text-cream",
   },
 ];
