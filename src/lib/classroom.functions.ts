@@ -422,6 +422,9 @@ export const getSubmissionResult = createServerFn({ method: "POST" })
       .eq("student_id", context.userId)
       .maybeSingle();
     if (!sub) throw new Error("No submission yet");
+    if (sub.status === "in_progress") {
+      throw new Error("Assignment not yet submitted");
+    }
     const { data: problems } = await supabaseAdmin
       .from("problems")
       .select("id, position, prompt, type, points, choices, correct_answer")
