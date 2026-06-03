@@ -174,6 +174,8 @@ function Index() {
                 alt="Colorful collage of dice, geometric shapes and graphs representing the MathOs curriculum"
                 width={1536}
                 height={1024}
+                fetchPriority="high"
+                decoding="async"
                 className="h-full w-full object-cover"
               />
             </div>
