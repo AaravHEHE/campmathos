@@ -1,0 +1,15 @@
+# MathOs
+
+> A completely free online summer applied math camp for students roughly at the 4th–7th grade math level. Live on Zoom, Tuesdays and Thursdays, 3–5 PM Central, July 7–30, 2026.
+
+MathOs is a free, fully online summer math camp run by student Camp Directors. Sessions are taught live over Zoom with a focus on hands-on, applied math — problem solving, games, geometry, and project work — culminating in a final showcase.
+
+## Pages
+
+- [Home](/): Overview of the camp, dates, format, and how to register.
+- [About](/about): What MathOs is, who it's for, and the mission behind the camp.
+- [Curriculum](/curriculum): Week-by-week topics and what campers will learn.
+- [Details](/details): Schedule, format, and logistics for the 2026 season.
+- [FAQ](/faq): Common questions about cost, schedule, joining online, materials, and registration.
+- [Board](/board): The Camp Directors and team behind MathOs.
+- [Register](/register): Express interest and get Zoom and schedule details before camp starts.
