@@ -15,7 +15,7 @@ export const Route = createFileRoute("/register")({
       {
         name: "description",
         content:
-          "Let us know your child is interested in MathOs, the free online summer applied math camp taught live over Zoom. No commitment — we'll send schedule and Zoom joining details as July gets closer.",
+          "Express interest in MathOs — the free online summer applied math camp on Zoom. No commitment; we'll send schedule and Zoom details before July.",
       },
       { property: "og:title", content: "Express interest — MathOs summer camp" },
       {
