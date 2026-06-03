@@ -49,14 +49,26 @@ async function syncEmails() {
     form_total: formEmails.length,
     already_registered: formEmails.length - missing.length,
     inserted,
-    missing_emails: missing,
   };
+}
+
+function isAuthorized(request: Request): boolean {
+  const expected = process.env.SYNC_WEBHOOK_SECRET;
+  if (!expected) return false;
+  const provided =
+    request.headers.get('x-webhook-secret') ??
+    request.headers.get('authorization')?.replace(/^Bearer\s+/i, '') ??
+    '';
+  return provided === expected;
 }
 
 export const Route = createFileRoute('/api/public/hooks/sync-form-emails')({
   server: {
     handlers: {
-      POST: async () => {
+      POST: async ({ request }) => {
+        if (!isAuthorized(request)) {
+          return new Response('Unauthorized', { status: 401 });
+        }
         try {
           const result = await syncEmails();
           return new Response(JSON.stringify({ success: true, ...result }), {
@@ -66,12 +78,15 @@ export const Route = createFileRoute('/api/public/hooks/sync-form-emails')({
           const message = e instanceof Error ? e.message : String(e);
           console.error('sync-form-emails failed:', message);
           return new Response(
-            JSON.stringify({ success: false, error: message }),
+            JSON.stringify({ success: false, error: 'Internal error' }),
             { status: 500, headers: { 'Content-Type': 'application/json' } },
           );
         }
       },
-      GET: async () => {
+      GET: async ({ request }) => {
+        if (!isAuthorized(request)) {
+          return new Response('Unauthorized', { status: 401 });
+        }
         try {
           const result = await syncEmails();
           return new Response(JSON.stringify({ success: true, ...result }), {
@@ -79,8 +94,9 @@ export const Route = createFileRoute('/api/public/hooks/sync-form-emails')({
           });
         } catch (e) {
           const message = e instanceof Error ? e.message : String(e);
+          console.error('sync-form-emails failed:', message);
           return new Response(
-            JSON.stringify({ success: false, error: message }),
+            JSON.stringify({ success: false, error: 'Internal error' }),
             { status: 500, headers: { 'Content-Type': 'application/json' } },
           );
         }
