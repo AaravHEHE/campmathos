@@ -6,6 +6,9 @@ import { Reveal } from "@/components/Reveal";
 import aaravPhoto from "@/assets/directors/aarav-arora.jpg";
 import yifanPhoto from "@/assets/directors/yifan-bao.jpg";
 import alanPhoto from "@/assets/directors/alan-zhan.jpg";
+import shauryPhoto from "@/assets/directors/shaury-sharma.jpg.asset.json";
+import atharvPhoto from "@/assets/directors/atharv-mishra.jpg.asset.json";
+import wenxuanPhoto from "@/assets/directors/wenxuan-chen.jpg.asset.json";
 
 const OG = ogImage("/og-board.jpg");
 
