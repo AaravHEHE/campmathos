@@ -52,12 +52,6 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link
-            to="/login"
-            className="hidden items-center rounded-md px-2 py-2 font-mono text-sm hover:text-electric md:inline-flex"
-          >
-            Sign in
-          </Link>
           <ThemeToggle className="hidden sm:inline-flex" />
           <Link
             to="/register"
@@ -65,6 +59,7 @@ export function SiteHeader() {
           >
             I'm interested →
           </Link>
+
 
           {/* Mobile menu button */}
           <button
@@ -129,19 +124,13 @@ export function SiteHeader() {
               <div className="mt-3 flex items-center gap-3 border-t-2 border-ink/15 px-2 pt-4">
                 <ThemeToggle />
                 <Link
-                  to="/login"
-                  onClick={() => setOpen(false)}
-                  className="flex min-h-11 items-center justify-center rounded-full border-2 border-ink bg-cream px-5 py-3 font-semibold text-ink"
-                >
-                  Sign in
-                </Link>
-                <Link
                   to="/register"
                   onClick={() => setOpen(false)}
                   className="flex min-h-11 flex-1 items-center justify-center rounded-full border-2 border-ink bg-coral px-5 py-3 font-semibold text-cream"
                 >
                   I'm interested →
                 </Link>
+
               </div>
             </nav>
           </div>
@@ -167,9 +156,7 @@ export function SiteFooter() {
           <Link to="/register" className="inline-flex min-h-11 items-center hover:text-electric">
             Interest form
           </Link>
-          <Link to="/login" className="inline-flex min-h-11 items-center hover:text-electric">
-            Student sign in
-          </Link>
+
           <Link to="/admin/login" className="text-cream/0 hover:text-ink/40" aria-label="Admin" tabIndex={-1}>
             Admin
           </Link>
