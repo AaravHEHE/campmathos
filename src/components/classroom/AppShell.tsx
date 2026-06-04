@@ -24,24 +24,10 @@ export function AppShell({
             <Wordmark />
           </Link>
           <nav className="hidden items-center gap-4 font-mono text-sm md:flex">
-            {isTeacher ? (
-              <>
-                <Link to="/teacher" className="hover:underline">
-                  Teach
-                </Link>
-                <Link to="/app" className="hover:underline">
-                  Student view
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link to="/app" className="hover:underline">
-                  Dashboard
-                </Link>
-                <Link to="/app/join" className="hover:underline">
-                  Join class
-                </Link>
-              </>
+            {isTeacher && (
+              <Link to="/teacher" className="hover:underline">
+                Teach
+              </Link>
             )}
             {role === "admin" && (
               <Link to="/admin" className="hover:underline">
@@ -49,6 +35,7 @@ export function AppShell({
               </Link>
             )}
           </nav>
+
           <div className="flex items-center gap-3">
             {displayName && (
               <span className="hidden font-mono text-xs text-ink/70 sm:inline">

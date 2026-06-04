@@ -30,16 +30,10 @@ export function useClassroomAuth(requireRole?: "teacher" | "student") {
       const user = userRes.user;
       if (!user) {
         setState({ status: "unauthenticated" });
-        if (requireRole === "teacher") {
-          navigate({ to: "/admin/login", replace: true });
-        } else {
-          navigate({
-            to: "/login",
-            search: { redirect: window.location.pathname + window.location.search },
-          });
-        }
+        navigate({ to: "/admin/login", replace: true });
         return;
       }
+
       const [{ data: roles }, { data: profile }] = await Promise.all([
         supabase.from("user_roles").select("role").eq("user_id", user.id),
         supabase.from("profiles").select("display_name").eq("id", user.id).maybeSingle(),
@@ -53,11 +47,7 @@ export function useClassroomAuth(requireRole?: "teacher" | "student") {
           : "student";
 
       if (requireRole === "teacher" && role === "student") {
-        navigate({ to: "/app", replace: true });
-        return;
-      }
-      if (requireRole === "student" && role === "teacher") {
-        navigate({ to: "/teacher", replace: true });
+        navigate({ to: "/admin/login", replace: true });
         return;
       }
       setState({
@@ -66,6 +56,7 @@ export function useClassroomAuth(requireRole?: "teacher" | "student") {
         role,
         displayName: profile?.display_name ?? null,
       });
+
     }
 
     resolve();
@@ -74,8 +65,9 @@ export function useClassroomAuth(requireRole?: "teacher" | "student") {
       (_event, session) => {
         if (!session) {
           setState({ status: "unauthenticated" });
-          navigate({ to: "/login" });
+          navigate({ to: "/admin/login" });
         }
+
       },
     );
     return () => {
@@ -90,5 +82,6 @@ export function useClassroomAuth(requireRole?: "teacher" | "student") {
 
 export async function signOut() {
   await supabase.auth.signOut();
-  window.location.href = "/login";
+  window.location.href = "/admin/login";
 }
+

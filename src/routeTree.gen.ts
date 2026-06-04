@@ -10,10 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as SignupRouteImport } from './routes/signup'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as MathosDoticsRouteImport } from './routes/mathos[.]ics'
-import { Route as LoginRouteImport } from './routes/login'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as DetailsRouteImport } from './routes/details'
 import { Route as CurriculumRouteImport } from './routes/curriculum'
@@ -21,27 +19,17 @@ import { Route as BoardRouteImport } from './routes/board'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TeacherIndexRouteImport } from './routes/teacher.index'
-import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
-import { Route as AppJoinRouteImport } from './routes/app.join'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as TeacherSubmissionSubmissionIdRouteImport } from './routes/teacher.submission.$submissionId'
 import { Route as TeacherClassClassIdRouteImport } from './routes/teacher.class.$classId'
-import { Route as AppClassClassIdRouteImport } from './routes/app.class.$classId'
 import { Route as TeacherAssignmentAssignmentIdIndexRouteImport } from './routes/teacher.assignment.$assignmentId.index'
-import { Route as AppAssignmentAssignmentIdIndexRouteImport } from './routes/app.assignment.$assignmentId.index'
 import { Route as TeacherAssignmentAssignmentIdSubmissionsRouteImport } from './routes/teacher.assignment.$assignmentId.submissions'
-import { Route as AppAssignmentAssignmentIdResultRouteImport } from './routes/app.assignment.$assignmentId.result'
 import { Route as ApiPublicHooksSyncFormEmailsRouteImport } from './routes/api.public.hooks.sync-form-emails'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SignupRoute = SignupRouteImport.update({
-  id: '/signup',
-  path: '/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RegisterRoute = RegisterRouteImport.update({
@@ -52,11 +40,6 @@ const RegisterRoute = RegisterRouteImport.update({
 const MathosDoticsRoute = MathosDoticsRouteImport.update({
   id: '/mathos.ics',
   path: '/mathos.ics',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqRoute = FaqRouteImport.update({
@@ -94,19 +77,9 @@ const TeacherIndexRoute = TeacherIndexRouteImport.update({
   path: '/teacher/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AppIndexRoute = AppIndexRouteImport.update({
-  id: '/app/',
-  path: '/app/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/admin/',
   path: '/admin/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AppJoinRoute = AppJoinRouteImport.update({
-  id: '/app/join',
-  path: '/app/join',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
@@ -125,33 +98,16 @@ const TeacherClassClassIdRoute = TeacherClassClassIdRouteImport.update({
   path: '/teacher/class/$classId',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AppClassClassIdRoute = AppClassClassIdRouteImport.update({
-  id: '/app/class/$classId',
-  path: '/app/class/$classId',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const TeacherAssignmentAssignmentIdIndexRoute =
   TeacherAssignmentAssignmentIdIndexRouteImport.update({
     id: '/teacher/assignment/$assignmentId/',
     path: '/teacher/assignment/$assignmentId/',
     getParentRoute: () => rootRouteImport,
   } as any)
-const AppAssignmentAssignmentIdIndexRoute =
-  AppAssignmentAssignmentIdIndexRouteImport.update({
-    id: '/app/assignment/$assignmentId/',
-    path: '/app/assignment/$assignmentId/',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const TeacherAssignmentAssignmentIdSubmissionsRoute =
   TeacherAssignmentAssignmentIdSubmissionsRouteImport.update({
     id: '/teacher/assignment/$assignmentId/submissions',
     path: '/teacher/assignment/$assignmentId/submissions',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const AppAssignmentAssignmentIdResultRoute =
-  AppAssignmentAssignmentIdResultRouteImport.update({
-    id: '/app/assignment/$assignmentId/result',
-    path: '/app/assignment/$assignmentId/result',
     getParentRoute: () => rootRouteImport,
   } as any)
 const ApiPublicHooksSyncFormEmailsRoute =
@@ -168,23 +124,16 @@ export interface FileRoutesByFullPath {
   '/curriculum': typeof CurriculumRoute
   '/details': typeof DetailsRoute
   '/faq': typeof FaqRoute
-  '/login': typeof LoginRoute
   '/mathos.ics': typeof MathosDoticsRoute
   '/register': typeof RegisterRoute
-  '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/login': typeof AdminLoginRoute
-  '/app/join': typeof AppJoinRoute
   '/admin/': typeof AdminIndexRoute
-  '/app/': typeof AppIndexRoute
   '/teacher/': typeof TeacherIndexRoute
-  '/app/class/$classId': typeof AppClassClassIdRoute
   '/teacher/class/$classId': typeof TeacherClassClassIdRoute
   '/teacher/submission/$submissionId': typeof TeacherSubmissionSubmissionIdRoute
   '/api/public/hooks/sync-form-emails': typeof ApiPublicHooksSyncFormEmailsRoute
-  '/app/assignment/$assignmentId/result': typeof AppAssignmentAssignmentIdResultRoute
   '/teacher/assignment/$assignmentId/submissions': typeof TeacherAssignmentAssignmentIdSubmissionsRoute
-  '/app/assignment/$assignmentId/': typeof AppAssignmentAssignmentIdIndexRoute
   '/teacher/assignment/$assignmentId/': typeof TeacherAssignmentAssignmentIdIndexRoute
 }
 export interface FileRoutesByTo {
@@ -194,23 +143,16 @@ export interface FileRoutesByTo {
   '/curriculum': typeof CurriculumRoute
   '/details': typeof DetailsRoute
   '/faq': typeof FaqRoute
-  '/login': typeof LoginRoute
   '/mathos.ics': typeof MathosDoticsRoute
   '/register': typeof RegisterRoute
-  '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/login': typeof AdminLoginRoute
-  '/app/join': typeof AppJoinRoute
   '/admin': typeof AdminIndexRoute
-  '/app': typeof AppIndexRoute
   '/teacher': typeof TeacherIndexRoute
-  '/app/class/$classId': typeof AppClassClassIdRoute
   '/teacher/class/$classId': typeof TeacherClassClassIdRoute
   '/teacher/submission/$submissionId': typeof TeacherSubmissionSubmissionIdRoute
   '/api/public/hooks/sync-form-emails': typeof ApiPublicHooksSyncFormEmailsRoute
-  '/app/assignment/$assignmentId/result': typeof AppAssignmentAssignmentIdResultRoute
   '/teacher/assignment/$assignmentId/submissions': typeof TeacherAssignmentAssignmentIdSubmissionsRoute
-  '/app/assignment/$assignmentId': typeof AppAssignmentAssignmentIdIndexRoute
   '/teacher/assignment/$assignmentId': typeof TeacherAssignmentAssignmentIdIndexRoute
 }
 export interface FileRoutesById {
@@ -221,23 +163,16 @@ export interface FileRoutesById {
   '/curriculum': typeof CurriculumRoute
   '/details': typeof DetailsRoute
   '/faq': typeof FaqRoute
-  '/login': typeof LoginRoute
   '/mathos.ics': typeof MathosDoticsRoute
   '/register': typeof RegisterRoute
-  '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/login': typeof AdminLoginRoute
-  '/app/join': typeof AppJoinRoute
   '/admin/': typeof AdminIndexRoute
-  '/app/': typeof AppIndexRoute
   '/teacher/': typeof TeacherIndexRoute
-  '/app/class/$classId': typeof AppClassClassIdRoute
   '/teacher/class/$classId': typeof TeacherClassClassIdRoute
   '/teacher/submission/$submissionId': typeof TeacherSubmissionSubmissionIdRoute
   '/api/public/hooks/sync-form-emails': typeof ApiPublicHooksSyncFormEmailsRoute
-  '/app/assignment/$assignmentId/result': typeof AppAssignmentAssignmentIdResultRoute
   '/teacher/assignment/$assignmentId/submissions': typeof TeacherAssignmentAssignmentIdSubmissionsRoute
-  '/app/assignment/$assignmentId/': typeof AppAssignmentAssignmentIdIndexRoute
   '/teacher/assignment/$assignmentId/': typeof TeacherAssignmentAssignmentIdIndexRoute
 }
 export interface FileRouteTypes {
@@ -249,23 +184,16 @@ export interface FileRouteTypes {
     | '/curriculum'
     | '/details'
     | '/faq'
-    | '/login'
     | '/mathos.ics'
     | '/register'
-    | '/signup'
     | '/sitemap.xml'
     | '/admin/login'
-    | '/app/join'
     | '/admin/'
-    | '/app/'
     | '/teacher/'
-    | '/app/class/$classId'
     | '/teacher/class/$classId'
     | '/teacher/submission/$submissionId'
     | '/api/public/hooks/sync-form-emails'
-    | '/app/assignment/$assignmentId/result'
     | '/teacher/assignment/$assignmentId/submissions'
-    | '/app/assignment/$assignmentId/'
     | '/teacher/assignment/$assignmentId/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -275,23 +203,16 @@ export interface FileRouteTypes {
     | '/curriculum'
     | '/details'
     | '/faq'
-    | '/login'
     | '/mathos.ics'
     | '/register'
-    | '/signup'
     | '/sitemap.xml'
     | '/admin/login'
-    | '/app/join'
     | '/admin'
-    | '/app'
     | '/teacher'
-    | '/app/class/$classId'
     | '/teacher/class/$classId'
     | '/teacher/submission/$submissionId'
     | '/api/public/hooks/sync-form-emails'
-    | '/app/assignment/$assignmentId/result'
     | '/teacher/assignment/$assignmentId/submissions'
-    | '/app/assignment/$assignmentId'
     | '/teacher/assignment/$assignmentId'
   id:
     | '__root__'
@@ -301,23 +222,16 @@ export interface FileRouteTypes {
     | '/curriculum'
     | '/details'
     | '/faq'
-    | '/login'
     | '/mathos.ics'
     | '/register'
-    | '/signup'
     | '/sitemap.xml'
     | '/admin/login'
-    | '/app/join'
     | '/admin/'
-    | '/app/'
     | '/teacher/'
-    | '/app/class/$classId'
     | '/teacher/class/$classId'
     | '/teacher/submission/$submissionId'
     | '/api/public/hooks/sync-form-emails'
-    | '/app/assignment/$assignmentId/result'
     | '/teacher/assignment/$assignmentId/submissions'
-    | '/app/assignment/$assignmentId/'
     | '/teacher/assignment/$assignmentId/'
   fileRoutesById: FileRoutesById
 }
@@ -328,23 +242,16 @@ export interface RootRouteChildren {
   CurriculumRoute: typeof CurriculumRoute
   DetailsRoute: typeof DetailsRoute
   FaqRoute: typeof FaqRoute
-  LoginRoute: typeof LoginRoute
   MathosDoticsRoute: typeof MathosDoticsRoute
   RegisterRoute: typeof RegisterRoute
-  SignupRoute: typeof SignupRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   AdminLoginRoute: typeof AdminLoginRoute
-  AppJoinRoute: typeof AppJoinRoute
   AdminIndexRoute: typeof AdminIndexRoute
-  AppIndexRoute: typeof AppIndexRoute
   TeacherIndexRoute: typeof TeacherIndexRoute
-  AppClassClassIdRoute: typeof AppClassClassIdRoute
   TeacherClassClassIdRoute: typeof TeacherClassClassIdRoute
   TeacherSubmissionSubmissionIdRoute: typeof TeacherSubmissionSubmissionIdRoute
   ApiPublicHooksSyncFormEmailsRoute: typeof ApiPublicHooksSyncFormEmailsRoute
-  AppAssignmentAssignmentIdResultRoute: typeof AppAssignmentAssignmentIdResultRoute
   TeacherAssignmentAssignmentIdSubmissionsRoute: typeof TeacherAssignmentAssignmentIdSubmissionsRoute
-  AppAssignmentAssignmentIdIndexRoute: typeof AppAssignmentAssignmentIdIndexRoute
   TeacherAssignmentAssignmentIdIndexRoute: typeof TeacherAssignmentAssignmentIdIndexRoute
 }
 
@@ -355,13 +262,6 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/signup': {
-      id: '/signup'
-      path: '/signup'
-      fullPath: '/signup'
-      preLoaderRoute: typeof SignupRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/register': {
@@ -376,13 +276,6 @@ declare module '@tanstack/react-router' {
       path: '/mathos.ics'
       fullPath: '/mathos.ics'
       preLoaderRoute: typeof MathosDoticsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faq': {
@@ -434,25 +327,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeacherIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/app/': {
-      id: '/app/'
-      path: '/app'
-      fullPath: '/app/'
-      preLoaderRoute: typeof AppIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/admin/': {
       id: '/admin/'
       path: '/admin'
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/app/join': {
-      id: '/app/join'
-      path: '/app/join'
-      fullPath: '/app/join'
-      preLoaderRoute: typeof AppJoinRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/login': {
@@ -476,13 +355,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeacherClassClassIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/app/class/$classId': {
-      id: '/app/class/$classId'
-      path: '/app/class/$classId'
-      fullPath: '/app/class/$classId'
-      preLoaderRoute: typeof AppClassClassIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/teacher/assignment/$assignmentId/': {
       id: '/teacher/assignment/$assignmentId/'
       path: '/teacher/assignment/$assignmentId'
@@ -490,25 +362,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeacherAssignmentAssignmentIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/app/assignment/$assignmentId/': {
-      id: '/app/assignment/$assignmentId/'
-      path: '/app/assignment/$assignmentId'
-      fullPath: '/app/assignment/$assignmentId/'
-      preLoaderRoute: typeof AppAssignmentAssignmentIdIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/teacher/assignment/$assignmentId/submissions': {
       id: '/teacher/assignment/$assignmentId/submissions'
       path: '/teacher/assignment/$assignmentId/submissions'
       fullPath: '/teacher/assignment/$assignmentId/submissions'
       preLoaderRoute: typeof TeacherAssignmentAssignmentIdSubmissionsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/app/assignment/$assignmentId/result': {
-      id: '/app/assignment/$assignmentId/result'
-      path: '/app/assignment/$assignmentId/result'
-      fullPath: '/app/assignment/$assignmentId/result'
-      preLoaderRoute: typeof AppAssignmentAssignmentIdResultRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/hooks/sync-form-emails': {
@@ -528,36 +386,20 @@ const rootRouteChildren: RootRouteChildren = {
   CurriculumRoute: CurriculumRoute,
   DetailsRoute: DetailsRoute,
   FaqRoute: FaqRoute,
-  LoginRoute: LoginRoute,
   MathosDoticsRoute: MathosDoticsRoute,
   RegisterRoute: RegisterRoute,
-  SignupRoute: SignupRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   AdminLoginRoute: AdminLoginRoute,
-  AppJoinRoute: AppJoinRoute,
   AdminIndexRoute: AdminIndexRoute,
-  AppIndexRoute: AppIndexRoute,
   TeacherIndexRoute: TeacherIndexRoute,
-  AppClassClassIdRoute: AppClassClassIdRoute,
   TeacherClassClassIdRoute: TeacherClassClassIdRoute,
   TeacherSubmissionSubmissionIdRoute: TeacherSubmissionSubmissionIdRoute,
   ApiPublicHooksSyncFormEmailsRoute: ApiPublicHooksSyncFormEmailsRoute,
-  AppAssignmentAssignmentIdResultRoute: AppAssignmentAssignmentIdResultRoute,
   TeacherAssignmentAssignmentIdSubmissionsRoute:
     TeacherAssignmentAssignmentIdSubmissionsRoute,
-  AppAssignmentAssignmentIdIndexRoute: AppAssignmentAssignmentIdIndexRoute,
   TeacherAssignmentAssignmentIdIndexRoute:
     TeacherAssignmentAssignmentIdIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
