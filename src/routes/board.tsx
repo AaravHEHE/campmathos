@@ -60,11 +60,13 @@ const directors: Director[] = [
     name: "Shaury Sharma",
     bio: "NVHS Class of 2029. Member of NVHS Robotics Team, IJAS State Qualifier, NVHS Science Olympiad State Qualifier, and eCYBERMISSION State Finalist and honorable mention.",
     accent: "bg-coral text-cream",
+    photo: shauryPhoto.url,
   },
   {
     name: "Wenxuan Chen",
     bio: "NVHS Class of 2029. Math Team State Qualifier and member of NVHS Freshman A soccer team. AMC 8 Honor Roll.",
     accent: "bg-electric text-cream",
+    photo: wenxuanPhoto.url,
   },
   {
     name: "Yifan Bao",
@@ -76,6 +78,7 @@ const directors: Director[] = [
     name: "Atharv Mishra",
     bio: "NVHS Class of 2029. Member of NVHS Robotics, Speech, and Youth & Government teams, and eCYBERMISSION State Finalist and honorable mention.",
     accent: "bg-sun text-cream",
+    photo: atharvPhoto.url,
   },
 ];
 
