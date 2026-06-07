@@ -52,8 +52,8 @@ export const adminDeleteRegistration = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
-const SPREADSHEET_ID = "15Oq536NyApV9gC0YqFBV0hj6xFJ3gjoDLqkTwiq3vz0";
-const SHEET_RANGE = "Form Responses 1!F2:F";
+const SPREADSHEET_ID = "1nAS5YQGtZTY9QXIKgClLVvZySRnCUrZeAiT-cDvHbmQ";
+const SHEET_RANGE = "Form Responses 1!G2:G";
 
 export const adminListFormEmails = createServerFn({ method: "POST" })
   .middleware([attachAuthHeader, requireSupabaseAuth])
