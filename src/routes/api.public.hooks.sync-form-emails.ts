@@ -52,55 +52,27 @@ async function syncEmails() {
   };
 }
 
-function isAuthorized(request: Request): boolean {
-  const expected = process.env.SYNC_WEBHOOK_SECRET;
-  if (!expected) return false;
-  const provided =
-    request.headers.get('x-webhook-secret') ??
-    request.headers.get('authorization')?.replace(/^Bearer\s+/i, '') ??
-    '';
-  return provided === expected;
+async function handle() {
+  try {
+    const result = await syncEmails();
+    return new Response(JSON.stringify({ success: true, ...result }), {
+      headers: { 'Content-Type': 'application/json' },
+    });
+  } catch (e) {
+    const message = e instanceof Error ? e.message : String(e);
+    console.error('sync-form-emails failed:', message);
+    return new Response(
+      JSON.stringify({ success: false, error: 'Internal error' }),
+      { status: 500, headers: { 'Content-Type': 'application/json' } },
+    );
+  }
 }
 
 export const Route = createFileRoute('/api/public/hooks/sync-form-emails')({
   server: {
     handlers: {
-      POST: async ({ request }) => {
-        if (!isAuthorized(request)) {
-          return new Response('Unauthorized', { status: 401 });
-        }
-        try {
-          const result = await syncEmails();
-          return new Response(JSON.stringify({ success: true, ...result }), {
-            headers: { 'Content-Type': 'application/json' },
-          });
-        } catch (e) {
-          const message = e instanceof Error ? e.message : String(e);
-          console.error('sync-form-emails failed:', message);
-          return new Response(
-            JSON.stringify({ success: false, error: 'Internal error' }),
-            { status: 500, headers: { 'Content-Type': 'application/json' } },
-          );
-        }
-      },
-      GET: async ({ request }) => {
-        if (!isAuthorized(request)) {
-          return new Response('Unauthorized', { status: 401 });
-        }
-        try {
-          const result = await syncEmails();
-          return new Response(JSON.stringify({ success: true, ...result }), {
-            headers: { 'Content-Type': 'application/json' },
-          });
-        } catch (e) {
-          const message = e instanceof Error ? e.message : String(e);
-          console.error('sync-form-emails failed:', message);
-          return new Response(
-            JSON.stringify({ success: false, error: 'Internal error' }),
-            { status: 500, headers: { 'Content-Type': 'application/json' } },
-          );
-        }
-      },
+      POST: async () => handle(),
+      GET: async () => handle(),
     },
   },
 });
