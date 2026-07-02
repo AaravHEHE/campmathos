@@ -85,6 +85,7 @@ async function syncEmails() {
   );
 
   const toInsert: FormRow[] = [];
+  const toUpgrade: FormRow[] = [];
   const emailsSeenInBatch = new Set<string>();
   for (const row of parsed) {
     const k = key(row.email, row.student_first_name, row.student_last_name);
@@ -96,26 +97,33 @@ async function syncEmails() {
       !emailsSeenInBatch.has(row.email)
     ) {
       emailsSeenInBatch.add(row.email);
-      const { error: upErr } = await supabaseAdmin
-        .from('registrations')
-        .update({
-          student_first_name: row.student_first_name,
-          student_last_name: row.student_last_name,
-          parent_first_name: row.parent_first_name,
-          parent_last_name: row.parent_last_name,
-          phone: row.phone,
-          grade_level: row.grade_level,
-        })
-        .eq('email', row.email)
-        .is('student_first_name', null)
-        .is('student_last_name', null);
-      if (upErr) throw new Error(`upgrade failed: ${upErr.message}`);
+      toUpgrade.push(row);
       existingKeys.add(k);
       existingEmailOnly.delete(row.email);
       continue;
     }
     existingKeys.add(k);
     toInsert.push(row);
+  }
+
+  let upgraded = 0;
+  for (const row of toUpgrade) {
+    const { data: upData, error: upErr } = await supabaseAdmin
+      .from('registrations')
+      .update({
+        student_first_name: row.student_first_name,
+        student_last_name: row.student_last_name,
+        parent_first_name: row.parent_first_name,
+        parent_last_name: row.parent_last_name,
+        phone: row.phone,
+        grade_level: row.grade_level,
+      })
+      .eq('email', row.email)
+      .is('student_first_name', null)
+      .is('student_last_name', null)
+      .select('id');
+    if (upErr) throw new Error(`upgrade failed for ${row.email}: ${upErr.message}`);
+    upgraded += upData?.length ?? 0;
   }
 
   let inserted = 0;
