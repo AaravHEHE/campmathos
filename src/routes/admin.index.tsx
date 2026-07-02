@@ -5,6 +5,7 @@ import { adminListRegistrations, adminDeleteRegistration, adminListFormEmails } 
 import { supabase } from "@/integrations/supabase/client";
 import { SignupsChart } from "@/components/admin/SignupsChart";
 import { BroadcastForm } from "@/components/admin/BroadcastForm";
+import { EmailOneDialog } from "@/components/admin/EmailOneDialog";
 
 export const Route = createFileRoute("/admin/")({
   component: AdminDashboard,
@@ -20,11 +21,41 @@ interface Registration {
   id: string;
   email: string;
   created_at: string;
+  student_first_name: string | null;
+  student_last_name: string | null;
+  parent_first_name: string | null;
+  parent_last_name: string | null;
+  phone: string | null;
+  grade_level: string | null;
 }
 
-type SortKey = "created_at" | "email";
+type SortKey = "created_at" | "email" | "grade" | "student";
 type SortDir = "asc" | "desc";
 type FormFilter = "all" | "filled" | "not_filled";
+
+// Map free-text grade values to a canonical order (lower = earlier).
+// Unknown/blank grades sort to the very end.
+function gradeOrder(raw: string | null | undefined): number {
+  if (!raw) return 999;
+  const s = raw.trim().toLowerCase();
+  const nth = s.match(/(\d+)\s*(?:st|nd|rd|th)?\s*grade/);
+  if (nth) return parseInt(nth[1], 10);
+  if (/pre[-\s]?algebra/.test(s)) return 20;
+  if (/algebra\s*1|algebra\s*i(\b|$)/.test(s)) return 21;
+  if (/geometry/.test(s)) return 22;
+  if (/algebra\s*2|algebra\s*ii/.test(s)) return 23;
+  if (/pre[-\s]?calc/.test(s)) return 24;
+  if (/calc/.test(s)) return 25;
+  const anyNum = s.match(/\d+/);
+  if (anyNum) return parseInt(anyNum[0], 10);
+  return 998;
+}
+
+function studentName(r: Registration): string {
+  const parts = [r.student_first_name, r.student_last_name].filter(Boolean);
+  return parts.join(" ").trim();
+}
+
 
 function AdminDashboard() {
   const navigate = useNavigate();
