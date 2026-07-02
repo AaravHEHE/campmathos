@@ -137,8 +137,9 @@ async function syncEmails() {
 
   return {
     form_total: parsed.length,
-    already_registered: parsed.length - inserted,
+    upgraded,
     inserted,
+    already_registered: parsed.length - inserted - upgraded,
   };
 }
 
