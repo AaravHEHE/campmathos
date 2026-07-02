@@ -243,17 +243,35 @@ export type Database = {
         Row: {
           created_at: string
           email: string
+          grade_level: string | null
           id: string
+          parent_first_name: string | null
+          parent_last_name: string | null
+          phone: string | null
+          student_first_name: string | null
+          student_last_name: string | null
         }
         Insert: {
           created_at?: string
           email: string
+          grade_level?: string | null
           id?: string
+          parent_first_name?: string | null
+          parent_last_name?: string | null
+          phone?: string | null
+          student_first_name?: string | null
+          student_last_name?: string | null
         }
         Update: {
           created_at?: string
           email?: string
+          grade_level?: string | null
           id?: string
+          parent_first_name?: string | null
+          parent_last_name?: string | null
+          phone?: string | null
+          student_first_name?: string | null
+          student_last_name?: string | null
         }
         Relationships: []
       }
