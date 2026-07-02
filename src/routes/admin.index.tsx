@@ -212,13 +212,27 @@ function AdminDashboard() {
   }, [rows, formEmails]);
 
   const csv = useMemo(() => {
-    // CSV reflects the current filtered/sorted view so directors can export a slice.
-    const header = "email,created_at\n";
+    const esc = (v: string | null | undefined) =>
+      `"${(v ?? "").replace(/"/g, '""')}"`;
+    const header =
+      "student_first_name,student_last_name,grade_level,parent_first_name,parent_last_name,email,phone,created_at\n";
     const body = visibleRows
-      .map((r) => `"${r.email.replace(/"/g, '""')}",${r.created_at}`)
+      .map((r) =>
+        [
+          esc(r.student_first_name),
+          esc(r.student_last_name),
+          esc(r.grade_level),
+          esc(r.parent_first_name),
+          esc(r.parent_last_name),
+          esc(r.email),
+          esc(r.phone),
+          r.created_at,
+        ].join(","),
+      )
       .join("\n");
     return header + body;
   }, [visibleRows]);
+
 
   const downloadCsv = () => {
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
