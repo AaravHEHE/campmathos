@@ -2,7 +2,27 @@ import { createFileRoute } from '@tanstack/react-router';
 import { supabaseAdmin } from '@/integrations/supabase/client.server';
 
 const SPREADSHEET_ID = '1nAS5YQGtZTY9QXIKgClLVvZySRnCUrZeAiT-cDvHbmQ';
-const SHEET_RANGE = "Form Responses 1!G2:G";
+// Columns: A Timestamp, B EmailAddr(often empty), C studentFirst, D studentLast,
+// E parentFirst, F parentLast, G parentEmail, H phone, I gradeLevel
+const SHEET_RANGE = "Form Responses 1!A2:I";
+
+const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
+interface FormRow {
+  email: string;
+  student_first_name: string | null;
+  student_last_name: string | null;
+  parent_first_name: string | null;
+  parent_last_name: string | null;
+  phone: string | null;
+  grade_level: string | null;
+}
+
+function clean(v: string | undefined): string | null {
+  if (!v) return null;
+  const t = v.trim();
+  return t.length === 0 ? null : t;
+}
 
 async function syncEmails() {
   const lovableKey = process.env.LOVABLE_API_KEY;
@@ -21,33 +41,95 @@ async function syncEmails() {
     throw new Error(`Sheets fetch failed ${res.status}: ${await res.text()}`);
   }
   const json = (await res.json()) as { values?: string[][] };
-  const rawEmails = (json.values ?? [])
-    .map((r) => (r?.[0] ?? '').trim().toLowerCase())
-    .filter((e) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e));
-  const formEmails = Array.from(new Set(rawEmails));
 
+  // Build one row per form response (per student). Same email may repeat.
+  const parsed: FormRow[] = [];
+  for (const r of json.values ?? []) {
+    const email = (r?.[6] ?? '').trim().toLowerCase();
+    if (!EMAIL_RE.test(email)) continue;
+    parsed.push({
+      email,
+      student_first_name: clean(r?.[2]),
+      student_last_name: clean(r?.[3]),
+      parent_first_name: clean(r?.[4]),
+      parent_last_name: clean(r?.[5]),
+      phone: clean(r?.[7]),
+      grade_level: clean(r?.[8]),
+    });
+  }
+
+  // Load existing rows to dedup on (email, student_first, student_last).
   const { data: existing, error: selErr } = await supabaseAdmin
     .from('registrations')
-    .select('email');
+    .select('email, student_first_name, student_last_name');
   if (selErr) throw new Error(`registrations read failed: ${selErr.message}`);
-  const existingSet = new Set(
-    (existing ?? []).map((r) => r.email.trim().toLowerCase()),
+
+  const key = (
+    e: string,
+    f: string | null | undefined,
+    l: string | null | undefined,
+  ) =>
+    `${e.trim().toLowerCase()}|${(f ?? '').trim().toLowerCase()}|${(l ?? '').trim().toLowerCase()}`;
+
+  const existingKeys = new Set(
+    (existing ?? []).map((r) =>
+      key(r.email ?? '', r.student_first_name, r.student_last_name),
+    ),
+  );
+  // Also allow matching an old email-only row (no student name) so we don't
+  // double-count parents who registered before student info was captured.
+  const existingEmailOnly = new Set(
+    (existing ?? [])
+      .filter((r) => !r.student_first_name && !r.student_last_name)
+      .map((r) => (r.email ?? '').trim().toLowerCase()),
   );
 
-  const missing = formEmails.filter((e) => !existingSet.has(e));
+  const toInsert: FormRow[] = [];
+  const emailsSeenInBatch = new Set<string>();
+  for (const row of parsed) {
+    const k = key(row.email, row.student_first_name, row.student_last_name);
+    if (existingKeys.has(k)) continue;
+    // If this is the first form entry we're seeing for an email that already
+    // exists as an old email-only row, upgrade it in place instead of inserting.
+    if (
+      existingEmailOnly.has(row.email) &&
+      !emailsSeenInBatch.has(row.email)
+    ) {
+      emailsSeenInBatch.add(row.email);
+      const { error: upErr } = await supabaseAdmin
+        .from('registrations')
+        .update({
+          student_first_name: row.student_first_name,
+          student_last_name: row.student_last_name,
+          parent_first_name: row.parent_first_name,
+          parent_last_name: row.parent_last_name,
+          phone: row.phone,
+          grade_level: row.grade_level,
+        })
+        .eq('email', row.email)
+        .is('student_first_name', null)
+        .is('student_last_name', null);
+      if (upErr) throw new Error(`upgrade failed: ${upErr.message}`);
+      existingKeys.add(k);
+      existingEmailOnly.delete(row.email);
+      continue;
+    }
+    existingKeys.add(k);
+    toInsert.push(row);
+  }
 
   let inserted = 0;
-  if (missing.length > 0) {
+  if (toInsert.length > 0) {
     const { error: insErr } = await supabaseAdmin
       .from('registrations')
-      .insert(missing.map((email) => ({ email })));
+      .insert(toInsert);
     if (insErr) throw new Error(`registrations insert failed: ${insErr.message}`);
-    inserted = missing.length;
+    inserted = toInsert.length;
   }
 
   return {
-    form_total: formEmails.length,
-    already_registered: formEmails.length - missing.length,
+    form_total: parsed.length,
+    already_registered: parsed.length - inserted,
     inserted,
   };
 }
