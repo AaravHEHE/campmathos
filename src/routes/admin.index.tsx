@@ -67,13 +67,15 @@ function AdminDashboard() {
 
   // UI state
   const [search, setSearch] = useState("");
-  const [sortKey, setSortKey] = useState<SortKey>("created_at");
-  const [sortDir, setSortDir] = useState<SortDir>("desc");
+  const [sortKey, setSortKey] = useState<SortKey>("grade");
+  const [sortDir, setSortDir] = useState<SortDir>("asc");
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [dateFrom, setDateFrom] = useState(""); // YYYY-MM-DD, local
   const [dateTo, setDateTo] = useState(""); // YYYY-MM-DD, local (inclusive)
   const [formFilter, setFormFilter] = useState<FormFilter>("all");
+  const [emailTarget, setEmailTarget] = useState<Registration | null>(null);
+
 
   useEffect(() => {
     let cancelled = false;
