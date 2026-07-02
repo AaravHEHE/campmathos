@@ -507,11 +507,32 @@ function AdminDashboard() {
           )}
 
           {/* Table */}
-          <div className="mt-6 overflow-hidden rounded-3xl border-2 border-ink">
-            <table className="w-full text-left">
+          <div className="mt-6 overflow-x-auto rounded-3xl border-2 border-ink">
+            <table className="w-full min-w-[900px] text-left">
               <thead className="bg-ink text-cream">
                 <tr>
-                  <th className="px-6 py-3 font-mono text-xs uppercase tracking-widest">
+                  <th className="px-4 py-3 font-mono text-xs uppercase tracking-widest">
+                    <button
+                      type="button"
+                      onClick={() => toggleSort("grade")}
+                      className="font-mono uppercase tracking-widest hover:text-sun"
+                    >
+                      Grade{sortIndicator("grade")}
+                    </button>
+                  </th>
+                  <th className="px-4 py-3 font-mono text-xs uppercase tracking-widest">
+                    <button
+                      type="button"
+                      onClick={() => toggleSort("student")}
+                      className="font-mono uppercase tracking-widest hover:text-sun"
+                    >
+                      Student{sortIndicator("student")}
+                    </button>
+                  </th>
+                  <th className="px-4 py-3 font-mono text-xs uppercase tracking-widest">
+                    Parent
+                  </th>
+                  <th className="px-4 py-3 font-mono text-xs uppercase tracking-widest">
                     <button
                       type="button"
                       onClick={() => toggleSort("email")}
@@ -520,7 +541,10 @@ function AdminDashboard() {
                       Email{sortIndicator("email")}
                     </button>
                   </th>
-                  <th className="px-6 py-3 font-mono text-xs uppercase tracking-widest">
+                  <th className="px-4 py-3 font-mono text-xs uppercase tracking-widest">
+                    Phone
+                  </th>
+                  <th className="px-4 py-3 font-mono text-xs uppercase tracking-widest">
                     <button
                       type="button"
                       onClick={() => toggleSort("created_at")}
@@ -529,10 +553,10 @@ function AdminDashboard() {
                       Submitted{sortIndicator("created_at")}
                     </button>
                   </th>
-                  <th className="px-6 py-3 font-mono text-xs uppercase tracking-widest">
+                  <th className="px-4 py-3 font-mono text-xs uppercase tracking-widest">
                     Form
                   </th>
-                  <th className="px-6 py-3 text-right font-mono text-xs uppercase tracking-widest">
+                  <th className="px-4 py-3 text-right font-mono text-xs uppercase tracking-widest">
                     Actions
                   </th>
                 </tr>
@@ -540,7 +564,7 @@ function AdminDashboard() {
               <tbody>
                 {visibleRows.length === 0 ? (
                   <tr>
-                    <td colSpan={4} className="px-6 py-12 text-center text-ink/60">
+                    <td colSpan={8} className="px-6 py-12 text-center text-ink/60">
                       {rows.length === 0
                         ? "No sign-ups yet — they'll show up here as parents register."
                         : "No sign-ups match the current filters."}
@@ -549,60 +573,104 @@ function AdminDashboard() {
                 ) : (
                   visibleRows.map((r, i) => {
                     const filled = hasFilledForm(r.email);
+                    const parent = [r.parent_first_name, r.parent_last_name]
+                      .filter(Boolean)
+                      .join(" ");
+                    const student = studentName(r);
                     return (
-                    <tr key={r.id} className={i % 2 === 0 ? "bg-cream" : "bg-cream/60"}>
-                      <td className="px-6 py-3 font-mono text-sm">
-                        <a
-                          href={`https://mail.google.com/mail/?view=cm&fs=1&authuser=campmathos@gmail.com&to=${encodeURIComponent(r.email)}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="hover:text-electric hover:underline"
-                        >
-                          {r.email}
-                        </a>
-                      </td>
-                      <td className="px-6 py-3 font-mono text-sm text-ink/70">
-                        {new Date(r.created_at).toLocaleString("en-US", {
-                          timeZone: "America/Chicago",
-                        })}
-                      </td>
-                      <td className="px-6 py-3">
-                        <span
-                          className={`inline-flex items-center rounded-full border px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-widest ${
-                            filled
-                              ? "border-electric/40 bg-electric/10 text-electric"
-                              : "border-coral/40 bg-coral/10 text-coral"
-                          }`}
-                        >
-                          {filled ? "Filled ✓" : "Not filled"}
-                        </span>
-                      </td>
-                      <td className="px-6 py-3 text-right">
-                        <div className="inline-flex gap-2">
-                          <button
-                            type="button"
-                            onClick={() => copyEmail(r)}
-                            className="rounded-full border border-ink/30 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-ink/80 transition hover:bg-ink hover:text-cream"
+                      <tr
+                        key={r.id}
+                        className={i % 2 === 0 ? "bg-cream" : "bg-cream/60"}
+                      >
+                        <td className="px-4 py-3 font-mono text-sm">
+                          {r.grade_level ?? (
+                            <span className="text-ink/30">—</span>
+                          )}
+                        </td>
+                        <td className="px-4 py-3 text-sm font-semibold">
+                          {student || <span className="text-ink/30">—</span>}
+                        </td>
+                        <td className="px-4 py-3 text-sm text-ink/70">
+                          {parent || <span className="text-ink/30">—</span>}
+                        </td>
+                        <td className="px-4 py-3 font-mono text-sm">
+                          <a
+                            href={`https://mail.google.com/mail/?view=cm&fs=1&authuser=campmathos@gmail.com&to=${encodeURIComponent(r.email)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:text-electric hover:underline"
                           >
-                            {copiedId === r.id ? "Copied ✓" : "Copy"}
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => deleteRow(r)}
-                            disabled={deletingId === r.id}
-                            className="rounded-full border border-coral/60 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-coral transition hover:bg-coral hover:text-cream disabled:opacity-50"
+                            {r.email}
+                          </a>
+                        </td>
+                        <td className="px-4 py-3 font-mono text-xs text-ink/70">
+                          {r.phone ?? <span className="text-ink/30">—</span>}
+                        </td>
+                        <td className="px-4 py-3 font-mono text-xs text-ink/70">
+                          {new Date(r.created_at).toLocaleString("en-US", {
+                            timeZone: "America/Chicago",
+                            dateStyle: "short",
+                            timeStyle: "short",
+                          })}
+                        </td>
+                        <td className="px-4 py-3">
+                          <span
+                            className={`inline-flex items-center rounded-full border px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-widest ${
+                              filled
+                                ? "border-electric/40 bg-electric/10 text-electric"
+                                : "border-coral/40 bg-coral/10 text-coral"
+                            }`}
                           >
-                            {deletingId === r.id ? "Deleting…" : "Delete"}
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
+                            {filled ? "Filled ✓" : "Not filled"}
+                          </span>
+                        </td>
+                        <td className="px-4 py-3 text-right">
+                          <div className="inline-flex gap-2">
+                            <button
+                              type="button"
+                              onClick={() => setEmailTarget(r)}
+                              className="rounded-full border border-electric/60 bg-electric/10 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-electric transition hover:bg-electric hover:text-cream"
+                            >
+                              Email
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => copyEmail(r)}
+                              className="rounded-full border border-ink/30 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-ink/80 transition hover:bg-ink hover:text-cream"
+                            >
+                              {copiedId === r.id ? "Copied ✓" : "Copy"}
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => deleteRow(r)}
+                              disabled={deletingId === r.id}
+                              className="rounded-full border border-coral/60 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-coral transition hover:bg-coral hover:text-cream disabled:opacity-50"
+                            >
+                              {deletingId === r.id ? "Deleting…" : "Delete"}
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
                     );
                   })
                 )}
               </tbody>
             </table>
           </div>
+          {emailTarget && (
+            <EmailOneDialog
+              email={emailTarget.email}
+              displayName={
+                studentName(emailTarget) ||
+                [emailTarget.parent_first_name, emailTarget.parent_last_name]
+                  .filter(Boolean)
+                  .join(" ") ||
+                null
+              }
+              onClose={() => setEmailTarget(null)}
+            />
+          )}
+
         </div>
       </section>
       <SiteFooter />
