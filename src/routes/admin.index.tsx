@@ -140,7 +140,20 @@ function AdminDashboard() {
     // dateTo is inclusive — add 1 day to include the entire selected day.
     const toTs = dateTo ? new Date(`${dateTo}T00:00:00`).getTime() + 24 * 60 * 60 * 1000 : null;
     const filtered = rows.filter((r) => {
-      if (q && !r.email.toLowerCase().includes(q)) return false;
+      if (q) {
+        const hay = [
+          r.email,
+          r.student_first_name ?? "",
+          r.student_last_name ?? "",
+          r.parent_first_name ?? "",
+          r.parent_last_name ?? "",
+          r.grade_level ?? "",
+          r.phone ?? "",
+        ]
+          .join(" ")
+          .toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
       if (fromTs || toTs) {
         const t = new Date(r.created_at).getTime();
         if (fromTs && t < fromTs) return false;
@@ -153,7 +166,12 @@ function AdminDashboard() {
     const sorted = [...filtered].sort((a, b) => {
       let cmp = 0;
       if (sortKey === "email") cmp = a.email.localeCompare(b.email);
-      else cmp = new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+      else if (sortKey === "student")
+        cmp = studentName(a).localeCompare(studentName(b));
+      else if (sortKey === "grade") {
+        cmp = gradeOrder(a.grade_level) - gradeOrder(b.grade_level);
+        if (cmp === 0) cmp = studentName(a).localeCompare(studentName(b));
+      } else cmp = new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
       return sortDir === "asc" ? cmp : -cmp;
     });
     return sorted;
