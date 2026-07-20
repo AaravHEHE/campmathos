@@ -380,6 +380,12 @@ function AdminDashboard() {
               >
                 Manage classes →
               </Link>
+              <Link
+                to="/admin/classroom"
+                className="rounded-full border-2 border-ink bg-electric px-5 py-2.5 font-semibold text-cream transition hover:bg-ink"
+              >
+                Google Classroom →
+              </Link>
               <button
                 onClick={downloadCsv}
                 disabled={visibleRows.length === 0}
