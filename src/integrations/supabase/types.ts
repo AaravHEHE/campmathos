@@ -145,6 +145,99 @@ export type Database = {
         }
         Relationships: []
       }
+      classroom_students: {
+        Row: {
+          course_id: string
+          course_name: string | null
+          created_at: string
+          email: string | null
+          family_name: string | null
+          full_name: string | null
+          given_name: string | null
+          google_user_id: string
+          id: string
+          joined_at: string | null
+          last_synced_at: string
+          updated_at: string
+        }
+        Insert: {
+          course_id: string
+          course_name?: string | null
+          created_at?: string
+          email?: string | null
+          family_name?: string | null
+          full_name?: string | null
+          given_name?: string | null
+          google_user_id: string
+          id?: string
+          joined_at?: string | null
+          last_synced_at?: string
+          updated_at?: string
+        }
+        Update: {
+          course_id?: string
+          course_name?: string | null
+          created_at?: string
+          email?: string | null
+          family_name?: string | null
+          full_name?: string | null
+          given_name?: string | null
+          google_user_id?: string
+          id?: string
+          joined_at?: string | null
+          last_synced_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      classroom_submissions: {
+        Row: {
+          assigned_grade: number | null
+          course_id: string
+          coursework_id: string
+          coursework_title: string | null
+          created_at: string
+          due_at: string | null
+          gc_updated_at: string | null
+          google_user_id: string
+          id: string
+          last_synced_at: string
+          late: boolean
+          state: string | null
+          updated_at: string
+        }
+        Insert: {
+          assigned_grade?: number | null
+          course_id: string
+          coursework_id: string
+          coursework_title?: string | null
+          created_at?: string
+          due_at?: string | null
+          gc_updated_at?: string | null
+          google_user_id: string
+          id?: string
+          last_synced_at?: string
+          late?: boolean
+          state?: string | null
+          updated_at?: string
+        }
+        Update: {
+          assigned_grade?: number | null
+          course_id?: string
+          coursework_id?: string
+          coursework_title?: string | null
+          created_at?: string
+          due_at?: string | null
+          gc_updated_at?: string | null
+          google_user_id?: string
+          id?: string
+          last_synced_at?: string
+          late?: boolean
+          state?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       enrollments: {
         Row: {
           class_id: string
@@ -173,6 +266,33 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      google_oauth_tokens: {
+        Row: {
+          connected_at: string
+          google_email: string | null
+          id: string
+          refresh_token: string
+          scope: string | null
+          updated_at: string
+        }
+        Insert: {
+          connected_at?: string
+          google_email?: string | null
+          id: string
+          refresh_token: string
+          scope?: string | null
+          updated_at?: string
+        }
+        Update: {
+          connected_at?: string
+          google_email?: string | null
+          id?: string
+          refresh_token?: string
+          scope?: string | null
+          updated_at?: string
+        }
+        Relationships: []
       }
       problems: {
         Row: {
@@ -241,6 +361,9 @@ export type Database = {
       }
       registrations: {
         Row: {
+          classroom_course_id: string | null
+          classroom_google_user_id: string | null
+          classroom_match_status: string
           created_at: string
           email: string
           grade_level: string | null
@@ -252,6 +375,9 @@ export type Database = {
           student_last_name: string | null
         }
         Insert: {
+          classroom_course_id?: string | null
+          classroom_google_user_id?: string | null
+          classroom_match_status?: string
           created_at?: string
           email: string
           grade_level?: string | null
@@ -263,6 +389,9 @@ export type Database = {
           student_last_name?: string | null
         }
         Update: {
+          classroom_course_id?: string | null
+          classroom_google_user_id?: string | null
+          classroom_match_status?: string
           created_at?: string
           email?: string
           grade_level?: string | null
