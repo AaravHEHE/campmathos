@@ -53,7 +53,7 @@ function AdminLoginPage() {
       return;
     }
 
-    // Look up roles — admin OR teacher may sign in here.
+    // Only admins may sign in through this form now.
     const { data: roleRows, error: roleError } = await supabase
       .from("user_roles")
       .select("role")
@@ -61,21 +61,16 @@ function AdminLoginPage() {
 
     const roles = (roleRows ?? []).map((r) => r.role as string);
     const isAdmin = roles.includes("admin");
-    const isTeacher = roles.includes("teacher");
 
-    if (roleError || (!isAdmin && !isTeacher)) {
+    if (roleError || !isAdmin) {
       await supabase.auth.signOut();
-      setError("This account does not have Director or Teacher access.");
+      setError("This account does not have Director access.");
       setLoading(false);
       return;
     }
 
-    if (isAdmin) {
-      markAdminSignedIn();
-      navigate({ to: "/admin" });
-    } else {
-      navigate({ to: "/teacher" });
-    }
+    markAdminSignedIn();
+    navigate({ to: "/admin" });
   };
 
   return (

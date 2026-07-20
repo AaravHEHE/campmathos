@@ -28,7 +28,10 @@ import { Route as TeacherAssignmentAssignmentIdIndexRouteImport } from './routes
 import { Route as TeacherAssignmentAssignmentIdSubmissionsRouteImport } from './routes/teacher.assignment.$assignmentId.submissions'
 import { Route as ApiPublicHooksSyncFormEmailsRouteImport } from './routes/api.public.hooks.sync-form-emails'
 import { Route as ApiPublicHooksSyncClassroomRouteImport } from './routes/api.public.hooks.sync-classroom'
+import { Route as AdminClassroomCourseCourseIdRouteImport } from './routes/admin.classroom.course.$courseId'
 import { Route as ApiPublicOauthGoogleClassroomCallbackRouteImport } from './routes/api.public.oauth.google-classroom.callback'
+import { Route as AdminClassroomCourseCourseIdStudentStudentIdRouteImport } from './routes/admin.classroom.course.$courseId.student.$studentId'
+import { Route as AdminClassroomCourseCourseIdAssignmentCourseworkIdRouteImport } from './routes/admin.classroom.course.$courseId.assignment.$courseworkId'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -130,11 +133,29 @@ const ApiPublicHooksSyncClassroomRoute =
     path: '/api/public/hooks/sync-classroom',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AdminClassroomCourseCourseIdRoute =
+  AdminClassroomCourseCourseIdRouteImport.update({
+    id: '/course/$courseId',
+    path: '/course/$courseId',
+    getParentRoute: () => AdminClassroomRoute,
+  } as any)
 const ApiPublicOauthGoogleClassroomCallbackRoute =
   ApiPublicOauthGoogleClassroomCallbackRouteImport.update({
     id: '/api/public/oauth/google-classroom/callback',
     path: '/api/public/oauth/google-classroom/callback',
     getParentRoute: () => rootRouteImport,
+  } as any)
+const AdminClassroomCourseCourseIdStudentStudentIdRoute =
+  AdminClassroomCourseCourseIdStudentStudentIdRouteImport.update({
+    id: '/student/$studentId',
+    path: '/student/$studentId',
+    getParentRoute: () => AdminClassroomCourseCourseIdRoute,
+  } as any)
+const AdminClassroomCourseCourseIdAssignmentCourseworkIdRoute =
+  AdminClassroomCourseCourseIdAssignmentCourseworkIdRouteImport.update({
+    id: '/assignment/$courseworkId',
+    path: '/assignment/$courseworkId',
+    getParentRoute: () => AdminClassroomCourseCourseIdRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
@@ -147,17 +168,20 @@ export interface FileRoutesByFullPath {
   '/mathos.ics': typeof MathosDoticsRoute
   '/register': typeof RegisterRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/admin/classroom': typeof AdminClassroomRoute
+  '/admin/classroom': typeof AdminClassroomRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/admin/': typeof AdminIndexRoute
   '/teacher/': typeof TeacherIndexRoute
   '/teacher/class/$classId': typeof TeacherClassClassIdRoute
   '/teacher/submission/$submissionId': typeof TeacherSubmissionSubmissionIdRoute
+  '/admin/classroom/course/$courseId': typeof AdminClassroomCourseCourseIdRouteWithChildren
   '/api/public/hooks/sync-classroom': typeof ApiPublicHooksSyncClassroomRoute
   '/api/public/hooks/sync-form-emails': typeof ApiPublicHooksSyncFormEmailsRoute
   '/teacher/assignment/$assignmentId/submissions': typeof TeacherAssignmentAssignmentIdSubmissionsRoute
   '/teacher/assignment/$assignmentId/': typeof TeacherAssignmentAssignmentIdIndexRoute
   '/api/public/oauth/google-classroom/callback': typeof ApiPublicOauthGoogleClassroomCallbackRoute
+  '/admin/classroom/course/$courseId/assignment/$courseworkId': typeof AdminClassroomCourseCourseIdAssignmentCourseworkIdRoute
+  '/admin/classroom/course/$courseId/student/$studentId': typeof AdminClassroomCourseCourseIdStudentStudentIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -169,17 +193,20 @@ export interface FileRoutesByTo {
   '/mathos.ics': typeof MathosDoticsRoute
   '/register': typeof RegisterRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/admin/classroom': typeof AdminClassroomRoute
+  '/admin/classroom': typeof AdminClassroomRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/admin': typeof AdminIndexRoute
   '/teacher': typeof TeacherIndexRoute
   '/teacher/class/$classId': typeof TeacherClassClassIdRoute
   '/teacher/submission/$submissionId': typeof TeacherSubmissionSubmissionIdRoute
+  '/admin/classroom/course/$courseId': typeof AdminClassroomCourseCourseIdRouteWithChildren
   '/api/public/hooks/sync-classroom': typeof ApiPublicHooksSyncClassroomRoute
   '/api/public/hooks/sync-form-emails': typeof ApiPublicHooksSyncFormEmailsRoute
   '/teacher/assignment/$assignmentId/submissions': typeof TeacherAssignmentAssignmentIdSubmissionsRoute
   '/teacher/assignment/$assignmentId': typeof TeacherAssignmentAssignmentIdIndexRoute
   '/api/public/oauth/google-classroom/callback': typeof ApiPublicOauthGoogleClassroomCallbackRoute
+  '/admin/classroom/course/$courseId/assignment/$courseworkId': typeof AdminClassroomCourseCourseIdAssignmentCourseworkIdRoute
+  '/admin/classroom/course/$courseId/student/$studentId': typeof AdminClassroomCourseCourseIdStudentStudentIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -192,17 +219,20 @@ export interface FileRoutesById {
   '/mathos.ics': typeof MathosDoticsRoute
   '/register': typeof RegisterRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/admin/classroom': typeof AdminClassroomRoute
+  '/admin/classroom': typeof AdminClassroomRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/admin/': typeof AdminIndexRoute
   '/teacher/': typeof TeacherIndexRoute
   '/teacher/class/$classId': typeof TeacherClassClassIdRoute
   '/teacher/submission/$submissionId': typeof TeacherSubmissionSubmissionIdRoute
+  '/admin/classroom/course/$courseId': typeof AdminClassroomCourseCourseIdRouteWithChildren
   '/api/public/hooks/sync-classroom': typeof ApiPublicHooksSyncClassroomRoute
   '/api/public/hooks/sync-form-emails': typeof ApiPublicHooksSyncFormEmailsRoute
   '/teacher/assignment/$assignmentId/submissions': typeof TeacherAssignmentAssignmentIdSubmissionsRoute
   '/teacher/assignment/$assignmentId/': typeof TeacherAssignmentAssignmentIdIndexRoute
   '/api/public/oauth/google-classroom/callback': typeof ApiPublicOauthGoogleClassroomCallbackRoute
+  '/admin/classroom/course/$courseId/assignment/$courseworkId': typeof AdminClassroomCourseCourseIdAssignmentCourseworkIdRoute
+  '/admin/classroom/course/$courseId/student/$studentId': typeof AdminClassroomCourseCourseIdStudentStudentIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -222,11 +252,14 @@ export interface FileRouteTypes {
     | '/teacher/'
     | '/teacher/class/$classId'
     | '/teacher/submission/$submissionId'
+    | '/admin/classroom/course/$courseId'
     | '/api/public/hooks/sync-classroom'
     | '/api/public/hooks/sync-form-emails'
     | '/teacher/assignment/$assignmentId/submissions'
     | '/teacher/assignment/$assignmentId/'
     | '/api/public/oauth/google-classroom/callback'
+    | '/admin/classroom/course/$courseId/assignment/$courseworkId'
+    | '/admin/classroom/course/$courseId/student/$studentId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -244,11 +277,14 @@ export interface FileRouteTypes {
     | '/teacher'
     | '/teacher/class/$classId'
     | '/teacher/submission/$submissionId'
+    | '/admin/classroom/course/$courseId'
     | '/api/public/hooks/sync-classroom'
     | '/api/public/hooks/sync-form-emails'
     | '/teacher/assignment/$assignmentId/submissions'
     | '/teacher/assignment/$assignmentId'
     | '/api/public/oauth/google-classroom/callback'
+    | '/admin/classroom/course/$courseId/assignment/$courseworkId'
+    | '/admin/classroom/course/$courseId/student/$studentId'
   id:
     | '__root__'
     | '/'
@@ -266,11 +302,14 @@ export interface FileRouteTypes {
     | '/teacher/'
     | '/teacher/class/$classId'
     | '/teacher/submission/$submissionId'
+    | '/admin/classroom/course/$courseId'
     | '/api/public/hooks/sync-classroom'
     | '/api/public/hooks/sync-form-emails'
     | '/teacher/assignment/$assignmentId/submissions'
     | '/teacher/assignment/$assignmentId/'
     | '/api/public/oauth/google-classroom/callback'
+    | '/admin/classroom/course/$courseId/assignment/$courseworkId'
+    | '/admin/classroom/course/$courseId/student/$studentId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -283,7 +322,7 @@ export interface RootRouteChildren {
   MathosDoticsRoute: typeof MathosDoticsRoute
   RegisterRoute: typeof RegisterRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
-  AdminClassroomRoute: typeof AdminClassroomRoute
+  AdminClassroomRoute: typeof AdminClassroomRouteWithChildren
   AdminLoginRoute: typeof AdminLoginRoute
   AdminIndexRoute: typeof AdminIndexRoute
   TeacherIndexRoute: typeof TeacherIndexRoute
@@ -431,6 +470,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicHooksSyncClassroomRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/classroom/course/$courseId': {
+      id: '/admin/classroom/course/$courseId'
+      path: '/course/$courseId'
+      fullPath: '/admin/classroom/course/$courseId'
+      preLoaderRoute: typeof AdminClassroomCourseCourseIdRouteImport
+      parentRoute: typeof AdminClassroomRoute
+    }
     '/api/public/oauth/google-classroom/callback': {
       id: '/api/public/oauth/google-classroom/callback'
       path: '/api/public/oauth/google-classroom/callback'
@@ -438,8 +484,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicOauthGoogleClassroomCallbackRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/classroom/course/$courseId/student/$studentId': {
+      id: '/admin/classroom/course/$courseId/student/$studentId'
+      path: '/student/$studentId'
+      fullPath: '/admin/classroom/course/$courseId/student/$studentId'
+      preLoaderRoute: typeof AdminClassroomCourseCourseIdStudentStudentIdRouteImport
+      parentRoute: typeof AdminClassroomCourseCourseIdRoute
+    }
+    '/admin/classroom/course/$courseId/assignment/$courseworkId': {
+      id: '/admin/classroom/course/$courseId/assignment/$courseworkId'
+      path: '/assignment/$courseworkId'
+      fullPath: '/admin/classroom/course/$courseId/assignment/$courseworkId'
+      preLoaderRoute: typeof AdminClassroomCourseCourseIdAssignmentCourseworkIdRouteImport
+      parentRoute: typeof AdminClassroomCourseCourseIdRoute
+    }
   }
 }
+
+interface AdminClassroomCourseCourseIdRouteChildren {
+  AdminClassroomCourseCourseIdAssignmentCourseworkIdRoute: typeof AdminClassroomCourseCourseIdAssignmentCourseworkIdRoute
+  AdminClassroomCourseCourseIdStudentStudentIdRoute: typeof AdminClassroomCourseCourseIdStudentStudentIdRoute
+}
+
+const AdminClassroomCourseCourseIdRouteChildren: AdminClassroomCourseCourseIdRouteChildren =
+  {
+    AdminClassroomCourseCourseIdAssignmentCourseworkIdRoute:
+      AdminClassroomCourseCourseIdAssignmentCourseworkIdRoute,
+    AdminClassroomCourseCourseIdStudentStudentIdRoute:
+      AdminClassroomCourseCourseIdStudentStudentIdRoute,
+  }
+
+const AdminClassroomCourseCourseIdRouteWithChildren =
+  AdminClassroomCourseCourseIdRoute._addFileChildren(
+    AdminClassroomCourseCourseIdRouteChildren,
+  )
+
+interface AdminClassroomRouteChildren {
+  AdminClassroomCourseCourseIdRoute: typeof AdminClassroomCourseCourseIdRouteWithChildren
+}
+
+const AdminClassroomRouteChildren: AdminClassroomRouteChildren = {
+  AdminClassroomCourseCourseIdRoute:
+    AdminClassroomCourseCourseIdRouteWithChildren,
+}
+
+const AdminClassroomRouteWithChildren = AdminClassroomRoute._addFileChildren(
+  AdminClassroomRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -451,7 +542,7 @@ const rootRouteChildren: RootRouteChildren = {
   MathosDoticsRoute: MathosDoticsRoute,
   RegisterRoute: RegisterRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
-  AdminClassroomRoute: AdminClassroomRoute,
+  AdminClassroomRoute: AdminClassroomRouteWithChildren,
   AdminLoginRoute: AdminLoginRoute,
   AdminIndexRoute: AdminIndexRoute,
   TeacherIndexRoute: TeacherIndexRoute,
@@ -469,12 +560,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}

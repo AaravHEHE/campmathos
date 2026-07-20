@@ -1,81 +1,45 @@
-# Google Classroom sync in Admin Dashboard
+## Goal
+Retire the in-app student/teacher portals from the public UI (keep files + DB intact) and give the admin a full read-only Google Classroom console at `/admin/classroom` that mirrors courses, rosters, coursework, and per-student submission status.
 
-Goal: in the admin registrations table, show for each student (a) whether they've joined the Google Classroom course, (b) which assignments they've turned in, and keep the parent↔student link that already exists in `registrations`.
+## Scope guardrails
+- Only touch: `SiteHeader`, `SiteFooter`, `AppShell`, admin-login redirect, admin dashboard nav, and new `/admin/classroom/*` routes + server functions.
+- Do NOT modify: marketing pages (home, about, board, faq, curriculum), registrations table/sync, broadcast email flow, RLS on classroom tables, any `src/routes/app.*` or `src/routes/teacher.*` route files (they stay on disk, just unlinked).
 
-## Auth approach
+## Part 1 — Hide the old portals (routes stay, links go)
+1. `SiteHeader.tsx` / mobile menu / `SiteFooter.tsx`: remove the "Sign in" link.
+2. `src/routes/admin.login.tsx` (or the post-login redirect logic): always send to `/admin` after login. Drop the teacher-role branch to `/teacher`.
+3. `src/routes/admin.index.tsx`: remove the "Teacher dashboard" / classwork nav pills; replace with a single "Google Classroom" link.
+4. Leave `/app/*`, `/teacher/*`, `/login` route files, hooks, and DB tables (`classes`, `assignments`, `submissions`, `enrollments`, `user_roles`, `problems`, `answers`) untouched. They become unlisted URLs.
 
-Google Classroom's API does not accept plain API keys — it requires OAuth as a real Google user who is a teacher/co-teacher of the course. Since only one Director's personal Google account will authorize this, we do a one-time OAuth handshake and store the refresh token as a server secret. All admins share that view (they don't each need to sign into Google).
+## Part 2 — Google Classroom admin console
+Google OAuth client + `google_oauth_tokens` table + basic connect flow already exist (per earlier turn). Build the read UI on top.
 
-- Create a Google Cloud OAuth client (Web app, "External" consent, in "Testing" mode — Director's Google email added as a test user).
-- Scopes (read-only, minimum viable):
-  - `classroom.courses.readonly`
-  - `classroom.rosters.readonly`
-  - `classroom.profile.emails`
-  - `classroom.coursework.students.readonly`
-  - `classroom.student-submissions.students.readonly`
-- One-time consent flow at `/admin/integrations/google-classroom` completes OAuth, exchanges the code for a refresh token, and stores it as `GOOGLE_CLASSROOM_REFRESH_TOKEN` (plus `GOOGLE_OAUTH_CLIENT_ID` / `GOOGLE_OAUTH_CLIENT_SECRET`) via the secrets tool. After that, no one has to sign into Google again unless the token is revoked.
+### Server functions (`src/lib/classroom.functions.ts`)
+All admin-only (`requireSupabaseAuth` + `has_role('admin')`); use the stored refresh token to mint an access token per call.
+- `listCourses()` → `GET /v1/courses?teacherId=me` (active only).
+- `getCourse(courseId)` → course details + teachers.
+- `listCourseStudents(courseId)` → `.../students` (name, email, photo).
+- `listCourseWork(courseId)` → assignments + due dates + max points.
+- `listSubmissions(courseId, courseWorkId)` → `studentSubmissions` (state, late, assignedGrade, updateTime, attachments).
+- `listStudentSubmissions(courseId, studentId)` → per-student view across all coursework (uses `courseWorkId=-` + `userId`).
 
-## Data model
+### Routes (all under admin gate)
+- `/admin/classroom` (`admin.classroom.index.tsx`) — connection status + course grid (name, section, student count, coursework count). "Sync now" button just re-queries.
+- `/admin/classroom/$courseId` (`admin.classroom.$courseId.index.tsx`) — tabs: **Students** (roster table) and **Assignments** (coursework list with counts of Turned in / Missing / Graded).
+- `/admin/classroom/$courseId/assignment/$courseWorkId` — submission table: student, state (Turned in / Late / Missing / Returned), grade, submitted-at, link to Classroom.
+- `/admin/classroom/$courseId/student/$studentId` — per-student view: every assignment + their status/grade.
 
-New table `public.classroom_students` (server-only, `service_role` grants; admin-scoped SELECT policy via `has_role('admin')`):
-- `course_id`, `course_name`
-- `google_user_id`, `email`, `given_name`, `family_name`, `full_name`
-- `joined_at`
-- `last_synced_at`
+### UI details
+- Reuse existing admin shell + shadcn Table/Badge/Tabs. State color mapping: Turned in = success, Late = warning, Missing = destructive, Returned = secondary.
+- Every row links out to the original item on `classroom.google.com` (open in new tab) for actions we don't mirror.
+- Loading via `useSuspenseQuery` + loader `ensureQueryData` per the query integration pattern; error/notFound boundaries on each route.
 
-New table `public.classroom_submissions`:
-- `course_id`, `coursework_id`, `coursework_title`, `due_at`
-- `google_user_id`
-- `state` (`NEW` / `CREATED` / `TURNED_IN` / `RETURNED`), `late`, `assigned_grade`, `updated_at`
+## Part 3 — Verification
+1. Manual walkthrough: home/about/faq/board/curriculum unchanged; no "Sign in" in nav or footer; `/login`, `/app`, `/teacher` still resolve if typed directly.
+2. Admin login lands on `/admin`; `/admin/classroom` loads courses, drill down works, submission counts match Classroom.
+3. Playwright smoke: hit `/`, `/about`, `/faq` → screenshots identical to current; hit `/admin` after login → screenshot shows new Classroom link, no teacher link.
 
-New nullable columns on `public.registrations`:
-- `classroom_google_user_id text` (once matched)
-- `classroom_match_status text` (`matched` / `unmatched` / `manual`)
-
-No changes to any existing table's RLS, and no changes to the existing camper/teacher schema.
-
-## Sync mechanism
-
-- New TanStack server route `POST /api/public/hooks/sync-classroom` (HMAC-verified, same pattern as `sync-form-emails`). Called every 5 min by `pg_cron`, and manually from the admin UI.
-- Handler flow (all inside handler, uses `google-auth-library` + `googleapis` — both Worker-compatible):
-  1. Exchange refresh token → access token.
-  2. `courses.list(teacherId=me, courseStates=ACTIVE)`.
-  3. For each course: `students.list` → upsert into `classroom_students`.
-  4. `courseWork.list` → for each coursework: `studentSubmissions.list` → upsert into `classroom_submissions`.
-  5. Run matching pass: for every `registrations` row without a `classroom_google_user_id`, try to match by (a) parent email = classroom email (rare but common for younger kids), (b) exact `lower(first+last)` name match, (c) fuzzy match (Levenshtein ≤ 2) with a `manual` flag needing confirmation.
-
-## Admin UI changes (additive only — existing screens untouched)
-
-- New tab/section on `/admin` alongside the existing registrations table: **"Google Classroom"** panel showing per-course join counts and a "Sync now" button.
-- Add two columns to the existing registrations table:
-  - **Joined GC** — green check / red x / yellow "?" (needs manual link)
-  - **Assignments** — small `3/5 turned in` badge with tooltip listing statuses; clicking opens a drawer with per-assignment state.
-- New route `/admin/registrations/$id/link-classroom` — dialog to manually pick a Classroom student when auto-match is ambiguous.
-
-Nothing on the marketing pages (`/`, `/about`, `/faq`, `/board`, `/login`, `/admin/login`) changes.
-
-## Out of scope (call out before building)
-
-- Parent emails in Google Classroom itself: Classroom's API only exposes **guardian** relationships if guardians were formally invited by the teacher through Classroom's guardian feature. If that's not set up, we cannot pull parent info from Classroom — we keep using the Google Form's parent name/email in `registrations` and just link the *student* record.
-- Writing back to Classroom (creating assignments, grading) — read-only for now.
-- The OAuth app stays in Google's "Testing" mode. That's fine because only the Director's account authorizes it. Publishing to "Production" would require Google's app verification (weeks of review) and is not needed.
-
-## Technical section
-
-Files added:
-- `supabase/migrations/<ts>_classroom_sync.sql` — 2 tables + grants + RLS + 2 columns on `registrations`.
-- `src/routes/api.public.hooks.sync-classroom.ts` — cron/webhook entry.
-- `src/lib/classroom.functions.ts` — `adminListClassroomStatus`, `adminSyncClassroom`, `adminLinkRegistrationToClassroom` (all `.middleware([requireSupabaseAuth])` + `has_role('admin')` check).
-- `src/lib/classroom.server.ts` — googleapis client factory (loaded via `await import` inside handlers), refresh-token exchange, list/upsert helpers.
-- `src/routes/admin.integrations.google-classroom.tsx` — one-time OAuth consent landing + "Connected as …" status.
-- `src/components/admin/ClassroomStatusCell.tsx` + `ClassroomSubmissionsDrawer.tsx` + `LinkClassroomDialog.tsx`.
-- Extend `src/routes/admin.index.tsx` and `src/lib/admin.functions.ts::adminListRegistrations` to join in classroom status (LEFT JOIN via `classroom_google_user_id`).
-
-Secrets requested via `add_secret` (after user confirms plan):
-- `GOOGLE_OAUTH_CLIENT_ID`, `GOOGLE_OAUTH_CLIENT_SECRET` — from Google Cloud Console.
-- `GOOGLE_CLASSROOM_REFRESH_TOKEN` — captured server-side during the one-time consent, not pasted by the user.
-- `CLASSROOM_SYNC_WEBHOOK_SECRET` — generated via `generate_secret` for pg_cron HMAC.
-
-Packages: `bun add googleapis google-auth-library` (both work on Cloudflare Workers with `nodejs_compat`).
-
-Existing pages, routes, RLS on other tables, and cron jobs are not modified.
+## Out of scope (call out to user, do not build)
+- Writing back to Classroom (creating coursework, grading, messaging).
+- Merging Classroom rosters with the `registrations` table.
+- Reviving student-facing UI.

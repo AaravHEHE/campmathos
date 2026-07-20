@@ -251,3 +251,174 @@ export const adminGetRegistrationSubmissions = createServerFn({ method: "POST" }
     if (error) throw new Error(error.message);
     return { submissions: subs ?? [] };
   });
+
+// --- Course detail: roster + coursework summary ---
+export const adminGetClassroomCourseDetail = createServerFn({ method: "POST" })
+  .middleware([attachAuthHeader, requireSupabaseAuth])
+  .inputValidator((i: { courseId: string }) => i)
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context.userId);
+    const [studentsRes, subsRes] = await Promise.all([
+      supabaseAdmin
+        .from("classroom_students")
+        .select("google_user_id, email, full_name, given_name, family_name, course_name, joined_at, last_synced_at")
+        .eq("course_id", data.courseId)
+        .order("full_name", { ascending: true }),
+      supabaseAdmin
+        .from("classroom_submissions")
+        .select("coursework_id, coursework_title, due_at, google_user_id, state, late, assigned_grade")
+        .eq("course_id", data.courseId),
+    ]);
+    if (studentsRes.error) throw new Error(studentsRes.error.message);
+    if (subsRes.error) throw new Error(subsRes.error.message);
+
+    const courseName = studentsRes.data?.[0]?.course_name ?? null;
+
+    const cwMap = new Map<
+      string,
+      {
+        coursework_id: string;
+        coursework_title: string | null;
+        due_at: string | null;
+        turned_in: number;
+        late: number;
+        missing: number;
+        graded: number;
+        total: number;
+      }
+    >();
+    // Per-student counts
+    const perStudent = new Map<string, { turned_in: number; total: number; graded: number }>();
+
+    for (const s of subsRes.data ?? []) {
+      const cw = cwMap.get(s.coursework_id) ?? {
+        coursework_id: s.coursework_id,
+        coursework_title: s.coursework_title,
+        due_at: s.due_at,
+        turned_in: 0,
+        late: 0,
+        missing: 0,
+        graded: 0,
+        total: 0,
+      };
+      cw.total += 1;
+      const state = s.state ?? "";
+      if (state === "TURNED_IN" || state === "RETURNED") cw.turned_in += 1;
+      else if (state === "CREATED" || state === "NEW" || state === "RECLAIMED_BY_STUDENT")
+        cw.missing += 1;
+      if (s.late) cw.late += 1;
+      if (s.assigned_grade != null) cw.graded += 1;
+      cwMap.set(s.coursework_id, cw);
+
+      const ps = perStudent.get(s.google_user_id) ?? { turned_in: 0, total: 0, graded: 0 };
+      ps.total += 1;
+      if (state === "TURNED_IN" || state === "RETURNED") ps.turned_in += 1;
+      if (s.assigned_grade != null) ps.graded += 1;
+      perStudent.set(s.google_user_id, ps);
+    }
+
+    const students = (studentsRes.data ?? []).map((s) => ({
+      google_user_id: s.google_user_id,
+      email: s.email,
+      full_name: s.full_name,
+      given_name: s.given_name,
+      family_name: s.family_name,
+      joined_at: s.joined_at,
+      ...(perStudent.get(s.google_user_id) ?? { turned_in: 0, total: 0, graded: 0 }),
+    }));
+
+    const coursework = Array.from(cwMap.values()).sort((a, b) => {
+      if (a.due_at && b.due_at) return a.due_at.localeCompare(b.due_at);
+      if (a.due_at) return -1;
+      if (b.due_at) return 1;
+      return (a.coursework_title ?? "").localeCompare(b.coursework_title ?? "");
+    });
+
+    return {
+      course: { id: data.courseId, name: courseName, student_count: students.length },
+      students,
+      coursework,
+    };
+  });
+
+// --- Assignment detail: all submissions for a coursework ---
+export const adminGetClassroomAssignment = createServerFn({ method: "POST" })
+  .middleware([attachAuthHeader, requireSupabaseAuth])
+  .inputValidator((i: { courseId: string; courseworkId: string }) => i)
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context.userId);
+    const [subsRes, studentsRes] = await Promise.all([
+      supabaseAdmin
+        .from("classroom_submissions")
+        .select("google_user_id, coursework_title, due_at, state, late, assigned_grade, gc_updated_at")
+        .eq("course_id", data.courseId)
+        .eq("coursework_id", data.courseworkId),
+      supabaseAdmin
+        .from("classroom_students")
+        .select("google_user_id, email, full_name, course_name")
+        .eq("course_id", data.courseId),
+    ]);
+    if (subsRes.error) throw new Error(subsRes.error.message);
+    if (studentsRes.error) throw new Error(studentsRes.error.message);
+
+    const sMap = new Map(
+      (studentsRes.data ?? []).map((s) => [
+        s.google_user_id,
+        { email: s.email, full_name: s.full_name, course_name: s.course_name },
+      ]),
+    );
+    const first = subsRes.data?.[0];
+    const rows = (subsRes.data ?? []).map((s) => {
+      const st = sMap.get(s.google_user_id);
+      return {
+        google_user_id: s.google_user_id,
+        student_name: st?.full_name ?? null,
+        student_email: st?.email ?? null,
+        state: s.state,
+        late: s.late,
+        assigned_grade: s.assigned_grade,
+        gc_updated_at: s.gc_updated_at,
+      };
+    }).sort((a, b) => (a.student_name ?? "").localeCompare(b.student_name ?? ""));
+
+    return {
+      assignment: {
+        course_id: data.courseId,
+        coursework_id: data.courseworkId,
+        title: first?.coursework_title ?? null,
+        due_at: first?.due_at ?? null,
+        course_name: (studentsRes.data?.[0]?.course_name) ?? null,
+      },
+      submissions: rows,
+    };
+  });
+
+// --- Student detail: all their submissions in a course ---
+export const adminGetClassroomStudentDetail = createServerFn({ method: "POST" })
+  .middleware([attachAuthHeader, requireSupabaseAuth])
+  .inputValidator((i: { courseId: string; googleUserId: string }) => i)
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context.userId);
+    const [studentRes, subsRes] = await Promise.all([
+      supabaseAdmin
+        .from("classroom_students")
+        .select("email, full_name, given_name, family_name, course_name, joined_at, last_synced_at")
+        .eq("course_id", data.courseId)
+        .eq("google_user_id", data.googleUserId)
+        .maybeSingle(),
+      supabaseAdmin
+        .from("classroom_submissions")
+        .select("coursework_id, coursework_title, due_at, state, late, assigned_grade, gc_updated_at")
+        .eq("course_id", data.courseId)
+        .eq("google_user_id", data.googleUserId)
+        .order("due_at", { ascending: true, nullsFirst: false }),
+    ]);
+    if (studentRes.error) throw new Error(studentRes.error.message);
+    if (subsRes.error) throw new Error(subsRes.error.message);
+    return {
+      student: studentRes.data
+        ? { google_user_id: data.googleUserId, ...studentRes.data }
+        : null,
+      submissions: subsRes.data ?? [],
+    };
+  });
