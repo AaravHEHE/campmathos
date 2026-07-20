@@ -107,12 +107,14 @@ function AdminClassroom() {
   }, [rows, query, filter]);
 
   const reload = async () => {
-    const [s, r] = await Promise.all([
+    const [s, r, c] = await Promise.all([
       adminGetClassroomStatus(),
       adminListRegistrationsWithClassroom(),
+      adminListClassroomCourses(),
     ]);
     setStatus(s);
     setRows(r.rows);
+    setCourses(c.courses);
   };
 
   const runSyncNow = async () => {
