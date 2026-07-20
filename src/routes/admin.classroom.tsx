@@ -184,6 +184,34 @@ function AdminClassroom() {
               onDisconnect={disconnect}
             />
 
+            {courses.length > 0 && (
+              <section className="mt-6">
+                <h2 className="font-serif text-lg text-ink mb-2">Courses</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {courses.map((c) => (
+                    <Link
+                      key={c.course_id}
+                      to="/admin/classroom/course/$courseId"
+                      params={{ courseId: c.course_id }}
+                      className="block rounded border border-ink/10 bg-white p-4 hover:border-electric transition"
+                    >
+                      <div className="font-serif text-ink truncate">
+                        {c.course_name ?? "Untitled course"}
+                      </div>
+                      <div className="text-xs text-ink/60 mt-1">
+                        {c.students} student{c.students === 1 ? "" : "s"}
+                      </div>
+                      {c.last_synced_at && (
+                        <div className="text-[10px] text-ink/40 mt-1">
+                          Synced {new Date(c.last_synced_at).toLocaleString()}
+                        </div>
+                      )}
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            )}
+
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6">
               <StatCard label="Signups" value={stats.total} />
               <StatCard label="Matched" value={stats.matched} tone="electric" />
