@@ -43,6 +43,7 @@ function AdminClassroom() {
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState<Status | null>(null);
   const [rows, setRows] = useState<ClassroomRegistrationRow[]>([]);
+  const [courses, setCourses] = useState<CourseSummary[]>([]);
   const [syncing, setSyncing] = useState(false);
   const [syncMsg, setSyncMsg] = useState<string | null>(null);
   const [err, setErr] = useState("");
@@ -60,12 +61,14 @@ function AdminClassroom() {
         return;
       }
       try {
-        const [s, r] = await Promise.all([
+        const [s, r, c] = await Promise.all([
           adminGetClassroomStatus(),
           adminListRegistrationsWithClassroom(),
+          adminListClassroomCourses(),
         ]);
         setStatus(s);
         setRows(r.rows);
+        setCourses(c.courses);
       } catch (e) {
         setErr((e as Error).message);
       } finally {
