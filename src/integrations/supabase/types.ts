@@ -267,6 +267,33 @@ export type Database = {
           },
         ]
       }
+      google_oauth_tokens: {
+        Row: {
+          connected_at: string
+          google_email: string | null
+          id: string
+          refresh_token: string
+          scope: string | null
+          updated_at: string
+        }
+        Insert: {
+          connected_at?: string
+          google_email?: string | null
+          id: string
+          refresh_token: string
+          scope?: string | null
+          updated_at?: string
+        }
+        Update: {
+          connected_at?: string
+          google_email?: string | null
+          id?: string
+          refresh_token?: string
+          scope?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       problems: {
         Row: {
           assignment_id: string
