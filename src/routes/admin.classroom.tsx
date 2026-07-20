@@ -11,8 +11,16 @@ import {
   adminSearchClassroomStudents,
   adminLinkRegistrationToClassroom,
   adminUnlinkRegistrationFromClassroom,
+  adminListClassroomCourses,
   type ClassroomRegistrationRow,
 } from "@/lib/gclassroom.functions";
+
+type CourseSummary = {
+  course_id: string;
+  course_name: string | null;
+  students: number;
+  last_synced_at: string | null;
+};
 
 export const Route = createFileRoute("/admin/classroom")({
   component: AdminClassroom,
