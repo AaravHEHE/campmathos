@@ -21,6 +21,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as TeacherIndexRouteImport } from './routes/teacher.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminClassroomRouteImport } from './routes/admin.classroom'
 import { Route as TeacherSubmissionSubmissionIdRouteImport } from './routes/teacher.submission.$submissionId'
 import { Route as TeacherClassClassIdRouteImport } from './routes/teacher.class.$classId'
 import { Route as TeacherAssignmentAssignmentIdIndexRouteImport } from './routes/teacher.assignment.$assignmentId.index'
@@ -89,6 +90,11 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   path: '/admin/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminClassroomRoute = AdminClassroomRouteImport.update({
+  id: '/admin/classroom',
+  path: '/admin/classroom',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TeacherSubmissionSubmissionIdRoute =
   TeacherSubmissionSubmissionIdRouteImport.update({
     id: '/teacher/submission/$submissionId',
@@ -141,6 +147,7 @@ export interface FileRoutesByFullPath {
   '/mathos.ics': typeof MathosDoticsRoute
   '/register': typeof RegisterRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/classroom': typeof AdminClassroomRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/': typeof AdminIndexRoute
   '/teacher/': typeof TeacherIndexRoute
@@ -162,6 +169,7 @@ export interface FileRoutesByTo {
   '/mathos.ics': typeof MathosDoticsRoute
   '/register': typeof RegisterRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/classroom': typeof AdminClassroomRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin': typeof AdminIndexRoute
   '/teacher': typeof TeacherIndexRoute
@@ -184,6 +192,7 @@ export interface FileRoutesById {
   '/mathos.ics': typeof MathosDoticsRoute
   '/register': typeof RegisterRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/classroom': typeof AdminClassroomRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/': typeof AdminIndexRoute
   '/teacher/': typeof TeacherIndexRoute
@@ -207,6 +216,7 @@ export interface FileRouteTypes {
     | '/mathos.ics'
     | '/register'
     | '/sitemap.xml'
+    | '/admin/classroom'
     | '/admin/login'
     | '/admin/'
     | '/teacher/'
@@ -228,6 +238,7 @@ export interface FileRouteTypes {
     | '/mathos.ics'
     | '/register'
     | '/sitemap.xml'
+    | '/admin/classroom'
     | '/admin/login'
     | '/admin'
     | '/teacher'
@@ -249,6 +260,7 @@ export interface FileRouteTypes {
     | '/mathos.ics'
     | '/register'
     | '/sitemap.xml'
+    | '/admin/classroom'
     | '/admin/login'
     | '/admin/'
     | '/teacher/'
@@ -271,6 +283,7 @@ export interface RootRouteChildren {
   MathosDoticsRoute: typeof MathosDoticsRoute
   RegisterRoute: typeof RegisterRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  AdminClassroomRoute: typeof AdminClassroomRoute
   AdminLoginRoute: typeof AdminLoginRoute
   AdminIndexRoute: typeof AdminIndexRoute
   TeacherIndexRoute: typeof TeacherIndexRoute
@@ -369,6 +382,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/classroom': {
+      id: '/admin/classroom'
+      path: '/admin/classroom'
+      fullPath: '/admin/classroom'
+      preLoaderRoute: typeof AdminClassroomRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/teacher/submission/$submissionId': {
       id: '/teacher/submission/$submissionId'
       path: '/teacher/submission/$submissionId'
@@ -431,6 +451,7 @@ const rootRouteChildren: RootRouteChildren = {
   MathosDoticsRoute: MathosDoticsRoute,
   RegisterRoute: RegisterRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  AdminClassroomRoute: AdminClassroomRoute,
   AdminLoginRoute: AdminLoginRoute,
   AdminIndexRoute: AdminIndexRoute,
   TeacherIndexRoute: TeacherIndexRoute,
