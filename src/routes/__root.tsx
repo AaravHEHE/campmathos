@@ -96,6 +96,7 @@ export const Route = createRootRoute({
       { rel: "preload", as: "style", href: FONTS_HREF },
       { rel: "stylesheet", href: FONTS_HREF },
       { rel: "stylesheet", href: appCss },
+      { rel: "icon", type: "image/png", href: "/favicon.png" },
     ],
   }),
   shellComponent: RootShell,
