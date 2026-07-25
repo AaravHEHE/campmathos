@@ -9,63 +9,33 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as RegisterRouteImport } from './routes/register'
-import { Route as MathosDoticsRouteImport } from './routes/mathos[.]ics'
-import { Route as FaqRouteImport } from './routes/faq'
-import { Route as DetailsRouteImport } from './routes/details'
-import { Route as CurriculumRouteImport } from './routes/curriculum'
-import { Route as BoardRouteImport } from './routes/board'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as TeacherIndexRouteImport } from './routes/teacher.index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as BoardRouteImport } from './routes/board'
+import { Route as CurriculumRouteImport } from './routes/curriculum'
+import { Route as DetailsRouteImport } from './routes/details'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as MathosDoticsRouteImport } from './routes/mathos[.]ics'
+import { Route as RegisterRouteImport } from './routes/register'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
-import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as AdminClassroomRouteImport } from './routes/admin.classroom'
-import { Route as TeacherSubmissionSubmissionIdRouteImport } from './routes/teacher.submission.$submissionId'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as TeacherIndexRouteImport } from './routes/teacher.index'
 import { Route as TeacherClassClassIdRouteImport } from './routes/teacher.class.$classId'
+import { Route as TeacherSubmissionSubmissionIdRouteImport } from './routes/teacher.submission.$submissionId'
+import { Route as AdminClassroomCourseCourseIdRouteImport } from './routes/admin.classroom.course.$courseId'
+import { Route as ApiPublicHooksSyncClassroomRouteImport } from './routes/api.public.hooks.sync-classroom'
+import { Route as ApiPublicHooksSyncFormEmailsRouteImport } from './routes/api.public.hooks.sync-form-emails'
 import { Route as TeacherAssignmentAssignmentIdIndexRouteImport } from './routes/teacher.assignment.$assignmentId.index'
 import { Route as TeacherAssignmentAssignmentIdSubmissionsRouteImport } from './routes/teacher.assignment.$assignmentId.submissions'
-import { Route as ApiPublicHooksSyncFormEmailsRouteImport } from './routes/api.public.hooks.sync-form-emails'
-import { Route as ApiPublicHooksSyncClassroomRouteImport } from './routes/api.public.hooks.sync-classroom'
-import { Route as AdminClassroomCourseCourseIdRouteImport } from './routes/admin.classroom.course.$courseId'
 import { Route as ApiPublicOauthGoogleClassroomCallbackRouteImport } from './routes/api.public.oauth.google-classroom.callback'
-import { Route as AdminClassroomCourseCourseIdStudentStudentIdRouteImport } from './routes/admin.classroom.course.$courseId.student.$studentId'
 import { Route as AdminClassroomCourseCourseIdAssignmentCourseworkIdRouteImport } from './routes/admin.classroom.course.$courseId.assignment.$courseworkId'
+import { Route as AdminClassroomCourseCourseIdStudentStudentIdRouteImport } from './routes/admin.classroom.course.$courseId.student.$studentId'
 
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RegisterRoute = RegisterRouteImport.update({
-  id: '/register',
-  path: '/register',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MathosDoticsRoute = MathosDoticsRouteImport.update({
-  id: '/mathos.ics',
-  path: '/mathos.ics',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FaqRoute = FaqRouteImport.update({
-  id: '/faq',
-  path: '/faq',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DetailsRoute = DetailsRouteImport.update({
-  id: '/details',
-  path: '/details',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CurriculumRoute = CurriculumRouteImport.update({
-  id: '/curriculum',
-  path: '/curriculum',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BoardRoute = BoardRouteImport.update({
-  id: '/board',
-  path: '/board',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -73,14 +43,39 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const BoardRoute = BoardRouteImport.update({
+  id: '/board',
+  path: '/board',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TeacherIndexRoute = TeacherIndexRouteImport.update({
-  id: '/teacher/',
-  path: '/teacher/',
+const CurriculumRoute = CurriculumRouteImport.update({
+  id: '/curriculum',
+  path: '/curriculum',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DetailsRoute = DetailsRouteImport.update({
+  id: '/details',
+  path: '/details',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MathosDoticsRoute = MathosDoticsRouteImport.update({
+  id: '/mathos.ics',
+  path: '/mathos.ics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
@@ -88,14 +83,24 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/admin/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminClassroomRoute = AdminClassroomRouteImport.update({
+  id: '/admin/classroom',
+  path: '/admin/classroom',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
   id: '/admin/login',
   path: '/admin/login',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminClassroomRoute = AdminClassroomRouteImport.update({
-  id: '/admin/classroom',
-  path: '/admin/classroom',
+const TeacherIndexRoute = TeacherIndexRouteImport.update({
+  id: '/teacher/',
+  path: '/teacher/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeacherClassClassIdRoute = TeacherClassClassIdRouteImport.update({
+  id: '/teacher/class/$classId',
+  path: '/teacher/class/$classId',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TeacherSubmissionSubmissionIdRoute =
@@ -104,11 +109,24 @@ const TeacherSubmissionSubmissionIdRoute =
     path: '/teacher/submission/$submissionId',
     getParentRoute: () => rootRouteImport,
   } as any)
-const TeacherClassClassIdRoute = TeacherClassClassIdRouteImport.update({
-  id: '/teacher/class/$classId',
-  path: '/teacher/class/$classId',
-  getParentRoute: () => rootRouteImport,
-} as any)
+const AdminClassroomCourseCourseIdRoute =
+  AdminClassroomCourseCourseIdRouteImport.update({
+    id: '/course/$courseId',
+    path: '/course/$courseId',
+    getParentRoute: () => AdminClassroomRoute,
+  } as any)
+const ApiPublicHooksSyncClassroomRoute =
+  ApiPublicHooksSyncClassroomRouteImport.update({
+    id: '/api/public/hooks/sync-classroom',
+    path: '/api/public/hooks/sync-classroom',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicHooksSyncFormEmailsRoute =
+  ApiPublicHooksSyncFormEmailsRouteImport.update({
+    id: '/api/public/hooks/sync-form-emails',
+    path: '/api/public/hooks/sync-form-emails',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const TeacherAssignmentAssignmentIdIndexRoute =
   TeacherAssignmentAssignmentIdIndexRouteImport.update({
     id: '/teacher/assignment/$assignmentId/',
@@ -121,40 +139,22 @@ const TeacherAssignmentAssignmentIdSubmissionsRoute =
     path: '/teacher/assignment/$assignmentId/submissions',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ApiPublicHooksSyncFormEmailsRoute =
-  ApiPublicHooksSyncFormEmailsRouteImport.update({
-    id: '/api/public/hooks/sync-form-emails',
-    path: '/api/public/hooks/sync-form-emails',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ApiPublicHooksSyncClassroomRoute =
-  ApiPublicHooksSyncClassroomRouteImport.update({
-    id: '/api/public/hooks/sync-classroom',
-    path: '/api/public/hooks/sync-classroom',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const AdminClassroomCourseCourseIdRoute =
-  AdminClassroomCourseCourseIdRouteImport.update({
-    id: '/course/$courseId',
-    path: '/course/$courseId',
-    getParentRoute: () => AdminClassroomRoute,
-  } as any)
 const ApiPublicOauthGoogleClassroomCallbackRoute =
   ApiPublicOauthGoogleClassroomCallbackRouteImport.update({
     id: '/api/public/oauth/google-classroom/callback',
     path: '/api/public/oauth/google-classroom/callback',
     getParentRoute: () => rootRouteImport,
   } as any)
-const AdminClassroomCourseCourseIdStudentStudentIdRoute =
-  AdminClassroomCourseCourseIdStudentStudentIdRouteImport.update({
-    id: '/student/$studentId',
-    path: '/student/$studentId',
-    getParentRoute: () => AdminClassroomCourseCourseIdRoute,
-  } as any)
 const AdminClassroomCourseCourseIdAssignmentCourseworkIdRoute =
   AdminClassroomCourseCourseIdAssignmentCourseworkIdRouteImport.update({
     id: '/assignment/$courseworkId',
     path: '/assignment/$courseworkId',
+    getParentRoute: () => AdminClassroomCourseCourseIdRoute,
+  } as any)
+const AdminClassroomCourseCourseIdStudentStudentIdRoute =
+  AdminClassroomCourseCourseIdStudentStudentIdRouteImport.update({
+    id: '/student/$studentId',
+    path: '/student/$studentId',
     getParentRoute: () => AdminClassroomCourseCourseIdRoute,
   } as any)
 
@@ -337,53 +337,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/register': {
-      id: '/register'
-      path: '/register'
-      fullPath: '/register'
-      preLoaderRoute: typeof RegisterRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mathos.ics': {
-      id: '/mathos.ics'
-      path: '/mathos.ics'
-      fullPath: '/mathos.ics'
-      preLoaderRoute: typeof MathosDoticsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/faq': {
-      id: '/faq'
-      path: '/faq'
-      fullPath: '/faq'
-      preLoaderRoute: typeof FaqRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/details': {
-      id: '/details'
-      path: '/details'
-      fullPath: '/details'
-      preLoaderRoute: typeof DetailsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/curriculum': {
-      id: '/curriculum'
-      path: '/curriculum'
-      fullPath: '/curriculum'
-      preLoaderRoute: typeof CurriculumRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/board': {
-      id: '/board'
-      path: '/board'
-      fullPath: '/board'
-      preLoaderRoute: typeof BoardRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -393,18 +351,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/board': {
+      id: '/board'
+      path: '/board'
+      fullPath: '/board'
+      preLoaderRoute: typeof BoardRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/teacher/': {
-      id: '/teacher/'
-      path: '/teacher'
-      fullPath: '/teacher/'
-      preLoaderRoute: typeof TeacherIndexRouteImport
+    '/curriculum': {
+      id: '/curriculum'
+      path: '/curriculum'
+      fullPath: '/curriculum'
+      preLoaderRoute: typeof CurriculumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/details': {
+      id: '/details'
+      path: '/details'
+      fullPath: '/details'
+      preLoaderRoute: typeof DetailsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mathos.ics': {
+      id: '/mathos.ics'
+      path: '/mathos.ics'
+      fullPath: '/mathos.ics'
+      preLoaderRoute: typeof MathosDoticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
@@ -414,6 +407,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/classroom': {
+      id: '/admin/classroom'
+      path: '/admin/classroom'
+      fullPath: '/admin/classroom'
+      preLoaderRoute: typeof AdminClassroomRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/login': {
       id: '/admin/login'
       path: '/admin/login'
@@ -421,11 +421,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/classroom': {
-      id: '/admin/classroom'
-      path: '/admin/classroom'
-      fullPath: '/admin/classroom'
-      preLoaderRoute: typeof AdminClassroomRouteImport
+    '/teacher/': {
+      id: '/teacher/'
+      path: '/teacher'
+      fullPath: '/teacher/'
+      preLoaderRoute: typeof TeacherIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teacher/class/$classId': {
+      id: '/teacher/class/$classId'
+      path: '/teacher/class/$classId'
+      fullPath: '/teacher/class/$classId'
+      preLoaderRoute: typeof TeacherClassClassIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/teacher/submission/$submissionId': {
@@ -435,11 +442,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeacherSubmissionSubmissionIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/teacher/class/$classId': {
-      id: '/teacher/class/$classId'
-      path: '/teacher/class/$classId'
-      fullPath: '/teacher/class/$classId'
-      preLoaderRoute: typeof TeacherClassClassIdRouteImport
+    '/admin/classroom/course/$courseId': {
+      id: '/admin/classroom/course/$courseId'
+      path: '/course/$courseId'
+      fullPath: '/admin/classroom/course/$courseId'
+      preLoaderRoute: typeof AdminClassroomCourseCourseIdRouteImport
+      parentRoute: typeof AdminClassroomRoute
+    }
+    '/api/public/hooks/sync-classroom': {
+      id: '/api/public/hooks/sync-classroom'
+      path: '/api/public/hooks/sync-classroom'
+      fullPath: '/api/public/hooks/sync-classroom'
+      preLoaderRoute: typeof ApiPublicHooksSyncClassroomRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/hooks/sync-form-emails': {
+      id: '/api/public/hooks/sync-form-emails'
+      path: '/api/public/hooks/sync-form-emails'
+      fullPath: '/api/public/hooks/sync-form-emails'
+      preLoaderRoute: typeof ApiPublicHooksSyncFormEmailsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/teacher/assignment/$assignmentId/': {
@@ -456,27 +477,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeacherAssignmentAssignmentIdSubmissionsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/hooks/sync-form-emails': {
-      id: '/api/public/hooks/sync-form-emails'
-      path: '/api/public/hooks/sync-form-emails'
-      fullPath: '/api/public/hooks/sync-form-emails'
-      preLoaderRoute: typeof ApiPublicHooksSyncFormEmailsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/public/hooks/sync-classroom': {
-      id: '/api/public/hooks/sync-classroom'
-      path: '/api/public/hooks/sync-classroom'
-      fullPath: '/api/public/hooks/sync-classroom'
-      preLoaderRoute: typeof ApiPublicHooksSyncClassroomRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/classroom/course/$courseId': {
-      id: '/admin/classroom/course/$courseId'
-      path: '/course/$courseId'
-      fullPath: '/admin/classroom/course/$courseId'
-      preLoaderRoute: typeof AdminClassroomCourseCourseIdRouteImport
-      parentRoute: typeof AdminClassroomRoute
-    }
     '/api/public/oauth/google-classroom/callback': {
       id: '/api/public/oauth/google-classroom/callback'
       path: '/api/public/oauth/google-classroom/callback'
@@ -484,18 +484,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicOauthGoogleClassroomCallbackRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/classroom/course/$courseId/student/$studentId': {
-      id: '/admin/classroom/course/$courseId/student/$studentId'
-      path: '/student/$studentId'
-      fullPath: '/admin/classroom/course/$courseId/student/$studentId'
-      preLoaderRoute: typeof AdminClassroomCourseCourseIdStudentStudentIdRouteImport
-      parentRoute: typeof AdminClassroomCourseCourseIdRoute
-    }
     '/admin/classroom/course/$courseId/assignment/$courseworkId': {
       id: '/admin/classroom/course/$courseId/assignment/$courseworkId'
       path: '/assignment/$courseworkId'
       fullPath: '/admin/classroom/course/$courseId/assignment/$courseworkId'
       preLoaderRoute: typeof AdminClassroomCourseCourseIdAssignmentCourseworkIdRouteImport
+      parentRoute: typeof AdminClassroomCourseCourseIdRoute
+    }
+    '/admin/classroom/course/$courseId/student/$studentId': {
+      id: '/admin/classroom/course/$courseId/student/$studentId'
+      path: '/student/$studentId'
+      fullPath: '/admin/classroom/course/$courseId/student/$studentId'
+      preLoaderRoute: typeof AdminClassroomCourseCourseIdStudentStudentIdRouteImport
       parentRoute: typeof AdminClassroomCourseCourseIdRoute
     }
   }
