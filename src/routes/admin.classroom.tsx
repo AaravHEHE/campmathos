@@ -24,9 +24,8 @@ type CourseSummary = {
 
 export const Route = createFileRoute("/admin/classroom")({
   component: AdminClassroom,
-  validateSearch: (s: Record<string, unknown>) => ({
-    connected: s.connected === 1 || s.connected === "1" ? 1 : undefined,
-  }),
+  validateSearch: (s: Record<string, unknown>): { connected?: 1 } =>
+    s.connected === 1 || s.connected === "1" ? { connected: 1 } : {},
   head: () => ({
     meta: [
       { title: "Google Classroom — MathOs Camp Directors" },

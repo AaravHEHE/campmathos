@@ -5,6 +5,7 @@ import { sendGmail, closeGmail } from "../_shared/gmail.ts";
 
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+const SUPABASE_ANON_KEY = Deno.env.get("SUPABASE_ANON_KEY")!;
 
 const DIRECTOR_NOTIFY = "campmathos@gmail.com";
 
@@ -59,10 +60,11 @@ function digestHtml(rows: { email: string; created_at: string }[], total: number
 }
 
 Deno.serve(async (req) => {
-  // Shared-secret auth: pg_cron must send the X-Cron-Secret header.
-  const expected = Deno.env.get("CRON_SECRET");
-  const provided = req.headers.get("x-cron-secret");
-  if (!expected || provided !== expected) {
+  // pg_cron authenticates with the project's anon key via the Authorization header
+  // (see supabase/migrations/20260420215054_..., which sends `Bearer <anon key>`).
+  const authHeader = req.headers.get("authorization") ?? "";
+  const provided = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : authHeader;
+  if (!SUPABASE_ANON_KEY || provided !== SUPABASE_ANON_KEY) {
     return new Response("Unauthorized", { status: 401 });
   }
 
