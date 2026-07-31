@@ -34,7 +34,7 @@ export const adminListRegistrations = createServerFn({ method: "POST" })
     const { data: rows, error } = await supabaseAdmin
       .from("registrations")
       .select(
-        "id, email, created_at, student_first_name, student_last_name, parent_first_name, parent_last_name, phone, grade_level",
+        "id, email, created_at, student_first_name, student_last_name, parent_first_name, parent_last_name, phone, grade_level, camp_year",
       )
       .order("created_at", { ascending: false });
     if (error) throw new Error(error.message);

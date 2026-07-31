@@ -55,10 +55,10 @@ function NotFoundComponent() {
             ← Back home
           </Link>
           <Link
-            to="/curriculum"
+            to="/details"
             className="inline-flex min-h-11 items-center rounded-full border-2 border-ink bg-cream px-6 py-3 font-semibold text-ink transition hover:bg-ink hover:text-cream"
           >
-            See the curriculum
+            See the details
           </Link>
           <Link
             to="/faq"

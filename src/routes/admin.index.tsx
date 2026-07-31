@@ -27,11 +27,14 @@ interface Registration {
   parent_last_name: string | null;
   phone: string | null;
   grade_level: string | null;
+  camp_year: number;
 }
 
 type SortKey = "created_at" | "email" | "grade" | "student";
 type SortDir = "asc" | "desc";
 type FormFilter = "all" | "filled" | "not_filled";
+type CampYear = 2027 | 2026;
+const CAMP_YEARS: CampYear[] = [2027, 2026];
 
 // Map free-text grade values to a canonical order (lower = earlier).
 // Unknown/blank grades sort to the very end.
@@ -66,6 +69,7 @@ function AdminDashboard() {
   const [error, setError] = useState("");
 
   // UI state
+  const [year, setYear] = useState<CampYear>(2027);
   const [search, setSearch] = useState("");
   const [sortKey, setSortKey] = useState<SortKey>("grade");
   const [sortDir, setSortDir] = useState<SortDir>("asc");
@@ -133,13 +137,26 @@ function AdminDashboard() {
   const hasFilledForm = (email: string) =>
     formEmails.has(email.trim().toLowerCase());
 
+  // Rows scoped to the selected camp year tab.
+  const yearCounts = useMemo(() => {
+    const counts = new Map<CampYear, number>();
+    for (const y of CAMP_YEARS) counts.set(y, 0);
+    for (const r of rows) {
+      if (counts.has(r.camp_year as CampYear)) {
+        counts.set(r.camp_year as CampYear, (counts.get(r.camp_year as CampYear) ?? 0) + 1);
+      }
+    }
+    return counts;
+  }, [rows]);
+  const yearRows = useMemo(() => rows.filter((r) => r.camp_year === year), [rows, year]);
+
   // Filtered + sorted view
   const visibleRows = useMemo(() => {
     const q = search.trim().toLowerCase();
     const fromTs = dateFrom ? new Date(`${dateFrom}T00:00:00`).getTime() : null;
     // dateTo is inclusive — add 1 day to include the entire selected day.
     const toTs = dateTo ? new Date(`${dateTo}T00:00:00`).getTime() + 24 * 60 * 60 * 1000 : null;
-    const filtered = rows.filter((r) => {
+    const filtered = yearRows.filter((r) => {
       if (q) {
         const hay = [
           r.email,
@@ -175,7 +192,7 @@ function AdminDashboard() {
       return sortDir === "asc" ? cmp : -cmp;
     });
     return sorted;
-  }, [rows, search, sortKey, sortDir, dateFrom, dateTo, formFilter, formEmails]);
+  }, [yearRows, search, sortKey, sortDir, dateFrom, dateTo, formFilter, formEmails]);
 
   const filtersActive = Boolean(search || dateFrom || dateTo || formFilter !== "all");
   const clearFilters = () => {
@@ -200,7 +217,7 @@ function AdminDashboard() {
     let thisWeek = 0;
     let filled = 0;
     let notFilled = 0;
-    for (const r of rows) {
+    for (const r of yearRows) {
       const t = new Date(r.created_at).getTime();
       if (now - t <= day) last24h++;
       if (t >= todayStart.getTime()) today++;
@@ -208,8 +225,8 @@ function AdminDashboard() {
       if (hasFilledForm(r.email)) filled++;
       else notFilled++;
     }
-    return { total: rows.length, last24h, today, thisWeek, filled, notFilled };
-  }, [rows, formEmails]);
+    return { total: yearRows.length, last24h, today, thisWeek, filled, notFilled };
+  }, [yearRows, formEmails]);
 
   const csv = useMemo(() => {
     const esc = (v: string | null | undefined) =>
@@ -239,7 +256,7 @@ function AdminDashboard() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `mathos-signups-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.download = `mathos-signups-${year}-${new Date().toISOString().slice(0, 10)}.csv`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -405,6 +422,22 @@ function AdminDashboard() {
             </div>
           </div>
 
+          {/* Camp year tabs */}
+          <div className="mt-6 inline-flex items-center rounded-full border-2 border-ink bg-cream p-1 font-mono text-sm">
+            {CAMP_YEARS.map((y) => (
+              <button
+                key={y}
+                type="button"
+                onClick={() => setYear(y)}
+                className={`rounded-full px-5 py-2 font-semibold transition ${
+                  year === y ? "bg-ink text-cream" : "text-ink/70 hover:text-ink"
+                }`}
+              >
+                {y} {y === 2026 ? "· Archive" : "· Current"} ({yearCounts.get(y) ?? 0})
+              </button>
+            ))}
+          </div>
+
           {/* Stat cards */}
           <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-4">
             <StatCard label="Total" value={stats.total} accent="bg-ink text-cream" />
@@ -421,12 +454,12 @@ function AdminDashboard() {
 
           {/* Sign-ups chart */}
           <div className="mt-6">
-            <SignupsChart rows={rows} days={30} />
+            <SignupsChart rows={yearRows} days={30} />
           </div>
 
           {/* Broadcast composer */}
           <div className="mt-6">
-            <BroadcastForm registrations={rows} formEmails={formEmails} />
+            <BroadcastForm registrations={yearRows} formEmails={formEmails} />
           </div>
 
           {/* Filters */}
@@ -498,7 +531,7 @@ function AdminDashboard() {
               )}
             </div>
             <p className="font-mono text-xs text-muted-foreground">
-              Showing {visibleRows.length} of {rows.length}
+              Showing {visibleRows.length} of {yearRows.length}
             </p>
           </div>
 
@@ -565,8 +598,8 @@ function AdminDashboard() {
                 {visibleRows.length === 0 ? (
                   <tr>
                     <td colSpan={8} className="px-6 py-12 text-center text-ink/60">
-                      {rows.length === 0
-                        ? "No sign-ups yet — they'll show up here as parents register."
+                      {yearRows.length === 0
+                        ? `No ${year} sign-ups yet.`
                         : "No sign-ups match the current filters."}
                     </td>
                   </tr>
