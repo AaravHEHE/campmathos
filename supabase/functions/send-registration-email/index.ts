@@ -130,7 +130,7 @@ Deno.serve(async (req) => {
 
     const { data: inserted, error: insertError } = await supabase
       .from("registrations")
-      .insert({ email: rawEmail })
+      .insert({ email: rawEmail, camp_year: CAMP_YEAR })
       .select("id, created_at")
       .single();
 
@@ -156,24 +156,42 @@ Deno.serve(async (req) => {
       timeZone: "America/Chicago",
     });
 
-    // Send sequentially via Gmail SMTP — pool handles connection reuse.
-    const results = await Promise.allSettled([
-      sendGmail({
+    // The camper confirmation is the one that must succeed — if the mail server
+    // rejects the address we roll the signup back so they can correct a typo.
+    let confirmationFailed = false;
+    try {
+      await sendGmail({
         to: rawEmail,
         subject: "Thanks for your interest in Mathos camp 👋",
         html: confirmationHtml(rawEmail),
-      }),
-      sendGmail({
+      });
+    } catch (mailErr) {
+      confirmationFailed = true;
+      console.error("Confirmation email failed:", mailErr);
+    }
+
+    if (confirmationFailed) {
+      await supabase.from("registrations").delete().eq("id", inserted!.id);
+      await closeGmail();
+      return new Response(
+        JSON.stringify({
+          error:
+            "We couldn't deliver a confirmation to that address. Please double-check it for typos and try again.",
+        }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      );
+    }
+
+    try {
+      await sendGmail({
         to: DIRECTOR_NOTIFY,
         subject: `New Mathos interest: ${rawEmail}`,
         html: notifyHtml(rawEmail, when),
         replyTo: rawEmail,
-      }),
-    ]);
-
-    results.forEach((r, i) => {
-      if (r.status === "rejected") console.error(`Email ${i} failed:`, r.reason);
-    });
+      });
+    } catch (notifyErr) {
+      console.error("Director notification failed:", notifyErr);
+    }
 
     await closeGmail();
 
@@ -181,6 +199,7 @@ Deno.serve(async (req) => {
       status: 200,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
+
   } catch (err) {
     console.error("Unhandled error", err);
     await closeGmail();
