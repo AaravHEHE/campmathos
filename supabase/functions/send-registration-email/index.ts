@@ -14,8 +14,35 @@ const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 
 const DIRECTOR_NOTIFY = "campmathos@gmail.com";
 
+// Camp year new interest-list signups belong to.
+const CAMP_YEAR = 2027;
+
 // Restrict to standard printable email characters — explicitly excludes <, >, &, " to prevent HTML injection.
 const EMAIL_RE = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+// Checks the domain can actually receive mail. Uses DNS-over-HTTPS (MX, then A/AAAA
+// fallback per RFC 5321). Fails open on network trouble so we never block a real signup.
+async function domainAcceptsMail(domain: string): Promise<boolean> {
+  if (!domain) return false;
+  const lookup = async (type: "MX" | "A" | "AAAA") => {
+    const res = await fetch(
+      `https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=${type}`,
+      { headers: { accept: "application/dns-json" } },
+    );
+    if (!res.ok) throw new Error(`DNS lookup failed: ${res.status}`);
+    const json = (await res.json()) as { Status?: number; Answer?: unknown[] };
+    return (json.Answer?.length ?? 0) > 0;
+  };
+  try {
+    if (await lookup("MX")) return true;
+    if (await lookup("A")) return true;
+    return await lookup("AAAA");
+  } catch (err) {
+    console.error("DNS check error", err);
+    return true; // fail open
+  }
+}
+
 
 function escapeHtml(s: string): string {
   return s
