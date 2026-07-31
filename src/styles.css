@@ -183,6 +183,12 @@
   --sun: oklch(0.88 0.17 90);
 }
 
+/* Yellow bands inherit body text, so force ink text for readability. */
+.dark .bg-sun {
+  color: var(--ink);
+}
+
+
 
 
 @layer base {
