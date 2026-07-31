@@ -158,6 +158,18 @@
   --sidebar-ring: oklch(0.72 0.2 255);
 }
 
+/*
+ * Dark mode: sections designed as "ink bands" (dark background, cream text in
+ * light mode) would otherwise invert into light bands, making pages look like
+ * they never left light mode. Re-flip the brand tokens inside those bands so
+ * they stay dark with light content.
+ */
+.dark .bg-ink {
+  --ink: oklch(0.13 0.03 260);
+  --cream: oklch(0.96 0.02 90);
+}
+
+
 @layer base {
   * {
     border-color: var(--color-border);
