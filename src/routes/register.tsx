@@ -31,7 +31,10 @@ export const Route = createFileRoute("/register")({
   }),
 });
 
+const EMAIL_RE = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
 function RegisterPage() {
+
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "duplicate" | "error">(
     "idle",
