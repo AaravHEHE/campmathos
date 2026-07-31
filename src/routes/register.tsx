@@ -116,15 +116,16 @@ function RegisterPage() {
           {status === "success" ? (
             <div className="mt-10 rounded-3xl border-2 border-ink bg-sun p-8">
               <p className="font-mono text-xs tracking-widest text-ink/70">
-                Noted
+                You're on the list
               </p>
               <h2 className="mt-2 font-display text-3xl font-black md:text-4xl">
-                Thanks for letting us know 📬
+                Congrats! You've been added to the 2027 waitlist 🎉
               </h2>
               <p className="mt-3 text-ink/80">
-                We just sent a confirmation with what to expect. We'll reach out with more
-                details closer to the date of the camp. Questions? Reply to that email.
+                Check your email to confirm everything has been entered correctly. We'll reach out
+                with more details closer to the date of the camp. Questions? Reply to that email.
               </p>
+
               <p className="mt-3 rounded-2xl border-2 border-ink bg-cream/60 px-4 py-3 font-mono text-xs text-ink/80">
                 📬 Heads up: the email comes from <strong>CampMathos</strong> and may land in your{" "}
                 <strong>Spam</strong> or <strong>Junk</strong> folder — please check there and mark it
