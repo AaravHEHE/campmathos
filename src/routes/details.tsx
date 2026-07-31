@@ -62,7 +62,7 @@ const pillars: { tag: string; title: string; body: string; accent: string }[] = 
   },
   {
     tag: "supportive",
-    title: "1-on-1 help, anytime.",
+    title: "1-on-1 help.",
     body: "Any Camp Director will meet a camper one-on-one — camp topics, school homework, or curiosity.",
     accent: "bg-sun text-ink",
   },
@@ -97,19 +97,19 @@ const themes = [
 
 const sessionStructure = [
   {
-    tag: "First ~55 min",
+    tag: "First ~60 min",
     title: "First half",
     body: "The real-world question of the day, the math behind it, and a hands-on activity applying it.",
     accent: "bg-electric text-cream",
   },
   {
-    tag: "~10 min",
+    tag: "~15 min",
     title: "Short break",
     body: "Snack, water, stretch. Cameras and mics off — a reset before the second half.",
     accent: "bg-sun text-ink",
   },
   {
-    tag: "Final ~55 min",
+    tag: "Final ~45 min",
     title: "Second half",
     body: "Project work and group challenges in breakout rooms, with instructors floating room to room.",
     accent: "bg-coral text-cream",
