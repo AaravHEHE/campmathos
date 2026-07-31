@@ -14,8 +14,35 @@ const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 
 const DIRECTOR_NOTIFY = "campmathos@gmail.com";
 
+// Camp year new interest-list signups belong to.
+const CAMP_YEAR = 2027;
+
 // Restrict to standard printable email characters — explicitly excludes <, >, &, " to prevent HTML injection.
 const EMAIL_RE = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+// Checks the domain can actually receive mail. Uses DNS-over-HTTPS (MX, then A/AAAA
+// fallback per RFC 5321). Fails open on network trouble so we never block a real signup.
+async function domainAcceptsMail(domain: string): Promise<boolean> {
+  if (!domain) return false;
+  const lookup = async (type: "MX" | "A" | "AAAA") => {
+    const res = await fetch(
+      `https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=${type}`,
+      { headers: { accept: "application/dns-json" } },
+    );
+    if (!res.ok) throw new Error(`DNS lookup failed: ${res.status}`);
+    const json = (await res.json()) as { Status?: number; Answer?: unknown[] };
+    return (json.Answer?.length ?? 0) > 0;
+  };
+  try {
+    if (await lookup("MX")) return true;
+    if (await lookup("A")) return true;
+    return await lookup("AAAA");
+  } catch (err) {
+    console.error("DNS check error", err);
+    return true; // fail open
+  }
+}
+
 
 function escapeHtml(s: string): string {
   return s
@@ -89,6 +116,19 @@ Deno.serve(async (req) => {
       });
     }
 
+    // Verify the email's domain can actually receive mail (MX, falling back to A/AAAA).
+    const domainOk = await domainAcceptsMail(rawEmail.split("@")[1] ?? "");
+    if (!domainOk) {
+      return new Response(
+        JSON.stringify({
+          error:
+            "We couldn't find a mail server for that email address — please check it for typos and try again.",
+        }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      );
+    }
+
+
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
     const { data: existing, error: existingError } = await supabase
@@ -117,7 +157,7 @@ Deno.serve(async (req) => {
 
     const { data: inserted, error: insertError } = await supabase
       .from("registrations")
-      .insert({ email: rawEmail })
+      .insert({ email: rawEmail, camp_year: CAMP_YEAR })
       .select("id, created_at")
       .single();
 
@@ -143,24 +183,42 @@ Deno.serve(async (req) => {
       timeZone: "America/Chicago",
     });
 
-    // Send sequentially via Gmail SMTP — pool handles connection reuse.
-    const results = await Promise.allSettled([
-      sendGmail({
+    // The camper confirmation is the one that must succeed — if the mail server
+    // rejects the address we roll the signup back so they can correct a typo.
+    let confirmationFailed = false;
+    try {
+      await sendGmail({
         to: rawEmail,
         subject: "Thanks for your interest in Mathos camp 👋",
         html: confirmationHtml(rawEmail),
-      }),
-      sendGmail({
+      });
+    } catch (mailErr) {
+      confirmationFailed = true;
+      console.error("Confirmation email failed:", mailErr);
+    }
+
+    if (confirmationFailed) {
+      await supabase.from("registrations").delete().eq("id", inserted!.id);
+      await closeGmail();
+      return new Response(
+        JSON.stringify({
+          error:
+            "We couldn't deliver a confirmation to that address. Please double-check it for typos and try again.",
+        }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      );
+    }
+
+    try {
+      await sendGmail({
         to: DIRECTOR_NOTIFY,
         subject: `New Mathos interest: ${rawEmail}`,
         html: notifyHtml(rawEmail, when),
         replyTo: rawEmail,
-      }),
-    ]);
-
-    results.forEach((r, i) => {
-      if (r.status === "rejected") console.error(`Email ${i} failed:`, r.reason);
-    });
+      });
+    } catch (notifyErr) {
+      console.error("Director notification failed:", notifyErr);
+    }
 
     await closeGmail();
 
@@ -168,6 +226,7 @@ Deno.serve(async (req) => {
       status: 200,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
+
   } catch (err) {
     console.error("Unhandled error", err);
     await closeGmail();

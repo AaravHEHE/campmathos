@@ -1,0 +1,1 @@
+DELETE FROM public.registrations WHERE email = 'campmathos+waitlisttest@gmail.com';
