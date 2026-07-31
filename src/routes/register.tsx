@@ -184,25 +184,10 @@ function RegisterPage() {
                 </p>
               )}
 
-              <div className="mt-8">
-                <p className="font-mono text-sm tracking-widest text-muted-foreground mb-3">
-                  Or sign up using the form below.
-                </p>
-                <div className="overflow-hidden rounded-3xl border-2 border-ink bg-cream">
-                  <iframe
-                    src="https://docs.google.com/forms/d/e/1FAIpQLSepdv-4mPcb9gOWptBgugQl__Xm-k5DnghAQ_ctkkwyT7Npqg/viewform?embedded=true"
-                    width="100%"
-                    height="900"
-                    frameBorder={0}
-                    marginHeight={0}
-                    marginWidth={0}
-                    title="MathOs interest form"
-                    className="block w-full"
-                  >
-                    Loading…
-                  </iframe>
-                </div>
-              </div>
+              <p className="mt-6 rounded-2xl border-2 border-ink bg-sun px-5 py-4 font-mono text-sm text-ink">
+                ✨ Sneak peek: MathOs '27 will be a hybrid camp — join us in person or virtually.
+              </p>
+
             </>
           )}
 
