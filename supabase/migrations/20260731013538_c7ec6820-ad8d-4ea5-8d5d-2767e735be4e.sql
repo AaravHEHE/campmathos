@@ -1,0 +1,1 @@
+ALTER TABLE public.registrations ALTER COLUMN camp_year SET DEFAULT 2027;
