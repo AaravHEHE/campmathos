@@ -169,6 +169,21 @@
   --cream: oklch(0.96 0.02 90);
 }
 
+/*
+ * Accent bands (sun / coral / electric) keep their light-mode treatment in dark
+ * mode: brand-saturated background with paper-colored content on top.
+ */
+.dark .bg-sun,
+.dark .bg-coral,
+.dark .bg-electric {
+  --cream: oklch(0.972 0.025 90);
+  --ink: oklch(0.18 0.04 260);
+  --electric: oklch(0.55 0.22 255);
+  --coral: oklch(0.62 0.2 25);
+  --sun: oklch(0.88 0.17 90);
+}
+
+
 
 @layer base {
   * {
