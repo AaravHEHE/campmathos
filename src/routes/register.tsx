@@ -192,7 +192,8 @@ function RegisterPage() {
 
               {status === "error" && (
                 <p className="mt-4 font-mono text-sm text-coral">
-                  {errorMsg || "Something went wrong. Please try again."}
+                  {errorMsg ||
+                    "There was an issue with your email — please check it for typos and try again."}
                 </p>
               )}
 
