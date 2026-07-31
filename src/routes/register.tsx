@@ -91,16 +91,17 @@ function RegisterPage() {
       <section className="grid-paper border-b-2 border-ink">
         <div className="mx-auto max-w-3xl px-6 py-20 md:py-28">
           <p className="font-mono text-sm tracking-widest text-muted-foreground">
-            Interest form
+            MathOs '27 interest list
           </p>
           <h1 className="mt-3 font-display text-5xl font-black leading-[0.95] md:text-7xl">
             Curious? <span className="italic text-electric">Tell us.</span>
           </h1>
           <p className="mt-6 text-lg text-ink/75">
-            This isn't a commitment — just a heads-up that your family is interested. Drop your
-            email and we'll reach out closer to the camp with the full schedule and the
-            Zoom joining details. Decide later whether to come. The camp itself is always free.
+            Sign up for MathOs '27 — just drop your email and we'll reach out closer to camp with
+            the full schedule and joining details. No commitment, and the camp itself is always
+            free.
           </p>
+
 
           {status === "success" ? (
             <div className="mt-10 rounded-3xl border-2 border-ink bg-sun p-8">
