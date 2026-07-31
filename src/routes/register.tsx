@@ -40,9 +40,16 @@ function RegisterPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const cleaned = email.trim().toLowerCase();
+    if (!EMAIL_RE.test(cleaned) || cleaned.length > 320) {
+      setErrorMsg("That doesn't look like a valid email address — please check it for typos.");
+      setStatus("error");
+      return;
+    }
     setStatus("loading");
     setErrorMsg("");
     try {
+
       const { data, error } = await supabase.functions.invoke("send-registration-email", {
         body: { email: email.trim().toLowerCase() },
       });
