@@ -112,7 +112,7 @@ function AdminDashboard() {
           })),
         ]);
         if (cancelled) return;
-        setRows((data as unknown as Registration[]) ?? []);
+        setRows((data as Registration[]) ?? []);
         setFormEmails(new Set(formRes.emails ?? []));
         setFormSyncError(formRes.error ?? null);
       } catch (err) {
