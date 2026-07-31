@@ -10,9 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as BoardRouteImport } from './routes/board'
-import { Route as CurriculumRouteImport } from './routes/curriculum'
 import { Route as DetailsRouteImport } from './routes/details'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as MathosDoticsRouteImport } from './routes/mathos[.]ics'
@@ -38,19 +36,9 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const BoardRoute = BoardRouteImport.update({
   id: '/board',
   path: '/board',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CurriculumRoute = CurriculumRouteImport.update({
-  id: '/curriculum',
-  path: '/curriculum',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DetailsRoute = DetailsRouteImport.update({
@@ -160,9 +148,7 @@ const AdminClassroomCourseCourseIdStudentStudentIdRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/board': typeof BoardRoute
-  '/curriculum': typeof CurriculumRoute
   '/details': typeof DetailsRoute
   '/faq': typeof FaqRoute
   '/mathos.ics': typeof MathosDoticsRoute
@@ -185,9 +171,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/board': typeof BoardRoute
-  '/curriculum': typeof CurriculumRoute
   '/details': typeof DetailsRoute
   '/faq': typeof FaqRoute
   '/mathos.ics': typeof MathosDoticsRoute
@@ -211,9 +195,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/board': typeof BoardRoute
-  '/curriculum': typeof CurriculumRoute
   '/details': typeof DetailsRoute
   '/faq': typeof FaqRoute
   '/mathos.ics': typeof MathosDoticsRoute
@@ -238,9 +220,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/about'
     | '/board'
-    | '/curriculum'
     | '/details'
     | '/faq'
     | '/mathos.ics'
@@ -263,9 +243,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/about'
     | '/board'
-    | '/curriculum'
     | '/details'
     | '/faq'
     | '/mathos.ics'
@@ -288,9 +266,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/about'
     | '/board'
-    | '/curriculum'
     | '/details'
     | '/faq'
     | '/mathos.ics'
@@ -314,9 +290,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
   BoardRoute: typeof BoardRoute
-  CurriculumRoute: typeof CurriculumRoute
   DetailsRoute: typeof DetailsRoute
   FaqRoute: typeof FaqRoute
   MathosDoticsRoute: typeof MathosDoticsRoute
@@ -344,25 +318,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/board': {
       id: '/board'
       path: '/board'
       fullPath: '/board'
       preLoaderRoute: typeof BoardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/curriculum': {
-      id: '/curriculum'
-      path: '/curriculum'
-      fullPath: '/curriculum'
-      preLoaderRoute: typeof CurriculumRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/details': {
@@ -534,9 +494,7 @@ const AdminClassroomRouteWithChildren = AdminClassroomRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
   BoardRoute: BoardRoute,
-  CurriculumRoute: CurriculumRoute,
   DetailsRoute: DetailsRoute,
   FaqRoute: FaqRoute,
   MathosDoticsRoute: MathosDoticsRoute,

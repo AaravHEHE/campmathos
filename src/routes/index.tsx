@@ -140,10 +140,10 @@ function Index() {
                 I'm interested →
               </Link>
               <Link
-                to="/curriculum"
+                to="/details"
                 className="rounded-full border-2 border-ink bg-cream px-8 py-4 font-semibold text-ink shadow-[6px_6px_0_0_var(--ink)] transition hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_var(--ink)]"
               >
-                See the curriculum
+                See the details
               </Link>
             </div>
 
@@ -199,7 +199,7 @@ function Index() {
                 </h2>
               </div>
               <p className="max-w-sm text-ink/70">
-                A quick look at what each week covers. For full week-by-week breakdowns, head to the curriculum page.
+                A quick look at what each week covers. Full week-by-week breakdowns live on the details page.
               </p>
             </div>
           </Reveal>
@@ -215,10 +215,10 @@ function Index() {
           <Reveal delay={0.05}>
             <div className="mt-10 text-center">
               <Link
-                to="/curriculum"
+                to="/details"
                 className="inline-flex rounded-full border-2 border-ink bg-ink px-8 py-4 font-semibold text-cream transition hover:bg-electric hover:border-electric"
               >
-                Read the full curriculum →
+                Read the full breakdown →
               </Link>
             </div>
           </Reveal>

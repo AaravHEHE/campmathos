@@ -4,8 +4,6 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { Wordmark } from "@/components/Wordmark";
 
 const navLinks = [
-  { to: "/about", label: "About" },
-  { to: "/curriculum", label: "Curriculum" },
   { to: "/details", label: "Details" },
   { to: "/board", label: "Camp Directors" },
   { to: "/faq", label: "FAQ" },
