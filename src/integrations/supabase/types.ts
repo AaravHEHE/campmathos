@@ -361,7 +361,6 @@ export type Database = {
       }
       registrations: {
         Row: {
-          camp_year: number
           classroom_course_id: string | null
           classroom_google_user_id: string | null
           classroom_match_status: string
@@ -376,7 +375,6 @@ export type Database = {
           student_last_name: string | null
         }
         Insert: {
-          camp_year?: number
           classroom_course_id?: string | null
           classroom_google_user_id?: string | null
           classroom_match_status?: string
@@ -391,7 +389,6 @@ export type Database = {
           student_last_name?: string | null
         }
         Update: {
-          camp_year?: number
           classroom_course_id?: string | null
           classroom_google_user_id?: string | null
           classroom_match_status?: string
