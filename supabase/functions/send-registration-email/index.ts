@@ -89,6 +89,19 @@ Deno.serve(async (req) => {
       });
     }
 
+    // Verify the email's domain can actually receive mail (MX, falling back to A/AAAA).
+    const domainOk = await domainAcceptsMail(rawEmail.split("@")[1] ?? "");
+    if (!domainOk) {
+      return new Response(
+        JSON.stringify({
+          error:
+            "We couldn't find a mail server for that email address — please check it for typos and try again.",
+        }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      );
+    }
+
+
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
     const { data: existing, error: existingError } = await supabase
