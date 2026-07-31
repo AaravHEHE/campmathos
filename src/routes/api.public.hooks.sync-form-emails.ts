@@ -132,8 +132,9 @@ async function syncEmails() {
   if (toInsert.length > 0) {
     const { error: insErr } = await supabaseAdmin
       .from('registrations')
-      .insert(toInsert);
+      .insert(toInsert.map((r) => ({ ...r, camp_year: 2026 })));
     if (insErr) throw new Error(`registrations insert failed: ${insErr.message}`);
+
     inserted = toInsert.length;
   }
 
