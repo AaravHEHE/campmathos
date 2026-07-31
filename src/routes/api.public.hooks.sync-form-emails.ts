@@ -119,9 +119,11 @@ async function syncEmails() {
         grade_level: row.grade_level,
       })
       .eq('email', row.email)
+      .eq('camp_year', 2026)
       .is('student_first_name', null)
       .is('student_last_name', null)
       .select('id');
+
     if (upErr) throw new Error(`upgrade failed for ${row.email}: ${upErr.message}`);
     upgraded += upData?.length ?? 0;
   }
