@@ -6,6 +6,7 @@ import { Wordmark } from "@/components/Wordmark";
 const navLinks = [
   { to: "/details", label: "Details" },
   { to: "/board", label: "Camp Directors" },
+  { to: "/through-the-years", label: "Through the Years" },
   { to: "/faq", label: "FAQ" },
   { to: "/register", label: "Register" },
 ] as const;

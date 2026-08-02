@@ -11,11 +11,13 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BoardRouteImport } from './routes/board'
+import { Route as BoardHistoryRouteImport } from './routes/board-history'
 import { Route as DetailsRouteImport } from './routes/details'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as MathosDoticsRouteImport } from './routes/mathos[.]ics'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ThroughTheYearsRouteImport } from './routes/through-the-years'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminClassroomRouteImport } from './routes/admin.classroom'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
@@ -41,6 +43,11 @@ const BoardRoute = BoardRouteImport.update({
   path: '/board',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BoardHistoryRoute = BoardHistoryRouteImport.update({
+  id: '/board-history',
+  path: '/board-history',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DetailsRoute = DetailsRouteImport.update({
   id: '/details',
   path: '/details',
@@ -64,6 +71,11 @@ const RegisterRoute = RegisterRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ThroughTheYearsRoute = ThroughTheYearsRouteImport.update({
+  id: '/through-the-years',
+  path: '/through-the-years',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
@@ -149,11 +161,13 @@ const AdminClassroomCourseCourseIdStudentStudentIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/board': typeof BoardRoute
+  '/board-history': typeof BoardHistoryRoute
   '/details': typeof DetailsRoute
   '/faq': typeof FaqRoute
   '/mathos.ics': typeof MathosDoticsRoute
   '/register': typeof RegisterRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/through-the-years': typeof ThroughTheYearsRoute
   '/admin/classroom': typeof AdminClassroomRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/admin/': typeof AdminIndexRoute
@@ -172,11 +186,13 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/board': typeof BoardRoute
+  '/board-history': typeof BoardHistoryRoute
   '/details': typeof DetailsRoute
   '/faq': typeof FaqRoute
   '/mathos.ics': typeof MathosDoticsRoute
   '/register': typeof RegisterRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/through-the-years': typeof ThroughTheYearsRoute
   '/admin/classroom': typeof AdminClassroomRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/admin': typeof AdminIndexRoute
@@ -196,11 +212,13 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/board': typeof BoardRoute
+  '/board-history': typeof BoardHistoryRoute
   '/details': typeof DetailsRoute
   '/faq': typeof FaqRoute
   '/mathos.ics': typeof MathosDoticsRoute
   '/register': typeof RegisterRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/through-the-years': typeof ThroughTheYearsRoute
   '/admin/classroom': typeof AdminClassroomRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/admin/': typeof AdminIndexRoute
@@ -221,11 +239,13 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/board'
+    | '/board-history'
     | '/details'
     | '/faq'
     | '/mathos.ics'
     | '/register'
     | '/sitemap.xml'
+    | '/through-the-years'
     | '/admin/classroom'
     | '/admin/login'
     | '/admin/'
@@ -244,11 +264,13 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/board'
+    | '/board-history'
     | '/details'
     | '/faq'
     | '/mathos.ics'
     | '/register'
     | '/sitemap.xml'
+    | '/through-the-years'
     | '/admin/classroom'
     | '/admin/login'
     | '/admin'
@@ -267,11 +289,13 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/board'
+    | '/board-history'
     | '/details'
     | '/faq'
     | '/mathos.ics'
     | '/register'
     | '/sitemap.xml'
+    | '/through-the-years'
     | '/admin/classroom'
     | '/admin/login'
     | '/admin/'
@@ -291,11 +315,13 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BoardRoute: typeof BoardRoute
+  BoardHistoryRoute: typeof BoardHistoryRoute
   DetailsRoute: typeof DetailsRoute
   FaqRoute: typeof FaqRoute
   MathosDoticsRoute: typeof MathosDoticsRoute
   RegisterRoute: typeof RegisterRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ThroughTheYearsRoute: typeof ThroughTheYearsRoute
   AdminClassroomRoute: typeof AdminClassroomRouteWithChildren
   AdminLoginRoute: typeof AdminLoginRoute
   AdminIndexRoute: typeof AdminIndexRoute
@@ -323,6 +349,13 @@ declare module '@tanstack/react-router' {
       path: '/board'
       fullPath: '/board'
       preLoaderRoute: typeof BoardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/board-history': {
+      id: '/board-history'
+      path: '/board-history'
+      fullPath: '/board-history'
+      preLoaderRoute: typeof BoardHistoryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/details': {
@@ -358,6 +391,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/through-the-years': {
+      id: '/through-the-years'
+      path: '/through-the-years'
+      fullPath: '/through-the-years'
+      preLoaderRoute: typeof ThroughTheYearsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
@@ -495,11 +535,13 @@ const AdminClassroomRouteWithChildren = AdminClassroomRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BoardRoute: BoardRoute,
+  BoardHistoryRoute: BoardHistoryRoute,
   DetailsRoute: DetailsRoute,
   FaqRoute: FaqRoute,
   MathosDoticsRoute: MathosDoticsRoute,
   RegisterRoute: RegisterRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ThroughTheYearsRoute: ThroughTheYearsRoute,
   AdminClassroomRoute: AdminClassroomRouteWithChildren,
   AdminLoginRoute: AdminLoginRoute,
   AdminIndexRoute: AdminIndexRoute,
