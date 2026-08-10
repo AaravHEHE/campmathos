@@ -20,12 +20,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ThroughTheYearsRouteImport } from './routes/through-the-years'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
-import { Route as TeacherIndexRouteImport } from './routes/teacher.index'
-import { Route as TeacherClassClassIdRouteImport } from './routes/teacher.class.$classId'
-import { Route as TeacherSubmissionSubmissionIdRouteImport } from './routes/teacher.submission.$submissionId'
 import { Route as ApiPublicHooksSyncFormEmailsRouteImport } from './routes/api.public.hooks.sync-form-emails'
-import { Route as TeacherAssignmentAssignmentIdIndexRouteImport } from './routes/teacher.assignment.$assignmentId.index'
-import { Route as TeacherAssignmentAssignmentIdSubmissionsRouteImport } from './routes/teacher.assignment.$assignmentId.submissions'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -82,38 +77,10 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   path: '/admin/login',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TeacherIndexRoute = TeacherIndexRouteImport.update({
-  id: '/teacher/',
-  path: '/teacher/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TeacherClassClassIdRoute = TeacherClassClassIdRouteImport.update({
-  id: '/teacher/class/$classId',
-  path: '/teacher/class/$classId',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TeacherSubmissionSubmissionIdRoute =
-  TeacherSubmissionSubmissionIdRouteImport.update({
-    id: '/teacher/submission/$submissionId',
-    path: '/teacher/submission/$submissionId',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const ApiPublicHooksSyncFormEmailsRoute =
   ApiPublicHooksSyncFormEmailsRouteImport.update({
     id: '/api/public/hooks/sync-form-emails',
     path: '/api/public/hooks/sync-form-emails',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const TeacherAssignmentAssignmentIdIndexRoute =
-  TeacherAssignmentAssignmentIdIndexRouteImport.update({
-    id: '/teacher/assignment/$assignmentId/',
-    path: '/teacher/assignment/$assignmentId/',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const TeacherAssignmentAssignmentIdSubmissionsRoute =
-  TeacherAssignmentAssignmentIdSubmissionsRouteImport.update({
-    id: '/teacher/assignment/$assignmentId/submissions',
-    path: '/teacher/assignment/$assignmentId/submissions',
     getParentRoute: () => rootRouteImport,
   } as any)
 
@@ -129,12 +96,7 @@ export interface FileRoutesByFullPath {
   '/through-the-years': typeof ThroughTheYearsRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/': typeof AdminIndexRoute
-  '/teacher/': typeof TeacherIndexRoute
-  '/teacher/class/$classId': typeof TeacherClassClassIdRoute
-  '/teacher/submission/$submissionId': typeof TeacherSubmissionSubmissionIdRoute
   '/api/public/hooks/sync-form-emails': typeof ApiPublicHooksSyncFormEmailsRoute
-  '/teacher/assignment/$assignmentId/submissions': typeof TeacherAssignmentAssignmentIdSubmissionsRoute
-  '/teacher/assignment/$assignmentId/': typeof TeacherAssignmentAssignmentIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -148,12 +110,7 @@ export interface FileRoutesByTo {
   '/through-the-years': typeof ThroughTheYearsRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin': typeof AdminIndexRoute
-  '/teacher': typeof TeacherIndexRoute
-  '/teacher/class/$classId': typeof TeacherClassClassIdRoute
-  '/teacher/submission/$submissionId': typeof TeacherSubmissionSubmissionIdRoute
   '/api/public/hooks/sync-form-emails': typeof ApiPublicHooksSyncFormEmailsRoute
-  '/teacher/assignment/$assignmentId/submissions': typeof TeacherAssignmentAssignmentIdSubmissionsRoute
-  '/teacher/assignment/$assignmentId': typeof TeacherAssignmentAssignmentIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -168,12 +125,7 @@ export interface FileRoutesById {
   '/through-the-years': typeof ThroughTheYearsRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/': typeof AdminIndexRoute
-  '/teacher/': typeof TeacherIndexRoute
-  '/teacher/class/$classId': typeof TeacherClassClassIdRoute
-  '/teacher/submission/$submissionId': typeof TeacherSubmissionSubmissionIdRoute
   '/api/public/hooks/sync-form-emails': typeof ApiPublicHooksSyncFormEmailsRoute
-  '/teacher/assignment/$assignmentId/submissions': typeof TeacherAssignmentAssignmentIdSubmissionsRoute
-  '/teacher/assignment/$assignmentId/': typeof TeacherAssignmentAssignmentIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -189,12 +141,7 @@ export interface FileRouteTypes {
     | '/through-the-years'
     | '/admin/login'
     | '/admin/'
-    | '/teacher/'
-    | '/teacher/class/$classId'
-    | '/teacher/submission/$submissionId'
     | '/api/public/hooks/sync-form-emails'
-    | '/teacher/assignment/$assignmentId/submissions'
-    | '/teacher/assignment/$assignmentId/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -208,12 +155,7 @@ export interface FileRouteTypes {
     | '/through-the-years'
     | '/admin/login'
     | '/admin'
-    | '/teacher'
-    | '/teacher/class/$classId'
-    | '/teacher/submission/$submissionId'
     | '/api/public/hooks/sync-form-emails'
-    | '/teacher/assignment/$assignmentId/submissions'
-    | '/teacher/assignment/$assignmentId'
   id:
     | '__root__'
     | '/'
@@ -227,12 +169,7 @@ export interface FileRouteTypes {
     | '/through-the-years'
     | '/admin/login'
     | '/admin/'
-    | '/teacher/'
-    | '/teacher/class/$classId'
-    | '/teacher/submission/$submissionId'
     | '/api/public/hooks/sync-form-emails'
-    | '/teacher/assignment/$assignmentId/submissions'
-    | '/teacher/assignment/$assignmentId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -247,12 +184,7 @@ export interface RootRouteChildren {
   ThroughTheYearsRoute: typeof ThroughTheYearsRoute
   AdminLoginRoute: typeof AdminLoginRoute
   AdminIndexRoute: typeof AdminIndexRoute
-  TeacherIndexRoute: typeof TeacherIndexRoute
-  TeacherClassClassIdRoute: typeof TeacherClassClassIdRoute
-  TeacherSubmissionSubmissionIdRoute: typeof TeacherSubmissionSubmissionIdRoute
   ApiPublicHooksSyncFormEmailsRoute: typeof ApiPublicHooksSyncFormEmailsRoute
-  TeacherAssignmentAssignmentIdSubmissionsRoute: typeof TeacherAssignmentAssignmentIdSubmissionsRoute
-  TeacherAssignmentAssignmentIdIndexRoute: typeof TeacherAssignmentAssignmentIdIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -334,46 +266,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/teacher/': {
-      id: '/teacher/'
-      path: '/teacher'
-      fullPath: '/teacher/'
-      preLoaderRoute: typeof TeacherIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/teacher/class/$classId': {
-      id: '/teacher/class/$classId'
-      path: '/teacher/class/$classId'
-      fullPath: '/teacher/class/$classId'
-      preLoaderRoute: typeof TeacherClassClassIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/teacher/submission/$submissionId': {
-      id: '/teacher/submission/$submissionId'
-      path: '/teacher/submission/$submissionId'
-      fullPath: '/teacher/submission/$submissionId'
-      preLoaderRoute: typeof TeacherSubmissionSubmissionIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/api/public/hooks/sync-form-emails': {
       id: '/api/public/hooks/sync-form-emails'
       path: '/api/public/hooks/sync-form-emails'
       fullPath: '/api/public/hooks/sync-form-emails'
       preLoaderRoute: typeof ApiPublicHooksSyncFormEmailsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/teacher/assignment/$assignmentId/': {
-      id: '/teacher/assignment/$assignmentId/'
-      path: '/teacher/assignment/$assignmentId'
-      fullPath: '/teacher/assignment/$assignmentId/'
-      preLoaderRoute: typeof TeacherAssignmentAssignmentIdIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/teacher/assignment/$assignmentId/submissions': {
-      id: '/teacher/assignment/$assignmentId/submissions'
-      path: '/teacher/assignment/$assignmentId/submissions'
-      fullPath: '/teacher/assignment/$assignmentId/submissions'
-      preLoaderRoute: typeof TeacherAssignmentAssignmentIdSubmissionsRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -391,14 +288,7 @@ const rootRouteChildren: RootRouteChildren = {
   ThroughTheYearsRoute: ThroughTheYearsRoute,
   AdminLoginRoute: AdminLoginRoute,
   AdminIndexRoute: AdminIndexRoute,
-  TeacherIndexRoute: TeacherIndexRoute,
-  TeacherClassClassIdRoute: TeacherClassClassIdRoute,
-  TeacherSubmissionSubmissionIdRoute: TeacherSubmissionSubmissionIdRoute,
   ApiPublicHooksSyncFormEmailsRoute: ApiPublicHooksSyncFormEmailsRoute,
-  TeacherAssignmentAssignmentIdSubmissionsRoute:
-    TeacherAssignmentAssignmentIdSubmissionsRoute,
-  TeacherAssignmentAssignmentIdIndexRoute:
-    TeacherAssignmentAssignmentIdIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
