@@ -20,7 +20,7 @@ export function ogImage(path: string): string {
 }
 
 /**
- * JSON-LD EducationEvent schema for the camp (fully online).
+ * JSON-LD EducationEvent schema for the camp (hybrid — in person + online).
  */
 export function campEventJsonLd() {
   return {
@@ -28,7 +28,7 @@ export function campEventJsonLd() {
     "@type": "EducationEvent",
     name: `${CAMP.name} — ${CAMP.tagline}`,
       description:
-      "Free multi-week online applied math summer camp, taught live over Zoom by the math team. Recommended skill range: 4th grade math through 7th grade math.",
+      "Free multi-week hybrid applied math summer camp — join in person or live over Zoom — taught by the math team. Recommended skill range: 4th grade math through 7th grade math.",
     startDate: `${CAMP.startDateISO}T${CAMP.sessionStartTime}:00-05:00`,
     endDate: `${CAMP.endDateISO}T${CAMP.sessionEndTime}:00-05:00`,
     eventSchedule: {
@@ -38,7 +38,7 @@ export function campEventJsonLd() {
       endTime: `${CAMP.sessionEndTime}:00`,
       scheduleTimezone: "America/Chicago",
     },
-    eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
+    eventAttendanceMode: "https://schema.org/MixedEventAttendanceMode",
     eventStatus: "https://schema.org/EventScheduled",
     location: {
       "@type": "VirtualLocation",
