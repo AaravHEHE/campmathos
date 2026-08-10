@@ -69,7 +69,7 @@ function YearSection({ camp }: { camp: CampYear }) {
                   <StatCard
                     label="Schools reached"
                     value={camp.reach.schools}
-                    accent="bg-sun text-ink"
+                    accent="bg-ink text-cream"
                   />
                   <StatCard
                     label="Grade levels enrolled"
