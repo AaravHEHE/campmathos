@@ -146,7 +146,34 @@ async function syncEmails() {
   };
 }
 
-async function handle() {
+function safeEqual(a: string, b: string): boolean {
+  const ab = Buffer.from(a);
+  const bb = Buffer.from(b);
+  if (ab.length !== bb.length) return false;
+  return timingSafeEqual(ab, bb);
+}
+
+async function handle(request: Request) {
+  const expected = process.env['SYNC_HOOK_SECRET'];
+  if (!expected) {
+    return new Response(
+      JSON.stringify({ success: false, error: 'Not configured' }),
+      { status: 503, headers: { 'Content-Type': 'application/json' } },
+    );
+  }
+
+  const authHeader = request.headers.get('authorization') ?? '';
+  const provided = authHeader.toLowerCase().startsWith('bearer ')
+    ? authHeader.slice(7).trim()
+    : (request.headers.get('x-sync-secret') ?? '').trim();
+
+  if (!provided || !safeEqual(provided, expected)) {
+    return new Response(
+      JSON.stringify({ success: false, error: 'Unauthorized' }),
+      { status: 401, headers: { 'Content-Type': 'application/json' } },
+    );
+  }
+
   try {
     const result = await syncEmails();
     return new Response(JSON.stringify({ success: true, ...result }), {
