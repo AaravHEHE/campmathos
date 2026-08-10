@@ -47,10 +47,30 @@ function YearSection({ camp }: { camp: CampYear }) {
             )}
           </Reveal>
           <Reveal amount={0.2}>
-            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <div
+              className={`mt-8 grid grid-cols-2 gap-4 ${camp.reach ? "sm:grid-cols-3 lg:grid-cols-5" : "sm:max-w-xs sm:grid-cols-1"}`}
+            >
               <StatCard label="Registrants" value={camp.registrants} accent="bg-electric text-cream" />
-              <StatCard label="Poll questions" value={camp.polls.length} accent="bg-coral text-cream" />
-              <StatCard label="Photos on file" value={camp.photos.length} accent="bg-sun text-ink" />
+              {camp.reach && (
+                <>
+                  <StatCard
+                    label="Time zones reached"
+                    value={camp.reach.timezones}
+                    accent="bg-coral text-cream"
+                  />
+                  <StatCard label="States reached" value={camp.reach.states} accent="bg-sun text-ink" />
+                  <StatCard
+                    label="Schools reached"
+                    value={camp.reach.schools}
+                    accent="bg-cream text-ink"
+                  />
+                  <StatCard
+                    label="Grade levels enrolled"
+                    value={camp.reach.gradeLevels}
+                    accent="bg-electric/80 text-cream"
+                  />
+                </>
+              )}
             </div>
           </Reveal>
         </div>
@@ -70,6 +90,35 @@ function YearSection({ camp }: { camp: CampYear }) {
               {camp.polls.map((poll, i) => (
                 <Reveal key={poll.question} delay={i * 0.15} amount={0.3}>
                   <PollIndicator poll={poll} />
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Testimonials */}
+      {camp.testimonials && camp.testimonials.length > 0 && (
+        <section className="border-b-2 border-ink bg-ink text-cream">
+          <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
+            <Reveal>
+              <p className="font-mono text-sm tracking-widest text-cream/60">In their words</p>
+              <h2 className="mt-2 font-display text-4xl font-black leading-[0.95] md:text-5xl">
+                What families told us.
+              </h2>
+            </Reveal>
+            <div className="mt-10 grid gap-6 md:grid-cols-2">
+              {camp.testimonials.map((t, i) => (
+                <Reveal key={t.author + i} delay={i * 0.15} amount={0.3}>
+                  <figure className="h-full rounded-3xl border-2 border-cream/25 bg-cream/5 p-8">
+                    <span className="font-display text-6xl font-black leading-none text-cream/20">"</span>
+                    <blockquote className="-mt-4 font-display text-2xl font-medium italic leading-snug">
+                      {t.quote}
+                    </blockquote>
+                    <figcaption className="mt-6 font-mono text-xs uppercase tracking-widest text-cream/60">
+                      — {t.author}
+                    </figcaption>
+                  </figure>
                 </Reveal>
               ))}
             </div>

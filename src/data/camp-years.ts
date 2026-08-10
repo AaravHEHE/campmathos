@@ -30,12 +30,20 @@ export interface CampPhoto {
   caption?: string;
 }
 
+export interface Testimonial {
+  quote: string;
+  author: string;
+}
+
 export interface CampYear {
   year: number;
   registrants: number;
   sessionDates?: string;
+  /** Geographic reach — how far campers were spread out, not just local turnout. */
+  reach?: { timezones: number; states: number; schools: number; gradeLevels: number };
   polls: PollResult[];
   photos: CampPhoto[];
+  testimonials?: Testimonial[];
   highlights?: string[];
 }
 
@@ -44,6 +52,7 @@ export const campYears: CampYear[] = [
     year: 2026,
     registrants: 60,
     sessionDates: "July 7 – 30, 2026",
+    reach: { timezones: 3, states: 5, schools: 18, gradeLevels: 6 },
     polls: [
       {
         question: "How difficult was the content?",
@@ -98,7 +107,23 @@ export const campYears: CampYear[] = [
         alt: "Camp Directors getting set up before a session",
         caption: "Getting things ready before campers log on.",
       },
+      {
+        src: "/through-the-years/2026/live-zoom-session.jpg",
+        alt: "Campers and Camp Directors together during a live Zoom session, with the group chat open alongside the video grid",
+        caption: "A full house on Zoom — shared with parent consent.",
+      },
       // TODO: add more camp photos here as they come in.
+    ],
+    testimonials: [
+      {
+        quote:
+          "The experience was enjoyable for everyone and thank you for the tremendous effort and dedication for the camp. We truly appreciate everything you guys did.",
+        author: "A camp parent",
+      },
+      {
+        quote: "I really enjoy you teaching me, thank you!",
+        author: "A camper",
+      },
     ],
   },
 ];

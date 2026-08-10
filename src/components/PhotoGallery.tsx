@@ -14,14 +14,16 @@ export function PhotoGallery({ photos }: { photos: CampPhoto[] }) {
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {photos.map((p) => (
         <figure key={p.src} className="overflow-hidden rounded-3xl border-2 border-ink bg-cream">
-          <img
-            src={p.src}
-            alt={p.alt}
-            loading="lazy"
-            width={640}
-            height={480}
-            className="h-56 w-full object-cover"
-          />
+          <div className="flex h-64 w-full items-center justify-center bg-ink/5">
+            <img
+              src={p.src}
+              alt={p.alt}
+              loading="lazy"
+              width={640}
+              height={480}
+              className="h-full w-full object-contain"
+            />
+          </div>
           {p.caption && (
             <figcaption className="border-t-2 border-ink px-4 py-3 text-sm text-ink/70">
               {p.caption}
