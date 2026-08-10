@@ -134,7 +134,7 @@ function DetailsPage() {
             </h1>
             <p className="mt-6 max-w-2xl text-lg text-ink/75">
               The name comes from the Greek word for "learning." <Wordmark /> is a free, student-led
-              hybrid summer program — join in person or online — that teaches applied math — the kind engineers, analysts, and
+              hybrid summer program — join in person or online — that teaches applied math, the kind engineers, analysts, and
               architects actually use — through hands-on activities instead of lectures. No fees, no
               exams, no pressure. Everything you need to know is on this page.
             </p>
