@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
+import { timingSafeEqual } from 'crypto';
 import { supabaseAdmin } from '@/integrations/supabase/client.server';
 
 const SPREADSHEET_ID = '1nAS5YQGtZTY9QXIKgClLVvZySRnCUrZeAiT-cDvHbmQ';
@@ -192,8 +193,7 @@ async function handle(request: Request) {
 export const Route = createFileRoute('/api/public/hooks/sync-form-emails')({
   server: {
     handlers: {
-      POST: async () => handle(),
-      GET: async () => handle(),
+      POST: async ({ request }) => handle(request),
     },
   },
 });
