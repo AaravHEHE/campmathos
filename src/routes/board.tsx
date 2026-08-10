@@ -1,14 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { Wordmark } from "@/components/Wordmark";
 import { canonical, ogImage } from "@/lib/seo";
 import { Reveal } from "@/components/Reveal";
-import aaravPhoto from "@/assets/directors/aarav-arora.jpg";
-import yifanPhoto from "@/assets/directors/yifan-bao.jpg";
-import alanPhoto from "@/assets/directors/alan-zhan.jpg";
-import shauryPhoto from "@/assets/directors/shaury-sharma.jpg.asset.json";
-import atharvPhoto from "@/assets/directors/atharv-mishra.jpg.asset.json";
-import wenxuanPhoto from "@/assets/directors/wenxuan-chen.jpg.asset.json";
+import { DirectorCard } from "@/components/DirectorCard";
+import { currentBoardYear } from "@/data/board-years";
 
 const OG = ogImage("/og-board.jpg");
 
@@ -36,62 +32,9 @@ export const Route = createFileRoute("/board")({
   }),
 });
 
-type Director = {
-  name: string;
-  bio: string;
-  accent: string;
-  photo?: string;
-};
-
-const directors: Director[] = [
-  {
-    name: "Aarav Arora",
-    bio: "NVHS Class of 2029. NVHS Robotics' first-ever sophomore Executive Board Member and a co-creator of NeighbrHub. eCYBERMISSION State Finalist and honorable mention.",
-    accent: "bg-electric text-cream",
-    photo: aaravPhoto,
-  },
-  {
-    name: "Alan Zhan",
-    bio: "NVHS Class of 2029. Member of NVHS Computing Team, Chess Team, and Math Team. #1 Neuqua Freshman in State Math, Highest record at state Chess.",
-    accent: "bg-sun text-cream",
-    photo: alanPhoto,
-  },
-  {
-    name: "Shaury Sharma",
-    bio: "NVHS Class of 2029. Member of NVHS Robotics Team, IJAS State Qualifier, NVHS Science Olympiad State Qualifier, and eCYBERMISSION State Finalist and honorable mention.",
-    accent: "bg-coral text-cream",
-    photo: shauryPhoto.url,
-  },
-  {
-    name: "Wenxuan Chen",
-    bio: "NVHS Class of 2029. Math Team State Qualifier and member of NVHS Freshman A soccer team. AMC 8 Honor Roll.",
-    accent: "bg-electric text-cream",
-    photo: wenxuanPhoto.url,
-  },
-  {
-    name: "Yifan Bao",
-    bio: "NVHS Class of 2029. Math Team State Qualifier and Science Olympiad State Qualifier. Sci Oly junior executive board member and 2nd place at state.",
-    accent: "bg-coral text-cream",
-    photo: yifanPhoto,
-  },
-  {
-    name: "Atharv Mishra",
-    bio: "NVHS Class of 2029. Member of NVHS Robotics, Speech, and Youth & Government teams, and eCYBERMISSION State Finalist and honorable mention.",
-    accent: "bg-sun text-cream",
-    photo: atharvPhoto.url,
-  },
-];
-
-function initials(name: string) {
-  return name
-    .split(" ")
-    .map((n) => n[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
-}
-
 function BoardPage() {
+  const board = currentBoardYear();
+
   return (
     <main className="min-h-screen bg-cream text-ink">
       <SiteHeader />
@@ -106,39 +49,21 @@ function BoardPage() {
             <Wordmark /> is built and taught by the math team, who believe math should feel useful,
             not abstract. We design every session, mentor every camper, and run every workshop ourselves.
           </p>
+          <Link
+            to="/board-history"
+            className="mt-6 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-ink/40 transition hover:text-electric"
+          >
+            See who helped us out in the past →
+          </Link>
         </div>
       </section>
 
       <section className="border-b-2 border-ink">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {directors.map((d, i) => (
-              <Reveal key={d.name} delay={(i % 3) * 0.2} amount={0.25}>
-                <article className="group flex flex-col rounded-3xl border-2 border-ink bg-cream p-8 transition hover:-translate-y-1 hover:shadow-[8px_8px_0_0_var(--ink)]">
-                  {/* Photo */}
-                  <div
-                    className={`relative flex h-56 w-full items-center justify-center overflow-hidden rounded-2xl border-2 border-ink ${d.accent}`}
-                  >
-                    {d.photo ? (
-                      <img
-                        src={d.photo}
-                        alt={`${d.name}, Camp Director`}
-                        loading="lazy"
-                        className="h-full w-full object-cover"
-                      />
-                    ) : (
-                      <>
-                        <span className="font-display text-5xl font-black">{initials(d.name)}</span>
-                        <span className="absolute bottom-2 right-3 font-mono text-[10px] tracking-widest opacity-70">
-                          Photo soon
-                        </span>
-                      </>
-                    )}
-                  </div>
-                  <h2 className="mt-6 font-display text-2xl font-black leading-tight">{d.name}</h2>
-                  <p className="mt-4 text-sm text-ink/70">{d.bio}</p>
-                </article>
-              </Reveal>
+          <p className="font-mono text-sm tracking-widest text-muted-foreground">{board.year} board</p>
+          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {board.directors.map((d, i) => (
+              <DirectorCard key={d.name} director={d} delay={(i % 3) * 0.2} />
             ))}
           </div>
 

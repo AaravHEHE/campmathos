@@ -9,5 +9,7 @@ MathOs is a free, fully online summer math camp run by student Camp Directors. S
 - [Home](/): Overview of the camp, dates, format, and how to register.
 - [Details](/details): What MathOs is, who it's for, the week-by-week curriculum, and the schedule, format, and logistics for the 2026 season.
 - [FAQ](/faq): Common questions about cost, schedule, joining online, materials, and registration.
-- [Board](/board): The Camp Directors and team behind MathOs.
+- [Board](/board): The current Camp Directors and team behind MathOs.
+- [Board history](/board-history): Past Camp Directors, year by year.
+- [Through the Years](/through-the-years): Camp archive — sign-up numbers, survey results, and photos from every year MathOs has run.
 - [Register](/register): Express interest and get Zoom and schedule details before camp starts.
