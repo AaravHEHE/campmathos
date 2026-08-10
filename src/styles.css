@@ -279,6 +279,16 @@
     box-shadow: 8px 8px 0 0 var(--cream);
   }
 
+  .card-3d-inverse {
+    border-radius: var(--radius-3xl);
+    border: 2px solid oklch(0.96 0.02 90 / 0.35);
+    box-shadow: 6px 6px 0 0 oklch(0.96 0.02 90 / 0.35);
+  }
+  .dark .card-3d-inverse {
+    border-color: var(--cream);
+    box-shadow: 6px 6px 0 0 var(--cream);
+  }
+
   .noise {
     position: relative;
   }
