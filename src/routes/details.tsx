@@ -140,7 +140,7 @@ function DetailsPage() {
             </p>
           </div>
           <Reveal direction="scale" className="md:col-span-5">
-            <div className="rotate-1 rounded-3xl border-2 border-ink bg-cream p-3 shadow-[8px_8px_0_0_var(--ink)]">
+            <div className="rotate-1 card-3d bg-cream p-3">
               <img
                 src={aboutLearning}
                 alt="A collage of graphs, dice, and geometric shapes representing the MathOs curriculum"
@@ -191,7 +191,7 @@ function DetailsPage() {
           <div className="mt-12 grid gap-6 sm:grid-cols-2">
             {pillars.map((p, i) => (
               <Reveal key={p.title} delay={i * 0.15} amount={0.3}>
-                <article className="rounded-3xl border-2 border-ink bg-cream p-8 shadow-[6px_6px_0_0_var(--ink)]">
+                <article className="card-3d bg-cream p-8">
                   <span className={`inline-block rounded-full px-3 py-1 font-mono text-xs font-bold ${p.accent}`}>
                     {p.tag}
                   </span>
@@ -217,7 +217,7 @@ function DetailsPage() {
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {themes.map((t, i) => (
               <Reveal key={t.title} delay={i * 0.2} amount={0.3}>
-                <article className="overflow-hidden rounded-3xl border-2 border-cream/30 bg-cream/5">
+                <article className="overflow-hidden card-3d-inverse bg-cream/5">
                   <img
                     src={t.img}
                     alt=""
@@ -293,7 +293,7 @@ function DetailsPage() {
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {sessionStructure.map((b, i) => (
               <Reveal key={b.title} delay={i * 0.2} amount={0.3}>
-                <article className="rounded-3xl border-2 border-ink bg-cream p-6 shadow-[6px_6px_0_0_var(--ink)]">
+                <article className="card-3d bg-cream p-6">
                   <span className={`inline-block rounded-full px-3 py-1 font-mono text-xs font-bold ${b.accent}`}>
                     {b.tag}
                   </span>
