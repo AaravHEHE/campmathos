@@ -23,7 +23,7 @@ export function DirectorCard({ director, delay = 0 }: { director: Director; dela
               src={director.photo}
               alt={`${director.name}, Camp Director`}
               loading="lazy"
-              className="h-full w-full object-cover"
+              className="h-full w-full object-contain"
             />
           ) : (
             <>
