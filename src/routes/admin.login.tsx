@@ -26,6 +26,8 @@ function safeNext(next: string | undefined): string | null {
 
 function AdminLoginPage() {
   const navigate = useNavigate();
+  const { next } = Route.useSearch();
+  const redirectTo = safeNext(next);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -33,8 +35,10 @@ function AdminLoginPage() {
 
   // On a fresh page load, force sign-out so reloading always returns the
   // Camp Director to this login form (even if the Supabase token is still
-  // cached in localStorage).
+  // cached in localStorage). Skipped when an authorization flow sent the
+  // Director here, so approving app access doesn't loop.
   useEffect(() => {
+    if (redirectTo) return;
     let cancelled = false;
     (async () => {
       const { data: { session } } = await supabase.auth.getSession();
@@ -46,7 +50,8 @@ function AdminLoginPage() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [redirectTo]);
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
