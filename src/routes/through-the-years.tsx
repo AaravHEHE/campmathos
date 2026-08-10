@@ -221,8 +221,13 @@ function ThroughTheYearsPage() {
               ))}
             </div>
           ) : (
-            <p className="font-mono text-sm tracking-widest text-electric">{camp?.year} camp</p>
+            <div className="flex justify-center">
+              <p className="rounded-full border-2 border-ink bg-sun px-6 py-2 text-center font-mono text-lg font-bold tracking-widest text-ink md:text-xl">
+                {camp?.year} camp
+              </p>
+            </div>
           )}
+
         </div>
       </section>
 
