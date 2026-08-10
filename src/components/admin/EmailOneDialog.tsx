@@ -93,7 +93,7 @@ export function EmailOneDialog({ email, displayName, onClose }: Props) {
 
         {done ? (
           <div className="mt-6 space-y-4">
-            <p className="rounded-2xl border-2 border-ink/30 bg-cream/60 p-4 font-mono text-sm">
+            <p className="card-3d bg-cream/60 p-4 font-mono text-sm">
               ✓ Sent to <strong>{email}</strong>.
             </p>
             <button

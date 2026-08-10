@@ -211,7 +211,7 @@ export function BroadcastForm({ registrations, formEmails }: BroadcastFormProps)
 
         {error && <p className="font-mono text-sm text-coral">{error}</p>}
         {result && (
-          <div className="rounded-2xl border-2 border-ink/30 bg-cream/60 p-4">
+          <div className="card-3d bg-cream/60 p-4">
             <p className="font-mono text-sm">
               ✓ Sent to <strong>{result.sent}</strong> of {result.total}
               {result.failed > 0 && (

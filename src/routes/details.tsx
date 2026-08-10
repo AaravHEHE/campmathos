@@ -163,7 +163,7 @@ function DetailsPage() {
             </h2>
           </Reveal>
           <Reveal amount={0.15}>
-            <dl className="mt-10 grid gap-px overflow-hidden rounded-3xl border-2 border-cream/20 bg-cream/10 md:grid-cols-2">
+            <dl className="mt-10 grid gap-px overflow-hidden card-3d-inverse bg-cream/10 md:grid-cols-2">
               {facts.map(([k, v]) => (
                 <div key={k} className="bg-ink p-8">
                   <dt className="font-mono text-xs tracking-widest text-cream/50">{k}</dt>
@@ -239,7 +239,7 @@ function DetailsPage() {
           </div>
 
           <Reveal amount={0.15}>
-            <div className="mt-12 overflow-x-auto rounded-3xl border-2 border-cream/20">
+            <div className="mt-12 overflow-x-auto card-3d-inverse">
               <table className="w-full min-w-[720px] text-left">
                 <thead className="bg-cream/10 font-mono text-xs uppercase tracking-widest text-cream/60">
                   <tr>
@@ -305,7 +305,7 @@ function DetailsPage() {
           </div>
 
           <Reveal direction="scale" amount={0.3}>
-            <div className="mt-12 rounded-3xl border-2 border-ink bg-electric p-6 text-cream md:flex md:items-center md:justify-between md:gap-8 md:p-8">
+            <div className="mt-12 card-3d bg-electric p-6 text-cream md:flex md:items-center md:justify-between md:gap-8 md:p-8">
               <div className="max-w-xl">
                 <p className="font-mono text-xs uppercase tracking-widest text-cream/70">Add to calendar</p>
                 <h3 className="mt-2 font-display text-2xl font-black md:text-3xl">
