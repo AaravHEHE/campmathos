@@ -97,7 +97,7 @@ function AdminLoginPage() {
     <main className="flex min-h-screen items-center justify-center bg-cream px-6 text-ink">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-sm rounded-3xl border-2 border-ink bg-cream p-8 shadow-[8px_8px_0_0_var(--ink)]"
+        className="w-full max-w-sm card-3d bg-cream p-8"
       >
         <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
           DIRECTORS & TEACHERS

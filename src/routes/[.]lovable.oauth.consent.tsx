@@ -99,7 +99,7 @@ function Consent() {
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-cream px-6 text-ink">
-      <div className="w-full max-w-md rounded-3xl border-2 border-ink bg-cream p-8 shadow-[8px_8px_0_0_var(--ink)]">
+      <div className="w-full max-w-md card-3d bg-cream p-8">
         <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
           Authorize access
         </p>

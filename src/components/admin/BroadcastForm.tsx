@@ -115,7 +115,7 @@ export function BroadcastForm({ registrations, formEmails }: BroadcastFormProps)
   }
 
   return (
-    <div className="rounded-3xl border-2 border-ink bg-cream p-5">
+    <div className="card-3d bg-cream p-5">
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">

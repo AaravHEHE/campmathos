@@ -534,7 +534,7 @@ function AdminDashboard() {
           )}
 
           {/* Table */}
-          <div className="mt-6 overflow-x-auto rounded-3xl border-2 border-ink">
+          <div className="mt-6 overflow-x-auto card-3d">
             <table className="w-full min-w-[900px] text-left">
               <thead className="bg-ink text-cream">
                 <tr>
@@ -715,7 +715,7 @@ function StatCard({
   accent: string;
 }) {
   return (
-    <div className={`rounded-3xl border-2 border-ink p-5 ${accent}`}>
+    <div className={`card-3d p-5 ${accent}`}>
       <p className="font-mono text-[10px] uppercase tracking-widest opacity-80">{label}</p>
       <p className="mt-2 font-display text-4xl font-black leading-none">{value}</p>
     </div>

@@ -69,7 +69,7 @@ export function EmailOneDialog({ email, displayName, onClose }: Props) {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-lg rounded-3xl border-2 border-ink bg-cream p-6 shadow-2xl"
+        className="w-full max-w-lg card-3d bg-cream p-6"
       >
         <div className="flex items-start justify-between gap-3">
           <div>
