@@ -7,7 +7,7 @@ import { StatCard } from "@/components/StatCard";
 import { PollIndicator } from "@/components/PollIndicator";
 import { PhotoGallery } from "@/components/PhotoGallery";
 import { canonical, ogImage } from "@/lib/seo";
-import { sortedCampYears, type CampYear, type PollResult } from "@/data/camp-years";
+import { sortedCampYears, type CampYear } from "@/data/camp-years";
 
 const OG = ogImage("/og-default.jpg");
 
@@ -34,20 +34,6 @@ export const Route = createFileRoute("/through-the-years")({
   }),
 });
 
-// Scale-endpoint labels per question — kept separate from the data layer
-// since they're presentation, not survey data.
-function pollEndpoints(question: string): [string, string] {
-  if (/difficult/i.test(question)) return ["Very easy", "Very difficult"];
-  if (/fun/i.test(question)) return ["Not fun", "Extremely fun"];
-  if (/learning/i.test(question)) return ["Learned little", "Learned a lot"];
-  return ["Low", "High"];
-}
-
-function totalResponses(polls: PollResult[]): number {
-  if (polls.length === 0) return 0;
-  return Math.max(...polls.map((p) => p.responseCount));
-}
-
 function YearSection({ camp }: { camp: CampYear }) {
   return (
     <>
@@ -61,15 +47,10 @@ function YearSection({ camp }: { camp: CampYear }) {
             )}
           </Reveal>
           <Reveal amount={0.2}>
-            <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
+            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
               <StatCard label="Registrants" value={camp.registrants} accent="bg-electric text-cream" />
-              <StatCard
-                label="Survey responses"
-                value={totalResponses(camp.polls)}
-                accent="bg-sun text-ink"
-              />
               <StatCard label="Poll questions" value={camp.polls.length} accent="bg-coral text-cream" />
-              <StatCard label="Photos on file" value={camp.photos.length} accent="bg-cream text-ink" />
+              <StatCard label="Photos on file" value={camp.photos.length} accent="bg-sun text-ink" />
             </div>
           </Reveal>
         </div>
@@ -86,14 +67,11 @@ function YearSection({ camp }: { camp: CampYear }) {
               </h2>
             </Reveal>
             <div className="mt-10 grid gap-6 md:grid-cols-3">
-              {camp.polls.map((poll, i) => {
-                const [low, high] = pollEndpoints(poll.question);
-                return (
-                  <Reveal key={poll.question} delay={i * 0.15} amount={0.3}>
-                    <PollIndicator poll={poll} lowLabel={low} highLabel={high} />
-                  </Reveal>
-                );
-              })}
+              {camp.polls.map((poll, i) => (
+                <Reveal key={poll.question} delay={i * 0.15} amount={0.3}>
+                  <PollIndicator poll={poll} />
+                </Reveal>
+              ))}
             </div>
           </div>
         </section>

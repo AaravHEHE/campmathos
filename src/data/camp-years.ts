@@ -3,12 +3,25 @@
 // `campYears` below. The page and every component under it render
 // entirely from this array — nothing else needs to change.
 
+export interface PollBucket {
+  /** Response label as worded on the survey, e.g. "Very fun!" */
+  label: string;
+  /** Percentage of respondents who chose this bucket (0-100). */
+  percent: number;
+}
+
 export interface PollResult {
   question: string;
   scale: 1 | 5;
-  average: number;
-  responseCount: number;
-  distribution?: Record<1 | 2 | 3 | 4 | 5, number>;
+  /** Clean computed average (e.g. 4.2). Use when you have exact survey math. */
+  average?: number;
+  responseCount?: number;
+  /** Percentage breakdown by response bucket — use when only bucketed results are available rather than a computed average. */
+  buckets?: PollBucket[];
+  /** A single highlighted aggregate stat, for when only one summary percentage is available rather than a full bucket breakdown. */
+  summaryStat?: { percent: number; description: string };
+  /** Optional footnote shown under the visual, e.g. a caveat about precision. */
+  note?: string;
 }
 
 export interface CampPhoto {
@@ -32,17 +45,61 @@ export const campYears: CampYear[] = [
     registrants: 60,
     sessionDates: "July 7 – 30, 2026",
     polls: [
-      // TODO: replace with real poll data — averages and response counts
-      // below are placeholders until the end-of-camp survey results come in.
-      { question: "How difficult was the content?", scale: 5, average: 3.2, responseCount: 45 },
-      { question: "How fun was the camp?", scale: 5, average: 4.6, responseCount: 45 },
-      { question: "How would you rate the learning?", scale: 5, average: 4.4, responseCount: 45 },
+      {
+        question: "How difficult was the content?",
+        scale: 5,
+        // Only the aggregate "appropriately challenging" stat is available —
+        // no per-bucket breakdown for this question.
+        summaryStat: {
+          percent: 91.4,
+          description:
+            'found the difficulty appropriately challenging — "a little hard" to "a little easy," not either extreme',
+        },
+      },
+      {
+        question: "How fun was the camp?",
+        scale: 5,
+        buckets: [
+          { label: "Below the midpoint", percent: 0 },
+          { label: "In the middle", percent: 26.8 },
+          { label: "Fun", percent: 46.3 },
+          { label: "Very fun!", percent: 26.8 },
+        ],
+      },
+      {
+        question: "How would you rate MathOs overall?",
+        scale: 5,
+        buckets: [
+          { label: "1–2 stars", percent: 0 },
+          { label: "3 stars", percent: 31 },
+          { label: "4–5 stars", percent: 69 },
+        ],
+        note: "The 4- and 5-star ratings were split almost evenly.",
+      },
     ],
-    // TODO: add camp photos here once available, e.g.
-    // { src: "/through-the-years/2026/showcase.jpg", alt: "...", caption: "..." }
-    // Files should live under public/through-the-years/2026/. The gallery
-    // renders a tasteful empty state until then.
-    photos: [],
+    photos: [
+      {
+        src: "/through-the-years/2026/director-headset.jpg",
+        alt: "A Camp Director wearing a headset, teaching a session from a laptop",
+        caption: "Mid-session, headset on.",
+      },
+      {
+        src: "/through-the-years/2026/director-hp-laptop.jpg",
+        alt: "A Camp Director working at a laptop before a session",
+        caption: "Prepping before the room fills up.",
+      },
+      {
+        src: "/through-the-years/2026/directors-side-by-side.jpg",
+        alt: "Two Camp Directors sitting side by side at their laptops",
+        caption: "Two directors, two laptops, one lesson plan.",
+      },
+      {
+        src: "/through-the-years/2026/prepping-before-session.jpg",
+        alt: "Camp Directors getting set up before a session",
+        caption: "Getting things ready before campers log on.",
+      },
+      // TODO: add more camp photos here as they come in.
+    ],
   },
 ];
 
