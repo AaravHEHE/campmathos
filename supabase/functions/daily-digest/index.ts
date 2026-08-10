@@ -60,11 +60,13 @@ function digestHtml(rows: { email: string; created_at: string }[], total: number
 }
 
 Deno.serve(async (req) => {
-  // pg_cron authenticates with the project's anon key via the Authorization header
-  // (see supabase/migrations/20260420215054_..., which sends `Bearer <anon key>`).
-  const authHeader = req.headers.get("authorization") ?? "";
-  const provided = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : authHeader;
-  if (!SUPABASE_ANON_KEY || provided !== SUPABASE_ANON_KEY) {
+  // Only the scheduled pg_cron job may trigger this. It sends a private shared
+  // secret (DIGEST_HOOK_SECRET) that is never shipped to the browser bundle.
+  if (req.method !== "POST") {
+    return new Response("Method Not Allowed", { status: 405 });
+  }
+  const provided = req.headers.get("x-digest-secret") ?? "";
+  if (!DIGEST_HOOK_SECRET || provided !== DIGEST_HOOK_SECRET) {
     return new Response("Unauthorized", { status: 401 });
   }
 
