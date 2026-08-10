@@ -74,7 +74,7 @@ function Marquee() {
 function WeekTeaser({ week }: { week: Week }) {
   const [open, setOpen] = useState(false);
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl border-2 border-ink bg-cream p-8 transition hover:-translate-y-1 hover:shadow-[8px_8px_0_0_var(--ink)]">
+    <article className="group relative flex h-full flex-col overflow-hidden card-3d-hover bg-cream p-8">
       <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} className="block w-full text-left">
         <div className="flex items-start justify-between">
           <span className={`rounded-full px-4 py-1 font-mono text-xs font-bold ${week.accent}`}>Week {week.n}</span>
@@ -247,7 +247,7 @@ function Index() {
           </Reveal>
 
           <Reveal direction="up" amount={0.2} className="md:col-span-7">
-            <dl className="grid gap-px overflow-hidden rounded-3xl border-2 border-cream/20 bg-cream/10 md:grid-cols-2">
+            <dl className="grid gap-px overflow-hidden card-3d-inverse bg-cream/10 md:grid-cols-2">
               {[
                 ["When", "July 2026"],
                 ["Where", "Hybrid — in person + online"],
@@ -281,7 +281,7 @@ function Index() {
             </p>
           </Reveal>
           <Reveal direction="left" delay={0.1} className="md:col-span-5">
-            <div className="rounded-3xl border-2 border-ink bg-cream p-8">
+            <div className="card-3d bg-cream p-8">
               <p className="font-mono text-xs tracking-widest text-muted-foreground">Want more material?</p>
               <h3 className="mt-2 font-display text-3xl font-black">Reach out — we'll send more.</h3>
               <p className="mt-3 text-ink/70">
@@ -324,7 +324,7 @@ function Index() {
                   <Link
                     to="/faq"
                     hash={id}
-                    className="block rounded-2xl border-2 border-ink bg-cream px-6 py-4 font-display text-xl font-bold transition hover:bg-electric hover:text-cream"
+                    className="card-3d block bg-cream px-6 py-4 font-display text-xl font-bold transition hover:bg-electric hover:text-cream"
                   >
                     {q}
                   </Link>

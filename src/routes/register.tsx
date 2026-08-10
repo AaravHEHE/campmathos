@@ -114,7 +114,7 @@ function RegisterPage() {
 
 
           {status === "success" ? (
-            <div className="mt-10 rounded-3xl border-2 border-ink bg-sun p-8">
+            <div className="mt-10 card-3d bg-sun p-8">
               <p className="font-mono text-xs tracking-widest text-ink/70">
                 You're on the list
               </p>
@@ -126,7 +126,7 @@ function RegisterPage() {
                 with more details closer to the date of the camp. Questions? Reply to that email.
               </p>
 
-              <p className="mt-3 rounded-2xl border-2 border-ink bg-cream/60 px-4 py-3 font-mono text-xs text-ink/80">
+              <p className="mt-3 card-3d bg-cream/60 px-4 py-3 font-mono text-xs text-ink/80">
                 📬 Heads up: the email comes from <strong>CampMathos</strong> and may land in your{" "}
                 <strong>Spam</strong> or <strong>Junk</strong> folder — please check there and mark it
                 as "Not spam" so you don't miss our updates.
@@ -141,7 +141,7 @@ function RegisterPage() {
               </button>
             </div>
           ) : status === "duplicate" ? (
-            <div className="mt-10 rounded-3xl border-2 border-ink bg-electric p-8 text-cream">
+            <div className="mt-10 card-3d bg-electric p-8 text-cream">
               <p className="font-mono text-xs tracking-widest text-cream/70">
                 Already on the list
               </p>
@@ -197,7 +197,7 @@ function RegisterPage() {
                 </p>
               )}
 
-              <p className="mt-6 rounded-2xl border-2 border-ink bg-sun px-5 py-4 font-mono text-sm text-ink">
+              <p className="mt-6 card-3d bg-sun px-5 py-4 font-mono text-sm text-ink">
                 ✨ Sneak peek: MathOs 2027 will be a hybrid camp — join us in person or virtually. Our pilot year ran fully online to gauge the community's reaction, and it was such a hit that we're going hybrid so our out-of-state campers can still join.
               </p>
 

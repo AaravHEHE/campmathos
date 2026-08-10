@@ -251,6 +251,44 @@
     background-size: 32px 32px;
   }
 
+  .card-3d {
+    border-radius: var(--radius-3xl);
+    border: 2px solid var(--ink);
+    box-shadow: 6px 6px 0 0 var(--ink);
+  }
+  .dark .card-3d {
+    border-color: var(--cream);
+    box-shadow: 6px 6px 0 0 var(--cream);
+  }
+
+  .card-3d-hover {
+    border-radius: var(--radius-3xl);
+    border: 2px solid var(--ink);
+    box-shadow: 6px 6px 0 0 var(--ink);
+    transition: transform 150ms ease, box-shadow 150ms ease;
+  }
+  .dark .card-3d-hover {
+    border-color: var(--cream);
+    box-shadow: 6px 6px 0 0 var(--cream);
+  }
+  .card-3d-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 8px 8px 0 0 var(--ink);
+  }
+  .dark .card-3d-hover:hover {
+    box-shadow: 8px 8px 0 0 var(--cream);
+  }
+
+  .card-3d-inverse {
+    border-radius: var(--radius-3xl);
+    border: 2px solid oklch(0.96 0.02 90 / 0.35);
+    box-shadow: 6px 6px 0 0 oklch(0.96 0.02 90 / 0.35);
+  }
+  .dark .card-3d-inverse {
+    border-color: var(--cream);
+    box-shadow: 6px 6px 0 0 var(--cream);
+  }
+
   .noise {
     position: relative;
   }

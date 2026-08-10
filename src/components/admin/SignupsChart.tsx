@@ -71,7 +71,7 @@ export function SignupsChart({ rows, days = 30 }: Props) {
   const total = data.reduce((s, p) => s + p.count, 0);
 
   return (
-    <div className="rounded-3xl border-2 border-ink bg-cream p-5">
+    <div className="card-3d bg-cream p-5">
       <div className="flex items-end justify-between gap-3">
         <div>
           <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">

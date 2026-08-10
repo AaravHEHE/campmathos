@@ -117,7 +117,7 @@ function YearSection({ camp }: { camp: CampYear }) {
             <div className="mt-10 grid gap-6 md:grid-cols-2">
               {camp.testimonials.map((t, i) => (
                 <Reveal key={t.author + i} delay={i * 0.15} amount={0.3}>
-                  <figure className="h-full rounded-3xl border-2 border-ink/20 bg-ink/[0.03] p-8">
+                  <figure className="h-full card-3d bg-cream p-8">
                     <span className="font-display text-6xl font-black leading-none text-ink/20">"</span>
                     <blockquote className="-mt-4 font-display text-2xl font-medium italic leading-snug">
                       {t.quote}
