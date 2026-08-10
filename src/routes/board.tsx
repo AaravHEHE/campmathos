@@ -16,13 +16,13 @@ export const Route = createFileRoute("/board")({
       {
         name: "description",
         content:
-          "Meet the MathOs Camp Directors — the math team leading our free online summer applied math camp.",
+          "Meet the MathOs Camp Directors — the math team leading our free hybrid summer applied math camp.",
       },
       { property: "og:title", content: "Camp Directors — MathOs" },
       {
         property: "og:description",
         content:
-          "Meet the six Camp Directors behind MathOs, a free online summer applied math camp.",
+          "Meet the six Camp Directors behind MathOs, a free hybrid summer applied math camp.",
       },
       { property: "og:image", content: OG },
       { name: "twitter:card", content: "summary_large_image" },

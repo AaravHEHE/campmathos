@@ -15,13 +15,13 @@ export const Route = createFileRoute("/register")({
       {
         name: "description",
         content:
-          "Express interest in MathOs — the free online summer applied math camp on Zoom. No commitment; we'll send schedule and Zoom details before July.",
+          "Express interest in MathOs — the free hybrid summer applied math camp, in person or on Zoom. No commitment; we'll send schedule and joining details before July.",
       },
       { property: "og:title", content: "Express interest — MathOs summer camp" },
       {
         property: "og:description",
         content:
-          "Drop your email to express interest. No commitment required. MathOs is a completely free online summer math camp.",
+          "Drop your email to express interest. No commitment required. MathOs is a completely free hybrid summer math camp.",
       },
       { property: "og:image", content: OG },
       { name: "twitter:card", content: "summary_large_image" },
@@ -101,13 +101,13 @@ function RegisterPage() {
       <section className="grid-paper border-b-2 border-ink">
         <div className="mx-auto max-w-3xl px-6 py-20 md:py-28">
           <p className="font-mono text-sm tracking-widest text-muted-foreground">
-            MathOs '27 interest list
+            MathOs 2027 interest list
           </p>
           <h1 className="mt-3 font-display text-5xl font-black leading-[0.95] md:text-7xl">
             Curious? <span className="italic text-electric">Tell us.</span>
           </h1>
           <p className="mt-6 text-lg text-ink/75">
-            Sign up for MathOs '27 — just drop your email and we'll reach out closer to camp with
+            Sign up for MathOs 2027 — just drop your email and we'll reach out closer to camp with
             the full schedule and joining details. No commitment, and the camp itself is always
             free.
           </p>
@@ -150,7 +150,7 @@ function RegisterPage() {
               </h2>
               <p className="mt-3 text-cream/85">
                 We already have <strong>{email}</strong> on our interest list — no need to sign
-                up again. We'll be in touch closer to the camp with the schedule and Zoom
+                up again. We'll be in touch closer to the camp with the schedule and joining
                 details. Questions? Email{" "}
                 <a href="mailto:campmathos@gmail.com" className="underline">
                   campmathos@gmail.com
@@ -198,7 +198,7 @@ function RegisterPage() {
               )}
 
               <p className="mt-6 rounded-2xl border-2 border-ink bg-sun px-5 py-4 font-mono text-sm text-ink">
-                ✨ Sneak peek: MathOs '27 will be a hybrid camp — join us in person or virtually.
+                ✨ Sneak peek: MathOs 2027 will be a hybrid camp — join us in person or virtually. Our pilot year ran fully online to gauge the community's reaction, and it was such a hit that we're going hybrid so our out-of-state campers can still join.
               </p>
 
             </>

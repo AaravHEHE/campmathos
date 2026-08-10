@@ -21,13 +21,13 @@ export const Route = createFileRoute("/faq")({
       {
         name: "description",
         content:
-          "Answers to the most common questions about MathOs: cost, schedule, joining online, materials, prerequisites, and how to register.",
+          "Answers to the most common questions about MathOs: cost, schedule, joining in person or online, materials, prerequisites, and how to register.",
       },
       { property: "og:title", content: "FAQ — MathOs summer camp" },
       {
         property: "og:description",
         content:
-          "Cost, schedule, joining online, materials, prerequisites, and how to register.",
+          "Cost, schedule, joining in person or online, materials, prerequisites, and how to register.",
       },
       { property: "og:image", content: OG },
       { name: "twitter:card", content: "summary_large_image" },
@@ -65,7 +65,7 @@ const faqs: { id: string; q: string; a: string }[] = [
   {
     id: "schedule",
     q: "What days and times does the camp meet?",
-    a: "The camp runs on Tuesday and Thursday from July 7 through July 30, 2026, live online over Zoom. Each session is two hours, 3–5 PM Central, with a short break in the middle.",
+    a: "The camp runs on Tuesday and Thursday from July 7 through July 30, 2026, as a hybrid camp — campers can attend in person or join live over Zoom. Each session is two hours, 3–5 PM Central, with a short break in the middle.",
   },
   {
     id: "attendance",
@@ -75,7 +75,7 @@ const faqs: { id: string; q: string; a: string }[] = [
   {
     id: "joining",
     q: "How does my child join each session?",
-    a: "We email the Zoom link to every registered family before each session. Click the link a few minutes early — cameras are encouraged but not required, and mics can stay muted until it's time to share. Parents are welcome to sit in alongside their child.",
+    a: "MathOs is hybrid, so your child can attend in person or join online. We email the in-person location and the Zoom link to every registered family before each session. Online campers should click the link a few minutes early — cameras are encouraged but not required, and mics can stay muted until it's time to share. Parents are welcome to sit in alongside their child.",
   },
   {
     id: "snacks",

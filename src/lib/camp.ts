@@ -3,12 +3,12 @@
 
 export const CAMP = {
   name: "MathOs",
-  tagline: "Free online summer applied math camp",
-  // MathOs is fully online — sessions run over Zoom.
+  tagline: "Free hybrid summer applied math camp",
+  // MathOs is hybrid — campers join in person or live online over Zoom.
   platform: {
-    name: "Online (Zoom)",
+    name: "Hybrid — in person or online (Zoom)",
     // Joining link is shared with registered families closer to camp.
-    joinNote: "Zoom link sent by email before each session",
+    joinNote: "In-person location and Zoom link sent by email before each session",
   },
   // Camp runs Tue/Thu, 3:00–5:00 PM Central (America/Chicago, CDT = UTC-5 in July)
   // Use the FIRST session date as the canonical "start" for ics.

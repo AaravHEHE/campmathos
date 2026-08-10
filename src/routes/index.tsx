@@ -14,17 +14,17 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "MathOs — Free online summer applied math camp | Summer 2026" },
+      { title: "MathOs — Free hybrid summer applied math camp | Summer 2026" },
       {
         name: "description",
         content:
-          "Free online applied math camp. Live on Zoom, Tue/Thu 3–5 PM Central, July 7–30, 2026. Recommended skill range 4th–7th grade math.",
+          "Free hybrid applied math camp — join in person or live on Zoom. Tue/Thu 3–5 PM Central, July 7–30, 2026. Recommended skill range 4th–7th grade math.",
       },
-      { property: "og:title", content: "MathOs — Free online summer applied math camp" },
+      { property: "og:title", content: "MathOs — Free hybrid summer applied math camp" },
       {
         property: "og:description",
         content:
-          "Hands-on applied math from 4th-grade arithmetic through 7th. Completely free. Fully online via Zoom, summer 2026.",
+          "Hands-on applied math from 4th-grade arithmetic through 7th. Completely free. Hybrid — join in person or online via Zoom.",
       },
       { property: "og:image", content: OG },
       { property: "og:type", content: "website" },
@@ -52,7 +52,7 @@ function Marquee() {
     "★",
     "4th grade math → 7th",
     "★",
-    "Online · Zoom",
+    "Hybrid · In person + online",
     "★",
     "July",
     "★",
@@ -119,7 +119,7 @@ function Index() {
           <div className="md:col-span-7">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-ink bg-cream px-4 py-1.5 font-mono text-xs tracking-widest">
               <span className="h-2 w-2 rounded-full bg-coral" />
-              July 2026 · Live online over Zoom · 100% free
+              July 2026 · Hybrid — in person + online · 100% free
             </div>
             <h1 className="font-display text-[clamp(2.5rem,8vw,7.5rem)] font-black leading-[0.9] break-words">
               Math is the
@@ -129,8 +129,8 @@ function Index() {
               system.
             </h1>
             <p className="mt-8 max-w-xl text-lg text-ink/75 md:text-xl">
-              For 4th-grade math through 7th-grade, organized and taught live online by members of the Neuqua Valley
-              math team.
+              For 4th-grade math through 7th-grade, organized and taught in person and live online by members of the
+              Neuqua Valley math team.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Link
@@ -234,8 +234,9 @@ function Index() {
               When, where, <span className="italic text-sun">how much</span>.
             </h2>
             <p className="mt-6 max-w-md text-cream/70">
-              <Wordmark /> meets Tuesdays and Thursdays from 3–5 PM Central — live over Zoom — from July 7 through July
-              30, 2026.
+              <Wordmark /> meets Tuesdays and Thursdays from 3–5 PM Central — in person or live over Zoom — from July 7
+              through July 30, 2026. Our pilot year ran fully online to gauge how the community would respond; it was
+              such a hit that we shifted to a hybrid camp so our out-of-state campers can still join us.
             </p>
             <Link
               to="/details"
@@ -249,7 +250,7 @@ function Index() {
             <dl className="grid gap-px overflow-hidden rounded-3xl border-2 border-cream/20 bg-cream/10 md:grid-cols-2">
               {[
                 ["When", "July 2026"],
-                ["Where", "Online (Zoom)"],
+                ["Where", "Hybrid — in person + online"],
                 ["Days", "Tue · Thu"],
                 ["Time", "3–5 PM Central (2 hr)"],
                 ["Skill", "4th gr → 7th grade math"],
@@ -352,7 +353,7 @@ function Index() {
               Spend July <span className="italic">thinking</span> in math.
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-lg text-cream/85">
-              Completely free. Drop your email to let us know you're interested — we'll send the schedule and Zoom
+              Completely free. Drop your email to let us know you're interested — we'll send the schedule and
               joining details as July gets closer. No commitment required.
             </p>
             <Link

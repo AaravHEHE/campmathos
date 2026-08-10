@@ -20,13 +20,13 @@ export const Route = createFileRoute("/details")({
       {
         name: "description",
         content:
-          "Everything about MathOs in one place: what it is and why, the week-by-week curriculum, and the schedule, platform, and logistics for July 2026.",
+          "Everything about MathOs in one place: what it is and why, the week-by-week curriculum, and the schedule, format, and logistics for July 2026.",
       },
       { property: "og:title", content: "Details — MathOs mission, curriculum, and logistics" },
       {
         property: "og:description",
         content:
-          "What MathOs is, what campers learn week by week, and exactly how the free online sessions run.",
+          "What MathOs is, what campers learn week by week, and exactly how the free hybrid sessions run.",
       },
       { property: "og:image", content: OG },
       { name: "twitter:card", content: "summary_large_image" },
@@ -38,12 +38,12 @@ export const Route = createFileRoute("/details")({
 
 const facts: [string, string][] = [
   ["When", CAMP.humanDateRange],
-  ["Where", "Online — live over Zoom"],
+  ["Where", "Hybrid — in person or live over Zoom"],
   ["Days", CAMP.humanDays],
   ["Time", CAMP.humanTime],
   ["Session length", "2 hours (with a short break)"],
   ["Skill range", "4th grade math → 7th grade math (recommended)"],
-  ["Platform", "Zoom link sent before each session"],
+  ["Platform", "In-person location and Zoom link sent before each session"],
   ["Cost", "Completely free"],
 ];
 
@@ -134,7 +134,7 @@ function DetailsPage() {
             </h1>
             <p className="mt-6 max-w-2xl text-lg text-ink/75">
               The name comes from the Greek word for "learning." <Wordmark /> is a free, student-led
-              online summer program that teaches applied math — the kind engineers, analysts, and
+              hybrid summer program — join in person or online — that teaches applied math, the kind engineers, analysts, and
               architects actually use — through hands-on activities instead of lectures. No fees, no
               exams, no pressure. Everything you need to know is on this page.
             </p>
@@ -337,7 +337,7 @@ function DetailsPage() {
               <h2 className="mt-3 font-display text-5xl font-black leading-[0.95]">What you need.</h2>
               <ul className="mt-8 space-y-3 font-mono text-sm">
                 <li className="flex gap-3">
-                  <span className="text-coral">→</span>A laptop, desktop, tablet, or phone with Zoom
+                  <span className="text-coral">→</span>A laptop, desktop, tablet, or phone with Zoom (online campers)
                 </li>
                 <li className="flex gap-3">
                   <span className="text-coral">→</span>A reliable internet connection
@@ -359,9 +359,13 @@ function DetailsPage() {
               <p className="font-mono text-sm tracking-widest text-ink/60">Joining a session</p>
               <h2 className="mt-3 font-display text-5xl font-black leading-[0.95]">How it works.</h2>
               <p className="mt-6 text-lg text-ink/80">
-                We email the Zoom link to every registered family before each session. Cameras are
-                encouraged but not required; mics stay muted until it's time to share. Parents are
-                welcome to sit in — Camp Directors are happy to answer questions before or after class.
+                Camp is hybrid: come in person or join live over Zoom, whichever works for your family. We
+                email the in-person location and the Zoom link to every registered family before each
+                session. Online campers are encouraged (but never required) to turn cameras on; mics stay
+                muted until it's time to share. Parents are welcome to sit in — Camp Directors are happy to
+                answer questions before or after class. Our pilot year ran fully online to gauge how the
+                community would react, and because it was such a hit we moved to a hybrid format so our
+                out-of-state campers can still join.
               </p>
             </div>
           </Reveal>
