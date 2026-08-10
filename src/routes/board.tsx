@@ -68,7 +68,7 @@ function BoardPage() {
           </div>
 
           <Reveal direction="scale" amount={0.2}>
-            <div className="mt-16 rounded-3xl border-2 border-ink bg-ink p-10 text-cream md:p-14">
+            <div className="mt-16 card-3d-inverse bg-ink p-10 text-cream md:p-14">
               <p className="font-mono text-sm tracking-widest text-cream/60">Extra help</p>
               <h2 className="mt-3 font-display text-4xl font-black md:text-5xl">We meet kids where they are.</h2>
               <p className="mt-5 max-w-2xl text-cream/80">
