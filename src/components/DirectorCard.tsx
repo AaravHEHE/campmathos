@@ -13,7 +13,7 @@ function initials(name: string) {
 export function DirectorCard({ director, delay = 0 }: { director: Director; delay?: number }) {
   return (
     <Reveal delay={delay} amount={0.25}>
-      <article className="group flex flex-col rounded-3xl border-2 border-ink bg-cream p-8 transition hover:-translate-y-1 hover:shadow-[8px_8px_0_0_var(--ink)]">
+      <article className="group flex flex-col card-3d-hover bg-cream p-8">
         {/* Photo */}
         <div
           className={`relative flex h-56 w-full items-center justify-center overflow-hidden rounded-2xl border-2 border-ink ${director.accent}`}

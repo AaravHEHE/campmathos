@@ -5,7 +5,7 @@ function SummaryStat({ poll }: { poll: PollResult }) {
   const stat = poll.summaryStat!;
   const summary = `${poll.question}: ${stat.percent}% ${stat.description}.`;
   return (
-    <div role="group" aria-label={summary} className="rounded-3xl border-2 border-ink bg-cream p-6">
+    <div role="group" aria-label={summary} className="card-3d bg-cream p-6">
       <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">{poll.question}</p>
       <p className="mt-3 font-display text-5xl font-black">{stat.percent}%</p>
       <p className="mt-3 text-sm text-ink/70">{stat.description}</p>
@@ -18,7 +18,7 @@ function BucketBars({ poll }: { poll: PollResult }) {
   const buckets = poll.buckets!;
   const summary = `${poll.question}: ${buckets.map((b) => `${b.label} ${b.percent}%`).join(", ")}.`;
   return (
-    <div role="group" aria-label={summary} className="rounded-3xl border-2 border-ink bg-cream p-6">
+    <div role="group" aria-label={summary} className="card-3d bg-cream p-6">
       <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">{poll.question}</p>
       <div className="mt-4 space-y-3" aria-hidden="true">
         {buckets.map((b) => (
@@ -46,7 +46,7 @@ function AverageBar({ poll }: { poll: PollResult }) {
     poll.responseCount ? `, from ${poll.responseCount} responses` : ""
   }.`;
   return (
-    <div role="group" aria-label={summary} className="rounded-3xl border-2 border-ink bg-cream p-6">
+    <div role="group" aria-label={summary} className="card-3d bg-cream p-6">
       <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">{poll.question}</p>
       <p className="mt-3 font-display text-4xl font-black">
         {poll.average!.toFixed(1)}

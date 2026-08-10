@@ -4,7 +4,7 @@ import type { CampPhoto } from "@/data/camp-years";
 export function PhotoGallery({ photos }: { photos: CampPhoto[] }) {
   if (photos.length === 0) {
     return (
-      <div className="rounded-3xl border-2 border-dashed border-ink/25 bg-cream/60 p-10 text-center">
+      <div className="card-3d border-dashed border-ink/25 bg-cream/60 p-10 text-center">
         <p className="font-mono text-sm text-ink/50">Photos from this year are coming soon.</p>
       </div>
     );
@@ -13,7 +13,7 @@ export function PhotoGallery({ photos }: { photos: CampPhoto[] }) {
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {photos.map((p) => (
-        <figure key={p.src} className="overflow-hidden rounded-3xl border-2 border-ink bg-cream">
+        <figure key={p.src} className="overflow-hidden card-3d bg-cream">
           <div className="flex h-64 w-full items-center justify-center bg-ink/5">
             <img
               src={p.src}
