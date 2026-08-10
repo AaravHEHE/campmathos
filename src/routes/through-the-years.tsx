@@ -38,7 +38,7 @@ function YearSection({ camp }: { camp: CampYear }) {
   return (
     <>
       {/* Headline stats */}
-      <section className="grid-paper border-b-2 border-ink bg-cream text-ink">
+      <section className="grid-paper bg-cream text-ink">
         <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
           <Reveal>
             <p className="font-mono text-sm tracking-widest text-muted-foreground">{camp.year} at a glance</p>
@@ -183,7 +183,7 @@ function ThroughTheYearsPage() {
       <SiteHeader />
 
       {/* HEADER */}
-      <section className="grid-paper border-b-2 border-ink">
+      <section className="grid-paper">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
           <p className="font-mono text-sm tracking-widest text-muted-foreground">Archive</p>
           <h1 className="mt-3 font-display text-5xl font-black leading-[0.95] md:text-7xl">
@@ -197,7 +197,7 @@ function ThroughTheYearsPage() {
       </section>
 
       {/* YEAR NAVIGATION */}
-      <section className="border-b-2 border-ink">
+      <section className="grid-paper">
         <div className="mx-auto max-w-7xl px-6 pt-10">
           {years.length > 1 ? (
             <div
