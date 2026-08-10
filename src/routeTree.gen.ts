@@ -15,11 +15,15 @@ import { Route as BoardHistoryRouteImport } from './routes/board-history'
 import { Route as DetailsRouteImport } from './routes/details'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as MathosDoticsRouteImport } from './routes/mathos[.]ics'
+import { Route as McpRouteImport } from './routes/mcp'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ThroughTheYearsRouteImport } from './routes/through-the-years'
+import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
+import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as ApiPublicHooksSyncFormEmailsRouteImport } from './routes/api.public.hooks.sync-form-emails'
 
 const IndexRoute = IndexRouteImport.update({
@@ -52,6 +56,11 @@ const MathosDoticsRoute = MathosDoticsRouteImport.update({
   path: '/mathos.ics',
   getParentRoute: () => rootRouteImport,
 } as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
@@ -67,6 +76,18 @@ const ThroughTheYearsRoute = ThroughTheYearsRouteImport.update({
   path: '/through-the-years',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Char91DotmcpChar93ListToolsRoute =
+  Char91DotmcpChar93ListToolsRouteImport.update({
+    id: '/.mcp/list-tools',
+    path: '/.mcp/list-tools',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const Char91DotwellKnownChar93OauthProtectedResourceRoute =
+  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
+    id: '/.well-known/oauth-protected-resource',
+    path: '/.well-known/oauth-protected-resource',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/admin/',
   path: '/admin/',
@@ -77,6 +98,12 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   path: '/admin/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Char91DotmcpChar93InvokeToolToolRoute =
+  Char91DotmcpChar93InvokeToolToolRouteImport.update({
+    id: '/.mcp/invoke-tool/$tool',
+    path: '/.mcp/invoke-tool/$tool',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicHooksSyncFormEmailsRoute =
   ApiPublicHooksSyncFormEmailsRouteImport.update({
     id: '/api/public/hooks/sync-form-emails',
@@ -91,11 +118,15 @@ export interface FileRoutesByFullPath {
   '/details': typeof DetailsRoute
   '/faq': typeof FaqRoute
   '/mathos.ics': typeof MathosDoticsRoute
+  '/mcp': typeof McpRoute
   '/register': typeof RegisterRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/through-the-years': typeof ThroughTheYearsRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/': typeof AdminIndexRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/hooks/sync-form-emails': typeof ApiPublicHooksSyncFormEmailsRoute
 }
 export interface FileRoutesByTo {
@@ -105,11 +136,15 @@ export interface FileRoutesByTo {
   '/details': typeof DetailsRoute
   '/faq': typeof FaqRoute
   '/mathos.ics': typeof MathosDoticsRoute
+  '/mcp': typeof McpRoute
   '/register': typeof RegisterRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/through-the-years': typeof ThroughTheYearsRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin': typeof AdminIndexRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/hooks/sync-form-emails': typeof ApiPublicHooksSyncFormEmailsRoute
 }
 export interface FileRoutesById {
@@ -120,11 +155,15 @@ export interface FileRoutesById {
   '/details': typeof DetailsRoute
   '/faq': typeof FaqRoute
   '/mathos.ics': typeof MathosDoticsRoute
+  '/mcp': typeof McpRoute
   '/register': typeof RegisterRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/through-the-years': typeof ThroughTheYearsRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/': typeof AdminIndexRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/hooks/sync-form-emails': typeof ApiPublicHooksSyncFormEmailsRoute
 }
 export interface FileRouteTypes {
@@ -136,11 +175,15 @@ export interface FileRouteTypes {
     | '/details'
     | '/faq'
     | '/mathos.ics'
+    | '/mcp'
     | '/register'
     | '/sitemap.xml'
     | '/through-the-years'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/admin/login'
     | '/admin/'
+    | '/.mcp/invoke-tool/$tool'
     | '/api/public/hooks/sync-form-emails'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -150,11 +193,15 @@ export interface FileRouteTypes {
     | '/details'
     | '/faq'
     | '/mathos.ics'
+    | '/mcp'
     | '/register'
     | '/sitemap.xml'
     | '/through-the-years'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/admin/login'
     | '/admin'
+    | '/.mcp/invoke-tool/$tool'
     | '/api/public/hooks/sync-form-emails'
   id:
     | '__root__'
@@ -164,11 +211,15 @@ export interface FileRouteTypes {
     | '/details'
     | '/faq'
     | '/mathos.ics'
+    | '/mcp'
     | '/register'
     | '/sitemap.xml'
     | '/through-the-years'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/admin/login'
     | '/admin/'
+    | '/.mcp/invoke-tool/$tool'
     | '/api/public/hooks/sync-form-emails'
   fileRoutesById: FileRoutesById
 }
@@ -179,11 +230,15 @@ export interface RootRouteChildren {
   DetailsRoute: typeof DetailsRoute
   FaqRoute: typeof FaqRoute
   MathosDoticsRoute: typeof MathosDoticsRoute
+  McpRoute: typeof McpRoute
   RegisterRoute: typeof RegisterRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ThroughTheYearsRoute: typeof ThroughTheYearsRoute
+  Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
+  Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AdminLoginRoute: typeof AdminLoginRoute
   AdminIndexRoute: typeof AdminIndexRoute
+  Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   ApiPublicHooksSyncFormEmailsRoute: typeof ApiPublicHooksSyncFormEmailsRoute
 }
 
@@ -231,6 +286,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MathosDoticsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/register': {
       id: '/register'
       path: '/register'
@@ -252,6 +314,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ThroughTheYearsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/.mcp/list-tools': {
+      id: '/.mcp/list-tools'
+      path: '/.mcp/list-tools'
+      fullPath: '/.mcp/list-tools'
+      preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.well-known/oauth-protected-resource': {
+      id: '/.well-known/oauth-protected-resource'
+      path: '/.well-known/oauth-protected-resource'
+      fullPath: '/.well-known/oauth-protected-resource'
+      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/': {
       id: '/admin/'
       path: '/admin'
@@ -264,6 +340,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/login'
       fullPath: '/admin/login'
       preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.mcp/invoke-tool/$tool': {
+      id: '/.mcp/invoke-tool/$tool'
+      path: '/.mcp/invoke-tool/$tool'
+      fullPath: '/.mcp/invoke-tool/$tool'
+      preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/hooks/sync-form-emails': {
@@ -283,11 +366,16 @@ const rootRouteChildren: RootRouteChildren = {
   DetailsRoute: DetailsRoute,
   FaqRoute: FaqRoute,
   MathosDoticsRoute: MathosDoticsRoute,
+  McpRoute: McpRoute,
   RegisterRoute: RegisterRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   ThroughTheYearsRoute: ThroughTheYearsRoute,
+  Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
+  Char91DotwellKnownChar93OauthProtectedResourceRoute:
+    Char91DotwellKnownChar93OauthProtectedResourceRoute,
   AdminLoginRoute: AdminLoginRoute,
   AdminIndexRoute: AdminIndexRoute,
+  Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   ApiPublicHooksSyncFormEmailsRoute: ApiPublicHooksSyncFormEmailsRoute,
 }
 export const routeTree = rootRouteImport
