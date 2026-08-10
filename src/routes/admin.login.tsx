@@ -86,6 +86,10 @@ function AdminLoginPage() {
     }
 
     markAdminSignedIn();
+    if (redirectTo) {
+      window.location.href = redirectTo;
+      return;
+    }
     navigate({ to: "/admin" });
   };
 
