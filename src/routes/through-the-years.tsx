@@ -38,12 +38,19 @@ function YearSection({ camp }: { camp: CampYear }) {
   return (
     <>
       {/* Headline stats */}
-      <section className="border-b-2 border-ink bg-ink text-cream">
+      <section className="grid-paper border-b-2 border-ink bg-cream text-ink">
         <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
           <Reveal>
-            <p className="font-mono text-sm tracking-widest text-cream/60">{camp.year} at a glance</p>
+            <p className="font-mono text-sm tracking-widest text-muted-foreground">{camp.year} at a glance</p>
             {camp.sessionDates && (
               <p className="mt-2 font-display text-2xl font-black md:text-3xl">{camp.sessionDates}</p>
+            )}
+            {camp.year === 2026 && (
+              <p className="mt-4 max-w-2xl text-ink/75">
+                2026 was our pilot year, so we ran camp fully online to gauge how the community would
+                react. It was such a hit that we've shifted to a hybrid camp — in person and online —
+                so our out-of-state campers can still join us.
+              </p>
             )}
           </Reveal>
           <Reveal amount={0.2}>
@@ -62,7 +69,7 @@ function YearSection({ camp }: { camp: CampYear }) {
                   <StatCard
                     label="Schools reached"
                     value={camp.reach.schools}
-                    accent="bg-cream text-ink"
+                    accent="bg-sun text-ink"
                   />
                   <StatCard
                     label="Grade levels enrolled"
@@ -99,10 +106,10 @@ function YearSection({ camp }: { camp: CampYear }) {
 
       {/* Testimonials */}
       {camp.testimonials && camp.testimonials.length > 0 && (
-        <section className="border-b-2 border-ink bg-ink text-cream">
+        <section className="border-b-2 border-ink bg-cream text-ink">
           <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
             <Reveal>
-              <p className="font-mono text-sm tracking-widest text-cream/60">In their words</p>
+              <p className="font-mono text-sm tracking-widest text-muted-foreground">In their words</p>
               <h2 className="mt-2 font-display text-4xl font-black leading-[0.95] md:text-5xl">
                 What families told us.
               </h2>
@@ -110,12 +117,12 @@ function YearSection({ camp }: { camp: CampYear }) {
             <div className="mt-10 grid gap-6 md:grid-cols-2">
               {camp.testimonials.map((t, i) => (
                 <Reveal key={t.author + i} delay={i * 0.15} amount={0.3}>
-                  <figure className="h-full rounded-3xl border-2 border-cream/25 bg-cream/5 p-8">
-                    <span className="font-display text-6xl font-black leading-none text-cream/20">"</span>
+                  <figure className="h-full rounded-3xl border-2 border-ink/20 bg-ink/[0.03] p-8">
+                    <span className="font-display text-6xl font-black leading-none text-ink/20">"</span>
                     <blockquote className="-mt-4 font-display text-2xl font-medium italic leading-snug">
                       {t.quote}
                     </blockquote>
-                    <figcaption className="mt-6 font-mono text-xs uppercase tracking-widest text-cream/60">
+                    <figcaption className="mt-6 font-mono text-xs uppercase tracking-widest text-muted-foreground">
                       — {t.author}
                     </figcaption>
                   </figure>
@@ -214,7 +221,7 @@ function ThroughTheYearsPage() {
               ))}
             </div>
           ) : (
-            <p className="font-mono text-sm tracking-widest text-muted-foreground">{camp?.year} camp</p>
+            <p className="font-mono text-sm tracking-widest text-electric">{camp?.year} camp</p>
           )}
         </div>
       </section>
