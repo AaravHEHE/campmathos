@@ -1,4 +1,4 @@
-// Edge function: daily digest of new sign-ups (last 24h) emailed to the director.
+// Edge function: weekly digest of new sign-ups (last 7 days) emailed to the director.
 // Triggered by pg_cron. Sends from campmathos@gmail.com via Gmail SMTP.
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { sendGmail, closeGmail } from "../_shared/gmail.ts";
@@ -32,8 +32,8 @@ function digestHtml(rows: { email: string; created_at: string }[], total: number
     })
     .join("");
   const body = rows.length === 0
-    ? `<p style="margin:0 0 16px;font-size:16px;line-height:1.5;">No new sign-ups in the last 24 hours.</p>`
-    : `<p style="margin:0 0 12px;font-size:16px;line-height:1.5;"><strong>${rows.length}</strong> new sign-up${rows.length === 1 ? "" : "s"} in the last 24 hours:</p>
+    ? `<p style="margin:0 0 16px;font-size:16px;line-height:1.5;">No new sign-ups in the last 7 days.</p>`
+    : `<p style="margin:0 0 12px;font-size:16px;line-height:1.5;"><strong>${rows.length}</strong> new sign-up${rows.length === 1 ? "" : "s"} in the last 7 days:</p>
        <ul style="margin:0 0 16px 20px;padding:0;font-size:14px;line-height:1.6;">${list}</ul>`;
 
   return `
@@ -43,7 +43,7 @@ function digestHtml(rows: { email: string; created_at: string }[], total: number
     <tr><td align="center">
       <table width="560" cellpadding="0" cellspacing="0" style="background:#ffffff;border:2px solid #1a1a2e;border-radius:16px;padding:32px;">
         <tr><td>
-          <p style="margin:0 0 8px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#666;">Mathos Camp · Daily Digest</p>
+          <p style="margin:0 0 8px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#666;">Mathos Camp · Weekly Digest</p>
           <h1 style="margin:0 0 16px;font-size:24px;line-height:1.1;">Sign-ups summary</h1>
           ${body}
           <p style="margin:24px 0 0;font-size:13px;color:#666;">
@@ -75,7 +75,7 @@ Deno.serve(async (req) => {
       auth: { persistSession: false, autoRefreshToken: false },
     });
 
-    const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+    const since = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
     const { data: recent, error: recentErr } = await supabase
       .from("registrations")
       .select("email, created_at")
@@ -90,8 +90,8 @@ Deno.serve(async (req) => {
 
     const rows = recent ?? [];
     const subject = rows.length === 0
-      ? "Mathos daily digest: 0 new sign-ups"
-      : `Mathos daily digest: ${rows.length} new sign-up${rows.length === 1 ? "" : "s"}`;
+      ? "Mathos weekly digest: 0 new sign-ups"
+      : `Mathos weekly digest: ${rows.length} new sign-up${rows.length === 1 ? "" : "s"}`;
 
     await sendGmail({
       to: DIRECTOR_NOTIFY,
