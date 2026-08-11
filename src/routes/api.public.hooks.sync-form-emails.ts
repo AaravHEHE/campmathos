@@ -32,15 +32,34 @@ async function syncEmails() {
   if (!sheetsKey) throw new Error('GOOGLE_SHEETS_API_KEY missing');
 
   const url = `https://connector-gateway.lovable.dev/google_sheets/v4/spreadsheets/${SPREADSHEET_ID}/values/${encodeURI(SHEET_RANGE)}`;
-  const res = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${lovableKey}`,
-      'X-Connection-Api-Key': sheetsKey,
-    },
-  });
-  if (!res.ok) {
-    throw new Error(`Sheets fetch failed ${res.status}: ${await res.text()}`);
+
+  // Transient failures (429 quota, 502/503/504 gateway) are common here.
+  // Retry a few times with exponential backoff before giving up on the batch.
+  const RETRYABLE = new Set([429, 500, 502, 503, 504]);
+  let res: Response | undefined;
+  let lastErr = '';
+  for (let attempt = 0; attempt < 4; attempt++) {
+    if (attempt > 0) {
+      await new Promise((r) => setTimeout(r, 500 * 2 ** (attempt - 1)));
+    }
+    try {
+      res = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${lovableKey}`,
+          'X-Connection-Api-Key': sheetsKey,
+        },
+      });
+    } catch (e) {
+      lastErr = e instanceof Error ? e.message : String(e);
+      res = undefined;
+      continue;
+    }
+    if (res.ok) break;
+    lastErr = `Sheets fetch failed ${res.status}: ${await res.text()}`;
+    if (!RETRYABLE.has(res.status)) throw new Error(lastErr);
+    res = undefined;
   }
+  if (!res) throw new Error(lastErr || 'Sheets fetch failed');
   const json = (await res.json()) as { values?: string[][] };
 
   // Build one row per form response (per student). Same email may repeat.
