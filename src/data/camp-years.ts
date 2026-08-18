@@ -51,7 +51,7 @@ export interface CampYear {
 export const campYears: CampYear[] = [
   {
     year: 2026,
-    registrants: 60,
+    registrants: "60+",
     sessionDates: "July 7 – 30, 2026",
     reach: { timezones: 3, states: 5, schools: 18, gradeLevels: 6 },
     polls: [
