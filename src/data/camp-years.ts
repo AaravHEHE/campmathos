@@ -37,7 +37,8 @@ export interface Testimonial {
 
 export interface CampYear {
   year: number;
-  registrants: number;
+  registrants: string | number;
+
   sessionDates?: string;
   /** Geographic reach — how far campers were spread out, not just local turnout. */
   reach?: { timezones: number; states: number; schools: number; gradeLevels: number };
