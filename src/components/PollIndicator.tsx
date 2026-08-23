@@ -27,9 +27,10 @@ function BucketBars({ poll }: { poll: PollResult }) {
               <span className="text-ink/70">{b.label}</span>
               <span className="font-bold text-ink">{b.percent}%</span>
             </div>
-            <div className="mt-1 h-2.5 w-full overflow-hidden rounded-full border border-ink/30 bg-cream">
-              <div className="h-full bg-ink" style={{ width: `${b.percent}%` }} />
+            <div className="mt-1 h-2.5 w-full overflow-hidden rounded-full border border-ink/30 bg-ink/10">
+              <div className="h-full bg-primary" style={{ width: `${b.percent}%` }} />
             </div>
+
           </div>
         ))}
       </div>
@@ -56,7 +57,7 @@ function AverageBar({ poll }: { poll: PollResult }) {
         {segments.map((n) => (
           <span
             key={n}
-            className={`h-3 flex-1 rounded-full border-2 border-ink ${n <= filled ? "bg-ink" : "bg-cream"}`}
+            className={`h-3 flex-1 rounded-full border-2 border-ink/40 ${n <= filled ? "bg-primary" : "bg-ink/10"}`}
           />
         ))}
       </div>
