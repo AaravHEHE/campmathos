@@ -82,6 +82,28 @@ function BoardPage() {
               </p>
             </div>
           </Reveal>
+
+          <Reveal direction="scale" amount={0.2}>
+            <div className="mt-10 card-3d-inverse bg-ink p-10 text-cream md:p-14">
+              <p className="font-mono text-sm tracking-widest text-cream/60">Join the team</p>
+              <h2 className="mt-3 font-display text-4xl font-black md:text-5xl">
+                Want to help run next year's camp?
+              </h2>
+              <p className="mt-5 max-w-2xl text-cream/80">
+                MathOs is entirely student-run, and the board turns over every year. If you're
+                interested in becoming a Camp Director, fill out this form and we'll follow up.
+              </p>
+              <a
+                href="[GOOGLE_FORM_URL_HERE]"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 inline-flex min-h-11 items-center rounded-full border-2 border-cream bg-cream px-6 py-3 font-semibold text-ink transition hover:bg-ink hover:text-cream"
+              >
+                Apply to be a Camp Director →
+              </a>
+            </div>
+          </Reveal>
+
         </div>
       </section>
 
