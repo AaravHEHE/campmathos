@@ -1,51 +1,86 @@
-# Batch 1: photo picks for Through the Years (2026)
+# 2026 Through the Years — combined image ranking
 
-Eight screenshots came in. Here's my call on each, plus what needs to happen before any of them go on the page.
+This ranking covers the first 19 visible screenshots. One final image is still pending, so no files will be published until that last image is ranked.
 
-## Use — strong picks
+## Current finalists
 
-1. **"Applications of the Coordinate Plane" slide** (`Screenshot_2026-07-09_151349`)
-   Best single image of the batch: real lesson content that shows what camp actually teaches. **Must be cropped** to just the shared slide — the current shot includes the Zoom participant list with camper first names, a private chat pane, browser tabs, and the Windows taskbar.
+1. **Student final project city graph** (`Screenshot_2026-08-18_214003`)
+   Strongest proof of what campers created. Crop out the student’s full name, browser interface, webcam tile, and all meeting details.
 
-2. **"Application, Which Triangle is Best?" slide** (`Screenshot_2026-08-18_213506`)
-   Great applied-math example (disaster-relief shelter design). Crop out the top browser banner. The Camp Director's webcam tile in the corner can stay — that's a director, not a camper.
+2. **Applications of the Coordinate Plane** (`Screenshot_2026-07-09_151349`)
+   Excellent overview of real-world math applications. Crop tightly to the shared slide.
 
-3. **"Best techniques for studying Geometry" slide** (`Screenshot_2026-08-18_213343`)
-   Clean, on-brand, ties directly to the Geometry curriculum theme. Same crop treatment.
+3. **Which Triangle is Best?** (`Screenshot_2026-08-18_213506`)
+   Memorable applied-geometry challenge involving disaster-relief shelters. Remove the meeting/browser strip; retain the Camp Director tile only if the final crop remains balanced.
 
-4. **Blooket "Final Standings" podium** (`Screenshot_2026-08-18_213410`)
-   Shows the fun/gamified side of camp. Nicknames only (amy, ivy, "hello people") — low privacy risk. Crop the top banner.
+4. **Amazon and FedEx optimization** (`Screenshot_2026-08-18_212848`)
+   Strong real-world optimization example and visually readable at gallery size. Crop away the outer meeting frame and participant count.
 
-5. **Student final project city graph** (`Screenshot_2026-08-18_214003`)
-   Excellent proof of student work — a full coordinate-plane city plan with a color legend. **Must crop the student's full name out of the document title**, and crop the browser chrome and the camper webcam tile in the corner.
+5. **First Moment of Area** (`Screenshot_2026-08-18_213722`)
+   Shows advanced, engineering-connected material and live annotation. Remove the black meeting strip, viewing-activity banner, participant count, and any visible camper annotation name.
 
-## Use with heavier editing
+6. **Blooket Final Standings — amy / ivy / hello people** (`Screenshot_2026-08-18_213410`)
+   Best clean image of the camp’s gamified activities. Crop away the black meeting strip, viewing-activity banner, participant count, and Director tile if needed.
 
-6. **Blooket live leaderboard** (`Screenshot_2026-08-18_212719`)
-   Good energy, but it duplicates #4 and shows a Camp Director's face plus a personal bookmarks bar. If we want two Blooket images, keep this one and crop tightly to the leaderboard panel only; otherwise skip it in favor of #4.
+7. **What is Mutually Exclusive?** (`Screenshot_2026-08-18_213012`)
+   Bright, clean probability visual that broadens the curriculum represented in the gallery.
 
-## Skip
+8. **Linear Inequalities** (`Screenshot_2026-08-18_212819`)
+   Clear graphing lesson with strong visual content. Remove the outer meeting frame and participant count.
 
-7. **Zoom + Blooket "Oops something went wrong"** (`Screenshot_2026-07-09_154905`)
-   Camper faces on webcam, camper names in the participant list, and a visible error message. Not usable.
+9. **Best Techniques for Studying Geometry** (`Screenshot_2026-08-18_213343`)
+   Useful geometry representation, though less visual than the higher-ranked lesson slides. Remove the black meeting strip, banner, and participant count.
 
-8. **"Impostors Win" screen** (`Screenshot_2026-08-18_213611`)
-   Mostly black space, no math content, reads as off-topic. Skip.
+10. **Transfer and Conservation** (`Screenshot_2026-08-18_213535`)
+    Good surface-area-versus-volume graph and advanced-content signal. Remove the black meeting strip, banner, and participant count.
 
-9. **City planning rubric Google Doc** (`Screenshot_2026-08-18_213838`)
-   Dense small text that will be unreadable at gallery size. Better used later as curriculum-page material than as a photo.
+## Alternates
 
-## Cross-cutting rules I'll apply to every image
+11. **What Has Counting to Do With This?** (`Screenshot_2026-08-18_212936`)
+    Clean probability slide, but overlaps with the stronger mutually-exclusive visual.
 
-- Crop out all browser chrome, tabs, bookmarks, taskbars, and Zoom UI panels.
-- No camper faces and no camper full names anywhere in frame.
-- Camp Directors on camera are fine.
-- Each gets a short caption in the camp's voice and descriptive alt text.
+12. **Blooket Final Standings — Devin / Gautam / Kavya** (`Screenshot_2026-07-09_160234`)
+    Energetic activity image, but the cleaner podium screenshot at rank 6 should be used first. A tight crop would need to remove all Zoom chrome, faces, chat, and participant count.
 
-## Technical notes
+13. **Blooket live leaderboard — orange theme** (`Screenshot_2026-08-18_212719`)
+    Good activity energy, but redundant after one podium image. Remove browser chrome, Director tile, and participant count if selected.
 
-Approved images get cropped with PIL, saved into `public/through-the-years/2026/`, and appended to the `photos` array of the 2026 entry in `src/data/camp-years.ts`. Nothing else changes — `PhotoGallery` already renders whatever is in that array, lazy-loaded and responsive.
+14. **Lesson Contents** (`Screenshot_2026-07-09_150812`)
+    Shows curriculum breadth but is less engaging than an actual worked lesson. Only usable as a tight slide crop with all faces, names, chat, browser chrome, and participant count removed.
 
-## Next steps
+15. **City Planning Requirements document** (`Screenshot_2026-08-18_213838`)
+    Good evidence of project depth, but text will be small in the gallery. Could support the city-graph image if room remains. Crop all document/editor chrome, Director tile, and participant count.
 
-Since two more upload batches are coming (11 more images), I'd suggest holding the actual crop-and-publish work until all three batches are in, so the gallery can be curated as a set rather than appended piecemeal — the final order should tell a story (lesson → activity → student work), not follow upload order. Say the word if you'd rather I ship batch 1 now.
+## Exclude
+
+16. **Blooket live leaderboard — Zoom view** (`Screenshot_2026-07-09_155705`)
+    Redundant, privacy-heavy, and dominated by Zoom chrome.
+
+17. **Blooket with visible error** (`Screenshot_2026-07-09_154905`)
+    Exclude because it contains camper faces, chat, participant data, and an error banner.
+
+18. **Correlation game in Zoom** (`Screenshot_2026-07-09_161930`)
+    Exclude because camper faces, names, chat messages, links, and an error banner overwhelm the useful content.
+
+19. **Impostors Win** (`Screenshot_2026-08-18_213611`)
+    Exclude because it has little visible connection to math camp and too much empty space.
+
+## Mandatory crop and privacy rules
+
+Apply these to **every selected image**, without exception:
+
+- Crop out the **number of participants / participant count** wherever it appears.
+- Remove participant lists, camper names, camper faces, chat messages, direct messages, meeting IDs, and links.
+- Remove browser tabs, address bars, bookmarks, desktop taskbars, Zoom toolbars, black meeting strips, viewing-activity banners, and error notices.
+- Remove student full names from document titles or project files.
+- Camp Director webcam tiles may remain only when no camper information is visible and the crop still looks intentional.
+- Prefer a clean 16:9 or 4:3 crop that keeps the main lesson or activity readable.
+
+## Final implementation after the last upload
+
+1. Add the last image to this ranking and choose a balanced final set rather than publishing every usable screenshot.
+2. Crop and sanitize each finalist, including mandatory removal of every participant count.
+3. Store the optimized images through the project asset flow.
+4. Add them to the 2026 `photos` collection with concise captions and descriptive alt text.
+5. Order the gallery as a story: live teaching → applied lessons → game/activity → student project.
+6. Verify the gallery on mobile and desktop without changing any other page.
