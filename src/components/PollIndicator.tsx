@@ -57,7 +57,7 @@ function AverageBar({ poll }: { poll: PollResult }) {
         {segments.map((n) => (
           <span
             key={n}
-            className={`h-3 flex-1 rounded-full border-2 border-ink ${n <= filled ? "bg-ink" : "bg-cream"}`}
+            className={`h-3 flex-1 rounded-full border-2 border-ink/40 ${n <= filled ? "bg-primary" : "bg-ink/10"}`}
           />
         ))}
       </div>
