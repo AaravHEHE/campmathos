@@ -3,6 +3,24 @@
 // `campYears` below. The page and every component under it render
 // entirely from this array — nothing else needs to change.
 
+import amazonFedex from "@/assets/camp2026/amazon-fedex-optimization.jpg.asset.json";
+import whichTriangle from "@/assets/camp2026/which-triangle-is-best.jpg.asset.json";
+import coordinatePlane from "@/assets/camp2026/coordinate-plane-applications.jpg.asset.json";
+import cityPlanGraph from "@/assets/camp2026/student-city-plan-graph.jpg.asset.json";
+import transferConservation from "@/assets/camp2026/transfer-and-conservation.jpg.asset.json";
+import firstMomentArea from "@/assets/camp2026/first-moment-of-area.jpg.asset.json";
+import correlationCoefficient from "@/assets/camp2026/correlation-coefficient.jpg.asset.json";
+import countingProbability from "@/assets/camp2026/counting-and-probability.jpg.asset.json";
+import linearInequalities from "@/assets/camp2026/linear-inequalities.jpg.asset.json";
+import mutuallyExclusive from "@/assets/camp2026/mutually-exclusive.jpg.asset.json";
+import guessCorrelation from "@/assets/camp2026/guess-the-correlation.jpg.asset.json";
+import blooketStandings from "@/assets/camp2026/blooket-final-standings.jpg.asset.json";
+import blooketPodium from "@/assets/camp2026/blooket-podium.jpg.asset.json";
+import blooketLeaderboard from "@/assets/camp2026/blooket-live-leaderboard.jpg.asset.json";
+import blooketUpgrades from "@/assets/camp2026/blooket-upgrade-feed.jpg.asset.json";
+
+
+
 export interface PollBucket {
   /** Response label as worded on the survey, e.g. "Very fun!" */
   label: string;
@@ -113,7 +131,83 @@ export const campYears: CampYear[] = [
         alt: "Campers and Camp Directors together during a live Zoom session, with the group chat open alongside the video grid",
         caption: "A full house on Zoom — shared with parent consent.",
       },
+      {
+        src: amazonFedex.url,
+        alt: "Camp slide titled Amazon and FedEx, framing package routing as an optimization problem with weight and space limits",
+        caption: "Optimization, disguised as a delivery truck.",
+      },
+      {
+        src: whichTriangle.url,
+        alt: "Camp slide asking which triangle is best for a disaster-relief shelter design",
+        caption: "Geometry with real stakes: designing relief shelters.",
+      },
+      {
+        src: coordinatePlane.url,
+        alt: "Camp slide listing applications of the coordinate plane across geolocation, engineering, physics, economics, astronomy, statistics, topography, and medicine",
+        caption: "Where the coordinate plane actually shows up.",
+      },
+      {
+        src: cityPlanGraph.url,
+        alt: "A camper's final project: a color-coded city plan graphed on grid paper with a legend for houses, roads, parks, and businesses",
+        caption: "A camper's final project — an entire city, graphed.",
+      },
+      {
+        src: transferConservation.url,
+        alt: "Camp slide on transfer and conservation, comparing how surface area and volume grow at different rates",
+        caption: "Why bigger isn't just bigger: surface area vs. volume.",
+      },
+      {
+        src: firstMomentArea.url,
+        alt: "Camp slide on the first moment of area with an annotated T-shaped cross-section",
+        caption: "Engineering math, annotated live.",
+      },
+      {
+        src: correlationCoefficient.url,
+        alt: "Camp slide explaining the correlation coefficient with scatter plots for r = 1 and r = 0",
+        caption: "How strong is that pattern, really?",
+      },
+      {
+        src: countingProbability.url,
+        alt: "Camp slide asking what counting has to do with probability, with a probability formula",
+        caption: "Counting carefully is most of probability.",
+      },
+      {
+        src: linearInequalities.url,
+        alt: "Camp slide on linear inequalities with shaded solution regions on a graph",
+        caption: "Shading the region where every condition holds.",
+      },
+      {
+        src: mutuallyExclusive.url,
+        alt: "Camp slide explaining mutually exclusive events with a Venn diagram",
+        caption: "Mutually exclusive, one Venn diagram at a time.",
+      },
+      {
+        src: guessCorrelation.url,
+        alt: "The Guess the Correlation game showing a scatter plot and a camper's guess of 0.6",
+        caption: "Eyeballing correlation, competitively.",
+      },
+      {
+        src: blooketStandings.url,
+        alt: "Blooket final standings podium from a camp review game",
+        caption: "Review game podium — hard-earned.",
+      },
+      {
+        src: blooketPodium.url,
+        alt: "Blooket final standings podium from another camp review game",
+        caption: "Another day, another leaderboard.",
+      },
+      {
+        src: blooketLeaderboard.url,
+        alt: "Live Blooket leaderboard during a camp review game with campers advancing through rounds",
+        caption: "Live scores climbing during review.",
+      },
+      {
+        src: blooketUpgrades.url,
+        alt: "Live Blooket leaderboard with a feed of campers upgrading their in-game abilities",
+        caption: "Math practice with an upgrade feed.",
+      },
       // TODO: add more camp photos here as they come in.
+
     ],
     testimonials: [
       {
