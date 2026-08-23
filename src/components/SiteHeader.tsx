@@ -8,6 +8,7 @@ const navLinks = [
   { to: "/board", label: "Camp Directors" },
   { to: "/through-the-years", label: "Through the Years" },
   { to: "/faq", label: "FAQ" },
+  { to: "/sponsors", label: "Sponsors" },
   { to: "/register", label: "Register" },
 ] as const;
 

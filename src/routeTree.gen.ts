@@ -21,6 +21,7 @@ import { Route as McpRouteImport } from './routes/mcp'
 import { Route as NapervilleMathCampRouteImport } from './routes/naperville-math-camp'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SponsorsRouteImport } from './routes/sponsors'
 import { Route as ThroughTheYearsRouteImport } from './routes/through-the-years'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
@@ -90,6 +91,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SponsorsRoute = SponsorsRouteImport.update({
+  id: '/sponsors',
+  path: '/sponsors',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ThroughTheYearsRoute = ThroughTheYearsRouteImport.update({
   id: '/through-the-years',
   path: '/through-the-years',
@@ -148,6 +154,7 @@ export interface FileRoutesByFullPath {
   '/naperville-math-camp': typeof NapervilleMathCampRoute
   '/register': typeof RegisterRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sponsors': typeof SponsorsRoute
   '/through-the-years': typeof ThroughTheYearsRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -170,6 +177,7 @@ export interface FileRoutesByTo {
   '/naperville-math-camp': typeof NapervilleMathCampRoute
   '/register': typeof RegisterRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sponsors': typeof SponsorsRoute
   '/through-the-years': typeof ThroughTheYearsRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -193,6 +201,7 @@ export interface FileRoutesById {
   '/naperville-math-camp': typeof NapervilleMathCampRoute
   '/register': typeof RegisterRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sponsors': typeof SponsorsRoute
   '/through-the-years': typeof ThroughTheYearsRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -217,6 +226,7 @@ export interface FileRouteTypes {
     | '/naperville-math-camp'
     | '/register'
     | '/sitemap.xml'
+    | '/sponsors'
     | '/through-the-years'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -239,6 +249,7 @@ export interface FileRouteTypes {
     | '/naperville-math-camp'
     | '/register'
     | '/sitemap.xml'
+    | '/sponsors'
     | '/through-the-years'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -261,6 +272,7 @@ export interface FileRouteTypes {
     | '/naperville-math-camp'
     | '/register'
     | '/sitemap.xml'
+    | '/sponsors'
     | '/through-the-years'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -284,6 +296,7 @@ export interface RootRouteChildren {
   NapervilleMathCampRoute: typeof NapervilleMathCampRoute
   RegisterRoute: typeof RegisterRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SponsorsRoute: typeof SponsorsRoute
   ThroughTheYearsRoute: typeof ThroughTheYearsRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -380,6 +393,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sponsors': {
+      id: '/sponsors'
+      path: '/sponsors'
+      fullPath: '/sponsors'
+      preLoaderRoute: typeof SponsorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/through-the-years': {
       id: '/through-the-years'
       path: '/through-the-years'
@@ -452,6 +472,7 @@ const rootRouteChildren: RootRouteChildren = {
   NapervilleMathCampRoute: NapervilleMathCampRoute,
   RegisterRoute: RegisterRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SponsorsRoute: SponsorsRoute,
   ThroughTheYearsRoute: ThroughTheYearsRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:

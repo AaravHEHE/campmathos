@@ -96,6 +96,117 @@ function notifyHtml(email: string, when: string) {
 </body></html>`;
 }
 
+// ---------------------------------------------------------------------------
+// Sponsor inquiries (/sponsors page). Handled here because all Gmail SMTP
+// sending lives in this function. Registration behaviour below is unchanged.
+// ---------------------------------------------------------------------------
+function sponsorNotifyHtml(
+  type: string,
+  name: string,
+  email: string,
+  message: string,
+  when: string,
+) {
+  const label = type === "money" ? "Monetary sponsorship" : "Resource donation";
+  return `
+<!doctype html>
+<html><body style="font-family:Arial,sans-serif;color:#111;">
+  <h2 style="margin:0 0 12px;">New MathOs sponsor inquiry</h2>
+  <p style="margin:0 0 8px;"><strong>Type:</strong> ${escapeHtml(label)}</p>
+  <p style="margin:0 0 8px;"><strong>Name:</strong> ${escapeHtml(name)}</p>
+  <p style="margin:0 0 8px;"><strong>Email:</strong> ${escapeHtml(email)}</p>
+  <p style="margin:0 0 8px;"><strong>Message:</strong><br>${escapeHtml(message || "(none)").replace(/\n/g, "<br>")}</p>
+  <p style="margin:0 0 8px;"><strong>Submitted:</strong> ${escapeHtml(when)}</p>
+</body></html>`;
+}
+
+function sponsorConfirmationHtml(name: string, type: string) {
+  const what = type === "money" ? "helping fund MathOs" : "offering resources to MathOs";
+  return `
+<!doctype html>
+<html><body style="margin:0;padding:0;background:#fdf8ee;font-family:Arial,sans-serif;color:#1a1a2e;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#fdf8ee;padding:32px 16px;">
+    <tr><td align="center">
+      <table width="560" cellpadding="0" cellspacing="0" style="background:#ffffff;border:2px solid #1a1a2e;border-radius:16px;padding:32px;">
+        <tr><td>
+          <p style="margin:0 0 8px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#666;">Mathos Camp</p>
+          <h1 style="margin:0 0 16px;font-size:28px;line-height:1.1;">Thanks, ${escapeHtml(name)}! 🙌</h1>
+          <p style="margin:0 0 16px;font-size:16px;line-height:1.5;">
+            We got your note about ${what}. MathOs is a completely free, student-run applied math camp, and support like yours is what keeps it that way. One of our Camp Directors will be in touch soon.
+          </p>
+          <p style="margin:24px 0 0;font-size:14px;color:#666;">
+            Questions? Just reply to this email — it goes straight to campmathos@gmail.com.
+          </p>
+          <p style="margin:24px 0 0;font-size:14px;">— The Mathos team</p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body></html>`;
+}
+
+async function handleSponsorInquiry(body: Record<string, unknown>): Promise<Response> {
+  const json = (payload: unknown, status: number) =>
+    new Response(JSON.stringify(payload), {
+      status,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+
+  const type = body?.type === "money" || body?.type === "resources" ? (body.type as string) : "";
+  const name = typeof body?.name === "string" ? body.name.trim().slice(0, 120) : "";
+  const email = typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
+  const message = typeof body?.message === "string" ? body.message.trim().slice(0, 2000) : "";
+
+  if (!type) return json({ error: "Please choose how you'd like to help." }, 400);
+  if (!name) return json({ error: "Please enter your name." }, 400);
+  if (!email || email.length > 320 || !EMAIL_RE.test(email)) {
+    return json({ error: "Please enter a valid email address." }, 400);
+  }
+  if (type === "resources" && !message) {
+    return json({ error: "Please tell us what you'd like to offer." }, 400);
+  }
+
+  const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+  const { data: inserted, error: insertError } = await supabase
+    .from("sponsor_inquiries")
+    .insert({ type, name, email, message: message || null })
+    .select("id, created_at")
+    .single();
+
+  if (insertError) {
+    console.error("Sponsor insert error", insertError);
+    return json({ error: "Could not save your message. Please try again." }, 500);
+  }
+
+  const when = new Date(inserted!.created_at as string).toLocaleString("en-US", {
+    timeZone: "America/Chicago",
+  });
+
+  try {
+    await sendGmail({
+      to: DIRECTOR_NOTIFY,
+      subject: `New MathOs sponsor inquiry (${type}): ${name}`,
+      html: sponsorNotifyHtml(type, name, email, message, when),
+      replyTo: email,
+    });
+  } catch (notifyErr) {
+    console.error("Sponsor notification failed:", notifyErr);
+  }
+
+  try {
+    await sendGmail({
+      to: email,
+      subject: "Thanks for supporting MathOs 🙌",
+      html: sponsorConfirmationHtml(name, type),
+    });
+  } catch (mailErr) {
+    console.error("Sponsor confirmation failed:", mailErr);
+  }
+
+  await closeGmail();
+  return json({ ok: true, id: inserted!.id }, 200);
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
   if (req.method !== "POST") {
@@ -107,7 +218,13 @@ Deno.serve(async (req) => {
 
   try {
     const body = await req.json().catch(() => ({}));
+
+    if (body?.kind === "sponsor") {
+      return await handleSponsorInquiry(body);
+    }
+
     const rawEmail = typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
+
 
     if (!rawEmail || rawEmail.length > 320 || !EMAIL_RE.test(rawEmail)) {
       return new Response(JSON.stringify({ error: "Please enter a valid email address." }), {
