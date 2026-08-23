@@ -10,12 +10,15 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as BoardRouteImport } from './routes/board'
 import { Route as BoardHistoryRouteImport } from './routes/board-history'
+import { Route as CurriculumRouteImport } from './routes/curriculum'
 import { Route as DetailsRouteImport } from './routes/details'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as MathosDoticsRouteImport } from './routes/mathos[.]ics'
 import { Route as McpRouteImport } from './routes/mcp'
+import { Route as NapervilleMathCampRouteImport } from './routes/naperville-math-camp'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ThroughTheYearsRouteImport } from './routes/through-the-years'
@@ -32,6 +35,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BoardRoute = BoardRouteImport.update({
   id: '/board',
   path: '/board',
@@ -40,6 +48,11 @@ const BoardRoute = BoardRouteImport.update({
 const BoardHistoryRoute = BoardHistoryRouteImport.update({
   id: '/board-history',
   path: '/board-history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CurriculumRoute = CurriculumRouteImport.update({
+  id: '/curriculum',
+  path: '/curriculum',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DetailsRoute = DetailsRouteImport.update({
@@ -60,6 +73,11 @@ const MathosDoticsRoute = MathosDoticsRouteImport.update({
 const McpRoute = McpRouteImport.update({
   id: '/mcp',
   path: '/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NapervilleMathCampRoute = NapervilleMathCampRouteImport.update({
+  id: '/naperville-math-camp',
+  path: '/naperville-math-camp',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RegisterRoute = RegisterRouteImport.update({
@@ -119,12 +137,15 @@ const ApiPublicHooksSyncFormEmailsRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/board': typeof BoardRoute
   '/board-history': typeof BoardHistoryRoute
+  '/curriculum': typeof CurriculumRoute
   '/details': typeof DetailsRoute
   '/faq': typeof FaqRoute
   '/mathos.ics': typeof MathosDoticsRoute
   '/mcp': typeof McpRoute
+  '/naperville-math-camp': typeof NapervilleMathCampRoute
   '/register': typeof RegisterRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/through-the-years': typeof ThroughTheYearsRoute
@@ -138,12 +159,15 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/board': typeof BoardRoute
   '/board-history': typeof BoardHistoryRoute
+  '/curriculum': typeof CurriculumRoute
   '/details': typeof DetailsRoute
   '/faq': typeof FaqRoute
   '/mathos.ics': typeof MathosDoticsRoute
   '/mcp': typeof McpRoute
+  '/naperville-math-camp': typeof NapervilleMathCampRoute
   '/register': typeof RegisterRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/through-the-years': typeof ThroughTheYearsRoute
@@ -158,12 +182,15 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/board': typeof BoardRoute
   '/board-history': typeof BoardHistoryRoute
+  '/curriculum': typeof CurriculumRoute
   '/details': typeof DetailsRoute
   '/faq': typeof FaqRoute
   '/mathos.ics': typeof MathosDoticsRoute
   '/mcp': typeof McpRoute
+  '/naperville-math-camp': typeof NapervilleMathCampRoute
   '/register': typeof RegisterRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/through-the-years': typeof ThroughTheYearsRoute
@@ -179,12 +206,15 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
     | '/board'
     | '/board-history'
+    | '/curriculum'
     | '/details'
     | '/faq'
     | '/mathos.ics'
     | '/mcp'
+    | '/naperville-math-camp'
     | '/register'
     | '/sitemap.xml'
     | '/through-the-years'
@@ -198,12 +228,15 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
     | '/board'
     | '/board-history'
+    | '/curriculum'
     | '/details'
     | '/faq'
     | '/mathos.ics'
     | '/mcp'
+    | '/naperville-math-camp'
     | '/register'
     | '/sitemap.xml'
     | '/through-the-years'
@@ -217,12 +250,15 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/about'
     | '/board'
     | '/board-history'
+    | '/curriculum'
     | '/details'
     | '/faq'
     | '/mathos.ics'
     | '/mcp'
+    | '/naperville-math-camp'
     | '/register'
     | '/sitemap.xml'
     | '/through-the-years'
@@ -237,12 +273,15 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   BoardRoute: typeof BoardRoute
   BoardHistoryRoute: typeof BoardHistoryRoute
+  CurriculumRoute: typeof CurriculumRoute
   DetailsRoute: typeof DetailsRoute
   FaqRoute: typeof FaqRoute
   MathosDoticsRoute: typeof MathosDoticsRoute
   McpRoute: typeof McpRoute
+  NapervilleMathCampRoute: typeof NapervilleMathCampRoute
   RegisterRoute: typeof RegisterRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ThroughTheYearsRoute: typeof ThroughTheYearsRoute
@@ -264,6 +303,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/board': {
       id: '/board'
       path: '/board'
@@ -276,6 +322,13 @@ declare module '@tanstack/react-router' {
       path: '/board-history'
       fullPath: '/board-history'
       preLoaderRoute: typeof BoardHistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/curriculum': {
+      id: '/curriculum'
+      path: '/curriculum'
+      fullPath: '/curriculum'
+      preLoaderRoute: typeof CurriculumRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/details': {
@@ -304,6 +357,13 @@ declare module '@tanstack/react-router' {
       path: '/mcp'
       fullPath: '/mcp'
       preLoaderRoute: typeof McpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/naperville-math-camp': {
+      id: '/naperville-math-camp'
+      path: '/naperville-math-camp'
+      fullPath: '/naperville-math-camp'
+      preLoaderRoute: typeof NapervilleMathCampRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/register': {
@@ -381,12 +441,15 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   BoardRoute: BoardRoute,
   BoardHistoryRoute: BoardHistoryRoute,
+  CurriculumRoute: CurriculumRoute,
   DetailsRoute: DetailsRoute,
   FaqRoute: FaqRoute,
   MathosDoticsRoute: MathosDoticsRoute,
   McpRoute: McpRoute,
+  NapervilleMathCampRoute: NapervilleMathCampRoute,
   RegisterRoute: RegisterRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   ThroughTheYearsRoute: ThroughTheYearsRoute,
