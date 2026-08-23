@@ -289,7 +289,7 @@ function SponsorsPage() {
                 </form>
               )}
 
-              <div className="mt-10 card-3d-inverse p-6">
+              <div className="mt-10 card-3d-inverse bg-ink p-6 text-cream">
                 <p className="font-mono text-xs uppercase tracking-widest opacity-70">
                   No payment here
                 </p>
