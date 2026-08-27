@@ -94,7 +94,7 @@ function BoardPage() {
                 interested in becoming a Camp Director, fill out this form and we'll follow up.
               </p>
               <a
-                href="[GOOGLE_FORM_URL_HERE]"
+                href="https://forms.gle/SAY2iVsdW9AQmsVXA"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-8 inline-flex min-h-11 items-center rounded-full border-2 border-cream bg-cream px-6 py-3 font-semibold text-ink transition hover:bg-ink hover:text-cream"
