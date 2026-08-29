@@ -298,9 +298,10 @@ function SponsorsPage() {
                   )}
                 </form>
               )}
+            </>
+          )}
 
-              {choice && (
-
+          <p className="mt-8 font-mono text-lg text-muted-foreground">
             Prefer email? Write to{" "}
             <a href="mailto:campmathos@gmail.com" className="underline hover:text-electric">
               campmathos@gmail.com
