@@ -220,12 +220,22 @@ async function handle(request: Request) {
     });
   } catch (e) {
     const message = e instanceof Error ? e.message : String(e);
+    const transient = Boolean((e as { transient?: boolean })?.transient);
+    if (transient) {
+      // Upstream Sheets quota/gateway hiccup — the next scheduled run retries.
+      console.warn('sync-form-emails deferred (transient):', message);
+      return new Response(
+        JSON.stringify({ success: false, deferred: true, error: 'Upstream temporarily unavailable' }),
+        { status: 503, headers: { 'Content-Type': 'application/json' } },
+      );
+    }
     console.error('sync-form-emails failed:', message);
     return new Response(
       JSON.stringify({ success: false, error: 'Internal error' }),
       { status: 500, headers: { 'Content-Type': 'application/json' } },
     );
   }
+
 }
 
 export const Route = createFileRoute('/api/public/hooks/sync-form-emails')({
