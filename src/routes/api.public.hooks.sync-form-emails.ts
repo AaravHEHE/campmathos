@@ -34,13 +34,20 @@ async function syncEmails() {
   const url = `https://connector-gateway.lovable.dev/google_sheets/v4/spreadsheets/${SPREADSHEET_ID}/values/${encodeURI(SHEET_RANGE)}`;
 
   // Transient failures (429 quota, 502/503/504 gateway) are common here.
-  // Retry a few times with exponential backoff before giving up on the batch.
+  // The 429 is a *per-minute* project-wide read quota on the shared Sheets
+  // connector, so short sub-second retries all land inside the same exhausted
+  // minute. Back off past the minute boundary (with jitter) and honor
+  // Retry-After when the API sends it.
   const RETRYABLE = new Set([429, 500, 502, 503, 504]);
+  const BACKOFF_MS = [2_000, 15_000, 45_000, 70_000];
   let res: Response | undefined;
   let lastErr = '';
-  for (let attempt = 0; attempt < 4; attempt++) {
+  let lastStatus = 0;
+  for (let attempt = 0; attempt < 5; attempt++) {
     if (attempt > 0) {
-      await new Promise((r) => setTimeout(r, 500 * 2 ** (attempt - 1)));
+      const base = BACKOFF_MS[attempt - 1] ?? 70_000;
+      const wait = base + Math.floor(Math.random() * 3_000);
+      await new Promise((r) => setTimeout(r, wait));
     }
     try {
       res = await fetch(url, {
@@ -55,11 +62,23 @@ async function syncEmails() {
       continue;
     }
     if (res.ok) break;
+    lastStatus = res.status;
+    const retryAfter = Number(res.headers.get('retry-after'));
     lastErr = `Sheets fetch failed ${res.status}: ${await res.text()}`;
     if (!RETRYABLE.has(res.status)) throw new Error(lastErr);
     res = undefined;
+    if (Number.isFinite(retryAfter) && retryAfter > 0) {
+      await new Promise((r) => setTimeout(r, Math.min(retryAfter, 90) * 1000));
+    }
   }
-  if (!res) throw new Error(lastErr || 'Sheets fetch failed');
+  if (!res) {
+    const err = new Error(lastErr || 'Sheets fetch failed') as Error & {
+      transient?: boolean;
+    };
+    err.transient = RETRYABLE.has(lastStatus) || lastStatus === 0;
+    throw err;
+  }
+
   const json = (await res.json()) as { values?: string[][] };
 
   // Build one row per form response (per student). Same email may repeat.
@@ -201,12 +220,22 @@ async function handle(request: Request) {
     });
   } catch (e) {
     const message = e instanceof Error ? e.message : String(e);
+    const transient = Boolean((e as { transient?: boolean })?.transient);
+    if (transient) {
+      // Upstream Sheets quota/gateway hiccup — the next scheduled run retries.
+      console.warn('sync-form-emails deferred (transient):', message);
+      return new Response(
+        JSON.stringify({ success: false, deferred: true, error: 'Upstream temporarily unavailable' }),
+        { status: 503, headers: { 'Content-Type': 'application/json' } },
+      );
+    }
     console.error('sync-form-emails failed:', message);
     return new Response(
       JSON.stringify({ success: false, error: 'Internal error' }),
       { status: 500, headers: { 'Content-Type': 'application/json' } },
     );
   }
+
 }
 
 export const Route = createFileRoute('/api/public/hooks/sync-form-emails')({
