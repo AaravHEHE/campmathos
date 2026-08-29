@@ -162,7 +162,17 @@ function SponsorsPage() {
             </div>
           ) : (
             <>
-              <div className="mt-12 grid gap-6 md:grid-cols-2">
+              <div className="mt-12 card-3d-inverse bg-ink p-6 text-cream">
+                <p className="font-mono text-xs uppercase tracking-widest opacity-70">
+                  No payment here
+                </p>
+                <p className="mt-2 text-base">
+                  This form just starts the conversation — nothing is charged and no payment details
+                  are collected. A Camp Director will email you back personally.
+                </p>
+              </div>
+
+              <div className="mt-10 grid gap-6 md:grid-cols-2">
                 <ChoiceCard
                   active={choice === "money"}
                   onClick={() => pick("money")}
@@ -289,19 +299,8 @@ function SponsorsPage() {
                 </form>
               )}
 
-              <div className="mt-10 card-3d-inverse bg-ink p-6 text-cream">
-                <p className="font-mono text-xs uppercase tracking-widest opacity-70">
-                  No payment here
-                </p>
-                <p className="mt-2 text-base">
-                  This form just starts the conversation — nothing is charged and no payment details
-                  are collected. A Camp Director will email you back personally.
-                </p>
-              </div>
-            </>
-          )}
+              {choice && (
 
-          <p className="mt-8 font-mono text-lg text-muted-foreground">
             Prefer email? Write to{" "}
             <a href="mailto:campmathos@gmail.com" className="underline hover:text-electric">
               campmathos@gmail.com
