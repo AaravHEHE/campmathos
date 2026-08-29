@@ -93,13 +93,23 @@ function BoardPage() {
                 MathOs is entirely student-run, and the board turns over every year. If you're
                 interested in becoming a Camp Director, fill out this form and we'll follow up.
               </p>
+              <div className="mt-8 overflow-hidden rounded-2xl border-2 border-cream bg-cream">
+                <iframe
+                  title="Apply to be a Camp Director"
+                  src="https://docs.google.com/forms/d/e/1FAIpQLSd3PpWRDFWM1zdbHChc1No7kGkCDm6UinL-effGfg4G_HWwAQ/viewform?embedded=true"
+                  className="h-[900px] w-full"
+                  loading="lazy"
+                >
+                  Loading…
+                </iframe>
+              </div>
               <a
                 href="https://forms.gle/SAY2iVsdW9AQmsVXA"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-8 inline-flex min-h-11 items-center rounded-full border-2 border-cream bg-cream px-6 py-3 font-semibold text-ink transition hover:bg-ink hover:text-cream"
+                className="mt-4 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-cream/60 transition hover:text-cream"
               >
-                Apply to be a Camp Director →
+                Open the form in a new tab →
               </a>
             </div>
           </Reveal>
