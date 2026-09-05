@@ -34,7 +34,7 @@ export type CurriculumWeek = {
 
 /** Shorten a curriculum title into a one/two word topic label. */
 function toTopic(title: string): string {
-  const head = title.split(/\s+(?:for|and)\s+/i)[0]?.trim() ?? title;
+  const head = title.split(/\s+(?:for|and)\s+|\s*\+\s*/i)[0]?.trim() ?? title;
   return head.charAt(0).toUpperCase() + head.slice(1);
 }
 
