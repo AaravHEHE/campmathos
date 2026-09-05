@@ -6,6 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { SignupsChart } from "@/components/admin/SignupsChart";
 import { BroadcastForm } from "@/components/admin/BroadcastForm";
 import { EmailOneDialog } from "@/components/admin/EmailOneDialog";
+import { ResourcesManager } from "@/components/admin/ResourcesManager";
 
 export const Route = createFileRoute("/admin/")({
   component: AdminDashboard,
@@ -455,6 +456,12 @@ function AdminDashboard() {
           <div className="mt-6">
             <BroadcastForm registrations={yearRows} formEmails={formEmails} />
           </div>
+
+          {/* Camper resources */}
+          <div className="mt-6">
+            <ResourcesManager />
+          </div>
+
 
           {/* Filters */}
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
