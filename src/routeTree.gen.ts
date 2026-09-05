@@ -28,6 +28,7 @@ import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } fr
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as ResourcesIndexRouteImport } from './routes/resources.index'
+import { Route as ResourcesResourceIdRouteImport } from './routes/resources.$resourceId'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as ApiPublicHooksSyncFormEmailsRouteImport } from './routes/api.public.hooks.sync-form-emails'
@@ -129,6 +130,11 @@ const ResourcesIndexRoute = ResourcesIndexRouteImport.update({
   path: '/resources/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResourcesResourceIdRoute = ResourcesResourceIdRouteImport.update({
+  id: '/resources/$resourceId',
+  path: '/resources/$resourceId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
   id: '/.lovable/oauth/consent',
   path: '/.lovable/oauth/consent',
@@ -165,6 +171,7 @@ export interface FileRoutesByFullPath {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/login': typeof AdminLoginRoute
+  '/resources/$resourceId': typeof ResourcesResourceIdRoute
   '/admin/': typeof AdminIndexRoute
   '/resources/': typeof ResourcesIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -189,6 +196,7 @@ export interface FileRoutesByTo {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/login': typeof AdminLoginRoute
+  '/resources/$resourceId': typeof ResourcesResourceIdRoute
   '/admin': typeof AdminIndexRoute
   '/resources': typeof ResourcesIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -214,6 +222,7 @@ export interface FileRoutesById {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/login': typeof AdminLoginRoute
+  '/resources/$resourceId': typeof ResourcesResourceIdRoute
   '/admin/': typeof AdminIndexRoute
   '/resources/': typeof ResourcesIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -240,6 +249,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/login'
+    | '/resources/$resourceId'
     | '/admin/'
     | '/resources/'
     | '/.lovable/oauth/consent'
@@ -264,6 +274,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/login'
+    | '/resources/$resourceId'
     | '/admin'
     | '/resources'
     | '/.lovable/oauth/consent'
@@ -288,6 +299,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/login'
+    | '/resources/$resourceId'
     | '/admin/'
     | '/resources/'
     | '/.lovable/oauth/consent'
@@ -313,6 +325,7 @@ export interface RootRouteChildren {
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AdminLoginRoute: typeof AdminLoginRoute
+  ResourcesResourceIdRoute: typeof ResourcesResourceIdRoute
   AdminIndexRoute: typeof AdminIndexRoute
   ResourcesIndexRoute: typeof ResourcesIndexRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
@@ -455,6 +468,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResourcesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/resources/$resourceId': {
+      id: '/resources/$resourceId'
+      path: '/resources/$resourceId'
+      fullPath: '/resources/$resourceId'
+      preLoaderRoute: typeof ResourcesResourceIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/.lovable/oauth/consent': {
       id: '/.lovable/oauth/consent'
       path: '/.lovable/oauth/consent'
@@ -498,6 +518,7 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   AdminLoginRoute: AdminLoginRoute,
+  ResourcesResourceIdRoute: ResourcesResourceIdRoute,
   AdminIndexRoute: AdminIndexRoute,
   ResourcesIndexRoute: ResourcesIndexRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
