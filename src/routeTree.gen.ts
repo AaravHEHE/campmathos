@@ -27,6 +27,7 @@ import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as GamesSlugRouteImport } from './routes/games.$slug'
 import { Route as ResourcesIndexRouteImport } from './routes/resources.index'
 import { Route as ResourcesResourceIdRouteImport } from './routes/resources.$resourceId'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
@@ -125,6 +126,11 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   path: '/admin/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GamesSlugRoute = GamesSlugRouteImport.update({
+  id: '/games/$slug',
+  path: '/games/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResourcesIndexRoute = ResourcesIndexRouteImport.update({
   id: '/resources/',
   path: '/resources/',
@@ -171,6 +177,7 @@ export interface FileRoutesByFullPath {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/login': typeof AdminLoginRoute
+  '/games/$slug': typeof GamesSlugRoute
   '/resources/$resourceId': typeof ResourcesResourceIdRoute
   '/admin/': typeof AdminIndexRoute
   '/resources/': typeof ResourcesIndexRoute
@@ -196,6 +203,7 @@ export interface FileRoutesByTo {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/login': typeof AdminLoginRoute
+  '/games/$slug': typeof GamesSlugRoute
   '/resources/$resourceId': typeof ResourcesResourceIdRoute
   '/admin': typeof AdminIndexRoute
   '/resources': typeof ResourcesIndexRoute
@@ -222,6 +230,7 @@ export interface FileRoutesById {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/login': typeof AdminLoginRoute
+  '/games/$slug': typeof GamesSlugRoute
   '/resources/$resourceId': typeof ResourcesResourceIdRoute
   '/admin/': typeof AdminIndexRoute
   '/resources/': typeof ResourcesIndexRoute
@@ -249,6 +258,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/login'
+    | '/games/$slug'
     | '/resources/$resourceId'
     | '/admin/'
     | '/resources/'
@@ -274,6 +284,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/login'
+    | '/games/$slug'
     | '/resources/$resourceId'
     | '/admin'
     | '/resources'
@@ -299,6 +310,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/login'
+    | '/games/$slug'
     | '/resources/$resourceId'
     | '/admin/'
     | '/resources/'
@@ -325,6 +337,7 @@ export interface RootRouteChildren {
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AdminLoginRoute: typeof AdminLoginRoute
+  GamesSlugRoute: typeof GamesSlugRoute
   ResourcesResourceIdRoute: typeof ResourcesResourceIdRoute
   AdminIndexRoute: typeof AdminIndexRoute
   ResourcesIndexRoute: typeof ResourcesIndexRoute
@@ -461,6 +474,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/games/$slug': {
+      id: '/games/$slug'
+      path: '/games/$slug'
+      fullPath: '/games/$slug'
+      preLoaderRoute: typeof GamesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/resources/': {
       id: '/resources/'
       path: '/resources'
@@ -518,6 +538,7 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   AdminLoginRoute: AdminLoginRoute,
+  GamesSlugRoute: GamesSlugRoute,
   ResourcesResourceIdRoute: ResourcesResourceIdRoute,
   AdminIndexRoute: AdminIndexRoute,
   ResourcesIndexRoute: ResourcesIndexRoute,
