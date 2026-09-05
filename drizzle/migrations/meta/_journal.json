@@ -8,6 +8,13 @@
       "when": 1788625310730,
       "tag": "0000_create_resources",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1788625378347,
+      "tag": "0001_resource_storage_policies",
+      "breakpoints": true
     }
   ]
 }
