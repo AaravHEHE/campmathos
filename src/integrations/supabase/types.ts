@@ -278,6 +278,63 @@ export type Database = {
         }
         Relationships: []
       }
+      resources: {
+        Row: {
+          created_at: string
+          description: string | null
+          embed_url: string | null
+          external_url: string | null
+          file_url: string | null
+          id: string
+          position: number
+          published: boolean
+          resource_type: string
+          school_level: string
+          slug: string | null
+          thumbnail_url: string | null
+          title: string
+          topic: string | null
+          updated_at: string
+          week_number: number
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          embed_url?: string | null
+          external_url?: string | null
+          file_url?: string | null
+          id?: string
+          position?: number
+          published?: boolean
+          resource_type: string
+          school_level: string
+          slug?: string | null
+          thumbnail_url?: string | null
+          title: string
+          topic?: string | null
+          updated_at?: string
+          week_number: number
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          embed_url?: string | null
+          external_url?: string | null
+          file_url?: string | null
+          id?: string
+          position?: number
+          published?: boolean
+          resource_type?: string
+          school_level?: string
+          slug?: string | null
+          thumbnail_url?: string | null
+          title?: string
+          topic?: string | null
+          updated_at?: string
+          week_number?: number
+        }
+        Relationships: []
+      }
       sponsor_inquiries: {
         Row: {
           created_at: string
