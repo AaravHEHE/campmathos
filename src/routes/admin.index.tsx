@@ -456,6 +456,12 @@ function AdminDashboard() {
             <BroadcastForm registrations={yearRows} formEmails={formEmails} />
           </div>
 
+          {/* Camper resources */}
+          <div className="mt-6">
+            <ResourcesManager />
+          </div>
+
+
           {/* Filters */}
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
             <div className="flex flex-wrap items-center gap-3">
