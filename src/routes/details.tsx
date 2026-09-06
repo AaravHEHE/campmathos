@@ -37,7 +37,7 @@ export const Route = createFileRoute("/details")({
 });
 
 const facts: [string, string][] = [
-  ["When", CAMP.humanDateRange],
+  ["When", "July 2027"],
   ["Where", "Hybrid — in person or live over Zoom"],
   ["Days", CAMP.humanDays],
   ["Time", CAMP.humanTime],

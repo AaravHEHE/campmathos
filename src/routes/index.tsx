@@ -249,7 +249,7 @@ function Index() {
           <Reveal direction="up" amount={0.2} className="md:col-span-7">
             <dl className="grid gap-px overflow-hidden card-3d-inverse bg-cream/10 md:grid-cols-2">
               {[
-                ["When", "July 2026"],
+                ["When", "July 2027"],
                 ["Where", "Hybrid — in person + online"],
                 ["Days", "Tue · Thu"],
                 ["Time", "3–5 PM Central (2 hr)"],
