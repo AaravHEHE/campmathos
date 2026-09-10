@@ -530,10 +530,13 @@ function EnrollmentForm({ draft, errors, step, capacity, submitting, submitError
               <ReviewGroup title="Consent" onEdit={() => onEdit(4)} rows={[
                 ["Photo consent", draft.photoConsent ? "Yes" : "No"], ["Signature", draft.waiverSignatureName],
               ]} />
-              <div className="card-3d bg-sun p-5">
-                <p className="font-mono text-xs font-bold uppercase tracking-widest">Review checkpoint</p>
-                <p className="mt-2">Final submission is intentionally disabled until the required waiver text and secure submission email flow are added in the next reviewed phase.</p>
-              </div>
+              {spotNotice(capacity, draft.formatPreference) && (
+                <div className="card-3d bg-sun p-5">
+                  <p className="font-mono text-xs font-bold uppercase tracking-widest">Availability</p>
+                  <p className="mt-2">{spotNotice(capacity, draft.formatPreference)}</p>
+                </div>
+              )}
+              {submitError && <p className="font-mono text-sm text-coral">{submitError}</p>}
             </div>
           </StepSection>
         )}
@@ -543,7 +546,9 @@ function EnrollmentForm({ draft, errors, step, capacity, submitting, submitError
           {step < 5 ? (
             <Button type="button" onClick={onNext} className="h-12 rounded-full bg-ink px-8 text-cream hover:bg-electric">Continue →</Button>
           ) : (
-            <Button type="button" disabled className="h-12 rounded-full bg-ink px-8 text-cream">Submit enrollment</Button>
+            <Button type="button" onClick={onSubmit} disabled={submitting} className="h-12 rounded-full bg-ink px-8 text-cream hover:bg-electric disabled:opacity-60">
+              {submitting ? "Submitting…" : "Submit enrollment"}
+            </Button>
           )}
         </div>
       </div>
