@@ -407,13 +407,17 @@ type EnrollmentFormProps = {
   draft: EnrollmentDraft;
   errors: Record<string, string>;
   step: number;
+  capacity: CapacityStatus | null;
+  submitting: boolean;
+  submitError: string;
   onChange: <K extends keyof EnrollmentDraft>(key: K, value: EnrollmentDraft[K]) => void;
   onBack: () => void;
   onNext: () => void;
   onEdit: (step: number) => void;
+  onSubmit: () => void;
 };
 
-function EnrollmentForm({ draft, errors, step, onChange, onBack, onNext, onEdit }: EnrollmentFormProps) {
+function EnrollmentForm({ draft, errors, step, capacity, submitting, submitError, onChange, onBack, onNext, onEdit, onSubmit }: EnrollmentFormProps) {
   return (
     <div className="mt-12">
       <ol aria-label="Enrollment progress" className="grid grid-cols-5 gap-2">
