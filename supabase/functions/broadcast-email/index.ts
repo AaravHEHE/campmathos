@@ -25,6 +25,84 @@ function escapeHtml(s: string): string {
     .replace(/'/g, "&#39;");
 }
 
+// Promotes a waitlisted enrollment to confirmed and emails the family with a
+// 7-day response deadline. Called from the admin enrollments dashboard.
+async function handlePromoteEnrollment(
+  admin: ReturnType<typeof createClient>,
+  enrollmentId: unknown,
+): Promise<Response> {
+  const json = (payload: unknown, status: number) =>
+    new Response(JSON.stringify(payload), {
+      status,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+
+  const id = typeof enrollmentId === "string" ? enrollmentId : "";
+  if (!/^[0-9a-f-]{36}$/i.test(id)) return json({ error: "Invalid enrollment id." }, 400);
+
+  const { data: enrollment, error: fetchError } = await admin
+    .from("camp_enrollments")
+    .select("id, camp_year, status, student_first_name, student_last_name, parent_first_name, parent_email, format_preference")
+    .eq("id", id)
+    .maybeSingle();
+  if (fetchError || !enrollment) return json({ error: "Enrollment not found." }, 404);
+  if (enrollment.status !== "waitlisted") {
+    return json({ error: "Only waitlisted enrollments can be promoted." }, 400);
+  }
+
+  const { error: updateError } = await admin
+    .from("camp_enrollments")
+    .update({ status: "confirmed" })
+    .eq("id", id)
+    .eq("status", "waitlisted");
+  if (updateError) return json({ error: "Could not update the enrollment." }, 500);
+
+  const deadlineLabel = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString("en-US", {
+    weekday: "long", month: "long", day: "numeric", year: "numeric", timeZone: "America/Chicago",
+  });
+  const formatLabel = enrollment.format_preference === "in_person"
+    ? "in person"
+    : enrollment.format_preference === "online"
+      ? "online"
+      : "your preferred";
+
+  try {
+    await sendGmail({
+      to: enrollment.parent_email,
+      subject: `A spot opened up for ${enrollment.student_first_name} at Mathos ${enrollment.camp_year}!`,
+      html: `
+<!doctype html>
+<html><body style="margin:0;padding:0;background:#fdf8ee;font-family:Arial,sans-serif;color:#1a1a2e;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#fdf8ee;padding:32px 16px;">
+    <tr><td align="center">
+      <table width="560" cellpadding="0" cellspacing="0" style="background:#ffffff;border:2px solid #1a1a2e;border-radius:16px;padding:32px;">
+        <tr><td>
+          <p style="margin:0 0 8px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#666;">Mathos Camp ${enrollment.camp_year} · Waitlist update</p>
+          <h1 style="margin:0 0 16px;font-size:24px;line-height:1.2;">Great news, ${escapeHtml(enrollment.parent_first_name)} — a spot opened up!</h1>
+          <p style="margin:0;font-size:15px;line-height:1.6;">
+            ${escapeHtml(enrollment.student_first_name)} ${escapeHtml(enrollment.student_last_name)} has been moved off the waitlist and is now
+            <strong>confirmed</strong> for the ${escapeHtml(formatLabel)} track of Mathos ${enrollment.camp_year}.
+          </p>
+          <p style="margin:16px 0 0;padding:12px 16px;background:#fff3cd;border:2px solid #1a1a2e;border-radius:10px;font-size:14px;line-height:1.5;">
+            <strong>Please reply to this email by ${escapeHtml(deadlineLabel)}</strong> to accept the spot. If we don’t hear from you by then, the spot may be offered to the next family on the waitlist.
+          </p>
+          <p style="margin:20px 0 0;font-size:14px;">— The Mathos team</p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body></html>`,
+    });
+  } catch (mailError) {
+    console.error("Promotion email failed", mailError);
+    return json({ ok: true, emailSent: false, error: "Promoted, but the email failed to send." }, 200);
+  } finally {
+    await closeGmail();
+  }
+
+  return json({ ok: true, emailSent: true }, 200);
+}
+
 function bodyHtml(message: string) {
   const safe = escapeHtml(message).replace(/\n/g, "<br>");
   return `

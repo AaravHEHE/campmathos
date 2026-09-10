@@ -425,6 +425,10 @@ Deno.serve(async (req) => {
       return await handleSponsorInquiry(body);
     }
 
+    if (body?.kind === "enrollment") {
+      return await handleEnrollment(body);
+    }
+
     const rawEmail = typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
 
 
