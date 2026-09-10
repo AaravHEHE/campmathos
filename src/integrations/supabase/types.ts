@@ -112,6 +112,87 @@ export type Database = {
           },
         ]
       }
+      camp_enrollments: {
+        Row: {
+          address: string
+          camp_year: number
+          created_at: string
+          date_of_birth: string
+          emergency_contact_name: string
+          emergency_contact_phone: string
+          emergency_contact_relationship: string
+          format_preference: string
+          grade_level: string
+          id: string
+          medical_notes: string | null
+          parent_email: string
+          parent_first_name: string
+          parent_last_name: string
+          parent_phone: string
+          photo_consent: boolean
+          school: string
+          state: string
+          status: string
+          student_first_name: string
+          student_last_name: string
+          updated_at: string
+          waiver_signature_name: string
+          waiver_signed_at: string | null
+        }
+        Insert: {
+          address: string
+          camp_year: number
+          created_at?: string
+          date_of_birth: string
+          emergency_contact_name: string
+          emergency_contact_phone: string
+          emergency_contact_relationship: string
+          format_preference: string
+          grade_level: string
+          id?: string
+          medical_notes?: string | null
+          parent_email: string
+          parent_first_name: string
+          parent_last_name: string
+          parent_phone: string
+          photo_consent: boolean
+          school: string
+          state: string
+          status?: string
+          student_first_name: string
+          student_last_name: string
+          updated_at?: string
+          waiver_signature_name: string
+          waiver_signed_at?: string | null
+        }
+        Update: {
+          address?: string
+          camp_year?: number
+          created_at?: string
+          date_of_birth?: string
+          emergency_contact_name?: string
+          emergency_contact_phone?: string
+          emergency_contact_relationship?: string
+          format_preference?: string
+          grade_level?: string
+          id?: string
+          medical_notes?: string | null
+          parent_email?: string
+          parent_first_name?: string
+          parent_last_name?: string
+          parent_phone?: string
+          photo_consent?: boolean
+          school?: string
+          state?: string
+          status?: string
+          student_first_name?: string
+          student_last_name?: string
+          updated_at?: string
+          waiver_signature_name?: string
+          waiver_signed_at?: string | null
+        }
+        Relationships: []
+      }
       classes: {
         Row: {
           archived: boolean
