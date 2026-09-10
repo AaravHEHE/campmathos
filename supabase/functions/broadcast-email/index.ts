@@ -171,7 +171,7 @@ Deno.serve(async (req) => {
     });
   }
 
-  let body: { subject?: string; message?: string; recipients?: string[] };
+  let body: { mode?: string; enrollmentId?: string; subject?: string; message?: string; recipients?: string[] };
   try {
     body = await req.json();
   } catch {
@@ -179,6 +179,10 @@ Deno.serve(async (req) => {
       status: 400,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
+  }
+
+  if (body.mode === "promote-enrollment") {
+    return await handlePromoteEnrollment(admin, body.enrollmentId);
   }
 
   const subject = (body.subject ?? "").trim();
