@@ -208,6 +208,207 @@ async function handleSponsorInquiry(body: Record<string, unknown>): Promise<Resp
   return json({ ok: true, id: inserted!.id }, 200);
 }
 
+// ---------------------------------------------------------------------------
+// Camp enrollments (/register page, kind: "enrollment"). Handled here because
+// all Gmail SMTP sending lives in this function and camp_enrollments has RLS
+// that blocks direct client inserts. Medical notes are stored but NEVER
+// echoed back over email.
+// ---------------------------------------------------------------------------
+const ENROLL_PHONE_RE = /^[+()\d\s.-]{7,25}$/;
+const ENROLL_FORMATS = new Set(["in_person", "online", "undecided"]);
+
+function reqStr(v: unknown, max: number): string | null {
+  if (typeof v !== "string") return null;
+  const t = v.trim();
+  return t && t.length <= max ? t : null;
+}
+
+function emailShell(inner: string): string {
+  return `
+<!doctype html>
+<html><body style="margin:0;padding:0;background:#fdf8ee;font-family:Arial,sans-serif;color:#1a1a2e;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#fdf8ee;padding:32px 16px;">
+    <tr><td align="center">
+      <table width="560" cellpadding="0" cellspacing="0" style="background:#ffffff;border:2px solid #1a1a2e;border-radius:16px;padding:32px;">
+        <tr><td>${inner}</td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body></html>`;
+}
+
+function summaryRow(label: string, value: string): string {
+  return `<tr>
+    <td style="padding:6px 12px 6px 0;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#666;vertical-align:top;white-space:nowrap;">${escapeHtml(label)}</td>
+    <td style="padding:6px 0;font-size:15px;line-height:1.5;">${escapeHtml(value)}</td>
+  </tr>`;
+}
+
+async function handleEnrollment(body: Record<string, unknown>): Promise<Response> {
+  const json = (payload: unknown, status: number) =>
+    new Response(JSON.stringify(payload), {
+      status,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+
+  const campYear = Number(body.camp_year);
+  if (!Number.isInteger(campYear) || campYear < 2026 || campYear > 2100) {
+    return json({ error: "Invalid camp year." }, 400);
+  }
+
+  const studentFirstName = reqStr(body.student_first_name, 100);
+  const studentLastName = reqStr(body.student_last_name, 100);
+  const gradeLevel = reqStr(body.grade_level, 50);
+  const dateOfBirth = reqStr(body.date_of_birth, 10);
+  const address = reqStr(body.address, 300);
+  const state = reqStr(body.state, 50);
+  const school = reqStr(body.school, 200);
+  const parentFirstName = reqStr(body.parent_first_name, 100);
+  const parentLastName = reqStr(body.parent_last_name, 100);
+  const parentEmail = reqStr(body.parent_email, 320)?.toLowerCase();
+  const parentPhone = reqStr(body.parent_phone, 25);
+  const emergencyName = reqStr(body.emergency_contact_name, 200);
+  const emergencyPhone = reqStr(body.emergency_contact_phone, 25);
+  const emergencyRel = reqStr(body.emergency_contact_relationship, 100);
+  const waiverName = reqStr(body.waiver_signature_name, 200);
+  const medicalNotes = typeof body.medical_notes === "string" ? body.medical_notes.trim().slice(0, 2000) : "";
+  const formatPreference = String(body.format_preference ?? "");
+  const photoConsentRaw = body.photo_consent;
+  const waiverAccepted = body.waiver_accepted === true;
+
+  if (
+    !studentFirstName || !studentLastName || !gradeLevel || !dateOfBirth ||
+    !address || !state || !school || !parentFirstName || !parentLastName ||
+    !parentEmail || !parentPhone || !emergencyName || !emergencyPhone ||
+    !emergencyRel || !waiverName
+  ) {
+    return json({ error: "Please complete every required field." }, 400);
+  }
+  if (!EMAIL_RE.test(parentEmail)) return json({ error: "Invalid parent email address." }, 400);
+  if (!ENROLL_PHONE_RE.test(parentPhone) || !ENROLL_PHONE_RE.test(emergencyPhone)) {
+    return json({ error: "Invalid phone number." }, 400);
+  }
+  if (Number.isNaN(Date.parse(dateOfBirth)) || new Date(dateOfBirth) >= new Date()) {
+    return json({ error: "Invalid date of birth." }, 400);
+  }
+  if (!ENROLL_FORMATS.has(formatPreference)) return json({ error: "Invalid format preference." }, 400);
+  if (typeof photoConsentRaw !== "boolean") return json({ error: "Photo consent choice is required." }, 400);
+  if (!waiverAccepted) return json({ error: "The waiver must be acknowledged." }, 400);
+
+  const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+
+  // Capacity: count confirmed enrollments for the chosen format. "Undecided"
+  // is never capacity-blocked. Missing settings row = no cap.
+  let status: "pending" | "waitlisted" = "pending";
+  if (formatPreference !== "undecided") {
+    const { data: settingsRow } = await supabase
+      .from("app_settings")
+      .select("value")
+      .eq("key", `capacity_${campYear}`)
+      .maybeSingle();
+    const caps = (settingsRow?.value ?? {}) as { in_person?: number | null; online?: number | null };
+    const cap = formatPreference === "in_person" ? caps.in_person : caps.online;
+    if (typeof cap === "number" && cap > 0) {
+      const { count } = await supabase
+        .from("camp_enrollments")
+        .select("id", { count: "exact", head: true })
+        .eq("camp_year", campYear)
+        .eq("format_preference", formatPreference)
+        .eq("status", "confirmed");
+      if ((count ?? 0) >= cap) status = "waitlisted";
+    }
+  }
+
+  const { error: insertError } = await supabase.from("camp_enrollments").insert({
+    camp_year: campYear,
+    student_first_name: studentFirstName,
+    student_last_name: studentLastName,
+    grade_level: gradeLevel,
+    date_of_birth: dateOfBirth,
+    address,
+    state,
+    school,
+    parent_first_name: parentFirstName,
+    parent_last_name: parentLastName,
+    parent_email: parentEmail,
+    parent_phone: parentPhone,
+    format_preference: formatPreference,
+    emergency_contact_name: emergencyName,
+    emergency_contact_phone: emergencyPhone,
+    emergency_contact_relationship: emergencyRel,
+    medical_notes: medicalNotes || null,
+    photo_consent: photoConsentRaw,
+    waiver_signed_at: new Date().toISOString(),
+    waiver_signature_name: waiverName,
+    status,
+  });
+  if (insertError) {
+    console.error("Enrollment insert error", insertError);
+    return json({ error: "We couldn't save your enrollment. Please try again." }, 500);
+  }
+
+  const studentName = `${studentFirstName} ${studentLastName}`;
+  const parentName = `${parentFirstName} ${parentLastName}`;
+  const formatLabel = formatPreference === "in_person" ? "In person" : formatPreference === "online" ? "Online" : "Undecided";
+
+  const waitlistNote = status === "waitlisted"
+    ? `<p style="margin:16px 0 0;padding:12px 16px;background:#fff3cd;border:2px solid #1a1a2e;border-radius:10px;font-size:14px;line-height:1.5;">
+         <strong>You’re on the waitlist.</strong> The ${escapeHtml(formatLabel.toLowerCase())} track is currently at capacity. We’ll email you right away if a spot opens up.
+       </p>`
+    : "";
+
+  const confirmation = emailShell(`
+    <p style="margin:0 0 8px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#666;">Mathos Camp ${campYear} · Enrollment received</p>
+    <h1 style="margin:0 0 16px;font-size:24px;line-height:1.2;">Thanks, ${escapeHtml(parentFirstName)} — we received ${escapeHtml(studentFirstName)}’s enrollment.</h1>
+    <table cellpadding="0" cellspacing="0" style="margin:0 0 8px;">
+      ${summaryRow("Student", studentName)}
+      ${summaryRow("Grade", gradeLevel)}
+      ${summaryRow("Format", formatLabel)}
+      ${summaryRow("Parent", `${parentName} · ${parentEmail} · ${parentPhone}`)}
+      ${summaryRow("Emergency contact", `${emergencyName} (${emergencyRel}) · ${emergencyPhone}`)}
+      ${summaryRow("Photo consent", photoConsentRaw ? "Yes" : "No")}
+      ${summaryRow("Waiver signed by", waiverName)}
+    </table>
+    ${waitlistNote}
+    <p style="margin:20px 0 0;font-size:14px;color:#666;">We’ll confirm your enrollment soon. Questions? Just reply — this goes straight to campmathos@gmail.com.</p>
+    <p style="margin:20px 0 0;font-size:14px;">— The Mathos team</p>
+  `);
+
+  const notification = emailShell(`
+    <p style="margin:0 0 8px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#666;">New enrollment · ${escapeHtml(status)}</p>
+    <h1 style="margin:0 0 16px;font-size:22px;">${escapeHtml(studentName)} (${escapeHtml(gradeLevel)})</h1>
+    <table cellpadding="0" cellspacing="0">
+      ${summaryRow("Format", formatLabel)}
+      ${summaryRow("School", school)}
+      ${summaryRow("Parent", `${parentName} · ${parentEmail} · ${parentPhone}`)}
+      ${summaryRow("Photo consent", photoConsentRaw ? "Yes" : "No")}
+    </table>
+    <p style="margin:16px 0 0;font-size:14px;color:#666;">Full record (including medical notes) is in the admin enrollments dashboard.</p>
+  `);
+
+  try {
+    await sendGmail({
+      to: parentEmail,
+      subject: `Mathos ${campYear} enrollment received for ${studentFirstName}`,
+      html: confirmation,
+    });
+  } catch (mailErr) {
+    console.error("Enrollment confirmation failed:", mailErr);
+  }
+  try {
+    await sendGmail({
+      to: DIRECTOR_NOTIFY,
+      subject: `New ${campYear} enrollment (${status}): ${studentName}`,
+      html: notification,
+    });
+  } catch (notifyErr) {
+    console.error("Enrollment notification failed:", notifyErr);
+  }
+  await closeGmail();
+
+  return json({ ok: true, status }, 200);
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
   if (req.method !== "POST") {
