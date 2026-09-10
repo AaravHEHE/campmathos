@@ -15,6 +15,13 @@
       "when": 1788625378347,
       "tag": "0001_resource_storage_policies",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1789077250314,
+      "tag": "0002_create_camp_enrollments",
+      "breakpoints": true
     }
   ]
 }
