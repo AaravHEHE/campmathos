@@ -241,24 +241,24 @@ function RegisterPage() {
 
           {track === "choose" && (
             <div className="mt-12 grid gap-7 md:grid-cols-2">
-              <button
+              <Button
                 type="button"
                 onClick={() => setTrack("enroll")}
-                className="card-3d bg-electric p-8 text-left text-cream transition hover:-translate-y-1"
+                className="card-3d h-auto whitespace-normal bg-electric p-8 text-left text-cream transition hover:-translate-y-1 hover:bg-electric"
               >
-                <span className="font-mono text-xs uppercase tracking-widest text-cream/75">Full registration</span>
+                <span className="block w-full"><span className="font-mono text-xs uppercase tracking-widest text-cream/75">Full registration</span>
                 <span className="mt-3 block font-display text-4xl font-black">Enroll for {CAMP_YEAR}</span>
-                <span className="mt-4 block text-cream/85">Student, guardian, emergency, consent, and waiver information.</span>
-              </button>
-              <button
+                <span className="mt-4 block font-serif text-base font-normal text-cream/85">Student, guardian, emergency, consent, and waiver information.</span></span>
+              </Button>
+              <Button
                 type="button"
                 onClick={() => setTrack("updates")}
-                className="card-3d bg-sun p-8 text-left transition hover:-translate-y-1"
+                className="card-3d h-auto whitespace-normal bg-sun p-8 text-left text-ink transition hover:-translate-y-1 hover:bg-sun"
               >
-                <span className="font-mono text-xs uppercase tracking-widest text-ink/65">Email only</span>
+                <span className="block w-full"><span className="font-mono text-xs uppercase tracking-widest text-ink/65">Email only</span>
                 <span className="mt-3 block font-display text-4xl font-black">Just keep me updated</span>
-                <span className="mt-4 block text-ink/75">No commitment. We’ll send schedules and joining details later.</span>
-              </button>
+                <span className="mt-4 block font-serif text-base font-normal text-ink/75">No commitment. We’ll send schedules and joining details later.</span></span>
+              </Button>
             </div>
           )}
 
