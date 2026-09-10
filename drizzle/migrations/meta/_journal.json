@@ -22,6 +22,13 @@
       "when": 1789077250314,
       "tag": "0002_create_camp_enrollments",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1789080256394,
+      "tag": "0003_create_app_settings",
+      "breakpoints": true
     }
   ]
 }

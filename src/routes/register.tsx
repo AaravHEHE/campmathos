@@ -7,6 +7,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
+import { getCapacityStatus, type CapacityStatus } from "@/lib/enrollments.functions";
 import { canonical, ogImage } from "@/lib/seo";
 
 const OG = ogImage("/og-register.jpg");
@@ -92,6 +93,18 @@ const STEPS = ["Student", "Parent", "Safety", "Consent", "Review"] as const;
 const fieldClass =
   "h-12 rounded-xl border-2 border-ink bg-cream px-4 text-ink placeholder:text-ink/40 focus-visible:ring-4 focus-visible:ring-electric/30";
 
+// Show remaining spots only when a cap is set and nearly full — never fake scarcity.
+const SPOT_THRESHOLD = 10;
+function spotNotice(capacity: CapacityStatus | null, format: FormatPreference): string | null {
+  if (!capacity || format === "undecided") return null;
+  const remaining = capacity.remaining[format];
+  if (remaining === null || remaining > SPOT_THRESHOLD) return null;
+  const label = format === "in_person" ? "in-person" : "online";
+  return remaining === 0
+    ? `The ${label} track is currently full — new enrollments join the waitlist.`
+    : `Only ${remaining} ${label} spot${remaining === 1 ? "" : "s"} left for ${CAMP_YEAR}.`;
+}
+
 function RegisterPage() {
   const [track, setTrack] = useState<Track>("choose");
   const [email, setEmail] = useState("");
@@ -101,6 +114,10 @@ function RegisterPage() {
   const [draft, setDraft] = useState<EnrollmentDraft>(EMPTY_DRAFT);
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const [draftLoaded, setDraftLoaded] = useState(false);
+  const [submitState, setSubmitState] = useState<"idle" | "submitting" | "done">("idle");
+  const [submitError, setSubmitError] = useState("");
+  const [enrollResult, setEnrollResult] = useState<"pending" | "waitlisted" | null>(null);
+  const [capacity, setCapacity] = useState<CapacityStatus | null>(null);
 
   useEffect(() => {
     try {
@@ -118,9 +135,72 @@ function RegisterPage() {
     window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(draft));
   }, [draft, draftLoaded]);
 
+  useEffect(() => {
+    getCapacityStatus({ data: { campYear: CAMP_YEAR } })
+      .then(setCapacity)
+      .catch(() => setCapacity(null));
+  }, []);
+
   const updateDraft = <K extends keyof EnrollmentDraft>(key: K, value: EnrollmentDraft[K]) => {
     setDraft((current) => ({ ...current, [key]: value }));
     setFormErrors((current) => ({ ...current, [key]: "" }));
+  };
+
+  const handleEnrollmentSubmit = async () => {
+    if (!validateStep(4)) {
+      setStep(4);
+      return;
+    }
+    setSubmitState("submitting");
+    setSubmitError("");
+    try {
+      const { data, error } = await supabase.functions.invoke("send-registration-email", {
+        body: {
+          kind: "enrollment",
+          camp_year: CAMP_YEAR,
+          student_first_name: draft.studentFirstName.trim(),
+          student_last_name: draft.studentLastName.trim(),
+          grade_level: draft.gradeLevel.trim(),
+          date_of_birth: draft.dateOfBirth,
+          address: draft.address.trim(),
+          state: draft.state.trim(),
+          school: draft.school.trim(),
+          parent_first_name: draft.parentFirstName.trim(),
+          parent_last_name: draft.parentLastName.trim(),
+          parent_email: draft.parentEmail.trim().toLowerCase(),
+          parent_phone: draft.parentPhone.trim(),
+          format_preference: draft.formatPreference,
+          emergency_contact_name: draft.emergencyContactName.trim(),
+          emergency_contact_phone: draft.emergencyContactPhone.trim(),
+          emergency_contact_relationship: draft.emergencyContactRelationship.trim(),
+          medical_notes: draft.medicalNotes.trim(),
+          photo_consent: draft.photoConsent,
+          waiver_signature_name: draft.waiverSignatureName.trim(),
+          waiver_accepted: draft.waiverAccepted,
+        },
+      });
+      let payload = (data ?? null) as { error?: string; ok?: boolean; status?: string } | null;
+      if (error) {
+        const context = (error as { context?: Response }).context;
+        if (context && typeof context.json === "function") {
+          try {
+            payload = await context.json();
+          } catch {
+            // Fall through to the friendly error below.
+          }
+        }
+        if (!payload?.error) throw new Error("Something went wrong. Please try again.");
+      }
+      if (payload?.error) throw new Error(payload.error);
+      setEnrollResult(payload?.status === "waitlisted" ? "waitlisted" : "pending");
+      setSubmitState("done");
+      setDraft(EMPTY_DRAFT);
+      window.sessionStorage.removeItem(STORAGE_KEY);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : "Something went wrong. Please try again.");
+      setSubmitState("idle");
+    }
   };
 
   const validateStep = (currentStep: number) => {
@@ -262,11 +342,38 @@ function RegisterPage() {
             </div>
           )}
 
-          {track === "enroll" && (
+          {track === "enroll" && (submitState === "done" ? (
+            <div className="mt-12 card-3d bg-sun p-8">
+              <p className="font-mono text-xs uppercase tracking-widest text-ink/70">Enrollment received</p>
+              <h2 className="mt-2 font-display text-3xl font-black md:text-4xl">
+                {enrollResult === "waitlisted" ? "You’re on the waitlist 📝" : "Congrats! Your enrollment is in 🎉"}
+              </h2>
+              <p className="mt-3 text-ink/80">
+                {enrollResult === "waitlisted"
+                  ? "This track is currently at capacity, so we’ve placed the enrollment on the waitlist. We’ve emailed you a confirmation — and we’ll reach out right away if a spot opens up."
+                  : "We’ve emailed you a confirmation with a summary of everything you submitted. We’ll confirm the spot soon — keep an eye on your inbox."}
+              </p>
+              <Button
+                type="button"
+                onClick={() => {
+                  setTrack("choose");
+                  setStep(1);
+                  setSubmitState("idle");
+                  setEnrollResult(null);
+                }}
+                className="mt-6 h-12 rounded-full bg-ink px-6 text-cream"
+              >
+                Back to start
+              </Button>
+            </div>
+          ) : (
             <EnrollmentForm
               draft={draft}
               errors={formErrors}
               step={step}
+              capacity={capacity}
+              submitting={submitState === "submitting"}
+              submitError={submitError}
               onChange={updateDraft}
               onBack={() => {
                 if (step === 1) setTrack("choose");
@@ -274,8 +381,9 @@ function RegisterPage() {
               }}
               onNext={nextStep}
               onEdit={setStep}
+              onSubmit={handleEnrollmentSubmit}
             />
-          )}
+          ))}
 
           {track === "updates" && (
             <InterestList
@@ -311,13 +419,17 @@ type EnrollmentFormProps = {
   draft: EnrollmentDraft;
   errors: Record<string, string>;
   step: number;
+  capacity: CapacityStatus | null;
+  submitting: boolean;
+  submitError: string;
   onChange: <K extends keyof EnrollmentDraft>(key: K, value: EnrollmentDraft[K]) => void;
   onBack: () => void;
   onNext: () => void;
   onEdit: (step: number) => void;
+  onSubmit: () => void;
 };
 
-function EnrollmentForm({ draft, errors, step, onChange, onBack, onNext, onEdit }: EnrollmentFormProps) {
+function EnrollmentForm({ draft, errors, step, capacity, submitting, submitError, onChange, onBack, onNext, onEdit, onSubmit }: EnrollmentFormProps) {
   return (
     <div className="mt-12">
       <ol aria-label="Enrollment progress" className="grid grid-cols-5 gap-2">
@@ -430,10 +542,13 @@ function EnrollmentForm({ draft, errors, step, onChange, onBack, onNext, onEdit 
               <ReviewGroup title="Consent" onEdit={() => onEdit(4)} rows={[
                 ["Photo consent", draft.photoConsent ? "Yes" : "No"], ["Signature", draft.waiverSignatureName],
               ]} />
-              <div className="card-3d bg-sun p-5">
-                <p className="font-mono text-xs font-bold uppercase tracking-widest">Review checkpoint</p>
-                <p className="mt-2">Final submission is intentionally disabled until the required waiver text and secure submission email flow are added in the next reviewed phase.</p>
-              </div>
+              {spotNotice(capacity, draft.formatPreference) && (
+                <div className="card-3d bg-sun p-5">
+                  <p className="font-mono text-xs font-bold uppercase tracking-widest">Availability</p>
+                  <p className="mt-2">{spotNotice(capacity, draft.formatPreference)}</p>
+                </div>
+              )}
+              {submitError && <p className="font-mono text-sm text-coral">{submitError}</p>}
             </div>
           </StepSection>
         )}
@@ -443,7 +558,9 @@ function EnrollmentForm({ draft, errors, step, onChange, onBack, onNext, onEdit 
           {step < 5 ? (
             <Button type="button" onClick={onNext} className="h-12 rounded-full bg-ink px-8 text-cream hover:bg-electric">Continue →</Button>
           ) : (
-            <Button type="button" disabled className="h-12 rounded-full bg-ink px-8 text-cream">Submit enrollment</Button>
+            <Button type="button" onClick={onSubmit} disabled={submitting} className="h-12 rounded-full bg-ink px-8 text-cream hover:bg-electric disabled:opacity-60">
+              {submitting ? "Submitting…" : "Submit enrollment"}
+            </Button>
           )}
         </div>
       </div>

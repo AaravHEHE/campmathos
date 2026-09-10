@@ -26,6 +26,7 @@ import { Route as ThroughTheYearsRouteImport } from './routes/through-the-years'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminEnrollmentsRouteImport } from './routes/admin.enrollments'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as GamesSlugRouteImport } from './routes/games.$slug'
 import { Route as ResourcesIndexRouteImport } from './routes/resources.index'
@@ -121,6 +122,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/admin/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminEnrollmentsRoute = AdminEnrollmentsRouteImport.update({
+  id: '/admin/enrollments',
+  path: '/admin/enrollments',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
   id: '/admin/login',
   path: '/admin/login',
@@ -176,6 +182,7 @@ export interface FileRoutesByFullPath {
   '/through-the-years': typeof ThroughTheYearsRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  '/admin/enrollments': typeof AdminEnrollmentsRoute
   '/admin/login': typeof AdminLoginRoute
   '/games/$slug': typeof GamesSlugRoute
   '/resources/$resourceId': typeof ResourcesResourceIdRoute
@@ -202,6 +209,7 @@ export interface FileRoutesByTo {
   '/through-the-years': typeof ThroughTheYearsRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  '/admin/enrollments': typeof AdminEnrollmentsRoute
   '/admin/login': typeof AdminLoginRoute
   '/games/$slug': typeof GamesSlugRoute
   '/resources/$resourceId': typeof ResourcesResourceIdRoute
@@ -229,6 +237,7 @@ export interface FileRoutesById {
   '/through-the-years': typeof ThroughTheYearsRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  '/admin/enrollments': typeof AdminEnrollmentsRoute
   '/admin/login': typeof AdminLoginRoute
   '/games/$slug': typeof GamesSlugRoute
   '/resources/$resourceId': typeof ResourcesResourceIdRoute
@@ -257,6 +266,7 @@ export interface FileRouteTypes {
     | '/through-the-years'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
+    | '/admin/enrollments'
     | '/admin/login'
     | '/games/$slug'
     | '/resources/$resourceId'
@@ -283,6 +293,7 @@ export interface FileRouteTypes {
     | '/through-the-years'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
+    | '/admin/enrollments'
     | '/admin/login'
     | '/games/$slug'
     | '/resources/$resourceId'
@@ -309,6 +320,7 @@ export interface FileRouteTypes {
     | '/through-the-years'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
+    | '/admin/enrollments'
     | '/admin/login'
     | '/games/$slug'
     | '/resources/$resourceId'
@@ -336,6 +348,7 @@ export interface RootRouteChildren {
   ThroughTheYearsRoute: typeof ThroughTheYearsRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  AdminEnrollmentsRoute: typeof AdminEnrollmentsRoute
   AdminLoginRoute: typeof AdminLoginRoute
   GamesSlugRoute: typeof GamesSlugRoute
   ResourcesResourceIdRoute: typeof ResourcesResourceIdRoute
@@ -467,6 +480,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/enrollments': {
+      id: '/admin/enrollments'
+      path: '/admin/enrollments'
+      fullPath: '/admin/enrollments'
+      preLoaderRoute: typeof AdminEnrollmentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/login': {
       id: '/admin/login'
       path: '/admin/login'
@@ -537,6 +557,7 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
+  AdminEnrollmentsRoute: AdminEnrollmentsRoute,
   AdminLoginRoute: AdminLoginRoute,
   GamesSlugRoute: GamesSlugRoute,
   ResourcesResourceIdRoute: ResourcesResourceIdRoute,
