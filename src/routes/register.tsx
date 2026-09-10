@@ -93,6 +93,18 @@ const STEPS = ["Student", "Parent", "Safety", "Consent", "Review"] as const;
 const fieldClass =
   "h-12 rounded-xl border-2 border-ink bg-cream px-4 text-ink placeholder:text-ink/40 focus-visible:ring-4 focus-visible:ring-electric/30";
 
+// Show remaining spots only when a cap is set and nearly full — never fake scarcity.
+const SPOT_THRESHOLD = 10;
+function spotNotice(capacity: CapacityStatus | null, format: FormatPreference): string | null {
+  if (!capacity || format === "undecided") return null;
+  const remaining = capacity.remaining[format];
+  if (remaining === null || remaining > SPOT_THRESHOLD) return null;
+  const label = format === "in_person" ? "in-person" : "online";
+  return remaining === 0
+    ? `The ${label} track is currently full — new enrollments join the waitlist.`
+    : `Only ${remaining} ${label} spot${remaining === 1 ? "" : "s"} left for ${CAMP_YEAR}.`;
+}
+
 function RegisterPage() {
   const [track, setTrack] = useState<Track>("choose");
   const [email, setEmail] = useState("");
