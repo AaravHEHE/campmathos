@@ -1,4 +1,5 @@
 // Edge function: stores a registration and sends confirmation + director notification.
+// Also handles sponsor inquiries and full camp enrollments (kind: "enrollment").
 // Uses Gmail SMTP — emails come directly from campmathos@gmail.com.
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { sendGmail, closeGmail } from "../_shared/gmail.ts";
