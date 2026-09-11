@@ -188,12 +188,14 @@ function AdminEnrollments() {
         body: { mode: "promote-enrollment", enrollmentId: enrollment.id },
       });
       if (error) throw new Error("Promotion failed — please try again.");
-      if (data?.error) throw new Error(data.error);
+      // The promotion can succeed while the email fails: the function then
+      // returns ok:true with an error message. Trust ok over error.
+      if (!data?.ok) throw new Error(data?.error || "Promotion failed — please try again.");
       refreshRow(enrollment.id, "confirmed");
       setNotice(
         data?.emailSent
           ? `Promoted ${enrollment.student_first_name} and emailed the family with a 7-day response deadline.`
-          : `Promoted ${enrollment.student_first_name}, but the email failed to send.`,
+          : `${enrollment.student_first_name} is confirmed — but the notification email did not send, so please contact the family directly. Do not promote again.`,
       );
       const cap = await adminGetCapacity({ data: { campYear: CAMP_YEAR } });
       setCapacity(cap);
