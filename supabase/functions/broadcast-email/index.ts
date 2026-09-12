@@ -48,8 +48,11 @@ async function handlePromoteEnrollment(
   if (fetchError || !enrollment) return json({ error: "Enrollment not found." }, 404);
   if (enrollment.status === "confirmed") {
     return json({
-      error: `${enrollment.student_first_name} is already confirmed — they have a spot. If the family wasn't emailed, contact them directly.`,
-    }, 400);
+      ok: true,
+      alreadyConfirmed: true,
+      emailSent: false,
+      message: `${enrollment.student_first_name} is already confirmed — they have a spot. If the family wasn't emailed, contact them directly.`,
+    }, 200);
   }
   if (enrollment.status !== "waitlisted") {
     return json({ error: "Only waitlisted enrollments can be promoted." }, 400);

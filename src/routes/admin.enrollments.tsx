@@ -193,7 +193,9 @@ function AdminEnrollments() {
       if (!data?.ok) throw new Error(data?.error || "Promotion failed — please try again.");
       refreshRow(enrollment.id, "confirmed");
       setNotice(
-        data?.emailSent
+        data?.alreadyConfirmed
+          ? data.message || `${enrollment.student_first_name} is already confirmed — they have a spot. If the family wasn't emailed, contact them directly.`
+          : data?.emailSent
           ? `Promoted ${enrollment.student_first_name} and emailed the family with a 7-day response deadline.`
           : `${enrollment.student_first_name} is confirmed — but the notification email did not send, so please contact the family directly. Do not promote again.`,
       );
