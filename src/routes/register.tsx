@@ -9,6 +9,16 @@ import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
 import { getCapacityStatus, type CapacityStatus } from "@/lib/enrollments.functions";
 import { canonical, ogImage } from "@/lib/seo";
+import {
+  MEDIA_RELEASE_TEXT,
+  PHOTO_QUESTION,
+  RECORDING_QUESTION,
+  SIGNATURE_TEXT,
+  WAIVER_ACKS,
+  WAIVER_INTRO,
+  WAIVER_SECTIONS,
+  type WaiverAckKey,
+} from "@/data/waiver-2027";
 
 const OG = ogImage("/og-register.jpg");
 const CAMP_YEAR = 2027;
@@ -63,8 +73,18 @@ type EnrollmentDraft = {
   emergencyContactRelationship: string;
   medicalNotes: string;
   photoConsent: boolean | null;
+  recordingConsent: boolean | null;
+  waiverAcks: Record<WaiverAckKey, boolean>;
   waiverSignatureName: string;
-  waiverAccepted: boolean;
+  waiverDate: string;
+};
+
+const EMPTY_ACKS: Record<WaiverAckKey, boolean> = {
+  risk: false,
+  release: false,
+  supervision: false,
+  emergency: false,
+  conduct: false,
 };
 
 const EMPTY_DRAFT: EnrollmentDraft = {
@@ -85,8 +105,10 @@ const EMPTY_DRAFT: EnrollmentDraft = {
   emergencyContactRelationship: "",
   medicalNotes: "",
   photoConsent: null,
+  recordingConsent: null,
+  waiverAcks: EMPTY_ACKS,
   waiverSignatureName: "",
-  waiverAccepted: false,
+  waiverDate: "",
 };
 
 const STEPS = ["Student", "Parent", "Safety", "Consent", "Review"] as const;
