@@ -648,6 +648,23 @@ function EnrollmentForm({ draft, errors, step, capacity, submitting, submitError
   );
 }
 
+function YesNoQuestion({ name, question, value, error, onChange }: { name: string; question: string; value: boolean | null; error?: string; onChange: (value: boolean) => void }) {
+  return (
+    <fieldset className="mt-5">
+      <legend className="font-semibold leading-relaxed">{question} <span className="font-mono text-xs text-coral">*</span></legend>
+      <div className="mt-3 grid gap-3 sm:grid-cols-2">
+        {[{ v: true, label: "Yes" }, { v: false, label: "No" }].map((option) => (
+          <label key={option.label} className={`cursor-pointer rounded-xl border-2 p-4 font-semibold ${error ? "border-coral" : "border-ink"} ${value === option.v ? "bg-electric text-cream" : "bg-cream text-ink"}`}>
+            <input className="sr-only" type="radio" name={name} checked={value === option.v} onChange={() => onChange(option.v)} />
+            {option.label}
+          </label>
+        ))}
+      </div>
+      {error && <p className="mt-2 font-mono text-sm text-coral">{error}</p>}
+    </fieldset>
+  );
+}
+
 function StepSection({ eyebrow, title, children }: { eyebrow: string; title: string; children: React.ReactNode }) {
   return <section><p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">{eyebrow}</p><h2 className="mt-2 mb-7 font-display text-3xl font-black md:text-4xl">{title}</h2>{children}</section>;
 }
