@@ -148,6 +148,7 @@ export type Database = {
           parent_last_name: string
           parent_phone: string
           photo_consent: boolean
+          recording_consent: boolean | null
           school: string
           state: string
           status: string
@@ -156,6 +157,8 @@ export type Database = {
           updated_at: string
           waiver_signature_name: string
           waiver_signed_at: string | null
+          waiver_signed_date: string | null
+          waiver_version: string | null
         }
         Insert: {
           address: string
@@ -174,6 +177,7 @@ export type Database = {
           parent_last_name: string
           parent_phone: string
           photo_consent: boolean
+          recording_consent?: boolean | null
           school: string
           state: string
           status?: string
@@ -182,6 +186,8 @@ export type Database = {
           updated_at?: string
           waiver_signature_name: string
           waiver_signed_at?: string | null
+          waiver_signed_date?: string | null
+          waiver_version?: string | null
         }
         Update: {
           address?: string
@@ -200,6 +206,7 @@ export type Database = {
           parent_last_name?: string
           parent_phone?: string
           photo_consent?: boolean
+          recording_consent?: boolean | null
           school?: string
           state?: string
           status?: string
@@ -208,6 +215,8 @@ export type Database = {
           updated_at?: string
           waiver_signature_name?: string
           waiver_signed_at?: string | null
+          waiver_signed_date?: string | null
+          waiver_version?: string | null
         }
         Relationships: []
       }

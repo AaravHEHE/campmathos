@@ -274,13 +274,18 @@ async function handleEnrollment(body: Record<string, unknown>): Promise<Response
   const medicalNotes = typeof body.medical_notes === "string" ? body.medical_notes.trim().slice(0, 2000) : "";
   const formatPreference = String(body.format_preference ?? "");
   const photoConsentRaw = body.photo_consent;
-  const waiverAccepted = body.waiver_accepted === true;
+  const recordingConsentRaw = body.recording_consent;
+  const waiverDate = reqStr(body.waiver_date, 10);
+  // Every required 2027 waiver checkbox must be true.
+  const acks = (body.waiver_acknowledgments ?? {}) as Record<string, unknown>;
+  const REQUIRED_ACKS = ["risk", "release", "supervision", "emergency", "conduct"];
+  const waiverAccepted = REQUIRED_ACKS.every((k) => acks[k] === true);
 
   if (
     !studentFirstName || !studentLastName || !gradeLevel || !dateOfBirth ||
     !address || !state || !school || !parentFirstName || !parentLastName ||
     !parentEmail || !parentPhone || !emergencyName || !emergencyPhone ||
-    !emergencyRel || !waiverName
+    !emergencyRel || !waiverName || !waiverDate
   ) {
     return json({ error: "Please complete every required field." }, 400);
   }
@@ -291,9 +296,17 @@ async function handleEnrollment(body: Record<string, unknown>): Promise<Response
   if (Number.isNaN(Date.parse(dateOfBirth)) || new Date(dateOfBirth) >= new Date()) {
     return json({ error: "Invalid date of birth." }, 400);
   }
+  // Allow one day of slack for time zones.
+  if (
+    !/^\d{4}-\d{2}-\d{2}$/.test(waiverDate) || Number.isNaN(Date.parse(waiverDate)) ||
+    Date.parse(waiverDate) > Date.now() + 36 * 60 * 60 * 1000
+  ) {
+    return json({ error: "Invalid waiver date." }, 400);
+  }
   if (!ENROLL_FORMATS.has(formatPreference)) return json({ error: "Invalid format preference." }, 400);
-  if (typeof photoConsentRaw !== "boolean") return json({ error: "Photo consent choice is required." }, 400);
-  if (!waiverAccepted) return json({ error: "The waiver must be acknowledged." }, 400);
+  if (typeof photoConsentRaw !== "boolean") return json({ error: "Photo & media choice is required." }, 400);
+  if (typeof recordingConsentRaw !== "boolean") return json({ error: "Zoom recording choice is required." }, 400);
+  if (!waiverAccepted) return json({ error: "Every required waiver box must be checked." }, 400);
 
   const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
@@ -338,8 +351,11 @@ async function handleEnrollment(body: Record<string, unknown>): Promise<Response
     emergency_contact_relationship: emergencyRel,
     medical_notes: medicalNotes || null,
     photo_consent: photoConsentRaw,
+    recording_consent: recordingConsentRaw,
     waiver_signed_at: new Date().toISOString(),
+    waiver_signed_date: waiverDate,
     waiver_signature_name: waiverName,
+    waiver_version: "2027-v1",
     status,
   });
   if (insertError) {
@@ -366,8 +382,9 @@ async function handleEnrollment(body: Record<string, unknown>): Promise<Response
       ${summaryRow("Format", formatLabel)}
       ${summaryRow("Parent", `${parentName} · ${parentEmail} · ${parentPhone}`)}
       ${summaryRow("Emergency contact", `${emergencyName} (${emergencyRel}) · ${emergencyPhone}`)}
-      ${summaryRow("Photo consent", photoConsentRaw ? "Yes" : "No")}
-      ${summaryRow("Waiver signed by", waiverName)}
+      ${summaryRow("Photo & media release", photoConsentRaw ? "Yes" : "No")}
+      ${summaryRow("Zoom recording", recordingConsentRaw ? "Yes" : "No")}
+      ${summaryRow("Waiver signed by", `${waiverName} · ${waiverDate}`)}
     </table>
     ${waitlistNote}
     <p style="margin:20px 0 0;font-size:14px;color:#666;">We’ll confirm your enrollment soon. Questions? Just reply — this goes straight to campmathos@gmail.com.</p>
@@ -382,6 +399,7 @@ async function handleEnrollment(body: Record<string, unknown>): Promise<Response
       ${summaryRow("School", school)}
       ${summaryRow("Parent", `${parentName} · ${parentEmail} · ${parentPhone}`)}
       ${summaryRow("Photo consent", photoConsentRaw ? "Yes" : "No")}
+      ${summaryRow("Zoom recording", recordingConsentRaw ? "Yes" : "No")}
     </table>
     <p style="margin:16px 0 0;font-size:14px;color:#666;">Full record (including medical notes) is in the admin enrollments dashboard.</p>
   `);
