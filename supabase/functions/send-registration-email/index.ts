@@ -351,8 +351,11 @@ async function handleEnrollment(body: Record<string, unknown>): Promise<Response
     emergency_contact_relationship: emergencyRel,
     medical_notes: medicalNotes || null,
     photo_consent: photoConsentRaw,
+    recording_consent: recordingConsentRaw,
     waiver_signed_at: new Date().toISOString(),
+    waiver_signed_date: waiverDate,
     waiver_signature_name: waiverName,
+    waiver_version: "2027-v1",
     status,
   });
   if (insertError) {
@@ -379,8 +382,9 @@ async function handleEnrollment(body: Record<string, unknown>): Promise<Response
       ${summaryRow("Format", formatLabel)}
       ${summaryRow("Parent", `${parentName} · ${parentEmail} · ${parentPhone}`)}
       ${summaryRow("Emergency contact", `${emergencyName} (${emergencyRel}) · ${emergencyPhone}`)}
-      ${summaryRow("Photo consent", photoConsentRaw ? "Yes" : "No")}
-      ${summaryRow("Waiver signed by", waiverName)}
+      ${summaryRow("Photo &amp; media release", photoConsentRaw ? "Yes" : "No")}
+      ${summaryRow("Zoom recording", recordingConsentRaw ? "Yes" : "No")}
+      ${summaryRow("Waiver signed by", `${waiverName} · ${waiverDate}`)}
     </table>
     ${waitlistNote}
     <p style="margin:20px 0 0;font-size:14px;color:#666;">We’ll confirm your enrollment soon. Questions? Just reply — this goes straight to campmathos@gmail.com.</p>
@@ -395,6 +399,7 @@ async function handleEnrollment(body: Record<string, unknown>): Promise<Response
       ${summaryRow("School", school)}
       ${summaryRow("Parent", `${parentName} · ${parentEmail} · ${parentPhone}`)}
       ${summaryRow("Photo consent", photoConsentRaw ? "Yes" : "No")}
+      ${summaryRow("Zoom recording", recordingConsentRaw ? "Yes" : "No")}
     </table>
     <p style="margin:16px 0 0;font-size:14px;color:#666;">Full record (including medical notes) is in the admin enrollments dashboard.</p>
   `);
