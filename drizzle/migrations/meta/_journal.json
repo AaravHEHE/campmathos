@@ -29,6 +29,13 @@
       "when": 1789080256394,
       "tag": "0003_create_app_settings",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1790129589631,
+      "tag": "0004_add_waiver_2027_fields",
+      "breakpoints": true
     }
   ]
 }
