@@ -247,16 +247,18 @@ function AdminEnrollments() {
       "Student first", "Student last", "Grade", "Date of birth", "Address", "State", "School",
       "Parent first", "Parent last", "Parent email", "Parent phone", "Format",
       "Emergency contact", "Emergency phone", "Emergency relationship",
-      "Medical notes", "Photo consent", "Waiver signed at", "Waiver signature",
+      "Medical notes", "Photo consent", "Zoom recording consent", "Waiver signed at",
+      "Waiver signature", "Waiver date", "Waiver version",
       "Status", "Submitted",
     ].join(",");
+    const yn = (v: boolean | null) => (v === null ? "" : v ? "yes" : "no");
     const body = visibleRows.map((r) => [
       r.student_first_name, r.student_last_name, r.grade_level, r.date_of_birth,
       r.address, r.state, r.school, r.parent_first_name, r.parent_last_name,
       r.parent_email, r.parent_phone, r.format_preference,
       r.emergency_contact_name, r.emergency_contact_phone, r.emergency_contact_relationship,
-      r.medical_notes, r.photo_consent ? "yes" : "no", r.waiver_signed_at,
-      r.waiver_signature_name, r.status, r.created_at,
+      r.medical_notes, yn(r.photo_consent), yn(r.recording_consent), r.waiver_signed_at,
+      r.waiver_signature_name, r.waiver_signed_date, r.waiver_version, r.status, r.created_at,
     ].map(esc).join(",")).join("\n");
     const blob = new Blob([`${header}\n${body}`], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
@@ -493,8 +495,11 @@ function AdminEnrollments() {
                 ["Emergency contact", `${selected.emergency_contact_name} (${selected.emergency_contact_relationship})`],
                 ["Emergency phone", selected.emergency_contact_phone],
                 ["Photo consent", selected.photo_consent ? "Yes" : "No"],
+                ["Zoom recording consent", selected.recording_consent === null ? "—" : selected.recording_consent ? "Yes" : "No"],
                 ["Waiver signed by", selected.waiver_signature_name],
+                ["Waiver date (typed)", selected.waiver_signed_date ?? "—"],
                 ["Waiver signed at", selected.waiver_signed_at ? new Date(selected.waiver_signed_at).toLocaleString() : "—"],
+                ["Waiver version", selected.waiver_version ?? "—"],
                 ["Submitted", new Date(selected.created_at).toLocaleString()],
               ] as Array<[string, string]>).map(([label, value]) => (
                 <div key={label}>
