@@ -144,7 +144,10 @@ function RegisterPage() {
   useEffect(() => {
     try {
       const saved = window.sessionStorage.getItem(STORAGE_KEY);
-      if (saved) setDraft({ ...EMPTY_DRAFT, ...(JSON.parse(saved) as Partial<EnrollmentDraft>) });
+      if (saved) {
+        const parsed = JSON.parse(saved) as Partial<EnrollmentDraft>;
+        setDraft({ ...EMPTY_DRAFT, ...parsed, waiverAcks: { ...EMPTY_ACKS, ...parsed.waiverAcks } });
+      }
     } catch {
       window.sessionStorage.removeItem(STORAGE_KEY);
     } finally {
@@ -197,8 +200,10 @@ function RegisterPage() {
           emergency_contact_relationship: draft.emergencyContactRelationship.trim(),
           medical_notes: draft.medicalNotes.trim(),
           photo_consent: draft.photoConsent,
+          recording_consent: draft.recordingConsent,
+          waiver_acknowledgments: draft.waiverAcks,
           waiver_signature_name: draft.waiverSignatureName.trim(),
-          waiver_accepted: draft.waiverAccepted,
+          waiver_date: draft.waiverDate,
         },
       });
       let payload = (data ?? null) as { error?: string; ok?: boolean; status?: string } | null;
@@ -267,9 +272,19 @@ function RegisterPage() {
       if (draft.medicalNotes.length > 2000) errors.medicalNotes = "Medical notes must be under 2,000 characters.";
     }
     if (currentStep === 4) {
-      if (draft.photoConsent === null) errors.photoConsent = "Choose a photo consent option.";
+      if (!Object.values(draft.waiverAcks).every(Boolean)) {
+        errors.waiverAcks = "Please check every required box in the waiver.";
+      }
+      if (draft.photoConsent === null) errors.photoConsent = "Choose Yes or No.";
+      if (draft.recordingConsent === null) errors.recordingConsent = "Choose Yes or No.";
       required("waiverSignatureName", "Typed signature", 200);
-      if (!draft.waiverAccepted) errors.waiverAccepted = "You must acknowledge the waiver before continuing.";
+      required("waiverDate", "Date", 10);
+      if (draft.waiverDate) {
+        const today = new Date().toLocaleDateString("en-CA");
+        if (Number.isNaN(Date.parse(draft.waiverDate)) || draft.waiverDate > today) {
+          errors.waiverDate = "Enter today's date.";
+        }
+      }
     }
 
     setFormErrors(errors);
@@ -519,32 +534,72 @@ function EnrollmentForm({ draft, errors, step, capacity, submitting, submitError
         )}
 
         {step === 4 && (
-          <StepSection eyebrow="Step 4 of 5" title="Consent and waiver">
-            <fieldset>
-              <legend className="font-mono text-xs font-bold uppercase tracking-widest">Photo consent</legend>
-              <div className="mt-3 grid gap-3 sm:grid-cols-2">
-                {[{ value: true, label: "I give photo consent" }, { value: false, label: "I do not give photo consent" }].map((option) => (
-                  <label key={option.label} className={`cursor-pointer rounded-xl border-2 border-ink p-4 font-semibold ${draft.photoConsent === option.value ? "bg-electric text-cream" : "bg-cream"}`}>
-                    <input className="sr-only" type="radio" name="photoConsent" checked={draft.photoConsent === option.value} onChange={() => onChange("photoConsent", option.value)} />
-                    {option.label}
-                  </label>
-                ))}
-              </div>
-              {errors.photoConsent && <p className="mt-2 font-mono text-sm text-coral">{errors.photoConsent}</p>}
-            </fieldset>
+          <StepSection eyebrow="Step 4 of 5" title="MathOs 2027 Participant Waiver">
+            <p className="font-serif text-lg leading-relaxed">{WAIVER_INTRO}</p>
 
-            <div className="mt-8 card-3d-inverse bg-ink p-6 text-cream">
-              <p className="font-mono text-xs uppercase tracking-widest text-coral">Required legal copy missing</p>
-              <p className="mt-3 font-display text-2xl font-black">[WAIVER TEXT TO BE SUPPLIED — do not launch without this]</p>
-            </div>
+            <div className="mt-8 space-y-10">
+              {WAIVER_SECTIONS.map((section) => (
+                <section key={section.title}>
+                  <h3 className="font-display text-2xl font-black">{section.title}</h3>
+                  {section.paragraphs?.map((p) => (
+                    <p key={p} className="mt-3 leading-relaxed text-foreground/85">{p}</p>
+                  ))}
+                  {section.list && (
+                    <ul className="mt-3 list-disc space-y-1.5 pl-6 leading-relaxed text-foreground/85">
+                      {section.list.map((item) => <li key={item}>{item}</li>)}
+                    </ul>
+                  )}
+                  {section.after?.map((p) => (
+                    <p key={p} className="mt-3 leading-relaxed text-foreground/85">{p}</p>
+                  ))}
+                  <div className="mt-4 space-y-3">
+                    {section.acks.map((key) => {
+                      const missing = Boolean(errors.waiverAcks) && !draft.waiverAcks[key];
+                      return (
+                        <label key={key} className={`flex cursor-pointer items-start gap-3 rounded-xl border-2 p-4 ${missing ? "border-coral" : "border-ink"} ${draft.waiverAcks[key] ? "bg-electric/10" : "bg-cream text-ink"}`}>
+                          <Checkbox
+                            checked={draft.waiverAcks[key]}
+                            onCheckedChange={(checked) => onChange("waiverAcks", { ...draft.waiverAcks, [key]: checked === true })}
+                            className="mt-1 h-5 w-5 shrink-0"
+                            aria-label={WAIVER_ACKS[key]}
+                          />
+                          <span className="leading-relaxed">{WAIVER_ACKS[key]} <span className="font-mono text-xs text-coral">*</span></span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                </section>
+              ))}
 
-            <div className="mt-8 space-y-5">
-              <Field label="Type your full name as your signature" error={errors.waiverSignatureName}><Input value={draft.waiverSignatureName} onChange={(e) => onChange("waiverSignatureName", e.target.value)} maxLength={200} className={fieldClass} /></Field>
-              <label className="flex items-start gap-3 rounded-xl border-2 border-ink p-4">
-                <Checkbox checked={draft.waiverAccepted} onCheckedChange={(checked) => onChange("waiverAccepted", checked === true)} className="mt-1 h-5 w-5" />
-                <span>I acknowledge the waiver above and confirm that the typed name is my signature.</span>
-              </label>
-              {errors.waiverAccepted && <p className="font-mono text-sm text-coral">{errors.waiverAccepted}</p>}
+              <section>
+                <h3 className="font-display text-2xl font-black">Photo &amp; Media Release</h3>
+                <p className="mt-3 leading-relaxed text-foreground/85">{MEDIA_RELEASE_TEXT}</p>
+                <YesNoQuestion
+                  name="photoConsent"
+                  question={PHOTO_QUESTION}
+                  value={draft.photoConsent}
+                  error={errors.photoConsent}
+                  onChange={(value) => onChange("photoConsent", value)}
+                />
+                <YesNoQuestion
+                  name="recordingConsent"
+                  question={RECORDING_QUESTION}
+                  value={draft.recordingConsent}
+                  error={errors.recordingConsent}
+                  onChange={(value) => onChange("recordingConsent", value)}
+                />
+              </section>
+
+              <section>
+                <h3 className="font-display text-2xl font-black">Signature</h3>
+                <p className="mt-3 leading-relaxed text-foreground/85">{SIGNATURE_TEXT}</p>
+                <div className="mt-4 grid gap-5 md:grid-cols-[2fr_1fr]">
+                  <Field label="Parent or guardian full name" error={errors.waiverSignatureName}><Input value={draft.waiverSignatureName} onChange={(e) => onChange("waiverSignatureName", e.target.value)} maxLength={200} autoComplete="name" className={fieldClass} /></Field>
+                  <Field label="Date" error={errors.waiverDate}><Input type="date" value={draft.waiverDate} onChange={(e) => onChange("waiverDate", e.target.value)} className={fieldClass} /></Field>
+                </div>
+              </section>
+
+              {errors.waiverAcks && <p className="font-mono text-sm text-coral">{errors.waiverAcks}</p>}
             </div>
           </StepSection>
         )}
@@ -561,8 +616,11 @@ function EnrollmentForm({ draft, errors, step, capacity, submitting, submitError
               <ReviewGroup title="Emergency and health" onEdit={() => onEdit(3)} rows={[
                 ["Emergency contact", draft.emergencyContactName], ["Phone", draft.emergencyContactPhone], ["Relationship", draft.emergencyContactRelationship], ["Medical notes", draft.medicalNotes || "None provided"],
               ]} />
-              <ReviewGroup title="Consent" onEdit={() => onEdit(4)} rows={[
-                ["Photo consent", draft.photoConsent ? "Yes" : "No"], ["Signature", draft.waiverSignatureName],
+              <ReviewGroup title="Waiver" onEdit={() => onEdit(4)} rows={[
+                ["Waiver agreements", Object.values(draft.waiverAcks).every(Boolean) ? "All agreed" : "Incomplete"],
+                ["Photo & media", draft.photoConsent ? "Yes" : "No"],
+                ["Zoom recording", draft.recordingConsent ? "Yes" : "No"],
+                ["Signature", draft.waiverSignatureName], ["Date", draft.waiverDate],
               ]} />
               {spotNotice(capacity, draft.formatPreference) && (
                 <div className="card-3d bg-sun p-5">
