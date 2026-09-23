@@ -382,7 +382,7 @@ async function handleEnrollment(body: Record<string, unknown>): Promise<Response
       ${summaryRow("Format", formatLabel)}
       ${summaryRow("Parent", `${parentName} · ${parentEmail} · ${parentPhone}`)}
       ${summaryRow("Emergency contact", `${emergencyName} (${emergencyRel}) · ${emergencyPhone}`)}
-      ${summaryRow("Photo &amp; media release", photoConsentRaw ? "Yes" : "No")}
+      ${summaryRow("Photo & media release", photoConsentRaw ? "Yes" : "No")}
       ${summaryRow("Zoom recording", recordingConsentRaw ? "Yes" : "No")}
       ${summaryRow("Waiver signed by", `${waiverName} · ${waiverDate}`)}
     </table>
