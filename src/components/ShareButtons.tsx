@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Check, Copy, Facebook, Mail } from "lucide-react";
 
-const SHARE_URL = "https://campmathos.lovable.app";
+const SHARE_URL = "https://campmathos.com";
 const SHARE_TEXT =
   "MathOs is a completely free hybrid summer applied math camp — join in person or live over Zoom, recommended for campers working at 4th-grade math through 7th-grade math. Tue/Thu, 3–5 PM Central. Worth a look:";
 
