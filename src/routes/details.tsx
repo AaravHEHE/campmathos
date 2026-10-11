@@ -20,13 +20,13 @@ export const Route = createFileRoute("/details")({
       {
         name: "description",
         content:
-          "Everything about MathOs in one place: what it is and why, the week-by-week curriculum, and the schedule, format, and logistics for July 2026.",
+          "Everything about MathOs 2027: why we run it, the week-by-week curriculum, and the schedule, format and logistics for July 6–29, 2027.",
       },
       { property: "og:title", content: "Details — MathOs mission, curriculum, and logistics" },
       {
         property: "og:description",
         content:
-          "What MathOs is, what campers learn week by week, and exactly how the free hybrid sessions run.",
+          "Everything about MathOs 2027: why we run it, the week-by-week curriculum, and the schedule, format and logistics for July 6–29, 2027.",
       },
       { property: "og:image", content: OG },
       { name: "twitter:card", content: "summary_large_image" },
