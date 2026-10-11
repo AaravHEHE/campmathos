@@ -12,13 +12,13 @@ export const CAMP = {
   },
   // Camp runs Tue/Thu, 3:00–5:00 PM Central (America/Chicago, CDT = UTC-5 in July)
   // Use the FIRST session date as the canonical "start" for ics.
-  startDateISO: "2026-07-07", // Tuesday July 7 2026
-  endDateISO: "2026-07-30",   // Thursday July 30 2026
+  startDateISO: "2027-07-06", // Tuesday July 6 2027
+  endDateISO: "2027-07-29",   // Thursday July 29 2027
   sessionStartTime: "15:00",  // 3:00 PM Central
   sessionEndTime: "17:00",    // 5:00 PM Central
   daysOfWeek: ["Tuesday", "Thursday"],
   // Human-friendly strings used across the site
-  humanDateRange: "July 2026",
+  humanDateRange: "July 2027",
   humanDays: "Tue · Thu",
   humanTime: "3–5 PM Central (2 hr)",
   cost: "Free",

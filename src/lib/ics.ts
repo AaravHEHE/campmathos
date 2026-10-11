@@ -37,7 +37,7 @@ export function buildCampIcs(): string {
   return [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//MathOs//Camp Schedule 2026//EN",
+    "PRODID:-//MathOs//Camp Schedule 2027//EN",
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
     "BEGIN:VTIMEZONE",

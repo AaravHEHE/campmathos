@@ -318,7 +318,7 @@ function DetailsPage() {
               </div>
               <a
                 href="/mathos.ics"
-                download="mathos-2026.ics"
+                download="mathos-2027.ics"
                 className="mt-5 inline-flex min-h-11 items-center rounded-full border-2 border-cream bg-cream px-6 py-3 font-semibold text-ink shadow-[6px_6px_0_0_var(--ink)] transition hover:bg-sun hover:border-sun md:mt-0"
               >
                 Download .ics →

@@ -234,8 +234,8 @@ function Index() {
               When, where, <span className="italic text-sun">how much</span>.
             </h2>
             <p className="mt-6 max-w-md text-cream/70">
-              <Wordmark /> meets Tuesdays and Thursdays from 3–5 PM Central — in person or live over Zoom — from July 7
-              through July 30, 2026. Our pilot year ran fully online to gauge how the community would respond; it was
+              <Wordmark /> meets Tuesdays and Thursdays from 3–5 PM Central — in person or live over Zoom — from July 6
+              through July 29, 2027. Our pilot year ran fully online to gauge how the community would respond; it was
               such a hit that we shifted to a hybrid camp so our out-of-state campers can still join us.
             </p>
             <Link
