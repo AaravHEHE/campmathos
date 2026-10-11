@@ -162,7 +162,7 @@ export function SiteFooter() {
           </Link>
         </div>
         <p className="font-mono text-xs text-muted-foreground">
-          2026 MathOs · Hybrid camp ·{" "}
+          2027 MathOs · Hybrid camp ·{" "}
           <u>
             <a href="mailto:campmathos@gmail.com">campmathos@gmail.com</a>
           </u>

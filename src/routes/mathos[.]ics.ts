@@ -9,7 +9,7 @@ export const Route = createFileRoute("/mathos.ics")({
         return new Response(ics, {
           headers: {
             "Content-Type": "text/calendar; charset=utf-8",
-            "Content-Disposition": 'attachment; filename="mathos-2026.ics"',
+            "Content-Disposition": 'attachment; filename="mathos-2027.ics"',
             "Cache-Control": "public, max-age=3600",
           },
         });
