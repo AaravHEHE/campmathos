@@ -14,17 +14,17 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "MathOs — Free hybrid summer applied math camp | Summer 2026" },
+      { title: "MathOs — Free Summer Math Camp, 4th–7th Grade Math | 2027" },
       {
         name: "description",
         content:
-          "Free hybrid applied math camp — join in person or live on Zoom. Tue/Thu 3–5 PM Central, July 7–30, 2026. Recommended skill range 4th–7th grade math.",
+          "Free, student-run applied math camp for 4th–7th grade math. In person or live on Zoom, Tue/Thu 3–5 PM Central, July 6–29, 2027. Enroll today.",
       },
-      { property: "og:title", content: "MathOs — Free hybrid summer applied math camp" },
+      { property: "og:title", content: "MathOs — Free Summer Math Camp, 4th–7th Grade Math | 2027" },
       {
         property: "og:description",
         content:
-          "Hands-on applied math from 4th-grade arithmetic through 7th. Completely free. Hybrid — join in person or online via Zoom.",
+          "Free, student-run applied math camp for 4th–7th grade math. In person or live on Zoom, Tue/Thu 3–5 PM Central, July 6–29, 2027. Enroll today.",
       },
       { property: "og:image", content: OG },
       { property: "og:type", content: "website" },
