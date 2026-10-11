@@ -15,7 +15,7 @@ export function buildCampIcs(): string {
     .map((d, i) => {
       const dtStart = formatLocalStamp(d, CAMP.sessionStartTime);
       const dtEnd = formatLocalStamp(d, CAMP.sessionEndTime);
-      const uid = `mathos-${d}-${i}@campmathos.lovable.app`;
+      const uid = `mathos-${d}-${i}@campmathos.com`;
       return [
         "BEGIN:VEVENT",
         `UID:${uid}`,

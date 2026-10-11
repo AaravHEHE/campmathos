@@ -24,5 +24,5 @@ export const CAMP = {
   cost: "Free",
   skillRange: "4th grade math → 7th grade math",
   contactEmail: "campmathos@gmail.com",
-  url: "https://campmathos.lovable.app",
+  url: "https://campmathos.com",
 } as const;
