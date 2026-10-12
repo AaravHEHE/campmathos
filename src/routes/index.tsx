@@ -121,13 +121,16 @@ function Index() {
               <span className="h-2 w-2 rounded-full bg-coral" />
               July 2027 · Hybrid — in person + online · 100% free
             </div>
-            <h1 className="font-display text-[clamp(2.5rem,8vw,7.5rem)] font-black leading-[0.9] break-words">
-              Math is the
+            <h1 className="font-display text-[clamp(2rem,5.5vw,4.75rem)] font-black leading-[0.95] break-words">
+              <Wordmark />
               <br />
-              <span className="italic text-electric">operating</span>
+              free summer
               <br />
-              system.
+              <span className="italic text-electric">applied math</span> camp
             </h1>
+            <p className="mt-6 font-display text-[clamp(1.35rem,3.2vw,2.25rem)] font-black italic leading-[1.05] text-electric">
+              Math is the operating system.
+            </p>
             <p className="mt-8 max-w-xl text-lg text-ink/75 md:text-xl">
               For 4th-grade math through 7th-grade, organized and taught in person and live online by members of the
               Neuqua Valley math team.
