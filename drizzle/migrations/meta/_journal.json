@@ -36,6 +36,13 @@
       "when": 1790129589631,
       "tag": "0004_add_waiver_2027_fields",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1795097300834,
+      "tag": "0005_create_admin_tasks",
+      "breakpoints": true
     }
   ]
 }

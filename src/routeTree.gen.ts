@@ -28,6 +28,7 @@ import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } fr
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminEnrollmentsRouteImport } from './routes/admin.enrollments'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminTasksRouteImport } from './routes/admin.tasks'
 import { Route as GamesSlugRouteImport } from './routes/games.$slug'
 import { Route as ResourcesIndexRouteImport } from './routes/resources.index'
 import { Route as ResourcesResourceIdRouteImport } from './routes/resources.$resourceId'
@@ -132,6 +133,11 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   path: '/admin/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminTasksRoute = AdminTasksRouteImport.update({
+  id: '/admin/tasks',
+  path: '/admin/tasks',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GamesSlugRoute = GamesSlugRouteImport.update({
   id: '/games/$slug',
   path: '/games/$slug',
@@ -184,6 +190,7 @@ export interface FileRoutesByFullPath {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/enrollments': typeof AdminEnrollmentsRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/tasks': typeof AdminTasksRoute
   '/games/$slug': typeof GamesSlugRoute
   '/resources/$resourceId': typeof ResourcesResourceIdRoute
   '/admin/': typeof AdminIndexRoute
@@ -211,6 +218,7 @@ export interface FileRoutesByTo {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/enrollments': typeof AdminEnrollmentsRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/tasks': typeof AdminTasksRoute
   '/games/$slug': typeof GamesSlugRoute
   '/resources/$resourceId': typeof ResourcesResourceIdRoute
   '/admin': typeof AdminIndexRoute
@@ -239,6 +247,7 @@ export interface FileRoutesById {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/enrollments': typeof AdminEnrollmentsRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/tasks': typeof AdminTasksRoute
   '/games/$slug': typeof GamesSlugRoute
   '/resources/$resourceId': typeof ResourcesResourceIdRoute
   '/admin/': typeof AdminIndexRoute
@@ -268,6 +277,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/enrollments'
     | '/admin/login'
+    | '/admin/tasks'
     | '/games/$slug'
     | '/resources/$resourceId'
     | '/admin/'
@@ -295,6 +305,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/enrollments'
     | '/admin/login'
+    | '/admin/tasks'
     | '/games/$slug'
     | '/resources/$resourceId'
     | '/admin'
@@ -322,6 +333,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/enrollments'
     | '/admin/login'
+    | '/admin/tasks'
     | '/games/$slug'
     | '/resources/$resourceId'
     | '/admin/'
@@ -350,6 +362,7 @@ export interface RootRouteChildren {
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AdminEnrollmentsRoute: typeof AdminEnrollmentsRoute
   AdminLoginRoute: typeof AdminLoginRoute
+  AdminTasksRoute: typeof AdminTasksRoute
   GamesSlugRoute: typeof GamesSlugRoute
   ResourcesResourceIdRoute: typeof ResourcesResourceIdRoute
   AdminIndexRoute: typeof AdminIndexRoute
@@ -494,6 +507,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/tasks': {
+      id: '/admin/tasks'
+      path: '/admin/tasks'
+      fullPath: '/admin/tasks'
+      preLoaderRoute: typeof AdminTasksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/games/$slug': {
       id: '/games/$slug'
       path: '/games/$slug'
@@ -559,6 +579,7 @@ const rootRouteChildren: RootRouteChildren = {
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   AdminEnrollmentsRoute: AdminEnrollmentsRoute,
   AdminLoginRoute: AdminLoginRoute,
+  AdminTasksRoute: AdminTasksRoute,
   GamesSlugRoute: GamesSlugRoute,
   ResourcesResourceIdRoute: ResourcesResourceIdRoute,
   AdminIndexRoute: AdminIndexRoute,

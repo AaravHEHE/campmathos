@@ -393,6 +393,12 @@ function AdminDashboard() {
             </div>
             <div className="flex flex-wrap gap-3">
               <Link
+                to="/admin/tasks"
+                className="rounded-full border-2 border-ink bg-coral px-5 py-2.5 font-semibold text-cream transition hover:bg-ink"
+              >
+                My tasks →
+              </Link>
+              <Link
                 to="/admin/enrollments"
                 className="rounded-full border-2 border-ink bg-electric px-5 py-2.5 font-semibold text-cream transition hover:bg-ink"
               >
