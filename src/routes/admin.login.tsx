@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { markAdminSignedIn } from "@/lib/adminSession";
+import { markAdminSignedIn, wasAdminSignedInThisPageLoad } from "@/lib/adminSession";
 
 export const Route = createFileRoute("/admin/login")({
   component: AdminLoginPage,
@@ -37,26 +37,27 @@ function AdminLoginPage() {
   // Camp Director to this login form (even if the Supabase token is still
   // cached in localStorage). Skipped when an authorization flow sent the
   // Director here, so approving app access doesn't loop.
+  // The sign-in handler awaits this, so a slow sign-out can never wipe the
+  // fresh session (that race caused "first login bounces back here").
+  const clearing = useRef<Promise<void>>(Promise.resolve());
+  // Also skipped once sign-in succeeds: this effect can re-fire while the
+  // page transitions to /admin, which used to sign the Director straight out.
+  const signedIn = useRef(false);
   useEffect(() => {
-    if (redirectTo) return;
-    let cancelled = false;
-    (async () => {
+    if (redirectTo || signedIn.current || wasAdminSignedInThisPageLoad()) return;
+    clearing.current = (async () => {
       const { data: { session } } = await supabase.auth.getSession();
-      if (cancelled) return;
-      if (session) {
-        await supabase.auth.signOut();
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, [redirectTo]);
+      if (session && !signedIn.current && !wasAdminSignedInThisPageLoad()) await supabase.auth.signOut();
+    })().catch(() => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setLoading(true);
+    await clearing.current;
 
     const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
       email: email.trim().toLowerCase(),
@@ -85,6 +86,7 @@ function AdminLoginPage() {
       return;
     }
 
+    signedIn.current = true;
     markAdminSignedIn();
     if (redirectTo) {
       window.location.href = redirectTo;
