@@ -25,6 +25,7 @@ function AdminTasks() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [me, setMe] = useState("");
+  const [isOwner, setIsOwner] = useState(false);
   const [admins, setAdmins] = useState<AdminPerson[]>([]);
   const [tasks, setTasks] = useState<AdminTask[]>([]);
   const [view, setView] = useState<string>("me");
@@ -38,7 +39,7 @@ function AdminTasks() {
 
   const refresh = useCallback(async () => {
     const r = await listAdminTasks();
-    setMe(r.me); setAdmins(r.admins); setTasks(r.tasks);
+    setMe(r.me); setIsOwner(r.isOwner); setAdmins(r.admins); setTasks(r.tasks);
     setAssignee((a) => a || r.me);
   }, []);
 
@@ -106,7 +107,7 @@ function AdminTasks() {
           From {t.created_by === me ? "you" : emailOf(t.created_by)}
         </p>
       </div>
-      <button onClick={() => remove(t)} className="font-mono text-xs text-coral hover:underline">Delete</button>
+      {isOwner && <button onClick={() => remove(t)} className="font-mono text-xs text-coral hover:underline">Delete</button>}
     </li>
   );
 
@@ -125,6 +126,7 @@ function AdminTasks() {
         {loading ? <p className="mt-10 font-mono">Loading…</p> : (
           <>
             {error && <p className="mt-6 font-mono text-sm text-coral">{error}</p>}
+            {isOwner && <>
             <div className="mt-8 flex flex-wrap gap-2">
               {[{ id: "me", label: "My tasks" }, ...admins.filter((a) => a.id !== me).map((a) => ({ id: a.id, label: a.email })), { id: "all", label: "Everyone" }].map((o) => (
                 <button key={o.id} onClick={() => setView(o.id)}
@@ -146,6 +148,7 @@ function AdminTasks() {
                 {saving ? "Adding…" : "Add task"}
               </button>
             </form>
+            </>}
 
             <section className="card-3d mt-8 bg-cream p-6">
               <h2 className="font-display text-2xl font-black">Open ({open.length})</h2>

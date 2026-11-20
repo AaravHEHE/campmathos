@@ -43,6 +43,13 @@
       "when": 1795097300834,
       "tag": "0005_create_admin_tasks",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1795147912663,
+      "tag": "0006_admin_tasks_owner_only",
+      "breakpoints": true
     }
   ]
 }
