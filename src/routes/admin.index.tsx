@@ -92,30 +92,22 @@ function AdminDashboard() {
         navigate({ to: "/admin/login" });
         return;
       }
-      // Verify admin role server-side via RLS-protected user_roles read.
-      const { data: roles } = await supabase
-        .from("user_roles")
-        .select("role")
-        .eq("user_id", session.user.id);
-      if (cancelled) return;
-      const isAdmin = (roles ?? []).some((r) => r.role === "admin");
-      if (!isAdmin) {
-        await supabase.auth.signOut();
-        navigate({ to: "/admin/login" });
-        return;
-      }
+      // The server functions re-check the admin role, so no separate
+      // role query is needed here (it only slowed the first paint).
+      // Google Sheets can be slow: load it in the background.
+      adminListFormEmails()
+        .then((formRes) => {
+          if (cancelled) return;
+          setFormEmails(new Set(formRes.emails ?? []));
+          setFormSyncError(formRes.error ?? null);
+        })
+        .catch((e) => {
+          if (!cancelled) setFormSyncError(e instanceof Error ? e.message : "Could not load form responses");
+        });
       try {
-        const [{ rows: data }, formRes] = await Promise.all([
-          adminListRegistrations(),
-          adminListFormEmails().catch((e) => ({
-            emails: [] as string[],
-            error: e instanceof Error ? e.message : "Could not load form responses",
-          })),
-        ]);
+        const { rows: data } = await adminListRegistrations();
         if (cancelled) return;
         setRows((data as Registration[]) ?? []);
-        setFormEmails(new Set(formRes.emails ?? []));
-        setFormSyncError(formRes.error ?? null);
       } catch (err) {
         if (cancelled) return;
         const msg = err instanceof Error ? err.message : "Failed to load sign-ups";
